@@ -17,7 +17,8 @@ pcb_t pcb[MAX_PROC];    // process table
 char stack[MAX_PROC][STACK_SIZE]; // run-time stacks for processes
 
 int main() {
-   InitData(); 		//call Init Data to initialize kernel data
+   InitData(); 		//call Init Data to initia
+   lize kernel data
    CreateISR(0);	//call CreateISR(0) to create Idle process (PID 0)
 
    infinite loop: {      // alter 2 things below
@@ -81,19 +82,25 @@ void Kernel() {
    check if key pressed on PC {
       read in pressed key // key = cons_getchar();
       switch(key) {
-         if 'n'
+         case 'n';//if 'n'
             if (none_q.size = 0)//no processes left in none queue
                printf("No more process!\n")                        //"No more process!\n" (msg on target PC)
             else
             DeQ(none_q);   //get 1st PID un-used (dequeue none queue)
             CreateISR();   //call CreateISR() with it to create new process
-         if 't'
-            call TerminateISR() to terminate CRP
-         if 'b'
+            break;
+         case 't'://if 't'
+            TerminateISR();//call TerminateISR() to terminate CRP
+            break;   
+         case 'b': //if 'b'
             just do breakpoint(); // this goes back to GDB prompt
-         if 'q'
-            just do exit(0);
-     } // end switch
+            break;
+         case 'q':   //if 'q'
+            exit(0);//just do exit(0);
+            break;
+         default:
+            break;
+      } // end switch
    } // end if some key pressed
 
    call SelectCRP() to settle/determine for next CRP
