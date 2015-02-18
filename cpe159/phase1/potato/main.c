@@ -82,11 +82,11 @@ void Kernel() {
       read in pressed key // key = cons_getchar();
       switch(key) {
          if 'n'
-            if no processes left in none queue
-               "No more process!\n" (msg on target PC)
+            if (none_q.size = 0)//no processes left in none queue
+               printf("No more process!\n")                        //"No more process!\n" (msg on target PC)
             else
-               get 1st PID un-used (dequeue none queue)
-               call CreateISR() with it to create new process
+            DeQ(none_q);   //get 1st PID un-used (dequeue none queue)
+            CreateISR();   //call CreateISR() with it to create new process
          if 't'
             call TerminateISR() to terminate CRP
          if 'b'
