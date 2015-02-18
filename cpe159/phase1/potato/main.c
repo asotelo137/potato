@@ -50,29 +50,34 @@ void SelectCRP() {       // select which PID to be new CRP
    (continue only when CRP is Idle or none (0 or -1)
    */ 
    if(CRP > 0){
+      
       return 0;
-   }else if(CRP = 0){
+      
+   }else if(CRP = 0){      //if it's' 0 (Idle), change its state in PCB to RUN
       pcb[CRP].state= RUN;
    }
-   if it's' 0 (Idle), change its state in PCB to RUN
-
-   if no processes to run (check size in run queue against zero)
-      set CRP to 0 (at least we can run Idle proc)
-   else
-      set CRP to first in run queue (dequeue it)
-
-   change mode in PCB of CRP to UMODE
-   change state in PCB of CRP to RUNNING
+   //if no processes to run (check size in run queue against zero)
+   //   set CRP to 0 (at least we can run Idle proc)
+   if(run_q.size == 0 ){
+      CRP =0;
+      
+   }else      //set CRP to first in run queue (dequeue it)
+   CRP = run_q.head;
+   //change mode in PCB of CRP to UMODE
+   pcb[CRP].mode = UMODE;
+   //change state in PCB of CRP to RUNNING
+   pcb[crp].state = RUNNING;
+   
 }
 
 void Kernel() {
    int pid;
    char key;
 
-   change state in PCB of CRP to kernel mode
-
-   call TimerISR() to service timer interrupt as it just occurred
-
+   //change state in PCB of CRP to kernel mode
+   pcb[CRP].state = KMODE;
+   //call TimerISR() to service timer interrupt as it just occurred
+   TimerISR();
    check if key pressed on PC {
       read in pressed key // key = cons_getchar();
       switch(key) {
