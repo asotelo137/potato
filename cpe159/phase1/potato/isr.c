@@ -21,11 +21,11 @@ void TerminateISR() {
       return 0;
     }  
    //change state of CRP to NONE
+   CRP = -1;
    //queue it to none queue
+   EnQ(CRP,none_q);
    //set CRP to -1 (none)
-   
-   pcb_t.state= NONE;
-   CRP=-1;
+   CRP = -1;
 }        
 
 void TimerISR() {
@@ -46,6 +46,9 @@ void TimerISR() {
    */
    if(pcb_t.runtime == TIME_LIMIT){
       pcb_t.total_runtime=pcb_t.runtime + pcb_t.total_runtime;
+      pcb[CRP].RUN;
+      EnQ(CRP,run_q);
+      CRP = -1;
       
    }
 }
