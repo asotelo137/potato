@@ -29,10 +29,19 @@ int main() {
 }
 
 void InitData() {
-   initialize 2 queues (use MyBzero() you code in tool.c/.h)
+   /*initialize 2 queues (use MyBzero() you code in tool.c/.h)
    queue PID's 1~19 (skip 0) into none_q (un-used PID's)
    set state to NONE in all un-used pcb[1~19]
-   set CRP to 0 (Idle proc ID)
+   set CRP to 0 (Idle proc ID)*/
+   MyBzero(run_q,Q_SIZE);
+   MyBzero(none_q,Q_SIZE);
+   int i = 1;
+   for(i ; i<20;i++){
+      pcb[i].state = NONE;
+      EnQ(i,none_q)
+      
+   }
+   CRP = 0;
 }
 
 void SelectCRP() {       // select which PID to be new CRP
