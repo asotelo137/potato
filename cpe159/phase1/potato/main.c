@@ -38,17 +38,23 @@ void InitData() {
    int i = 1;
    for(i ; i<20;i++){
       pcb[i].state = NONE;
-      EnQ(i,none_q)
+      EnQ(i,none_q);
       
    }
    CRP = 0;
 }
 
 void SelectCRP() {       // select which PID to be new CRP
-   simply return if CRP is greater than 0 (already good one selected)
+   
+   /*simply return if CRP is greater than 0 (already good one selected)
    (continue only when CRP is Idle or none (0 or -1)
-
-   if it's 0 (Idle), change its state in PCB to RUN
+   */ 
+   if(CRP > 0){
+      return 0;
+   }else if(CRP = 0){
+      pcb[CRP].state= RUN;
+   }
+   if it's' 0 (Idle), change its state in PCB to RUN
 
    if no processes to run (check size in run queue against zero)
       set CRP to 0 (at least we can run Idle proc)
