@@ -26,14 +26,8 @@ void MyBZero(q_t *p, int size) {
 	node_ptr new = (node_ptr)malloc(sizeof(struct node));
 	myqueue->front = new;
 */
-	if(p== run_queue){
 		int i = 1;
 		for (i; i < 20; i++){
-		EnQ(i,p);
-		}
-	}else
-		int j = 1;
-		for (j; j < 20; j++){
 		EnQ(0,p);
 }
 
