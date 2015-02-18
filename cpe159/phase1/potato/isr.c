@@ -8,11 +8,15 @@
 #include "proc.h"
 
 void CreateISR(int pid) {
-   if pid given is not 0 (Idle), enqueue it into run queue
-   PCB of new proc:
-      mode is set to UMODE
-      state is set to RUN
-      both runtime counts are reset to 0
+   if(pid !=0 ){ //if pid given is not 0 (Idle), enqueue it into run queue
+      EnQ(pid,run_q);
+      // PCB of new proc:
+      pcb[pid].mode = UMODE;//mode is set to UMODE
+      pcb[pid].state= RUN;//state is set to RUN
+      pcb[[pid].runtime = 0;// both runtime counts are reset to 0
+      pcb[[pid].total_runtime = 0;// both runtime counts are reset to 0
+   }
+  return 0;
 }
 
 void TerminateISR() {
@@ -26,6 +30,7 @@ void TerminateISR() {
    EnQ(CRP,none_q);
    //set CRP to -1 (none)
    CRP = -1;
+   return 0;
 }        
 
 void TimerISR() {
@@ -49,6 +54,6 @@ void TimerISR() {
       pcb[CRP].RUN;
       EnQ(CRP,run_q);
       CRP = -1;
-      
    }
+    return 0;
 }
