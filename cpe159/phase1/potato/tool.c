@@ -6,8 +6,8 @@
 #include "type.h"
 #include "extern.h"
 
-typedef struct node *node_ptr;
-typedef struct queue *queue_ptr;
+//typedef struct node *node_ptr;
+//typedef struct queue *queue_ptr;
 
 /*struct node{
 	int data;
@@ -26,9 +26,10 @@ void MyBZero(q_t *p, int size) {
 	node_ptr new = (node_ptr)malloc(sizeof(struct node));
 	myqueue->front = new;
 */
-		int i = 1;
-		for (i; i < 20; i++){
-		EnQ(0,p);
+	int i = 1;
+	for (i; i < 20; i++){
+	EnQ(0,p);
+		
 }
 
 /*int init(queue_ptr * qp){
