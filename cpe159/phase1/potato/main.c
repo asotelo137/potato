@@ -65,6 +65,7 @@ void SelectCRP() {       // select which PID to be new CRP
    //if no processes to run (check size in run queue against zero)
    //   set CRP to 0 (at least we can run Idle proc)
    if(run_q.size == 0 ){
+      printf("run_q size = 0 ");
       CRP = 0;
    }else{      
       //set CRP to first in run queue (dequeue it)
