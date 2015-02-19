@@ -27,7 +27,7 @@ void TerminateISR() {
    //change state of CRP to NONE
    CRP = NONE;
    //queue it to none queue
-   EnQ(CRP,none_q);                             //STILL ERROR HERE
+   EnQ(CRP,&none_q);                             //STILL ERROR HERE
    //set CRP to -1 (none)
    CRP = -1;
  //  return 0;
