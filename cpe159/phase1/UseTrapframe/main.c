@@ -3,9 +3,21 @@
 //
 // skeleton of main() for phase 1
 
-include statements...
-declare kernel data structures...
-(include stuff from timer lab and new PCB described in 1.html)
+//include statements...
+#include "spede.h" // spede stuff
+#include "main.h" // main stuff
+#include "isr.h" // ISR's
+#include "tool.h" // handy functions
+#include "proc.h" // processes such as Init()
+#include "type.h" // processes such as Init()
+// kernel data structure:
+int CRP; // current running PID, -1 means no process
+q_t run_q, none_q; // processes ready to run and not used
+pcb_t pcb[MAX_PROC]; // process table
+char stack[MAX_PROC][STACK_SIZE]; // run-time stacks for processes
+
+//declare kernel data structures...
+//(include stuff from timer lab and new PCB described in 1.html)
 
 (some needed subroutines here, prototype them in main.h)
 InitData() still the same as PureSimulation
