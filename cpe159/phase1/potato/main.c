@@ -85,7 +85,7 @@ void Kernel() {
       char key = cons_getchar(); // key = cons_getchar();
       switch(key) {
          case 'n'://if 'n'
-            if (none_q.size = 0){//no processes left in none queue
+            if (none_q.size == 0){//no processes left in none queue
                printf("No more process!\n");                        //"No more process!\n" (msg on target PC)
             }else{
             DeQ(none_q);   //get 1st PID un-used (dequeue none queue)
