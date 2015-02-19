@@ -8,6 +8,10 @@
 
 void MyBZero(q_t *p, int size) {
 
+	p->size = 0;
+	p->head = 0;
+	p->tail = 0;
+
 	int i;
 	for (i = 1; i < 20; i++){
 	EnQ(0,p);
@@ -20,11 +24,12 @@ void EnQ(int pid, q_t *p) {
 // show error msg and return if queue's already full
 // needs coding
 // ????????????????????????????????????????????????	
-	if (p->tail == p->head){
+	if (p->size == Q_SIZE){
 		printf("\nQueue is full; \n");
 	//	return -1;
 	}else
 	p->tail += 1;
+	p->size +=1;
 	p->q[p->tail]= pid;
 	
 }
