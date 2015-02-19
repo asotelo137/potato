@@ -35,7 +35,6 @@ void InitData() {
    queue PID's 1~19 (skip 0) into none_q (un-used PID's)
    set state to NONE in all un-used pcb[1~19]
    set CRP to 0 (Idle proc ID)*/
-   printf("shit");
    MyBZero(&run_q,Q_SIZE);
    MyBZero(&none_q,Q_SIZE);
    i = 1;
@@ -86,6 +85,7 @@ void Kernel() {
       key = cons_getchar(); // key = cons_getchar();
       switch(key) {
          case 'n':                                                   //if 'n'
+            printf("I banged yo mama");
             if (none_q.size == 0){                                   //no processes left in none queue
                cons_printf("No more process!\n");                    //"No more process!\n" (msg on target PC)
             }else{
