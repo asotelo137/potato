@@ -88,7 +88,7 @@ void Kernel() {
             if (none_q.size == 0){//no processes left in none queue
                printf("No more process!\n");                        //"No more process!\n" (msg on target PC)
             }else{
-            DeQ(none_q);   //get 1st PID un-used (dequeue none queue)
+            DeQ(&none_q);   //get 1st PID un-used (dequeue none queue)
             CreateISR();   //call CreateISR() with it to create new process
             }
             break;
