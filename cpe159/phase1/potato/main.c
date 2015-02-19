@@ -34,7 +34,7 @@ void InitData() {
    queue PID's 1~19 (skip 0) into none_q (un-used PID's)
    set state to NONE in all un-used pcb[1~19]
    set CRP to 0 (Idle proc ID)*/
-   MyBZero(run_q,Q_SIZE);
+   MyBZero(run_q,20);
    MyBZero(none_q,Q_SIZE);
    int i = 1;
    for(i ; i<20;i++){
