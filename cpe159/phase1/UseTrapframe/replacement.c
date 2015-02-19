@@ -1,4 +1,4 @@
-// replacement.txt, 159
+// replacement.c, 159
 
 //********************************************************************
 // in isr.c, update old CreateISR():
@@ -8,6 +8,20 @@ void CreateISR(int pid) {
 // ****************************************************
 // besides code in old CreateISR() still included, add:
 // ****************************************************
+
+///////////////////////////////////////////////////////////////////////////////////
+//Code from PureSimulation CreateISR function
+   // printf("create\n");
+   if(pid !=0 ){ //if pid given is not 0 (Idle), enqueue it into run queue
+    //   printf("Create recieved a pid : %d \n",pid);
+      EnQ(pid,&run_q);
+      // PCB of new proc:
+      pcb[pid].mode = UMODE;//mode is set to UMODE
+      pcb[pid].state= RUN;//state is set to RUN
+      pcb[pid].runtime = 0;// both runtime counts are reset to 0
+      pcb[pid].total_runtime = 0;// both runtime counts are reset to 0
+   }
+//////////////////////////////////////////////////////////////////////////////////
 
    MyBzero(stack[pid], STACK_SIZE); // erase stack
 
