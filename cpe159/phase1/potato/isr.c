@@ -24,11 +24,11 @@ void CreateISR(int pid) {
 void TerminateISR() {
    printf("terminate\n");
    //just return if CRP is 0 or -1 (Idle or not given)
-    if (CRP == 0 || CRP < -1 ){
+    if (CRP <=0 ){
       return;
     }  
    //change state of CRP to NONE
-   CRP = NONE;
+   pcb[CRP].state = NONE;
    //queue it to none queue
    EnQ(CRP,&none_q);                             //STILL ERROR HERE
    //set CRP to -1 (none)
@@ -59,6 +59,7 @@ void TimerISR() {
    if(pcb[CRP].runtime == TIME_LIMIT){
       printf("limit\n");
       pcb[CRP].total_runtime=pcb[CRP].runtime + pcb[CRP].total_runtime;
+      pcb[CRP].run_time=0;
       pcb[CRP].state = RUN;
       EnQ(CRP,&run_q);
       CRP = -1;
