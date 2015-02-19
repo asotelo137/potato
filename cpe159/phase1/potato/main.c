@@ -49,7 +49,7 @@ void InitData() {
 
 void SelectCRP() {       // select which PID to be new CRP
    
-    printf("Selcet CRP  Beggineing CRP %d \n",CRP);
+//    printf("Selcet CRP  Beggineing CRP %d \n",CRP);
    /*simply return if CRP is greater than 0 (already good one selected)
    (continue only when CRP is Idle or none (0 or -1)
    */ 
@@ -60,18 +60,18 @@ void SelectCRP() {       // select which PID to be new CRP
    if(CRP == 0){
       pcb[0].state = RUN;
    }
-    printf("after checking if its zero or greater CRP %d \n",CRP);
+//    printf("after checking if its zero or greater CRP %d \n",CRP);
    //if no processes to run (check size in run queue against zero)
-   printf("run_q size = %d \n",run_q.size);
+//   printf("run_q size = %d \n",run_q.size);
    //   set CRP to 0 (at least we can run Idle proc)
    if(run_q.size == 0 ){
-      printf("run_q size = %d \n ",run_q.size);
+//      printf("run_q size = %d \n ",run_q.size);
       CRP = 0;
    }else{  
-       printf("after checking run q size CRP %d \n",CRP);
+//       printf("after checking run q size CRP %d \n",CRP);
       //set CRP to first in run queue (dequeue it)
       CRP = DeQ(&run_q); 
-      printf("after DeQ in selectcrp %d \n",CRP);
+//      printf("after DeQ in selectcrp %d \n",CRP);
       //change mode in PCB of CRP to UMODE
       pcb[CRP].mode = UMODE;
       //change state in PCB of CRP to RUNNING
@@ -91,35 +91,35 @@ void Kernel() {
       key = cons_getchar(); // key = cons_getchar();
       switch(key) {
          case 'n':                                                   //if 'n'
-            printf("n pressed\n");
+ //           printf("n pressed\n");
             if (none_q.size == 0){                                   //no processes left in none queue
                cons_printf("No more process!\n");                    //"No more process!\n" (msg on target PC)
             }else{
             pid = DeQ(&none_q);                                      //get 1st PID un-used (dequeue none queue)
-             printf("after pressing n pid is %d \n",pid);
+//             printf("after pressing n pid is %d \n",pid);
             CreateISR(pid);                                          //call CreateISR() with it to create new process
             i = 1;
             for(i  ; i<Q_SIZE;i++){
-               printf("%d is in runque %d\n",run_q.q[i],i);
+//               printf("%d is in runque %d\n",run_q.q[i],i);
                
             }
                
             }
             break;
          case 't':                                                   //if 't'
-            printf("t pressed\n");
+//            printf("t pressed\n");
             TerminateISR();                                          //call TerminateISR() to terminate CRP
             break;   
          case 'b':                                                   //if 'b'
-            printf("b pressed \n");
+//            printf("b pressed \n");
             breakpoint();                                            // this goes back to GDB prompt
             break;
          case 'q':                                                   //if 'q'
-            printf("q pressed\n");
+//            printf("q pressed\n");
             exit(0);                                                 //just do exit(0);
       }                                                              // end switch
    }                                                                 // end if some key pressed
-   printf("after case statement \n");
+//   printf("after case statement \n");
    SelectCRP();                                                       //call SelectCRP() to settle/determine for next CRP
    
 }
