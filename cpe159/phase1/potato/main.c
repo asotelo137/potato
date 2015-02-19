@@ -36,8 +36,8 @@ void InitData() {
    set state to NONE in all un-used pcb[1~19]
    set CRP to 0 (Idle proc ID)*/
    printf("shit");
-   MyBZero(run_q,Q_SIZE);
-   MyBZero(none_q,Q_SIZE);
+   MyBZero(&run_q,Q_SIZE);
+   MyBZero(&none_q,Q_SIZE);
    i = 1;
    for(i  ; i<20;i++){
       pcb[i].state = NONE;
