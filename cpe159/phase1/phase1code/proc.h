@@ -3,6 +3,7 @@
 #ifndef _PROC_H_
 #define _PROC_H_
 
+void Disptach();
 void Idle();
 void UserProc();
 
