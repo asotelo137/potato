@@ -78,7 +78,7 @@ fill_gate(gateptr, (int) func_ptr, get_cs(), ACC_INTR_GATE, 0 );
 
 void InitIDT(){ //is new to code, containing 3 statements from timer lab:
 idt_table = get_idt_base(); //locate IDT
-SetEntry(32,TimerEntry) //fill out IDT timer entry
+SetEntry(32,TimerEntry); //fill out IDT timer entry
 outportb(0x21,~1); //program PIC mask
 //(but NO "sti")
 }
@@ -89,7 +89,7 @@ int main() {
    CreateISR(0);	//call CreateISR(0) to create Idle process (PID 0)
    
    while (1) {      // alter 2 things below
-      Dispatch(pcb[CRP].);    // to dispatch/run CRP
+      Dispatch(pcb[CRP].TF_ptr);    // to dispatch/run CRP
       Kernel();      // for kernel control
    }
 
