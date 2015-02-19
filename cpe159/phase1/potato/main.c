@@ -47,6 +47,7 @@ void InitData() {
 }
 
 void SelectCRP() {       // select which PID to be new CRP
+   
    printf("Select Crp \n");
    /*simply return if CRP is greater than 0 (already good one selected)
    (continue only when CRP is Idle or none (0 or -1)
@@ -68,7 +69,7 @@ void SelectCRP() {       // select which PID to be new CRP
    }else{      
       //set CRP to first in run queue (dequeue it)
       CRP = DeQ(&run_q); 
-      printf("%d after DeQ",CRP);
+      printf("%d after DeQ\n",CRP);
       //change mode in PCB of CRP to UMODE
       pcb[CRP].mode = UMODE;
       //change state in PCB of CRP to RUNNING
@@ -110,7 +111,7 @@ void Kernel() {
       }                                                              // end switch
    }                                                                 // end if some key pressed
    printf("after case statement \n");
-  SelectCRP();                                                       //call SelectCRP() to settle/determine for next CRP
+   SelectCRP();                                                       //call SelectCRP() to settle/determine for next CRP
    
 }
 
