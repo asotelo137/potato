@@ -102,7 +102,7 @@ void Kernel() {
             breakpoint();                                            // this goes back to GDB prompt
             break;
          case 'q':                                                   //if 'q'
-            printf("Meet at Berto's Mom's house ASAP\n")
+            printf("Meet at Berto's Mom's house ASAP\n");
             exit(0);                                                 //just do exit(0);
       }                                                              // end switch
    }                                                                 // end if some key pressed
