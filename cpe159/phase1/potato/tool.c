@@ -1,7 +1,6 @@
 // tool.c, 159
 
-#include <stdio.h>
-#include <stdlib.h>
+
 #include "spede.h"
 #include "type.h"
 #include "extern.h"
