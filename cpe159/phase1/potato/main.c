@@ -100,7 +100,7 @@ void Kernel() {
             CreateISR(pid);                                          //call CreateISR() with it to create new process
             i = 1;
             for(i  ; i<Q_SIZE;i++){
-               printf("in runque %d\n",run_q.q[i]);
+               printf("%d is in runque %d\n",run_q.q[i],i);
                
             }
                
