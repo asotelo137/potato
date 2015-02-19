@@ -38,6 +38,6 @@ int DeQ(q_t *p) { // return -1 if q is empty
 	//	return -1;
 	}else
 	p->head--;
-	
+	return 0;
 }
 
