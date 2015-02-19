@@ -8,7 +8,7 @@
 #include "proc.h"
 
 void CreateISR(int pid) {
-   printf("create");
+   printf("create\n");
    if(pid !=0 ){ //if pid given is not 0 (Idle), enqueue it into run queue
       EnQ(pid,&run_q);
       // PCB of new proc:
@@ -21,7 +21,7 @@ void CreateISR(int pid) {
 }
 
 void TerminateISR() {
-   printf("terminate");
+   printf("terminate\n");
    //just return if CRP is 0 or -1 (Idle or not given)
     if (CRP == 0 || CRP < -1 ){
       return;
@@ -36,7 +36,7 @@ void TerminateISR() {
 }        
 
 void TimerISR() {
-   printf("timer");
+   printf("timer\n");
   // just return if CRP is Idle (0) or less (-1)
    if (CRP == 0 || CRP < -1 ){
       return;
@@ -44,7 +44,7 @@ void TimerISR() {
    
    //upcount the runtime of CRP
    pcb[CRP].runtime++;
-   printf("runtime");
+   printf("runtime\n");
    
    /*if the runtime of CRP reaches TIME_LIMIT
    (need to rotate to next PID in run queue)
@@ -54,12 +54,12 @@ void TimerISR() {
       reset CRP (to -1, means none)
    */
    if(pcb[CRP].runtime == TIME_LIMIT){
-      printf("limit");
+      printf("limit\n");
       pcb[CRP].total_runtime=pcb[CRP].runtime + pcb[CRP].total_runtime;
       pcb[CRP].state = RUN;
       EnQ(CRP,&run_q);
       CRP = -1;
-      printf("set crp -1");
+      printf("set crp -1\n");
    }
    // return 0;
 }
