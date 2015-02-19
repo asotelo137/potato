@@ -20,7 +20,7 @@
 	node_ptr back;
 }*/
 
-void MyBZero(char *p, int size) {
+void MyBZero(q_t *p, int size) {
 /*	queue_ptr myqueue;
 	init(&myqueue);
 	node_ptr new = (node_ptr)malloc(sizeof(struct node));
