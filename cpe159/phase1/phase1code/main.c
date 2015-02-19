@@ -15,20 +15,10 @@ int CRP;                // current running PID, -1 means no process
 q_t run_q, none_q;      // processes ready to run and not used
 pcb_t pcb[MAX_PROC];    // process table
 char stack[MAX_PROC][STACK_SIZE]; // run-time stacks for processes
+//(include stuff from timer lab and new PCB described in 1.html)
+struct i386_gate * idt_table;
 
-int main() {
-   InitData(); 		//call Init Data to initialize kernel data
-   
-   CreateISR(0);	//call CreateISR(0) to create Idle process (PID 0)
-
-   while (1) {      // alter 2 things below
-      Dispatch();    // to dispatch/run CRP
-      Kernel();      // for kernel control
-   }
-
-   //return 0;
-}
-
+//InitData() still the same as PureSimulation
 void InitData() {
    int i;
    /*initialize 2 queues (use MyBzero() you code in tool.c/.h)
@@ -47,6 +37,7 @@ void InitData() {
    CRP = 0;
 }
 
+//SelectCRP() still the same as PureSimulation
 void SelectCRP() {       // select which PID to be new CRP
    
 //    printf("Selcet CRP  Beggineing CRP %d \n",CRP);
@@ -78,6 +69,36 @@ void SelectCRP() {       // select which PID to be new CRP
       pcb[CRP].state = RUNNING;
    }
 }
+
+//SetEntry() needed from timer lab
+void SetEntry( int entry_num , func_ptr_t func_ptr){
+struct i386_gate *gateptr = &IDT_ptr_[entry_num];
+fill_gate(gateptr, (int) func_ptr, get_cs(), ACC_INTR_GATE, 0 );
+}
+
+void InitIDT(){ //is new to code, containing 3 statements from timer lab:
+idt_table = get_idt_base(); //locate IDT
+SetEntry(32,TimerEntry) //fill out IDT timer entry
+outportb(0x21,~1); //program PIC mask
+//(but NO "sti")
+}
+
+int main() {
+   InitData(); 		//call Init Data to initialize kernel data
+   InitIDT();        //call (new) InitIDT() to set up timer (from timer lab)
+   CreateISR(0);	//call CreateISR(0) to create Idle process (PID 0)
+   
+   while (1) {      // alter 2 things below
+      Dispatch(pcb[CRP].);    // to dispatch/run CRP
+      Kernel();      // for kernel control
+   }
+
+   //return 0;
+}
+
+
+
+
 
 void Kernel() {
    int pid,i;
