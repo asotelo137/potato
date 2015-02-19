@@ -82,7 +82,7 @@ void Kernel() {
    //call TimerISR() to service timer interrupt as it just occurred
    TimerISR();
    if (cons_kbhit()) {
-      cons_getchar() // key = cons_getchar();
+      char key = cons_getchar(); // key = cons_getchar();
       switch(key) {
          case 'n';//if 'n'
             if (none_q.size = 0)//no processes left in none queue
