@@ -3,7 +3,9 @@
 #ifndef _TYPE_H_
 #define _TYPE_H_
 
-#define TIME_LIMIT 3         // max timer count to run
+#include "TF.h"
+
+#define TIME_LIMIT 300       // max timer count to run
 #define MAX_PROC 20          // max number of processes
 #define Q_SIZE 20            // queuing capacity
 #define STACK_SIZE 4096      // process stack in bytes
@@ -17,6 +19,7 @@ typedef struct {             // PCB describes proc image
    state_t state;            // state of process
    int runtime;              // run time since dispatched
    int total_runtime;        // total run time since created
+   TF_t *TF_ptr;             // points to TF in stack
 } pcb_t;
 
 typedef struct {             // proc queue type
@@ -24,4 +27,6 @@ typedef struct {             // proc queue type
    int q[Q_SIZE];            // indices into q[] array to place or get element
 } q_t;
 
-#endif
+typedef void (* func_ptr_t)(); // void-returning function pointer type
+
+#endif _TYPE_H_
