@@ -48,6 +48,7 @@ void InitData() {
 
 void SelectCRP() {       // select which PID to be new CRP
    
+    printf("Selcet CRP  Beggineing CRP %d \n",CRP);
    printf("Select Crp \n");
    /*simply return if CRP is greater than 0 (already good one selected)
    (continue only when CRP is Idle or none (0 or -1)
@@ -59,14 +60,15 @@ void SelectCRP() {       // select which PID to be new CRP
    if(CRP == 0){
       pcb[0].state = RUN;
    }
- 
+    printf("after checking if its zero or greater CRP %d \n",CRP);
    //if no processes to run (check size in run queue against zero)
    printf("run_q size = %d \n",run_q.size);
    //   set CRP to 0 (at least we can run Idle proc)
    if(run_q.size == 0 ){
       printf("run_q size = %d \n ",run_q.size);
       CRP = 0;
-   }else{      
+   }else{  
+       printf("after checking run q size CRP %d \n",CRP);
       //set CRP to first in run queue (dequeue it)
       CRP = DeQ(&run_q); 
       printf("after DeQ in selectcrp %d \n",CRP);
