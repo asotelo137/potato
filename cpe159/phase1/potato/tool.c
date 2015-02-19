@@ -22,6 +22,7 @@ void EnQ(int pid, q_t *p) {
 		printf("\nQueue is full \n");
 		return;
 	}else
+	 printf("EnQ pid %d \n",pid);
 	p->q[p->tail]= pid;
 	p->tail ++;
 	p->size ++;
