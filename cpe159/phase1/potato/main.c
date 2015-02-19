@@ -50,7 +50,6 @@ void InitData() {
 void SelectCRP() {       // select which PID to be new CRP
    
     printf("Selcet CRP  Beggineing CRP %d \n",CRP);
-   printf("Select Crp \n");
    /*simply return if CRP is greater than 0 (already good one selected)
    (continue only when CRP is Idle or none (0 or -1)
    */ 
@@ -81,7 +80,7 @@ void SelectCRP() {       // select which PID to be new CRP
 }
 
 void Kernel() {
-   int pid;
+   int pid,i;
    char key;
 
    //change state in PCB of CRP to kernel mode
@@ -99,6 +98,12 @@ void Kernel() {
             pid = DeQ(&none_q);                                      //get 1st PID un-used (dequeue none queue)
              printf("after pressing n pid is %d \n",pid);
             CreateISR(pid);                                          //call CreateISR() with it to create new process
+            i = 1;
+            for(i  ; i<Q_SIZE;i++){
+               printf("in runque %d",run_q.q[i]);
+               
+            }
+               
             }
             break;
          case 't':                                                   //if 't'
