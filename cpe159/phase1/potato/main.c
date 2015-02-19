@@ -56,7 +56,8 @@ void SelectCRP() {       // select which PID to be new CRP
       return;
    }    
    //if it's' 0 (Idle), change its state in PCB to RUN
-   else if(CRP == 0){     
+   else if(CRP == 0){
+      printf("%d",CRP);
       pcb[CRP].state = RUN;
    }
    //if no processes to run (check size in run queue against zero)
