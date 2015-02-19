@@ -36,8 +36,7 @@ void InitData() {
    set CRP to 0 (Idle proc ID)*/
    MyBZero(run_q,Q_SIZE);
    MyBZero(none_q,Q_SIZE);
-   unsigned long i;
-   i = 1;
+   unsigned long i = 1;
    for(i ; i<20;i++){
       pcb[i].state = NONE;
       EnQ(i,none_q);
@@ -53,22 +52,23 @@ void SelectCRP() {       // select which PID to be new CRP
    */ 
    if(CRP > 0){
       
-      return 0;
-      
-   }else if(CRP = 0){      //if it's' 0 (Idle), change its state in PCB to RUN
-      pcb[CRP].state= RUN;
+      return;
+   }    
+   //if it's' 0 (Idle), change its state in PCB to RUN
+   else if(CRP == 0){     
+      pcb[CRP].state = RUN;
    }
    //if no processes to run (check size in run queue against zero)
    //   set CRP to 0 (at least we can run Idle proc)
    if(run_q.size == 0 ){
-      CRP =0;
-      
-   }else      //set CRP to first in run queue (dequeue it)
+      CRP = 0;
+   }else      
+   //set CRP to first in run queue (dequeue it)
    CRP = run_q.head;
    //change mode in PCB of CRP to UMODE
    pcb[CRP].mode = UMODE;
    //change state in PCB of CRP to RUNNING
-   pcb[crp].state = RUNNING;
+   pcb[CRP].state = RUNNING;
    
 }
 
