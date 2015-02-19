@@ -16,10 +16,10 @@ void Dispatch() {
 
 void Idle() {
    cons_printf("0");//print 0 on PC
-   delay (1);//busy-loop delay for about 1 sec
+   for(i=0; i<1666000; i++) IO_DELAY();//busy-loop delay for about 1 sec
 }
 
 void UserProc() {
    printf("%d",CRP);//print its pid (CRP) on PC
-   delay(1);//busy-loop delay for about 1 sec
+   for(i=0; i<1666000; i++) IO_DELAY();//busy-loop delay for about 1 sec
 }
