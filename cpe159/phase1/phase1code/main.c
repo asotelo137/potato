@@ -87,20 +87,16 @@ int main() {
    InitData(); 		//call Init Data to initialize kernel data
    InitIDT();        //call (new) InitIDT() to set up timer (from timer lab)
    CreateISR(0);	//call CreateISR(0) to create Idle process (PID 0)
+   Dispatch(pcb[CRP].TF_ptr]);    // to dispatch/run CRP
    
-   while (1) {      // alter 2 things below
-      Dispatch(pcb[CRP].);    // to dispatch/run CRP
-      Kernel();      // for kernel control
-   }
-
-   //return 0;
+   return 0;
 }
 
 
 
 
 
-void Kernel() {
+void Kernel(Tf_t *TF_ptr) {
    int pid,i;
    char key;
 
@@ -142,6 +138,6 @@ void Kernel() {
    }                                                                 // end if some key pressed
 //   printf("after case statement \n");
    SelectCRP();                                                       //call SelectCRP() to settle/determine for next CRP
-   
+   Dispatch(pcb[CRP].TF_ptr);
 }
 
