@@ -76,12 +76,12 @@ void SetEntry( int entry_num , func_ptr_t func_ptr){
    fill_gate(gateptr, (int) func_ptr, get_cs(), ACC_INTR_GATE, 0 );
 }
 
-InitIDT() is new to code, containing 3 statements from timer lab:
-   locate IDT
+void InitIDT(){ //is new to code, containing 3 statements from timer lab:
+   //locate IDT
    fill out IDT timer entry
    program PIC mask
    (but NO "sti")
-
+}
 int main() {
    call InitData() to initialize kernel data structure
    call (new) InitIDT() to set up timer (from timer lab)
@@ -105,7 +105,7 @@ void Kernel(TF_t *TF_ptr) {
 // still handles other keyed-in simulated events
    (same as PureSimulation to handle key events)
 
-   call SelectCRP() to select process to run
-   call Dispatch(pcb[CRP].TF_ptr) to load it and run
+   SelectCRP();// call SelectCRP() to select process to run
+   Dispatch(pcb[CRP].TF_ptr);//call Dispatch(pcb[CRP].TF_ptr) to load it and run
 }
 
