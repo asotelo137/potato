@@ -34,7 +34,7 @@ int DeQ(q_t *p) { // return -1 if q is empty
 	int pid;
 	
 	if (p->size == 0){
-		printf("Queue is full\n");
+		printf("Queue is empty\n");
 		return;
 	}else
 	pid=p->head;
