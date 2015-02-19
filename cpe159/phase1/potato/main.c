@@ -65,15 +65,15 @@ void SelectCRP() {       // select which PID to be new CRP
    //   set CRP to 0 (at least we can run Idle proc)
    if(run_q.size == 0 ){
       CRP = 0;
-   }else      
-   //set CRP to first in run queue (dequeue it)
-   CRP = DeQ(&run_q); 
-   printf("%d after DeQ",CRP);
-   //change mode in PCB of CRP to UMODE
-   pcb[CRP].mode = UMODE;
-   //change state in PCB of CRP to RUNNING
-   pcb[CRP].state = RUNNING;
-   
+   }else{      
+      //set CRP to first in run queue (dequeue it)
+      CRP = DeQ(&run_q); 
+      printf("%d after DeQ",CRP);
+      //change mode in PCB of CRP to UMODE
+      pcb[CRP].mode = UMODE;
+      //change state in PCB of CRP to RUNNING
+      pcb[CRP].state = RUNNING;
+   }
 }
 
 void Kernel() {
