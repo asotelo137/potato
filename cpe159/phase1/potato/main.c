@@ -36,7 +36,8 @@ void InitData() {
    set CRP to 0 (Idle proc ID)*/
    MyBZero(run_q,Q_SIZE);
    MyBZero(none_q,Q_SIZE);
-   unsigned long i = 1;
+   int i;
+   i = 1;
    for(i ; i<20;i++){
       pcb[i].state = NONE;
       EnQ(i,none_q);
