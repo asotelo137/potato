@@ -35,8 +35,8 @@ void TerminateISR() {
 
 void TimerISR() {
   // just return if CRP is Idle (0) or less (-1)
-   if (pcb_t.state <= 0 ){
-      return 0;
+   if (CRP == 0 || CRP < -1 ){
+      return;
    }
    
    //upcount the runtime of CRP
