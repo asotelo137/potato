@@ -8,6 +8,7 @@
 #include "proc.h"
 
 void CreateISR(int pid) {
+   printf("create");
    if(pid !=0 ){ //if pid given is not 0 (Idle), enqueue it into run queue
       EnQ(pid,&run_q);
       // PCB of new proc:
@@ -20,6 +21,7 @@ void CreateISR(int pid) {
 }
 
 void TerminateISR() {
+   printf("terminate");
    //just return if CRP is 0 or -1 (Idle or not given)
     if (CRP == 0 || CRP < -1 ){
       return;
@@ -34,6 +36,7 @@ void TerminateISR() {
 }        
 
 void TimerISR() {
+   printf("timer");
   // just return if CRP is Idle (0) or less (-1)
    if (CRP == 0 || CRP < -1 ){
       return;
