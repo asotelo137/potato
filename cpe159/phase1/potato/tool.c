@@ -22,10 +22,9 @@ void EnQ(int pid, q_t *p) {
 		printf("\nQueue is full \n");
 		return;
 	}else
+	p->q[p->tail]= pid;
 	p->tail += 1;
 	p->size +=1;
-	p->q[p->tail]= pid;
-	
 }
 
 int DeQ(q_t *p) { // return -1 if q is empty
