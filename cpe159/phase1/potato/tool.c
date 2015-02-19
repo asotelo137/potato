@@ -26,6 +26,9 @@ void EnQ(int pid, q_t *p) {
 	p->q[p->tail]= pid;
 	p->tail ++;
 	p->size ++;
+	if (p->tail >= Q_SIZE) {
+		p->tail = 0;
+	}
 }
 
 int DeQ(q_t *p) { // return -1 if q is empty
@@ -40,8 +43,11 @@ int DeQ(q_t *p) { // return -1 if q is empty
 	}else
 	
 	pid=p->head;
-	p->head--;
+	p->head++;
 	p->size--;
+	if(p->head==Q_SIZE){
+		p->head=0;
+	}
 	printf("DeQ pid %d \n",pid);
 	return pid;
 }
