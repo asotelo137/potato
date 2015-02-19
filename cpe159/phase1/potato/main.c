@@ -85,7 +85,7 @@ void Kernel() {
       key = cons_getchar(); // key = cons_getchar();
       switch(key) {
          case 'n':                                                   //if 'n'
-            printf("I banged yo mama");
+            printf("I banged yo mama\n");
             if (none_q.size == 0){                                   //no processes left in none queue
                cons_printf("No more process!\n");                    //"No more process!\n" (msg on target PC)
             }else{
@@ -94,12 +94,15 @@ void Kernel() {
             }
             break;
          case 't':                                                   //if 't'
+            printf("I need pancakes\n");
             TerminateISR();                                          //call TerminateISR() to terminate CRP
             break;   
          case 'b':                                                   //if 'b'
+            printf("Vote Nav for Miss Drag Queen 2015\n");
             breakpoint();                                            // this goes back to GDB prompt
             break;
          case 'q':                                                   //if 'q'
+            printf("Meet at Berto's Mom's house ASAP\n")
             exit(0);                                                 //just do exit(0);
       }                                                              // end switch
    }                                                                 // end if some key pressed
