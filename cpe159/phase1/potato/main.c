@@ -103,6 +103,7 @@ void Kernel() {
       } // end switch
    } // end if some key pressed
 
-   call SelectCRP() to settle/determine for next CRP
+  SelectCRP(); //call SelectCRP() to settle/determine for next CRP
+   
 }
 
