@@ -84,7 +84,7 @@ void Kernel() {
    if (cons_kbhit()) {
       char key = cons_getchar(); // key = cons_getchar();
       switch(key) {
-         case 'n';//if 'n'
+         case 'n'://if 'n'
             if (none_q.size = 0)//no processes left in none queue
                printf("No more process!\n")                        //"No more process!\n" (msg on target PC)
             else
