@@ -40,7 +40,7 @@ void TimerISR() {
    }
    
    //upcount the runtime of CRP
-   CRP.runtime++;
+   pcb[CRP].runtime++;
    
    /*if the runtime of CRP reaches TIME_LIMIT
    (need to rotate to next PID in run queue)
