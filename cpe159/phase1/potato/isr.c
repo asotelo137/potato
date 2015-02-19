@@ -9,7 +9,7 @@
 
 void CreateISR(int pid) {
    if(pid !=0 ){ //if pid given is not 0 (Idle), enqueue it into run queue
-      EnQ(pid,run_q);
+      EnQ(pid,&run_q);
       // PCB of new proc:
       pcb[pid].mode = UMODE;//mode is set to UMODE
       pcb[pid].state= RUN;//state is set to RUN
