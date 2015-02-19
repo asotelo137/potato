@@ -7,15 +7,9 @@
 
 
 void MyBZero(q_t *p, int size) {
-
 	p->size = 0;
 	p->head = 0;
 	p->tail = 0;
-
-	int i;
-	for (i = 1; i < 20; i++){
-	EnQ(0,p);
-	}
 }
 
 
