@@ -53,13 +53,11 @@ void SelectCRP() {       // select which PID to be new CRP
    (continue only when CRP is Idle or none (0 or -1)
    */ 
    if(CRP > 0){
-      
       return;
    }    
    //if it's' 0 (Idle), change its state in PCB to RUN
-   else if(CRP == 0){
-      
-      pcb[CRP].state = RUN;
+   if(CRP == 0){
+      pcb[0].state = RUN;
    }
  
    //if no processes to run (check size in run queue against zero)
