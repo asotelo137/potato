@@ -23,8 +23,8 @@ void EnQ(int pid, q_t *p) {
 		return;
 	}else
 	p->q[p->tail]= pid;
-	p->tail += 1;
-	p->size +=1;
+	p->tail ++;
+	p->size ++1;
 }
 
 int DeQ(q_t *p) { // return -1 if q is empty
@@ -39,6 +39,7 @@ int DeQ(q_t *p) { // return -1 if q is empty
 	}else
 	pid=p->head;
 	p->head--;
+	p->size--;
 	return pid;
 }
 
