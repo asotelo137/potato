@@ -40,7 +40,7 @@ void InitData() {
    i = 1;
    for(i  ; i<20;i++){
       pcb[i].state = NONE;
-      EnQ(i,none_q);
+      EnQ(i,&none_q);
       
    }
    CRP = 0;
