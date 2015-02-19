@@ -25,12 +25,12 @@ void TerminateISR() {
       return 0;
     }  
    //change state of CRP to NONE
-   pcb.state;
+   pcb.state = NONE;
    //queue it to none queue
-   EnQ(CRP,none_q);
+   EnQ(CRP,none_q);                             //STILL ERROR HERE
    //set CRP to -1 (none)
    CRP = -1;
-   return 0;
+ //  return 0;
 }        
 
 void TimerISR() {
@@ -55,5 +55,5 @@ void TimerISR() {
       EnQ(CRP,&run_q);
       CRP = -1;
    }
-    return 0;
+   // return 0;
 }
