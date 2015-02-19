@@ -38,8 +38,8 @@ void TerminateISR() {
 void TimerISR() {
    printf("timer\n");
   // just return if CRP is Idle (0) or less (-1)
-   if (CRP == 0 || CRP < -1 ){
-      printf("CRP is idle\n");
+   if (CRP <= 0  ){
+      printf("TIMER ISR CRP is %d\n", CRP);
       return;
    }
    
