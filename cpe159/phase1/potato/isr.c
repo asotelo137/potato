@@ -8,9 +8,9 @@
 #include "proc.h"
 
 void CreateISR(int pid) {
-   printf("create\n");
+  // printf("create\n");
    if(pid !=0 ){ //if pid given is not 0 (Idle), enqueue it into run queue
-       printf("Create recieved a pid : %d \n",pid);
+    //   printf("Create recieved a pid : %d \n",pid);
       EnQ(pid,&run_q);
       // PCB of new proc:
       pcb[pid].mode = UMODE;//mode is set to UMODE
@@ -22,7 +22,7 @@ void CreateISR(int pid) {
 }
 
 void TerminateISR() {
-   printf("terminate\n");
+   //printf("terminate\n");
    //just return if CRP is 0 or -1 (Idle or not given)
     if (CRP <=0 ){
       return;
@@ -37,17 +37,17 @@ void TerminateISR() {
 }        
 
 void TimerISR() {
-   printf("timer\n");
-   printf("TimerISR Beggineing CRP %d \n",CRP);
+   
+  // printf("TimerISR Beggineing CRP %d \n",CRP);
   // just return if CRP is Idle (0) or less (-1)
    if (CRP <= 0  ){
-      printf("TIMER ISR CRP is %d\n", CRP);
+      //printf("TIMER ISR CRP is %d\n", CRP);
       return;
    }
    
    //upcount the runtime of CRP
    pcb[CRP].runtime++;
-   printf("runtime %d \n", pcb[CRP].runtime);
+   //printf("runtime %d \n", pcb[CRP].runtime);
    
    /*if the runtime of CRP reaches TIME_LIMIT
    (need to rotate to next PID in run queue)
@@ -57,13 +57,13 @@ void TimerISR() {
       reset CRP (to -1, means none)
    */
    if(pcb[CRP].runtime == TIME_LIMIT){
-      printf("limit\n");
+    //  printf("limit\n");
       pcb[CRP].total_runtime=pcb[CRP].runtime + pcb[CRP].total_runtime;
       pcb[CRP].runtime=0;
       pcb[CRP].state = RUN;
       EnQ(CRP,&run_q);
       CRP = -1;
-      printf("set crp -1\n");
+     // printf("set crp -1\n");
    }
    // return 0;
 }
