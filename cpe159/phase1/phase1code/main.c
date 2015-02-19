@@ -173,6 +173,6 @@ void Kernel() {
    }                                                                 // end if some key pressed
 //   printf("after case statement \n");
    SelectCRP();                                                       //call SelectCRP() to settle/determine for next CRP
-   Dispatch(pcb[CRP].TF_ptr)
+   Dispatch(pcb[CRP].TF_ptr);
 }
 
