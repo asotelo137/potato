@@ -89,14 +89,14 @@ void Kernel() {
                printf("No more process!\n");                        //"No more process!\n" (msg on target PC)
             }else{
             pid = DeQ(&none_q);   //get 1st PID un-used (dequeue none queue)
-            CreateISR(pid);   //call CreateISR() with it to create new process
+            CreateISR();   //call CreateISR() with it to create new process
             }
             break;
          case 't'://if 't'
             TerminateISR();//call TerminateISR() to terminate CRP
             break;   
          case 'b': //if 'b'
-            just do breakpoint(); // this goes back to GDB prompt
+            breakpoint(); // this goes back to GDB prompt
             break;
          case 'q':   //if 'q'
             exit(0);//just do exit(0);
