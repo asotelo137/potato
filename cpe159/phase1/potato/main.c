@@ -9,7 +9,7 @@
 #include "tool.h"       // handy functions
 #include "proc.h"       // processes such as Init()
 #include "type.h"       // processes such as Init()
-int i;
+
 // kernel data structure:
 int CRP;                // current running PID, -1 means no process
 q_t run_q, none_q;      // processes ready to run and not used
@@ -36,8 +36,8 @@ void InitData() {
    set CRP to 0 (Idle proc ID)*/
    MyBZero(run_q,20);
    MyBZero(none_q,Q_SIZE);
-   i = 1;
-   for(i ; i<20;i++){
+   int i;
+   for(i = 1 ; i<20;i++){
       pcb[i].state = NONE;
       EnQ(i,none_q);
       
