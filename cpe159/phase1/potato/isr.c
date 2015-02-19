@@ -13,15 +13,15 @@ void CreateISR(int pid) {
       // PCB of new proc:
       pcb[pid].mode = UMODE;//mode is set to UMODE
       pcb[pid].state= RUN;//state is set to RUN
-      pcb[[pid].runtime = 0;// both runtime counts are reset to 0
-      pcb[[pid].total_runtime = 0;// both runtime counts are reset to 0
+      pcb[pid].runtime = 0;// both runtime counts are reset to 0
+      pcb[pid].total_runtime = 0;// both runtime counts are reset to 0
    }
-  return 0;
+//  return 0;
 }
 
 void TerminateISR() {
    //just return if CRP is 0 or -1 (Idle or not given)
-    if (pcb_t.state<=0){
+    if (pcb.state<=0){
       return 0;
     }  
    //change state of CRP to NONE
