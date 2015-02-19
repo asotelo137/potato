@@ -21,11 +21,11 @@ void CreateISR(int pid) {
 
 void TerminateISR() {
    //just return if CRP is 0 or -1 (Idle or not given)
-    if (pcb.state<=0){
-      return 0;
+    if (CRP == 0 || CRP < -1 ){
+      return;
     }  
    //change state of CRP to NONE
-   pcb.state = NONE;
+   CRP = NONE;
    //queue it to none queue
    EnQ(CRP,none_q);                             //STILL ERROR HERE
    //set CRP to -1 (none)
@@ -40,7 +40,7 @@ void TimerISR() {
    }
    
    //upcount the runtime of CRP
-   pcb_t.runtime++;
+   CRP.runtime++;
    
    /*if the runtime of CRP reaches TIME_LIMIT
    (need to rotate to next PID in run queue)
@@ -49,7 +49,7 @@ void TimerISR() {
       queue it to run queue
       reset CRP (to -1, means none)
    */
-   if(CRP.runtime == TIME_LIMIT){
+   if(pcb.runtime == TIME_LIMIT){
       pcb_t.total_runtime=pcb_t.runtime + pcb_t.total_runtime;
       pcb[CRP].RUN;
       EnQ(CRP,&run_q);
