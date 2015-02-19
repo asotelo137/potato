@@ -85,26 +85,26 @@ void Kernel() {
    if (cons_kbhit()) {
       key = cons_getchar(); // key = cons_getchar();
       switch(key) {
-         case 'n'://if 'n'
-            if (none_q.size == 0){//no processes left in none queue
-               cons_printf("No more process!\n");                        //"No more process!\n" (msg on target PC)
+         case 'n':                                                   //if 'n'
+            if (none_q.size == 0){                                   //no processes left in none queue
+               cons_printf("No more process!\n");                    //"No more process!\n" (msg on target PC)
             }else{
-            pid = DeQ(&none_q);   //get 1st PID un-used (dequeue none queue)
-            CreateISR(pid);   //call CreateISR() with it to create new process
+            pid = DeQ(&none_q);                                      //get 1st PID un-used (dequeue none queue)
+            CreateISR(pid);                                          //call CreateISR() with it to create new process
             }
             break;
-         case 't'://if 't'
-            TerminateISR();//call TerminateISR() to terminate CRP
+         case 't':                                                   //if 't'
+            TerminateISR();                                          //call TerminateISR() to terminate CRP
             break;   
-         case 'b': //if 'b'
-            breakpoint(); // this goes back to GDB prompt
+         case 'b':                                                   //if 'b'
+            breakpoint();                                            // this goes back to GDB prompt
             break;
-         case 'q':   //if 'q'
-            exit(0);//just do exit(0);
-      } // end switch
-   } // end if some key pressed
+         case 'q':                                                   //if 'q'
+            exit(0);                                                 //just do exit(0);
+      }                                                              // end switch
+   }                                                                 // end if some key pressed
 
-  SelectCRP(); //call SelectCRP() to settle/determine for next CRP
+  SelectCRP();                                                       //call SelectCRP() to settle/determine for next CRP
    
 }
 
