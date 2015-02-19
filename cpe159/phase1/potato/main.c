@@ -47,7 +47,7 @@ void InitData() {
 }
 
 void SelectCRP() {       // select which PID to be new CRP
-   
+   printf("Select Crp \n");
    /*simply return if CRP is greater than 0 (already good one selected)
    (continue only when CRP is Idle or none (0 or -1)
    */ 
