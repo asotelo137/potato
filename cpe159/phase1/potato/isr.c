@@ -45,7 +45,7 @@ void TimerISR() {
    
    //upcount the runtime of CRP
    pcb[CRP].runtime++;
-   printf("runtime\n");
+   printf("runtime %d \n", pcb[CRP].runtime);
    
    /*if the runtime of CRP reaches TIME_LIMIT
    (need to rotate to next PID in run queue)
