@@ -87,7 +87,7 @@ void Kernel() {
       switch(key) {
          case 'n'://if 'n'
             if (none_q.size == 0){//no processes left in none queue
-               printf("No more process!\n");                        //"No more process!\n" (msg on target PC)
+               cons_printf("No more process!\n");                        //"No more process!\n" (msg on target PC)
             }else{
             pid = DeQ(&none_q);   //get 1st PID un-used (dequeue none queue)
             CreateISR(pid);   //call CreateISR() with it to create new process
@@ -101,9 +101,6 @@ void Kernel() {
             break;
          case 'q':   //if 'q'
             exit(0);//just do exit(0);
-            break;
-         default:
-            break;
       } // end switch
    } // end if some key pressed
 
