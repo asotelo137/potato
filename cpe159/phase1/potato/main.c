@@ -70,7 +70,7 @@ void SelectCRP() {       // select which PID to be new CRP
    }else{      
       //set CRP to first in run queue (dequeue it)
       CRP = DeQ(&run_q); 
-      printf("%d after DeQ\n",CRP);
+      printf("%d after DeQ in selectcrp\n",CRP);
       //change mode in PCB of CRP to UMODE
       pcb[CRP].mode = UMODE;
       //change state in PCB of CRP to RUNNING
