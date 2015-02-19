@@ -87,21 +87,56 @@ int main() {
    InitData(); 		//call Init Data to initialize kernel data
    InitIDT();        //call (new) InitIDT() to set up timer (from timer lab)
    CreateISR(0);	//call CreateISR(0) to create Idle process (PID 0)
-   Dispatch(pcb[CRP].TF_ptr]);    // to dispatch/run CRP
    
-   return 0;
+   while (1) {      // alter 2 things below
+      Dispatch(pcb[CRP].);    // to dispatch/run CRP
+      Kernel();      // for kernel control
+   }
+
+   //return 0;
 }
 
 
+/*
+void Kernel(TF_t *TF_ptr) {
+   change to kernel mode for CRP
+   save TF_ptr to PCB of CRP
+
+   switch upon intr_num pointed by TF_ptr to call corresponging ISR {
+      if it's TIMER_INTR:
+         call TimerISR()
+      default:
+         PANIC! msg and break into GDB
+   }
+
+// still handles other keyed-in simulated events
+   (same as PureSimulation to handle key events)
+
+   call SelectCRP() to select process to run
+   call Dispatch(pcb[CRP].TF_ptr) to load it and run
+}
+*/
 
 
-
-void Kernel(Tf_t *TF_ptr) {
+void Kernel() {
    int pid,i;
    char key;
 
    //change state in PCB of CRP to kernel mode
    pcb[CRP].state = KMODE;
+   //save TF_ptr to PCB of CRP
+   pcb[CRP].pcb_t = TF_ptr;
+   
+   switch(TF_ptr->intr_num)
+   {
+      case TIMER_INTR:
+         TimerISR(); 
+         break;
+      default:
+         printf("Non-magical");
+   }
+   
+   
    //call TimerISR() to service timer interrupt as it just occurred
    TimerISR();
    if (cons_kbhit()) {
@@ -138,6 +173,6 @@ void Kernel(Tf_t *TF_ptr) {
    }                                                                 // end if some key pressed
 //   printf("after case statement \n");
    SelectCRP();                                                       //call SelectCRP() to settle/determine for next CRP
-   Dispatch(pcb[CRP].TF_ptr);
+   Dispatch(pcb[CRP].TF_ptr)
 }
 
