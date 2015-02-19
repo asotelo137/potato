@@ -109,7 +109,7 @@ void Kernel() {
             exit(0);                                                 //just do exit(0);
       }                                                              // end switch
    }                                                                 // end if some key pressed
-
+   printf("after case statement \n");
   SelectCRP();                                                       //call SelectCRP() to settle/determine for next CRP
    
 }
