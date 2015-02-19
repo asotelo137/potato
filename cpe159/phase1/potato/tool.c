@@ -24,8 +24,8 @@ void EnQ(int pid, q_t *p) {
 		printf("\nQueue is full; \n");
 	//	return -1;
 	}else
-	tail++;
-	p.q[tail] = pid;
+	p.tail++;
+	p.tail = pid;
 	
 }
 
