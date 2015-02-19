@@ -21,7 +21,7 @@ int main() {
    
    CreateISR(0);	//call CreateISR(0) to create Idle process (PID 0)
 
-   while 1 {      // alter 2 things below
+   while (1) {      // alter 2 things below
       call Dispatch()    // to dispatch/run CRP
       call Kernel()      // for kernel control
    }
