@@ -11,6 +11,7 @@
 #include "type.h"       // processes such as Init()
 
 // kernel data structure:
+int i;
 int CRP;                // current running PID, -1 means no process
 q_t run_q, none_q;      // processes ready to run and not used
 pcb_t pcb[MAX_PROC];    // process table
@@ -36,8 +37,8 @@ void InitData() {
    set CRP to 0 (Idle proc ID)*/
    MyBZero(run_q,20);
    MyBZero(none_q,Q_SIZE);
-   int i;
-   for(i = 1 ; i<20;i++){
+   i = 1;
+   for(i  ; i<20;i++){
       pcb[i].state = NONE;
       EnQ(i,none_q);
       
