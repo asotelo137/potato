@@ -59,7 +59,7 @@ void TimerISR() {
    if(pcb[CRP].runtime == TIME_LIMIT){
       printf("limit\n");
       pcb[CRP].total_runtime=pcb[CRP].runtime + pcb[CRP].total_runtime;
-      pcb[CRP].run_time=0;
+      pcb[CRP].runtime=0;
       pcb[CRP].state = RUN;
       EnQ(CRP,&run_q);
       CRP = -1;
