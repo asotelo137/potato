@@ -17,16 +17,16 @@ pcb_t pcb[MAX_PROC];    // process table
 char stack[MAX_PROC][STACK_SIZE]; // run-time stacks for processes
 
 int main() {
-   InitData(); 		//call Init Data to initia
-   lize kernel data
+   InitData(); 		//call Init Data to initialize kernel data
+   
    CreateISR(0);	//call CreateISR(0) to create Idle process (PID 0)
 
-   infinite loop: {      // alter 2 things below
+   while 1 {      // alter 2 things below
       call Dispatch()    // to dispatch/run CRP
       call Kernel()      // for kernel control
    }
 
-   return 0;
+   //return 0;
 }
 
 void InitData() {
