@@ -89,7 +89,7 @@ void Kernel() {
                printf("No more process!\n");                        //"No more process!\n" (msg on target PC)
             }else{
             DeQ(&none_q);   //get 1st PID un-used (dequeue none queue)
-            CreateISR();   //call CreateISR() with it to create new process
+            CreateISR(CRP);   //call CreateISR() with it to create new process
             }
             break;
          case 't'://if 't'
