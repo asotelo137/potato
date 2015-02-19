@@ -50,7 +50,7 @@ void TimerISR() {
       reset CRP (to -1, means none)
    */
    if(pcb.runtime == TIME_LIMIT){
-      pcb_t.total_runtime=pcb_t.runtime + pcb_t.total_runtime;
+      pcb.total_runtime=pcb.runtime + pcb.total_runtime;
       pcb[CRP].RUN;
       EnQ(CRP,&run_q);
       CRP = -1;
