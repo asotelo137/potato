@@ -25,7 +25,7 @@ void TerminateISR() {
       return 0;
     }  
    //change state of CRP to NONE
-   CRP = -1;
+   pcb.state;
    //queue it to none queue
    EnQ(CRP,none_q);
    //set CRP to -1 (none)
