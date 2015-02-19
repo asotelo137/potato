@@ -22,8 +22,8 @@ int main() {
    CreateISR(0);	//call CreateISR(0) to create Idle process (PID 0)
 
    while (1) {      // alter 2 things below
-      call Dispatch()    // to dispatch/run CRP
-      call Kernel()      // for kernel control
+      Dispatch()    // to dispatch/run CRP
+      Kernel()      // for kernel control
    }
 
    //return 0;
@@ -36,7 +36,8 @@ void InitData() {
    set CRP to 0 (Idle proc ID)*/
    MyBZero(run_q,Q_SIZE);
    MyBZero(none_q,Q_SIZE);
-   int i = 1;
+   unsigned long i;
+   i = 1;
    for(i ; i<20;i++){
       pcb[i].state = NONE;
       EnQ(i,none_q);
