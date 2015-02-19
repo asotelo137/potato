@@ -7,7 +7,7 @@
 
 
 void MyBZero(q_t *p, int size) {
-	p->size = 0;
+	//p->size = 0;
 	p->head = 0;
 	p->tail = 0;
 }
