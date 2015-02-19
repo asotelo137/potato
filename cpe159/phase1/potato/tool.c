@@ -25,7 +25,7 @@ void EnQ(int pid, q_t *p) {
 	//	return -1;
 	}else
 	p.tail++;
-	p.tail = pid;
+	p->q[p->tail]= pid;
 	
 }
 
