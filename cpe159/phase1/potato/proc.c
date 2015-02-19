@@ -6,7 +6,7 @@
 #include "proc.h"    // for Idle, SimpleProc, DispatchProc
 
 void Dispatch() {
-   if(CRP = 0) {//if CRP is 0:
+   if(CRP == 0) {//if CRP is 0:
     Idle();  //call Idle() as proc run
    }else //(all other processes)
       //call UserProc() as proc run
