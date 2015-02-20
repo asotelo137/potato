@@ -33,8 +33,7 @@ InitIDT();
 CreateISR(0); //call CreateISR(0) to create Idle process (PID 0)
 Dispatch(); // to dispatch/run CRP
 
-}
-//return 0;
+return 0;
 }
 void InitData() {
 int i;
