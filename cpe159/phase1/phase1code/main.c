@@ -132,11 +132,11 @@ void Kernel(TF_t *TF_ptr) {
 
 
 void Kernel(TF_t *TF_ptr) {
-   int pid;
+   int pid,i;
    char key;
 
    //change state in PCB of CRP to kernel mode
-   pcb[CRP].state = KMODE;
+   pcb[CRP].mode = KMODE;
    //save TF_ptr to PCB of CRP
    pcb[CRP].TF_ptr = TF_ptr;
    
