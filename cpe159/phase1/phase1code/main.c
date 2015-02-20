@@ -97,7 +97,7 @@ int main() {
    InitIDT();        //call (new) InitIDT() to set up timer (from timer lab)
    CreateISR(0);	//call CreateISR(0) to create Idle process (PID 0)
        // alter 2 things below
-   CRP= 0;
+   //CRP= 0;
    Dispatch(pcb[0].TF_ptr);    // to dispatch/run CRP pcb[CRP].TF_ptr
      // Kernel();      // for kernel control
 
