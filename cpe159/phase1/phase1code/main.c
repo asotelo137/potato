@@ -72,7 +72,7 @@ void SelectCRP() {       // select which PID to be new CRP
 
 //SetEntry() needed from timer lab
 void SetEntry( int entry_num , func_ptr_t func_ptr){
-struct i386_gate *gateptr = &IDT_ptr_[entry_num];
+struct i386_gate *gateptr = &IDT_ptr[entry_num];
 fill_gate(gateptr, (int) func_ptr, get_cs(), ACC_INTR_GATE, 0 );
 }
 
