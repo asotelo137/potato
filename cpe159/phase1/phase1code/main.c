@@ -10,6 +10,7 @@
 #include "proc.h"       // processes such as Init()
 #include "type.h"       // processes such as Init()
 #include "entry.h"
+#include "entry.S"
 
 // kernel data structure:
 int CRP;                // current running PID, -1 means no process
@@ -81,7 +82,7 @@ fill_gate(gateptr, (int) func_ptr, get_cs(), ACC_INTR_GATE, 0 );
 
 void InitIDT(){ //is new to code, containing 3 statements from timer lab:
 idt_table = get_idt_base(); //locate IDT
-SetIDTEntry(32, TimerEntry); //fill out IDT timer entry
+SetEntry(32, TimerEntry); //fill out IDT timer entry
 outportb(0x21,~1); //program PIC mask
 //(but NO "sti")
 }
