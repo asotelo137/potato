@@ -10,8 +10,6 @@
 #include "proc.h"       // processes such as Init()
 #include "type.h"       // processes such as Init()
 #include "entry.h"
-//#include "extern.h"
-//#include "TF.h"
 
 
 // kernel data structure:
@@ -21,6 +19,7 @@ pcb_t pcb[MAX_PROC];    // process table
 char stack[MAX_PROC][STACK_SIZE]; // run-time stacks for processes
 //(include stuff from timer lab and new PCB described in 1.html)
 struct i386_gate * idt_table;
+void InitIDT;
 //typedef void (* func_ptr_t)();
 struct i386_gate *IDT_ptr;
 
