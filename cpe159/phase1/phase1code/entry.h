@@ -10,7 +10,7 @@
 #ifndef ASSEMBLER
 __BEGIN_DECLS
 #include "type.h" // for trapframe_t below
-extern void TimeEntry(); // code defined in entry.S
+extern void TimerEntry(); // code defined in entry.S
 extern void Dispatch(TF_t *); // code defined in entry.S
 __END_DECLS
 #endif
