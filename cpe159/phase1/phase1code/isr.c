@@ -89,10 +89,11 @@ void TimerISR() {
      // printf("set crp -1\n");
    }
 }
+
+}
 MyBzero(void *s, int n ){
   int i;
   for (i = 0; i < n; i++) {
     *((char*)s+n) = '\0';
   }
-}
 }
