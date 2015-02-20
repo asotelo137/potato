@@ -17,7 +17,7 @@ pcb_t pcb[MAX_PROC];    // process table
 char stack[MAX_PROC][STACK_SIZE]; // run-time stacks for processes
 //(include stuff from timer lab and new PCB described in 1.html)
 struct i386_gate * idt_table;
-typedef void (* func_ptr_t)();
+//typedef void (* func_ptr_t)();
 struct i386_gate *IDT_ptr;
 
 //InitData() still the same as PureSimulation
@@ -127,7 +127,7 @@ void Kernel() {
    //change state in PCB of CRP to kernel mode
    pcb[CRP].state = KMODE;
    //save TF_ptr to PCB of CRP
-   pcb[CRP].*TF_ptr = TF_ptr;
+   pcb[CRP].pcb_t = TF_ptr;
    
    switch(TF_ptr->intr_num)
    {
