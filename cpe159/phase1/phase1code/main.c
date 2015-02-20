@@ -132,7 +132,7 @@ void Kernel(TF_t *TF_ptr) {
 
 
 void Kernel(TF_t *TF_ptr) {
-   int pid,i;
+   int pid;
    char key;
 
    //change state in PCB of CRP to kernel mode
