@@ -30,6 +30,11 @@ char stack[MAX_PROC][STACK_SIZE]; // run-time stacks for processes
 //typedef void (* func_ptr_t)();
 struct i386_gate *IDT_ptr;
 void InitIDT();
+//SetEntry() needed from timer lab
+void SetEntry(int entry_num, func_ptr_t func_ptr){
+   struct i386_gate *gateptr = &IDT_ptr[entry_num];
+   fill_gate(gateptr, (int)func_ptr, get_cs(), ACC_INTR_GATE,0);
+}
 //InitData() still the same as PureSimulation
 void InitData() {
    int i;
@@ -80,11 +85,6 @@ void SelectCRP() {       // select which PID to be new CRP
    }
 }
 
-//SetEntry() needed from timer lab
-void SetEntry(int entry_num, func_ptr_t func_ptr){
-   struct i386_gate *gateptr = &IDT_ptr[entry_num];
-   fill_gate(gateptr, (int)func_ptr, get_cs(), ACC_INTR_GATE,0);
-}
 
 void InitIDT(){ //is new to code, containing 3 statements from timer lab:
    IDT_ptr = get_idt_base(); //locate IDT
