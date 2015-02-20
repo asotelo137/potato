@@ -13,7 +13,17 @@ int CRP; // current running PID, -1 means no process
 q_t run_q, none_q; // processes ready to run and not used
 pcb_t pcb[MAX_PROC]; // process table
 char stack[MAX_PROC][STACK_SIZE]; // run-time stacks for processes
+
+//Timer Lab Stuff
+struct i386_gate *IDT_ptr;
+
+void SetEntry(int entry_num, func_ptr_t func_ptr){
+   struct i386_gate *gateptr = &IDT_ptr[entry_num];
+   fill_gate(gateptr, (int)func_ptr,get_cs(),ACC_INTR_GATE,0);
+}
+
 int main() {
+   int i;
    InitData(); //call Init Data to initialize kernel data
    CreateISR(0); //call CreateISR(0) to create Idle process (PID 0)
    while (1) { // alter 2 things below
