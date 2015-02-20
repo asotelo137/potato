@@ -10,6 +10,7 @@
 #include "proc.h"       // processes such as Init()
 #include "type.h"       // processes such as Init()
 #include "entry.h"
+#include "extern.h"
 
 
 // kernel data structure:
