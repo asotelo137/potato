@@ -2,14 +2,14 @@
 // simulated kernel
 //
 // Team Name: ??????? (Members: ?????? and ??????)
-
+#include "entry.h"
 #include "spede.h"      // spede stuff
 #include "main.h"       // main stuff
 #include "isr.h"        // ISR's
 #include "tool.h"       // handy functions
 #include "proc.h"       // processes such as Init()
 #include "type.h"       // processes such as Init()
-#include "entry.h"
+
 // Speede Includes
 #include <spede/stdio.h>
 #include <spede/flames.h>
