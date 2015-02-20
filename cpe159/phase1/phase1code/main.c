@@ -24,7 +24,7 @@ q_t run_q, none_q;      // processes ready to run and not used
 pcb_t pcb[MAX_PROC];    // process table
 char stack[MAX_PROC][STACK_SIZE]; // run-time stacks for processes
 //(include stuff from timer lab and new PCB described in 1.html)
-//struct i386_gate *idt_table;
+
 
 //typedef void (* func_ptr_t)();
 struct i386_gate *IDT_ptr;
@@ -81,13 +81,13 @@ void SelectCRP() {       // select which PID to be new CRP
 
 //SetEntry() needed from timer lab
 void SetEntry(int entry_num, func_ptr_t func_ptr){
-struct i386_gate *gateptr = &IDT_ptr[entry_num];
-fill_gate(gateptr, (int)func_ptr, get_cs(), ACC_INTR_GATE,0);
+   struct i386_gate *gateptr = &IDT_ptr[entry_num];
+   fill_gate(gateptr, (int)func_ptr, get_cs(), ACC_INTR_GATE,0);
 }
 
 void InitIDT(){ //is new to code, containing 3 statements from timer lab:
    IDT_ptr = get_idt_base(); //locate IDT
-   SetEntry(32, TimerEntry); //fill out IDT timer entry
+   SetEntry(32, Timerentry); //fill out IDT timer entry
    outportb(0x21, ~0x01); //program PIC mask
    //(but NO "sti")
 }
