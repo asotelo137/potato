@@ -81,7 +81,7 @@ fill_gate(gateptr, (int) func_ptr, get_cs(), ACC_INTR_GATE, 0 );
 
 void InitIDT(){ //is new to code, containing 3 statements from timer lab:
 idt_table = get_idt_base(); //locate IDT
-SetEntry(32,TimerEntry); //fill out IDT timer entry
+SetIDTEntry(32, TimerEntry); //fill out IDT timer entry
 outportb(0x21,~1); //program PIC mask
 //(but NO "sti")
 }
