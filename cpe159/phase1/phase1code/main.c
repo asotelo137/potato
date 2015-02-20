@@ -92,7 +92,7 @@ int main() {
    CreateISR(0);	//call CreateISR(0) to create Idle process (PID 0)
        // alter 2 things below
    //CRP= 0;
-   Dispatch(pcb[CRP].TF_ptr);    // to dispatch/run CRP
+   Dispatch();    // to dispatch/run CRP pcb[CRP].TF_ptr
      // Kernel();      // for kernel control
 
 
