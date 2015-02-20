@@ -94,7 +94,9 @@ void InitIDT(){ //is new to code, containing 3 statements from timer lab:
 
 int main() {
    InitData(); 		//call Init Data to initialize kernel data
+   
    CreateISR(0);	//call CreateISR(0) to create Idle process (PID 0)
+   
    InitIDT();        //call (new) InitIDT() to set up timer (from timer lab)
    
        // alter 2 things below
