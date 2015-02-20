@@ -85,6 +85,7 @@ void Kernel(TF_t *TF_ptr) {
    pcb[CRP].mode = KMODE;
    //call TimerISR() to service timer interrupt as it just occurred
    switch(TF_ptr->intr_num){
+      
       case TIMER_INTR:
          printf("made it into kernel\n");
          TimerISR();
