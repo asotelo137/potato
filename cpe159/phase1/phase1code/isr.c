@@ -60,7 +60,7 @@ void TerminateISR() {
 }        
 
 void TimerISR() {
-   
+  outportb(0x20,0x60);
   // printf("TimerISR Beggineing CRP %d \n",CRP);
   // just return if CRP is Idle (0) or less (-1)
    if (CRP <= 0  ){
