@@ -76,7 +76,8 @@ int main() {
    return 0;
 }
 void Kernel(TF_t *TF_ptr) {
-   printf("made it into kernel.");
+   
+   printf("n pressed\n");
    int pid,i;
    char key;
    pcb[CRP].TF_ptr=TF_ptr;
