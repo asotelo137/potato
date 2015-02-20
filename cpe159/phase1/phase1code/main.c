@@ -9,7 +9,7 @@
 #include "tool.h"       // handy functions
 #include "proc.h"       // processes such as Init()
 #include "type.h"       // processes such as Init()
-//#include "entry.h"
+#include "entry.h"
 
 
 // kernel data structure:
