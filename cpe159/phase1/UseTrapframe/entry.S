@@ -10,6 +10,7 @@
 .comm kstack, KSTACK_SIZE, 1 // define kernel stack space
 .text
 
+
 // Dispatch() loads registers from trapframe to run
 ENTRY(Dispatch)
    movl 4(%esp), %eax   // load stack pointer from eax
