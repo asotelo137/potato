@@ -102,8 +102,8 @@ void Kernel(TF_t *TF_ptr) {
             pid = DeQ(&none_q);                                      //get 1st PID un-used (dequeue none queue)
 //             printf("after pressing n pid is %d \n",pid);
             CreateISR(pid);                                          //call CreateISR() with it to create new process
-            i = 1;
-            for(i  ; i<Q_SIZE;i++){
+           
+            for(i =1; i<Q_SIZE;i++){
 //               printf("%d is in runque %d\n",run_q.q[i],i);
                
             }
