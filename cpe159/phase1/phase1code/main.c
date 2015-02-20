@@ -24,7 +24,7 @@ q_t run_q, none_q;      // processes ready to run and not used
 pcb_t pcb[MAX_PROC];    // process table
 char stack[MAX_PROC][STACK_SIZE]; // run-time stacks for processes
 //(include stuff from timer lab and new PCB described in 1.html)
-struct i386_gate * idt_table;
+struct i386_gate *idt_table;
 
 //typedef void (* func_ptr_t)();
 struct i386_gate *IDT_ptr;
