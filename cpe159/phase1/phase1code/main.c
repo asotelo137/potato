@@ -29,7 +29,7 @@ char stack[MAX_PROC][STACK_SIZE]; // run-time stacks for processes
 
 //typedef void (* func_ptr_t)();
 struct i386_gate *IDT_ptr;
-
+void InitIDT();
 //InitData() still the same as PureSimulation
 void InitData() {
    int i;
