@@ -80,9 +80,9 @@ void SelectCRP() {       // select which PID to be new CRP
 }
 
 //SetEntry() needed from timer lab
-void SetEntry(int entry_num, func_ptr_t entry_addr){
-struct i386_gate *gateptr = &idt_table[entry_num];
-fill_gate(gateptr, (int)entry_addr, get_cs(), ACC_INTR_GATE,0);
+void SetEntry(int entry_num, func_ptr_t func_ptr){
+struct i386_gate *gateptr = &IDT_ptr[entry_num];
+fill_gate(gateptr, (int)func_ptr, get_cs(), ACC_INTR_GATE,0);
 }
 
 void InitIDT(){ //is new to code, containing 3 statements from timer lab:
