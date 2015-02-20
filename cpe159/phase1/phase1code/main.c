@@ -36,7 +36,6 @@ void InitData() {
    for(i  ; i<Q_SIZE;i++){
       pcb[i].state = NONE;
       EnQ(i,&none_q);
-      
    }
    CRP = 0;
 }
