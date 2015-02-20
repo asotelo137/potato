@@ -34,9 +34,9 @@ void InitIDT(){
 
 int main() {
    InitData(); 		//call Init Data to initialize kernel data
-   
+   InitIDT();
    CreateISR(0);	//call CreateISR(0) to create Idle process (PID 0)
-   //Dispatch(pcb[0].TF_ptr);    // to dispatch/run CRP
+   Dispatch(pcb[0].TF_ptr);    // to dispatch/run CRP
    
    return 0;
    
