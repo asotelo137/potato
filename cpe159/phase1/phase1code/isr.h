@@ -3,6 +3,7 @@
 #ifndef _ISR_H_
 #define _ISR_H_
 
+void MyBZero(int , int);
 void CreateISR(int);
 void TerminateISR();
 void TimerISR();
