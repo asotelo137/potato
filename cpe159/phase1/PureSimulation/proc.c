@@ -6,18 +6,22 @@
 #include "proc.h"    // for Idle, SimpleProc, DispatchProc
 
 void Dispatch() {
-   if CRP is 0:
-      call Idle() as proc run
-   else (all other processes)
-      call UserProc() as proc run
+   if(CRP == 0) {//if CRP is 0:
+    Idle();  //call Idle() as proc run
+   }else //(all other processes)
+      //call UserProc() as proc run
+      UserProc();
+   
 }
 
 void Idle() {
-   print 0 on PC
-   busy-loop delay for about 1 sec
+   int i;
+   cons_printf("0");//print 0 on PC
+   for(i=0; i<1666000; i++) IO_DELAY();//busy-loop delay for about 1 sec
 }
 
 void UserProc() {
-   print its pid (CRP) on PC
-   busy-loop delay for about 1 sec
+   int i;
+   cons_printf("%d",CRP);//print its pid (CRP) on PC
+   for(i=0; i<1666000; i++) IO_DELAY();//busy-loop delay for about 1 sec
 }
