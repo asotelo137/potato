@@ -22,7 +22,7 @@ fill_gate(gateptr, (int)func_ptr,get_cs(),ACC_INTR_GATE,0);
 }
 void InitIDT(){
   IDT_ptr = get_idt_base();
-  SetEntry(32,TimerEntry);
+  //SetEntry(32,TimerEntry);
   outportb(0x21,~0x01);
 }
 
