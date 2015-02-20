@@ -7,7 +7,7 @@
 
 
 
-void MyBZero(q_t *p, int size) {
+void MyBzero(q_t *p, int size) {
 	p->size = size;
 	p->head = size;
 	p->tail = size;
