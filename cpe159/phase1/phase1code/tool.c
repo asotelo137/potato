@@ -6,7 +6,8 @@
 #include "extern.h"
 
 
-void InitQ(q_t *p, int size) {
+
+void MyBZero(q_t *p, int size) {
 	p->size = size;
 	p->head = size;
 	p->tail = size;
