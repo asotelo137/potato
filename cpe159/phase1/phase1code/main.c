@@ -32,8 +32,7 @@ void InitData() {
    InitQ(&run_q,0);
    InitQ(&none_q,0);
    
-   i = 1;
-   for(i  ; i<Q_SIZE;i++){
+   for(i =1  ; i<Q_SIZE;i++){
       pcb[i].state = NONE;
       EnQ(i,&none_q);
    }
