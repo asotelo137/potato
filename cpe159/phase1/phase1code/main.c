@@ -41,8 +41,8 @@ int i;
 queue PID's 1~19 (skip 0) into none_q (un-used PID's)
 set state to NONE in all un-used pcb[1~19]
 set CRP to 0 (Idle proc ID)*/
-MyBZero(&run_q,0);
-MyBZero(&none_q,0);
+MyBzero(&run_q,0);
+MyBzero(&none_q,0);
 i = 1;
 for(i ; i<Q_SIZE;i++){
 pcb[i].state = NONE;
