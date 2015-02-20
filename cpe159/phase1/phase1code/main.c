@@ -121,7 +121,7 @@ void Kernel(TF_t *TF_ptr) {
 */
 
 
-void Kernel() {
+void Kernel(TF_t *TF_ptr) {
    int pid,i;
    char key;
 
