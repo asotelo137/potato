@@ -17,6 +17,23 @@ void CreateISR(int pid) {
       pcb[pid].state= RUN;//state is set to RUN
       pcb[pid].runtime = 0;// both runtime counts are reset to 0
       pcb[pid].total_runtime = 0;// both runtime counts are reset to 0
+      
+      MyBzero(stack[pid], STACK_SIZE); // erase stack
+      // point to just above stack, then drop by sizeof(TF_t)
+      pcb[pid].TF_ptr = (TF_t *)&stack[pid][STACK_SIZE];
+      pcb[pid].TF_ptr--;
+      // fill out trapframe of this new proc:
+      if(pid == 0)
+      pcb[pid].TF_ptr->eip = (unsigned int)Idle; // Idle process
+      else
+      pcb[pid].TF_ptr->eip = (unsigned int)UserProc; // other new process
+      pcb[pid].TF_ptr->eflags = EF_DEFAULT_VALUE | EF_INTR;
+      pcb[pid].TF_ptr->cs = get_cs();
+      pcb[pid].TF_ptr->ds = get_ds();
+      pcb[pid].TF_ptr->es = get_es();
+      pcb[pid].TF_ptr->fs = get_fs();
+      pcb[pid].TF_ptr->gs = get_gs();
+      
    }
 //  return 0;
 }
