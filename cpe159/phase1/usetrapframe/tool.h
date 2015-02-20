@@ -5,7 +5,7 @@
 
 #include "type.h" // q_t needs be defined in code below
 
-void MyBzero( *s, int )
+void MyBzero( *s, int );
 void MyBZero(q_t *, int);
 int DeQ(q_t *);
 void EnQ(int, q_t *);
