@@ -88,7 +88,7 @@ void SetEntry(int entry_num, func_ptr_t func_ptr){
 void InitIDT(){ //is new to code, containing 3 statements from timer lab:
    IDT_ptr = get_idt_base(); //locate IDT
    SetEntry(32, TimerEntry); //fill out IDT timer entry
-   outportb(0x21, ~1); //program PIC mask
+   outportb(0x21, ~0x01); //program PIC mask
    //(but NO "sti")
 }
 
