@@ -19,7 +19,7 @@ pcb_t pcb[MAX_PROC];    // process table
 char stack[MAX_PROC][STACK_SIZE]; // run-time stacks for processes
 //(include stuff from timer lab and new PCB described in 1.html)
 struct i386_gate * idt_table;
-void InitIDT;
+
 //typedef void (* func_ptr_t)();
 struct i386_gate *IDT_ptr;
 
@@ -82,7 +82,7 @@ fill_gate(gateptr, (int)entry_addr, get_cs(), ACC_INTR_GATE,0);
 void InitIDT(){ //is new to code, containing 3 statements from timer lab:
    idt_table = get_idt_base(); //locate IDT
    SetEntry(32, TimerEntry); //fill out IDT timer entry
-   outportb(0x21,~1); //program PIC mask
+   outportb(0x21, ~0x01); //program PIC mask
    //(but NO "sti")
 }
 
