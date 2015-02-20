@@ -12,6 +12,7 @@ void CreateISR(int pid) {
    if(pid !=0 ){ //if pid given is not 0 (Idle), enqueue it into run queue
     //   printf("Create recieved a pid : %d \n",pid);
       EnQ(pid,&run_q);
+   }
       // PCB of new proc:
       pcb[pid].mode = UMODE;//mode is set to UMODE
       pcb[pid].state= RUN;//state is set to RUN
@@ -35,7 +36,7 @@ void CreateISR(int pid) {
       pcb[pid].TF_ptr->fs = get_fs();
       pcb[pid].TF_ptr->gs = get_gs();
       
-   }
+   
 //  return 0;
 }
 
