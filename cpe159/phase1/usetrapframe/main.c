@@ -96,12 +96,12 @@ void Kernel(TF_t *TF_ptr) {
       key = cons_getchar(); // key = cons_getchar();
       switch(key) {
          case 'n':                                                   //if 'n'
- //           printf("n pressed\n");
+          printf("n pressed\n");
             if (none_q.size == 0){                                   //no processes left in none queue
                cons_printf("No more process!\n");                    //"No more process!\n" (msg on target PC)
             }else{
             pid = DeQ(&none_q);                                      //get 1st PID un-used (dequeue none queue)
-//             printf("after pressing n pid is %d \n",pid);
+             printf("after pressing n pid is %d \n",pid);
             CreateISR(pid);                                          //call CreateISR() with it to create new process
            
             for(i =1; i<Q_SIZE;i++){
@@ -112,15 +112,15 @@ void Kernel(TF_t *TF_ptr) {
             }
             break;
          case 't':                                                   //if 't'
-//            printf("t pressed\n");
+            printf("t pressed\n");
             TerminateISR();                                          //call TerminateISR() to terminate CRP
             break;   
          case 'b':                                                   //if 'b'
-//            printf("b pressed \n");
+            printf("b pressed \n");
             breakpoint();                                            // this goes back to GDB prompt
             break;
          case 'q':                                                   //if 'q'
-//            printf("q pressed\n");
+            printf("q pressed\n");
             exit(0);                                                 //just do exit(0);
       }                                                              // end switch
    }                                                                 // end if some key pressed
