@@ -17,7 +17,7 @@ void CreateISR(int pid) {
       pcb[pid].state= RUN;//state is set to RUN
       pcb[pid].runtime = 0;// both runtime counts are reset to 0
       pcb[pid].total_runtime = 0;// both runtime counts are reset to 0
-      pcb[pid].TF_ptr=0;
+      pcb[pid].TF_ptr=1;
       
       MyBzero((void *)stack[pid], STACK_SIZE); // erase stack
       // point to just above stack, then drop by sizeof(TF_t)
