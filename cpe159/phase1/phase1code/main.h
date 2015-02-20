@@ -7,6 +7,5 @@ int main();
 void InitData();
 void SelectCRP();
 void Kernel();
-void InitIDT();
 
 #endif
