@@ -41,11 +41,9 @@ void CreateISR(int pid) {
 }
 
 void TerminateISR() {
-  
-   
-  printf("terminate\n");
+  //printf("terminate\n");
    //just return if CRP is 0 or -1 (Idle or not given)
-    outportb(0x20,0x60);
+    
     if (CRP <=0 ){
       return;
     }  
@@ -59,7 +57,7 @@ void TerminateISR() {
 }        
 
 void TimerISR() {
-   
+   outportb(0x20,0x60);
   // printf("TimerISR Beggineing CRP %d \n",CRP);
   // just return if CRP is Idle (0) or less (-1)
    if (CRP <= 0  ){
