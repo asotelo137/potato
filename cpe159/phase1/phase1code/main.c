@@ -127,7 +127,7 @@ void Kernel() {
    //change state in PCB of CRP to kernel mode
    pcb[CRP].state = KMODE;
    //save TF_ptr to PCB of CRP
-   pcb[CRP].*TF_ptr = TF_ptr;
+   pcb[CRP].TF_ptr = TF_ptr;
    
    switch(TF_ptr->intr_num)
    {
