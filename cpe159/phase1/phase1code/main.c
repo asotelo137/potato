@@ -20,7 +20,7 @@ void SetEntry(int entry_num, func_ptr_t func_ptr){
 struct i386_gate *gateptr = &IDT_ptr[entry_num];
 fill_gate(gateptr, (int)func_ptr,get_cs(),ACC_INTR_GATE,0);
 }
-InitIDT(){
+void InitIDT(){
   IDT_ptr = get_idt_base();
   SetEntry(32,TimerEntry);
   outportb(0x21,~0x01);
