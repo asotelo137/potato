@@ -90,10 +90,10 @@ int main() {
    InitData(); 		//call Init Data to initialize kernel data
    InitIDT();        //call (new) InitIDT() to set up timer (from timer lab)
    CreateISR(0);	//call CreateISR(0) to create Idle process (PID 0)
-   
-   while (1) {      // alter 2 things below
-      Dispatch(pcb[CRP].TF_ptr);    // to dispatch/run CRP
-      Kernel();      // for kernel control
+       // alter 2 things below
+   CRP= 0;
+   Dispatch(pcb[CRP].TF_ptr);    // to dispatch/run CRP
+     // Kernel();      // for kernel control
    }
 
    //return 0;
