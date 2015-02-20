@@ -11,6 +11,12 @@
 #include "type.h"       // processes such as Init()
 #include "entry.h"
 // Speede Includes
+#include <spede/stdio.h>
+#include <spede/flames.h>
+#include <spede/machine/io.h>
+#include <spede/machine/proc_reg.h>
+#include <spede/machine/seg.h>
+#include <spede/machine/pic.h>
 
 // kernel data structure:
 int CRP;                // current running PID, -1 means no process
