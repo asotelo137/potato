@@ -36,6 +36,7 @@ int main() {
    InitData(); 		//call Init Data to initialize kernel data
    CreateISR(0);	//call CreateISR(0) to create Idle process (PID 0)
    InitIDT();
+   cons_printf("{pcb[0] is at %u. \n",pcb[0].TF_ptr);
    Dispatch(pcb[0].TF_ptr);    // to dispatch/run CRP
    
    return 0;
