@@ -67,6 +67,7 @@ void TimerISR() {
    
    //upcount the runtime of CRP
    pcb[CRP].runtime++;
+   sys_time++;
    //printf("runtime %d \n", pcb[CRP].runtime);
    
    /*if the runtime of CRP reaches TIME_LIMIT
@@ -81,9 +82,19 @@ void TimerISR() {
       pcb[CRP].total_runtime=pcb[CRP].runtime + pcb[CRP].total_runtime;
       pcb[CRP].runtime=0;
       pcb[CRP].state = RUN;
+      pcb[CRP].
       EnQ(CRP,&run_q);
       CRP = -1;
      // printf("set crp -1\n");
    }
    // return 0;
+}
+
+int GetPidISR(){
+  pcb[CRP].PID=GetPidf();
+  
+}
+
+void SleepISR(){
+  
 }
