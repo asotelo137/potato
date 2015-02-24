@@ -22,15 +22,16 @@ ENTRY(Dispatch)
    add $4, %esp         // skip 4 bytes that stored intr_num
    iret
 
-
-// getpiud entry
-ENTRY(GetPidEntry)
-      
-      
-//Sleep Entry
+// get pid entry
 ENTRY(SleepEntry)
-
-
+   push1 $SLEEP_INTR
+   jmp Intokernel
+   
+//Sleep Entry
+ENTRY(GetPidEntry)
+   push1 $GETPID_INTR
+   jmp Intokernel
+   
 // push intr type number then jump to common handler
 ENTRY(TimerEntry)
    pushl $TIMER_INTR
