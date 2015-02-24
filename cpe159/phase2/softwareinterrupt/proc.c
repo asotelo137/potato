@@ -20,7 +20,7 @@ void UserProc() {
   // int i;
   
    for(;;){
-   cons_printf(" %d ",CRP);//print its pid (CRP) on PC
+   cons_printf(" %d ",GetPid());//print its pid (CRP) on PC
    seconds= 4 - (CRP%4);
    Sleep(seconds);
    // Sleep(seconds);
