@@ -133,7 +133,7 @@ void Kernel(TF_t *TF_ptr) {
             breakpoint();                                            // this goes back to GDB prompt
             break;
          case 'w':
-            int i;
+            
             for(i =1; i<Q_SIZE;i++){
                printf("run_q %d is %d ", i , run_q.q[i]);
             }
