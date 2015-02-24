@@ -24,12 +24,12 @@ ENTRY(Dispatch)
 
 // get pid entry
 ENTRY(SleepEntry)
-   push1 $SLEEP_INTR
+   pushl $SLEEP_INTR
    jmp Intokernel
    
 //Sleep Entry
 ENTRY(GetPidEntry)
-   push1 $GETPID_INTR
+   pushl $GETPID_INTR
    jmp Intokernel
    
 // push intr type number then jump to common handler
