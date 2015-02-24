@@ -18,13 +18,14 @@ void Idle() {
 
 void UserProc() {
   // int i;
-  
+   int pid
    for(;;){
-   cons_printf(" %d ",GetPid());//print its pid (CRP) on PC
-   seconds= 4 - (CRP%4);
-   //leep(seconds);
-   // Sleep(seconds);
-   for(i=0; i<1666000; i++) IO_DELAY();//busy-loop delay for about 1 sec
+      pid = getPID();
+      cons_printf(" %d ",pid;//print its pid (CRP) on PC
+      seconds= 4 - (pid%4);
+      Sleep(seconds);
+      // Sleep(seconds);
+      //for(i=0; i<1666000; i++) IO_DELAY();//busy-loop delay for about 1 sec
    }
    
 }
