@@ -15,9 +15,13 @@ void Idle() {
 }
 
 void UserProc() {
-   int i;
-    for(;;){
+  // int i;
+   int seconds;
+   for(;;){
    cons_printf("%d",CRP);//print its pid (CRP) on PC
-   for(i=0; i<1666000; i++) IO_DELAY();//busy-loop delay for about 1 sec
-    }
+   seconds= 4 - (CRP%4);
+   sleep(seconds);
+   //for(i=0; i<1666000; i++) IO_DELAY();//busy-loop delay for about 1 sec
+   }
+   
 }
