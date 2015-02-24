@@ -91,7 +91,7 @@ void TimerISR() {
    // return 0;
 }
 
-int GetPidISR(){
+void GetPidISR(){
   outportb(0x20,0x60);
   
   pcb[CRP].TF_ptr->ebx = CRP;
