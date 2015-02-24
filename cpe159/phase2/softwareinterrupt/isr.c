@@ -64,8 +64,8 @@ void TimerISR() {
    pcb[CRP].runtime++;
    sys_time++;
    While(sleep_q.size !=0 && pcb[sleep_q.q[sleep_q.head]].wake_time <= sys_time){
-     int wakingID;
-     wakingID= DeQ(&sleep_q);
+     //int wakingID;
+     int wakingID= DeQ(&sleep_q);
      pcb[wakingID].state=RUN;
      EnQ(wakingID,&run_q);
    }
@@ -75,9 +75,7 @@ void TimerISR() {
       return;
    }
    //printf("runtime %d \n", pcb[CRP].runtime);
-   while(sleep_q)
-   
-   
+
    /*if the runtime of CRP reaches TIME_LIMIT
    (need to rotate to next PID in run queue)
       sum up runtime to the total runtime of CRP
