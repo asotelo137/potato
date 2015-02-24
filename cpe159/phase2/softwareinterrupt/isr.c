@@ -8,6 +8,7 @@
 #include "proc.h"
 
 int wakingID;
+int wake_period;
 
 void CreateISR(int pid) {
   // printf("create\n");
@@ -99,11 +100,10 @@ int GetPidISR(){
 
 void SleepISR(int seconds){
   outportb(0x20,0x60);
-  int wake_period;
   wake_period= sys_time+(100*seconds);
   pcb[CRP].wake_time=wake_period;
   EnQ(CRP,&sleep_q);
-  pcb[CRP].state=SlEEP;
+  pcb[CRP].state=SLEEP;
   CRP=-1;
   
 }
