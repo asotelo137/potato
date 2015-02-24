@@ -11,7 +11,7 @@ int seconds;
 void Idle() {
    int i;
    for(;;){
-   cons_printf("0");//print 0 on PC
+   cons_printf(" 0 ");//print 0 on PC
    for(i=0; i<1666000; i++) IO_DELAY();//busy-loop delay for about 1 sec
    } 
 }
@@ -20,8 +20,7 @@ void UserProc() {
   // int i;
   
    for(;;){
-   cons_printf("%d",CRP);//print its pid (CRP) on PC
-   cons_printf(" ");
+   cons_printf(" %d ",CRP);//print its pid (CRP) on PC
    seconds= 4 - (CRP%4);
    Sleep(seconds);
    printf("seconds %d", seconds);
