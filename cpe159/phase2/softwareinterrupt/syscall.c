@@ -20,5 +20,4 @@ void Sleep(int sec) {
       :
       :"g" (sec)
       :"%ebx");
-   return sec;   
 }
