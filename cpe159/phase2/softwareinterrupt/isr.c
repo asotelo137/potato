@@ -10,7 +10,6 @@
 
 int wakingID;
 int wake_period;
-
 void CreateISR(int pid) {
   // printf("create\n");
    if(pid !=0 ){//if pid given is not 0 (Idle), enqueue it into run queue
@@ -94,8 +93,11 @@ void TimerISR() {
 
 int GetPidISR(){
   outportb(0x20,0x60);
+  
   pcb[CRP].TF_ptr->ebx = CRP;
+  
   GetPid();
+  return;
 }
 
 void SleepISR(int seconds){
