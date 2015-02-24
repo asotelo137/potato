@@ -125,8 +125,8 @@ void Kernel(TF_t *TF_ptr) {
             }
             break;
          case 't':                                                   //if 't'
-            printf("t pressed\n");
             TerminateISR();                                          //call TerminateISR() to terminate CRP
+            printf("t pressed\n");
             break;   
          case 'b':                                                   //if 'b'
             printf("b pressed \n");
