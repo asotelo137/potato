@@ -6,6 +6,8 @@
 #include "proc.h"    // for Idle, SimpleProc, DispatchProc
 #include "syscall.h"
 
+int seconds;
+
 void Idle() {
    int i;
    for(;;){
@@ -16,7 +18,7 @@ void Idle() {
 
 void UserProc() {
   // int i;
-   int seconds;
+  
    for(;;){
    cons_printf("%d",CRP);//print its pid (CRP) on PC
    seconds= 4 - (CRP%4);
