@@ -1,7 +1,7 @@
 // main.c, 159
 // simulated kernel
 //
-// Team Name: ??????? (Members: ?????? and ??????)
+// Team Name: Potato (Members: Aaron Sotelo and Joey Brennan)
 
 //include statements...
 #include "spede.h"      // spede stuff
@@ -27,7 +27,7 @@ void SetEntry(int entry_num, func_ptr_t func_ptr){
 
 void InitIDT(){
    IDT_ptr = get_idt_base();//locate IDT
-   cons_printf("IDT is at %u. \n",IDT_ptr);
+   //cons_printf("IDT is at %u. \n",IDT_ptr);
    SetEntry(32,TimerEntry);//prime IDT Entry
    outportb(0x21,~1);
 }
@@ -70,7 +70,7 @@ int main() {
    InitData(); 		//call Init Data to initialize kernel data
    CreateISR(0);	//call CreateISR(0) to create Idle process (PID 0)
    InitIDT();
-   cons_printf("{pcb[0] is at %u. \n",pcb[0].TF_ptr);
+   //cons_printf("{pcb[0] is at %u. \n",pcb[0].TF_ptr);
    Dispatch(pcb[0].TF_ptr);    // to dispatch/run CRP
    
    return 0;
@@ -100,12 +100,12 @@ void Kernel(TF_t *TF_ptr) {
       key = cons_getchar(); // key = cons_getchar();
       switch(key) {
          case 'n':                                                   //if 'n'
-          printf("n pressed\n");
+          //printf("n pressed\n");
             if (none_q.size == 0){                                   //no processes left in none queue
                cons_printf("No more process!\n");                    //"No more process!\n" (msg on target PC)
             }else{
             pid = DeQ(&none_q);                                      //get 1st PID un-used (dequeue none queue)
-             printf("after pressing n pid is %d \n",pid);
+             //printf("after pressing n pid is %d \n",pid);
             CreateISR(pid);                                          //call CreateISR() with it to create new process
            
             for(i =1; i<Q_SIZE;i++){
