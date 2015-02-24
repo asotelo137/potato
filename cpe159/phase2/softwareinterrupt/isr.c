@@ -105,5 +105,6 @@ void SleepISR(int seconds){
   EnQ(CRP,&sleep_q);
   pcb[CRP].state=SLEEP;
   CRP=-1;
+  return;
   
 }
