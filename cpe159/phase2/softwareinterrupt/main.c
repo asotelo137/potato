@@ -132,6 +132,14 @@ void Kernel(TF_t *TF_ptr) {
             printf("b pressed \n");
             breakpoint();                                            // this goes back to GDB prompt
             break;
+         case 'w':
+            int i;
+            for (i=1;i<21;i++){
+               printf("run_q %d is %d ", i , run_q[i]);
+            }
+            for (i=1;i<21;i++){
+               printf("none_q %d is %d ", i , none_q[i]);
+            }
          case 'q':                                                   //if 'q'
             printf("q pressed\n");
             exit(0);                                                 //just do exit(0);
