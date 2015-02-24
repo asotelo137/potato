@@ -1,5 +1,6 @@
 // isr.c, 159
 
+#include "syscall.h"
 #include "spede.h"
 #include "type.h"
 #include "isr.h"
