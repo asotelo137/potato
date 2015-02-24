@@ -94,7 +94,6 @@ void Kernel(TF_t *TF_ptr) {
          TimerISR();
          break;
       case GETPID_INTR:
-         TF_ptr->ebx = CRP;
          GetPidISR();
          break;
       case SLEEP_INTR:
