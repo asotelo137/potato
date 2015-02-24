@@ -140,6 +140,7 @@ void Kernel(TF_t *TF_ptr) {
             for (i=1;i<21;i++){
                printf("none_q %d is %d ", i , none_q[i]);
             }
+            break;
          case 'q':                                                   //if 'q'
             printf("q pressed\n");
             exit(0);                                                 //just do exit(0);
