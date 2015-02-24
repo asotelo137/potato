@@ -59,16 +59,24 @@ void TerminateISR() {
 void TimerISR() {
    outportb(0x20,0x60);
   // printf("TimerISR Beggineing CRP %d \n",CRP);
-  // just return if CRP is Idle (0) or less (-1)
+  
+   //upcount the runtime of CRP and system time
+   pcb[CRP].runtime++;
+   sys_time++;
+   While(sleep_q !=0 && pcb[sleep_q.q[head]].wake_time <= sys_time){
+     int wakingID;
+     wakingID= DeQ(&sleep_q);
+     pcb[wakingID].state=RUN;
+     EnQ(wakingID,&run_q);
+   }
+   // just return if CRP is Idle (0) or less (-1)
    if (CRP <= 0  ){
       //printf("TIMER ISR CRP is %d\n", CRP);
       return;
    }
-   
-   //upcount the runtime of CRP
-   pcb[CRP].runtime++;
-   sys_time++;
    //printf("runtime %d \n", pcb[CRP].runtime);
+   while(sleep_q)
+   
    
    /*if the runtime of CRP reaches TIME_LIMIT
    (need to rotate to next PID in run queue)
@@ -91,10 +99,18 @@ void TimerISR() {
 }
 
 int GetPidISR(){
-  pcb[CRP].PID=GetPidf();
-  
+  outportb(0x20,0x60);
+  pcb[CRP].TF_ptr->ebx = CRP;
+  GetPid();
 }
 
-void SleepISR(){
+void SleepISR(int seconds){
+  outportb(0x20,0x60);
+  int wake_period;
+  wake_period= sys_time+(100*seconds);
+  pcb[CRP].wake_time=wake_period;
+  EnQ(CRP,&sleep_q);
+  pcb[CRP].state=SlEEP;
+  CRP=-1;
   
 }
