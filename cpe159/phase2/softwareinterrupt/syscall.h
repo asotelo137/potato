@@ -4,6 +4,6 @@
 #define _SYSCALL_H_
 
 int GetPid();      // no input, 1 return
-void sleep(int);   // 1 input, no return
+void Sleep(int);   // 1 input, no return
 
 #endif
