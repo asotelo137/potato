@@ -94,10 +94,11 @@ void Kernel(TF_t *TF_ptr) {
          TimerISR();
          break;
       case GETPID_INTR:
+         TF_ptr->ebx = CRP;
          GetPidISR();
          break;
       case SLEEP_INTR:
-         SleepISR();
+         SleepISR(TF_ptr->ebx);
          break;
       default:
          cons_printf("Panic!\n");
