@@ -78,6 +78,15 @@ void TimerISR() {
       //printf("TIMER ISR CRP is %d\n", CRP);
       return;
    }
+   
+void GetPidISR(){
+  
+  outportb(0x20,0x60);
+  pcb[CRP].TF_ptr->ebx = CRP;
+  GetPid();
+  
+  return;
+}
 
    if(pcb[CRP].runtime == TIME_LIMIT){
     
@@ -91,14 +100,7 @@ void TimerISR() {
    // return 0;
 }
 
-void GetPidISR(){
-  
-  outportb(0x20,0x60);
-  pcb[CRP].TF_ptr->ebx = CRP;
-  GetPid();
-  
-  return;
-}
+
 
 void SleepISR(int seconds){
   outportb(0x20,0x60);
