@@ -62,7 +62,7 @@ void TerminateISR() {
 
 void GetPidISR(){
   
- // outportb(0x20,0x60);
+ outportb(0x20,0x60);
   pcb[CRP].TF_ptr->ebx = CRP;
   GetPid();
   
@@ -104,7 +104,7 @@ void TimerISR() {
 
 
 void SleepISR(int seconds){
-  //outportb(0x20,0x60);
+  outportb(0x20,0x60);
   wake_period= sys_time+(100*seconds);
   pcb[CRP].wake_time=wake_period;
   EnQ(CRP,&sleep_q);
