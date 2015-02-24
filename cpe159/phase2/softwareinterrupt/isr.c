@@ -47,7 +47,7 @@ void TerminateISR() {
   
   printf("terminate\n");
    //just return if CRP is 0 or -1 (Idle or not given)
-    
+    CRP=GetPid();
     if (CRP <=0 ){
       return;
     }  
