@@ -7,9 +7,9 @@ int GetPid() {
    int pid;
 
    asm("int $48; movl %%ebx, %0" // CPU inst
-       : "g"  (pid)              // 1 output from asm() 
+       : "=g"  (pid)              // 1 output from asm() 
        :                         // no input into asm()
-       : ="%ebx");                // push/pop before/after asm()
+       : %ebx");                // push/pop before/after asm()
     
    return pid;
 }
