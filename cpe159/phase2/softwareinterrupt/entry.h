@@ -22,6 +22,8 @@ __BEGIN_DECLS
 
 extern void TimerEntry();     // code defined in entry.S
 extern void Dispatch(TF_t *); // code defined in entry.S
+extern void GetPidEntry();    // code for entry getpid
+extern void SleepEntry();
 
 __END_DECLS
 
