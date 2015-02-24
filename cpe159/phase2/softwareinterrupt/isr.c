@@ -7,6 +7,8 @@
 #include "extern.h"
 #include "proc.h"
 
+int wakingID;
+
 void CreateISR(int pid) {
   // printf("create\n");
    if(pid !=0 ){//if pid given is not 0 (Idle), enqueue it into run queue
@@ -58,6 +60,7 @@ void TerminateISR() {
 
 void TimerISR() {
    outportb(0x20,0x60);
+   
   // printf("TimerISR Beggineing CRP %d \n",CRP);
   
    //upcount the runtime of CRP and system time
@@ -65,7 +68,7 @@ void TimerISR() {
    sys_time++;
    While(sleep_q.size !=0 && pcb[sleep_q.q[sleep_q.head]].wake_time <= sys_time){
      //int wakingID;
-     int wakingID= DeQ(&sleep_q);
+     wakingID = DeQ(&sleep_q);
      pcb[wakingID].state=RUN;
      EnQ(wakingID,&run_q);
    }
@@ -74,24 +77,16 @@ void TimerISR() {
       //printf("TIMER ISR CRP is %d\n", CRP);
       return;
    }
-   //printf("runtime %d \n", pcb[CRP].runtime);
 
-   /*if the runtime of CRP reaches TIME_LIMIT
-   (need to rotate to next PID in run queue)
-      sum up runtime to the total runtime of CRP
-      change its state to RUN
-      queue it to run queue
-      reset CRP (to -1, means none)
-   */
    if(pcb[CRP].runtime == TIME_LIMIT){
-    //  printf("limit\n");
+    
       pcb[CRP].total_runtime=pcb[CRP].runtime + pcb[CRP].total_runtime;
       pcb[CRP].runtime=0;
       pcb[CRP].state = RUN;
       pcb[CRP].
       EnQ(CRP,&run_q);
       CRP = -1;
-     // printf("set crp -1\n");
+    
    }
    // return 0;
 }
