@@ -4,7 +4,7 @@
 #include "spede.h"   // for IO_DELAY() needed here below
 #include "extern.h"  // for current_run_pid needed here below
 #include "proc.h"    // for Idle, SimpleProc, DispatchProc
-#include "syscall.h"
+
 
 void Idle() {
    int i;
