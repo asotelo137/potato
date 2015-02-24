@@ -13,8 +13,8 @@
 #include "entry.h"
 
 // kernel data structure:
-int CRP;                // current running PID, -1 means no process
-q_t run_q, none_q;      // processes ready to run and not used
+int CRP, sys_time;                // current running PID, -1 means no process
+q_t run_q, none_q,sleep_q;      // processes ready to run and not used
 pcb_t pcb[MAX_PROC];    // process table
 char stack[MAX_PROC][STACK_SIZE]; // run-time stacks for processes
 //(include stuff from timer lab and new PCB described in 1.html)
