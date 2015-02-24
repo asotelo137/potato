@@ -16,6 +16,9 @@ int GetPid() {
 
 void Sleep(int sec) {
    
-   asm("
-   
+   asm("movl %0, %%ebx ,int $49"
+      :
+      :"=g" (sec)
+      :"ebx");
+      
 }
