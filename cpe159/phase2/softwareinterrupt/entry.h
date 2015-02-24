@@ -6,6 +6,8 @@
 #include <spede/machine/pic.h>
 
 #define TIMER_INTR 32
+#define GETPID_INTR 48
+#define SLEEP_INTR 49
 
 #define KCODE 0x08    // kernel's code segment
 #define KDATA 0x10    // kernel's data segment
