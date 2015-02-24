@@ -135,10 +135,7 @@ void Kernel(TF_t *TF_ptr) {
          case 'w':
             
             for(i =1; i<Q_SIZE;i++){
-               printf("run_q %d is %d ", i , run_q.q[i]);
-            }
-            for(i =1; i<Q_SIZE;i++){
-               printf("none_q %d is %d ", i , none_q.q[i]);
+               printf("run_q %d is %d,none_q %d is %d \n" , i , run_q.q[i], i , none_q.q[i]);
             }
             break;
          case 'q':                                                   //if 'q'
