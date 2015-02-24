@@ -124,10 +124,7 @@ void Kernel(TF_t *TF_ptr) {
                
             }
             break;
-         case 't':
-            printf("t pressed\n");
-            TerminateISR();
-            break;
+         case 't':TerminateISR(); break;
          case 'b':                                                   //if 'b'
             printf("b pressed \n");
             breakpoint();                                            // this goes back to GDB prompt
