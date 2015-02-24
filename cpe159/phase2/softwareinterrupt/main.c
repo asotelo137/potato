@@ -29,6 +29,8 @@ void InitIDT(){
    IDT_ptr = get_idt_base();//locate IDT
    cons_printf("IDT is at %u. \n",IDT_ptr);
    SetEntry(32,TimerEntry);//prime IDT Entry
+   SetEntry(48,GetPidEntry);
+   SetEntry(49,SleepEntry);
    outportb(0x21,~1);
 }
 
@@ -36,10 +38,11 @@ void InitIDT(){
 
 void InitData() {
    int i;
+   sys_time = 0;
    
    MyBZero(&run_q,0);
    MyBZero(&none_q,0);
-   
+   MyBZero(&sleep_q,0)
    
    for(i = 1 ; i<Q_SIZE;i++){
       pcb[i].state = NONE;
@@ -89,6 +92,12 @@ void Kernel(TF_t *TF_ptr) {
       case TIMER_INTR:
          //printf("made it into kernel\n");
          TimerISR();
+         break;
+      case GETPID_INTR:
+         GetPidISR();
+         break;
+      case SLEEP_INTR:
+         SleepISR();
          break;
       default:
          cons_printf("Panic!\n");
