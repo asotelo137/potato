@@ -22,9 +22,9 @@ void UserProc() {
    for(;;){
    cons_printf(" %d ",GetPid());//print its pid (CRP) on PC
    seconds= 4 - (CRP%4);
-   Sleep(seconds);
+   //leep(seconds);
    // Sleep(seconds);
-   //for(i=0; i<1666000; i++) IO_DELAY();//busy-loop delay for about 1 sec
+   for(i=0; i<1666000; i++) IO_DELAY();//busy-loop delay for about 1 sec
    }
    
 }
