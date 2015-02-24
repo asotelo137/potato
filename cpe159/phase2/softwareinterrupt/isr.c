@@ -6,6 +6,7 @@
 #include "tool.h"
 #include "extern.h"
 #include "proc.h"
+#include "syscall.h"
 
 int wakingID;
 int wake_period;
