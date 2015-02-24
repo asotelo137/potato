@@ -331,7 +331,7 @@ $(MY_DLI) :	$(OBJECTS) Makefile
 #  Dependencies.
 #### YQYQYQ-MARK-2 ####
 #
-#  Dependencies generated Fri Feb 20 00:04:48 PST 2015 by (spede-mkmf $Revision: 1.2 $/1)
+#  Dependencies generated Mon Feb 23 21:24:59 PST 2015 by (spede-mkmf $Revision: 1.2 $/1)
 #
 
 entry.o: entry.S \
@@ -341,7 +341,7 @@ entry.o: entry.S \
  /gaia/home/project/spede2/Target-i386/i686/gnu/i386-unknown-gnu/include/spede/machine/pic.h \
  /gaia/home/project/spede2/Target-i386/i686/gnu/i386-unknown-gnu/include/spede/sys/bits.h \
  type.h TF.h
-isr.o: isr.c spede.h \
+isr.o: isr.c syscall.c syscall.h spede.h \
  /gaia/home/project/spede2/Target-i386/i686/gnu/i386-unknown-gnu/include/spede/flames.h \
  /gaia/home/project/spede2/Target-i386/i686/gnu/i386-unknown-gnu/include/spede/sys/cdefs.h \
  /gaia/home/project/spede2/Target-i386/i686/gnu/i386-unknown-gnu/include/spede/sys/types.h \
@@ -386,7 +386,7 @@ proc.o: proc.c spede.h \
  /gaia/home/project/spede2/Target-i386/i686/gnu/i386-unknown-gnu/include/spede/machine/proc_reg.h \
  /gaia/home/project/spede2/Target-i386/i686/gnu/i386-unknown-gnu/include/spede/machine/seg.h \
  /gaia/home/project/spede2/Target-i386/i686/gnu/i386-unknown-gnu/include/spede/machine/asmacros.h \
- extern.h type.h TF.h proc.h
+ extern.h type.h TF.h proc.h syscall.h
 tool.o: tool.c spede.h \
  /gaia/home/project/spede2/Target-i386/i686/gnu/i386-unknown-gnu/include/spede/flames.h \
  /gaia/home/project/spede2/Target-i386/i686/gnu/i386-unknown-gnu/include/spede/sys/cdefs.h \
