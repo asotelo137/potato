@@ -7,10 +7,12 @@
 #include "syscall.h"
 
 void Idle() {
-   int i;
+   int i,seconds;
    for(;;){
    cons_printf("0");//print 0 on PC
-   for(i=0; i<1666000; i++) IO_DELAY();//busy-loop delay for about 1 sec
+   seconds= 4 - (CRP%4);
+   Sleep(seconds);
+   //for(i=0; i<1666000; i++) IO_DELAY();//busy-loop delay for about 1 sec
    } 
 }
 
