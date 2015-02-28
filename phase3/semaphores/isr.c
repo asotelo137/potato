@@ -112,3 +112,11 @@ void SleepISR(int seconds){
   return;
   
 }
+
+void SemWaitISR(){
+  
+}
+
+void SemPostISR(){
+  
+}
