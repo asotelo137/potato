@@ -28,6 +28,11 @@ typedef struct {             // proc queue type
    int q[Q_SIZE];            // indices into q[] array to place or get element
 } q_t;
 
+typedef struct {
+   int count;
+   q_t wait_q;
+} semaphore_t
+
 typedef void (* func_ptr_t)(); // void-returning function pointer type
 
 #endif _TYPE_H_
