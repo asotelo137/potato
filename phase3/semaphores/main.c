@@ -102,6 +102,12 @@ void Kernel(TF_t *TF_ptr) {
       case SLEEP_INTR:
          SleepISR(TF_ptr->ebx);
          break;
+      case SEMWAIT_INTR:
+         SemWaitISR();
+         break;
+      case SEMPOST_INTR:
+         SemPostISR();
+         break;
       default:
          cons_printf("Panic!\n");
          breakpoint();
