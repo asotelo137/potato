@@ -14,6 +14,7 @@
 
 // kernel data structure:
 int CRP, sys_time;                // current running PID, -1 means no process
+int product_semaphore,product;
 q_t run_q, none_q,sleep_q;      // processes ready to run and not used
 pcb_t pcb[MAX_PROC];    // process table
 char stack[MAX_PROC][STACK_SIZE]; // run-time stacks for processes
@@ -31,6 +32,8 @@ void InitIDT(){
    SetEntry(32,TimerEntry);//prime IDT Entry
    SetEntry(48,GetPidEntry);
    SetEntry(49,SleepEntry);
+   SetEntry(50,SemWaitEntry);
+   SetEntry(51,SemPostEntry);
    outportb(0x21,~1);
 }
 
