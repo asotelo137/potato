@@ -20,3 +20,11 @@ void Sleep(int sec) {
         :"g" (sec)
         :"%ebx");
 }
+
+void SemWait(){
+   
+}
+
+void SemPost(){
+   
+}
