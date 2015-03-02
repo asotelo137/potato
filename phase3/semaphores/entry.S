@@ -37,6 +37,14 @@ ENTRY(TimerEntry)
    pushl $TIMER_INTR
    jmp IntoKernel
 
+//SemWaitEntry
+   pushl $SEMWAIT_INTR
+   jmp Intokernel
+
+//SemPostEntry
+   pushl $SEMPOST_INTR
+   jmp IntoKernel
+
 // Common IRQ entry, save context and call Kmain()
 IntoKernel:
    pusha
