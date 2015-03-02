@@ -128,12 +128,12 @@ void SemWaitISR(semaphore_t *semid,q_t *semaphorq){
   }
 }
 
-void SemPostISR(semaphore_t *semid){
+void SemPostISR(semaphore_t *semid , q_t *semq){
   int tempsemid;
-  if(semaphore_q.size ==0){
+  if(semq->size ==0){
     semid->count ++;
   }else
-  tempsemid = DeQ(semaphorq);
+  tempsemid = DeQ(semq);
   pcb[tempsemid].state = RUN;
   EnQ(tempsemid,&run_q);
 }
