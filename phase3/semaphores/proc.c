@@ -31,8 +31,8 @@ void UserProc() {
 }
  
 void Producer(){
+   int i;
    while(1){
-      
       SemWait(semaphoreID);// Wait for product semaphore
       cons_printf("\n %d is producing ...\n",PID);
       product += 100;
@@ -43,8 +43,8 @@ void Producer(){
 }
 
 void Consumer(){
+   int i;
    while(1){
-      
       SemWait(semaphoreID);// Wait for product semaphore
       cons_printf("\n %d is consuming ...\n",PID);
       product -= 100;
