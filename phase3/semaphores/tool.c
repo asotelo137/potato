@@ -10,6 +10,10 @@ void MyBZero(q_t *p, int size) {
 	p->size = size;
 	p->head = size;
 	p->tail = size;
+	int i;
+	for (i = 0; i < n; i++) {
+	p[i] = '\0';
+	}
 }
 
 void MyBzero(void *s, int n) {
