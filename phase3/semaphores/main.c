@@ -47,7 +47,7 @@ void InitData() {
    MyBZero(&run_q,0);
    MyBZero(&none_q,0);
    MyBZero(&sleep_q,0);
-   MyBZero(&semaphore_q);
+   MyBZero(&semaphore_q,0);
    
    for(i = 1 ; i<Q_SIZE;i++){
       pcb[i].state = NONE;
