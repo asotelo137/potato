@@ -119,7 +119,7 @@ void SleepISR(int seconds){
 void SemWaitISR(int semaphoreID){
    
   if(semaphore.count > 0){
-    semphore.count --;
+    semaphore.count --;
   }
   if(semaphore.count == 0){
     EnQ(CRP,&semaphore_q);
