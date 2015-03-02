@@ -117,13 +117,13 @@ void SleepISR(int seconds){
 }
 
 void SemWaitISR(int semaphoreID){
-  Semaphore * semptr = & semaphores[sid];
-  ASSERT( 0<= sem_index && sem_index < MAX_SEMS);
-  semptr->count--;
-  if(semptr -> count <0){
-    list_add(&semptr -> blocked,running_pcb);
-    running_pcb= NULL;
-    
+  if(semaphore.count > 0){
+    semaphore.count --;
+  }
+  if(semaphore.count == 0){
+    EnQ(CRP,&semaphore_q);
+    semaphore_q.q[semaphore_q.tail]
+    CRP=-1
   }
 }
 
