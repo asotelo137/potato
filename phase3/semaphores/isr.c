@@ -113,7 +113,7 @@ void SleepISR(int seconds){
   
 }
 
-void SemWaitISR(int sid){
+void SemWaitISR(int semaphoreID){
   Semaphore * semptr = & semaphores[sid];
   ASSERT( 0<= sem_index && sem_index < MAX_SEMS);
   semptr->count--;
@@ -124,6 +124,6 @@ void SemWaitISR(int sid){
   }
 }
 
-void SemPostISR(){
+void SemPostISR(int semaphoreID){
   
 }
