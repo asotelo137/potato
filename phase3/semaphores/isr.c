@@ -116,23 +116,24 @@ void SleepISR(int seconds){
   
 }
 
-void SemWaitISR(int semaphoreID){
+void SemWaitISR(semaphore_t *semid){
    
-  if(semaphore.count > 0){
-    semaphore.count --;
+  if(semid->count > 0){
+    semid->count --;
   }
-  if(semaphore.count == 0){
+  if(semid->count == 0){
     EnQ(CRP,&semaphore_q);
     pcb[CRP].state = WAIT;
     CRP=-1;
   }
 }
 
-void SemPostISR(int semaphoreID){
+void SemPostISR(semaphore_t *semid){
+  int tempsemid;
   if(semaphore_q.size ==0){
-    semaphore.count ++;
+    semid->count ++;
   }else
-  semaphoreID = DeQ(&semaphore_q);
-  pcb[semaphoreID].state = RUN;
-  EnQ(semaphoreID,&run_q);
+  tempsemid = DeQ(&semaphore_q);
+  pcb[tempsemid].state = RUN;
+  EnQ(tempsemid),&run_q);
 }
