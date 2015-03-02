@@ -5,7 +5,7 @@
 
 int GetPid();      // no input, 1 return
 void Sleep(int);   // 1 input, no return
-void SemWait();
-void SemPost();
+void SemWait(int);
+void SemPost(int);
 
 #endif
