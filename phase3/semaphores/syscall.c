@@ -22,7 +22,10 @@ void Sleep(int sec) {
 }
 
 void SemWait(){
-   
+   asm(" int %1
+         : /* NO OUTPUTS */
+         : "a" ((int) semid, "g"(T_SYS_SEM_WAIT));
+   )
 }
 
 void SemPost(){
