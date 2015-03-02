@@ -113,8 +113,15 @@ void SleepISR(int seconds){
   
 }
 
-void SemWaitISR(){
-  
+void SemWaitISR(int sid){
+  Semaphore * semptr = & semaphores[sid];
+  ASSERT( 0<= sem_index && sem_index < MAX_SEMS);
+  semptr->count--;
+  if(semptr -> count <0){
+    list_add(&semptr -> blocked,running_pcb);
+    running_pcb= NULL;
+    
+  }
 }
 
 void SemPostISR(){
