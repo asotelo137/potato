@@ -31,7 +31,7 @@ typedef struct {             // proc queue type
 typedef struct {
    int count;
    q_t wait_q;
-} semaphore_t
+} semaphore_t;
 
 typedef void (* func_ptr_t)(); // void-returning function pointer type
 
