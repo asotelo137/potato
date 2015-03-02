@@ -52,7 +52,6 @@ void InitData() {
    for(i = 1 ; i<Q_SIZE;i++){
       pcb[i].state = NONE;
       EnQ(i,&none_q);
-      semaphore_q[i]=i;
       
    }
    
