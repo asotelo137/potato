@@ -30,8 +30,11 @@ void CreateISR(int pid) {
       // fill out trapframe of this new proc:
       if(pid == 0)
       pcb[pid].TF_ptr->eip = (unsigned int)Idle; // Idle process
-      else
-      pcb[pid].TF_ptr->eip = (unsigned int)UserProc; // other new process
+      else(pid%2 == 0 ){
+        pcb[pid].TF_ptr->eip = (unsigned int) Producer; 
+      }else(pid%2 == 1){
+      pcb[pid].TF_ptr->eip = (unsigned int) Consumer; // other new process
+      }
       pcb[pid].TF_ptr->eflags = EF_DEFAULT_VALUE | EF_INTR;
       pcb[pid].TF_ptr->cs = get_cs();
       pcb[pid].TF_ptr->ds = get_ds();
