@@ -43,7 +43,7 @@ ENTRY(SemWaitEntry)
    jmp IntoKernel
 
 //SemPostEntry
-ENTRY(SempostEntry)
+ENTRY(SemPostEntry)
    pushl $SEMPOST_INTR
    jmp IntoKernel
 
