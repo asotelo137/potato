@@ -117,7 +117,7 @@ void SleepISR(int seconds){
 }
 
 void SemWaitISR(int semaphoreID){
-   
+  outportb(0x20,0x60);
   if(semaphore[semaphoreID].count > 0){
     semaphore[semaphoreID].count --;
   }
@@ -129,6 +129,7 @@ void SemWaitISR(int semaphoreID){
 }
 
 void SemPostISR(int semaphoreID){
+  outportb(0x20,0x60);
   if(semaphore[semaphoreID].wait_q.size ==0){
     semaphore[semaphoreID].count ++;
   }else {
