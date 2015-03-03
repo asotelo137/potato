@@ -38,10 +38,12 @@ ENTRY(TimerEntry)
    jmp IntoKernel
 
 //SemWaitEntry
+ENTRY(SemWaitEntry)
    pushl $SEMWAIT_INTR
    jmp IntoKernel
 
 //SemPostEntry
+ENTRY(SempostEntry)
    pushl $SEMPOST_INTR
    jmp IntoKernel
 
