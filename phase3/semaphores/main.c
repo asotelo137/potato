@@ -54,7 +54,8 @@ void InitData() {
       EnQ(i,&none_q);
       
    }
-   
+   product = 0;
+   product_semaphore = 0;
    CRP = 0;
 }
 
