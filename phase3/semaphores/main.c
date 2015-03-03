@@ -14,7 +14,7 @@
 
 // kernel data structure:
 int CRP, sys_time;                // current running PID, -1 means no process
-int product_semaphore,product;
+int product_semaphore,product,semaphoreID;
 q_t run_q, none_q,sleep_q,semaphore_q;      // processes ready to run and not used, asleep and semaphores
 pcb_t pcb[MAX_PROC];    // process table
 char stack[MAX_PROC][STACK_SIZE]; // run-time stacks for processes
