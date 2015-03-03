@@ -52,10 +52,10 @@ void InitData() {
    for(i = 1 ; i<Q_SIZE;i++){
       pcb[i].state = NONE;
       EnQ(i,&none_q);
-      
+      EnQ(i,&semaphore_q);
    }
    product = 0;
-   product_semaphore = 0;
+   product_semaphore = DeQ(&semaphore_q);
    CRP = 0;
 }
 
