@@ -39,7 +39,7 @@ ENTRY(TimerEntry)
 
 //SemWaitEntry
    pushl $SEMWAIT_INTR
-   jmp Intokernel
+   jmp IntoKernel
 
 //SemPostEntry
    pushl $SEMPOST_INTR
