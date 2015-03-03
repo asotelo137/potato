@@ -107,10 +107,10 @@ void Kernel(TF_t *TF_ptr) {
          SleepISR(TF_ptr->ebx);
          break;
       case SEMWAIT_INTR:
-         SemWaitISR();
+         SemWaitISR(product_semaphore);
          break;
       case SEMPOST_INTR:
-         SemPostISR();
+         SemPostISR(product_semaphore);
          break;
       default:
          cons_printf("Panic!\n");
