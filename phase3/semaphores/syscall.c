@@ -28,7 +28,7 @@ void SemWait(int semaphoreID){
       :"%ebx");
 }
 
-void SemPost(int semmaphoreID){
+void SemPost(int semaphoreID){
    asm("movl %0, %%ebx ;int $49"
       :
       :"g" (semaphoreID)
