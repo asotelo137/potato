@@ -22,14 +22,14 @@ void Sleep(int sec) {
 }
 
 void SemWait(int semaphoreID){
-  asm("movl %0, %%ebx ;int $49"
+  asm("movl %0, %%ebx ;int $50"
       :
       :"g" (semaphoreID)
       :"%ebx");
 }
 
 void SemPost(int semaphoreID){
-   asm("movl %0, %%ebx ;int $49"
+   asm("movl %0, %%ebx ;int $51"
       :
       :"g" (semaphoreID)
       :"%ebx");
