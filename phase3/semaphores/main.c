@@ -1,7 +1,7 @@
 // main.c, 159
 // simulated kernel
 //
-// Team Name: Potato (M  embers: Aaron Sotelo and Joey Brennan)
+// Team Name: Potato (Members: Aaron Sotelo and Joey Brennan)
 
 //include statements...
 #include "spede.h"      // spede stuff
