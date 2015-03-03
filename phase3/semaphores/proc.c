@@ -33,11 +33,11 @@ void UserProc() {
 void Producer(){
    int i;
    while(1){
-      SemWait(semaphoreID);// Wait for product semaphore
-      cons_printf("Proc %d is producing...",CRP);
+      SemWait(product_semaphore);// Wait for product semaphore
+      cons_printf("Proc %d is producing... ",CRP);
       product += 100;
       cons_printf("+++ product is now %d \n",product);
-      SemPost(semaphoreID);// post product semaphore
+      SemPost(product_semaphore);// post product semaphore
       for(i=0; i<1666000; i++) IO_DELAY();
    }
 }
@@ -45,11 +45,11 @@ void Producer(){
 void Consumer(){
    int i;
    while(1){
-      SemWait(semaphoreID);// Wait for product semaphore
+      SemWait(product_semaphore);// Wait for product semaphore
       cons_printf("Proc %d is consuming... ",CRP);
       product -= 100;
       cons_printf("--- product is now %d \n",product);
-      SemPost(semaphoreID);// post product semaphore
+      SemPost(product_semaphore);// post product semaphore
       for(i=0; i<1666000; i++) IO_DELAY();
    }
 }

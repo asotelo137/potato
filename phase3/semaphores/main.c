@@ -44,8 +44,8 @@ void InitData() {
    int i;
    sys_time = 0;
    
-   MyBZero((char*)run_q,0);
-   MyBZero((char*)none_q,0);
+   MyBZero((char*)& run_q,0);
+   MyBZero((char*)& none_q,0);
    MyBZero((char*)&sleep_q,0);
    MyBZero((char*)&semaphore_q,0);
    
