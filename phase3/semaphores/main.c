@@ -51,6 +51,7 @@ void InitData() {
    
    for(i = 1 ; i<Q_SIZE;i++){
       pcb[i].state = NONE;
+      semaphore[i]=i;
       EnQ(i,&none_q);
       EnQ(i,&semaphore_q);
    }
