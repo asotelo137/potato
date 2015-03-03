@@ -11,7 +11,7 @@ void MyBZero(q_t *p, int size) {
 	p->head = size;
 	p->tail = size;
 	int i;
-	for (i = 0; i < n; i++) {
+	for (i = 0; i < MAX_PROC; i++) {
 	p[i] = '\0';
 	}
 }
