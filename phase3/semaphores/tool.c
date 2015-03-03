@@ -6,20 +6,9 @@
 #include "extern.h"
 
 
-void MyBZero(q_t *p, int size) {
-	p->size = size;
-	p->head = size;
-	p->tail = size;
-	int i;
-	for (i = 0; i < MAX_PROC; i++) {
-	p[i] = '\0';
-	}
-}
-
-void MyBzero(void *s, int n) {
-	int i;
-	for (i = 0; i < n; i++) {
-	*((char*)s+n) = '\0';
+void MyBZero(char *p, int size) {
+	while(size--){
+		*p++=(char)0;
 	}
 }
 
