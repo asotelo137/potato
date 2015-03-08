@@ -17,11 +17,12 @@ void Idle() {
 }
 
 void UserProc() {
-  // int i;
+   int i;
    int seconds;
    for(;;){
-   cons_printf("%d",CRP);//print its pid (CRP) on PC
-   seconds= 4 - (CRP%4);
+   i=GetPID();
+   cons_printf("%d",i);//print its pid (CRP) on PC
+   seconds= 4 - (i%4);
    Sleep(seconds);
    //printf("seconds %d", seconds);
    // Sleep(seconds);
