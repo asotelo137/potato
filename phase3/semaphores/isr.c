@@ -63,18 +63,12 @@ void TerminateISR() {
 }    
 
 void GetPidISR(){
-  
-  outportb(0x20,0x60);
   pcb[CRP].TF_ptr->ebx = CRP;
-  GetPid();
-  
   return;
 }
 
 void TimerISR() {
-   outportb(0x20,0x60);
-   
-  // printf("TimerISR Beggineing CRP %d \n",CRP);
+     // printf("TimerISR Beggineing CRP %d \n",CRP);
   
    //upcount the runtime of CRP and system time
    pcb[CRP].runtime++;
