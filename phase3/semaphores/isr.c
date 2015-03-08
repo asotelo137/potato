@@ -64,7 +64,6 @@ void TerminateISR() {
 
 void GetPidISR(){
   pcb[CRP].TF_ptr->ebx = CRP;
-  return;
 }
 
 void TimerISR() {
@@ -108,7 +107,7 @@ void TimerISR() {
 
 
 void SleepISR(int seconds){
-  outportb(0x20,0x60);
+
   wake_period= sys_time+(100*seconds);
   pcb[CRP].wake_time=wake_period;
   EnQ(CRP,&sleep_q);
@@ -131,7 +130,7 @@ void SemWaitISR(int semaphoreID){
 }
 
 void SemPostISR(int semaphoreID){
-  outportb(0x20,0x60);
+
   if(semaphore[semaphoreID].wait_q.size ==0){
     semaphore[semaphoreID].count ++;
   }else {
