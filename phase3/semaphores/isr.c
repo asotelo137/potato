@@ -28,9 +28,9 @@ void CreateISR(int pid) {
       pcb[pid].TF_ptr = (TF_t *)&stack[pid][STACK_SIZE];
       pcb[pid].TF_ptr--;
       // fill out trapframe of this new proc:
-      if(pid == 0)
+      if(pid == 0){
       pcb[pid].TF_ptr->eip = (unsigned int)Idle; // Idle process
-      else if(pid%2 == 0 ){
+      }else if(pid%2 == 0 ){
         pcb[pid].TF_ptr->eip = (unsigned int) Consumer; 
       }else if(pid%2 == 1){
       pcb[pid].TF_ptr->eip = (unsigned int) Producer; // other new process
