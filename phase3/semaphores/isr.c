@@ -9,7 +9,7 @@
 #include "syscall.h"
 
 int wakingID;
-int wake_period;
+int wake_period,index;
 void CreateISR(int pid) {
   // printf("create\n");
    if(pid !=0 ){//if pid given is not 0 (Idle), enqueue it into run queue
@@ -70,13 +70,13 @@ void GetPidISR(){
 void TimerISR() {
   
   outportb(0x20,0x60);
-  int aindex;
+  int index;
      // printf("TimerISR Beggineing CRP %d \n",CRP);
   
    //upcount the runtime of CRP and system time
    pcb[CRP].runtime++;
    sys_time++;
-   for(aindex=0; aindex < sleep_q.size; aindex++){
+   for(index=0; index < sleep_q.size; index++){
      if(pcb[sleep_q.q[sleep_q.head]].wake_time > sys_time){
         wakingID = DeQ(&sleep_q);
         EnQ(wakingID, &sleep_q);
