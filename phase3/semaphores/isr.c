@@ -70,7 +70,7 @@ void GetPidISR(){
 void TimerISR() {
   
   outportb(0x20,0x60);
-  int index;
+
      // printf("TimerISR Beggineing CRP %d \n",CRP);
   
    //upcount the runtime of CRP and system time
