@@ -137,7 +137,9 @@ void Kernel(TF_t *TF_ptr) {
             CreateISR(pid);                                          //call CreateISR() with it to create new process
             }
             break;
-         case 't': TerminateISR(); break;   
+         case 't': 
+            TerminateISR(); 
+            break;   
          case 'b':                                                   //if 'b'
            // printf("b pressed \n");
             breakpoint();                                            // this goes back to GDB prompt
