@@ -69,9 +69,15 @@ void SelectCRP() {       // select which PID to be new CRP
    }
 
    if(run_q.size == 0)
+<<<<<<< HEAD
      CRP = 0;
    else 
      CRP = DeQ(&run_q);
+=======
+      CRP = 0;
+   else 
+      CRP = DeQ(&run_q);
+>>>>>>> 6d15a6b0fa464db96d3a2834f485b6ea3feb0687
 
    pcb[CRP].mode = UMODE;
    pcb[CRP].state = RUNNING;
@@ -129,12 +135,6 @@ void Kernel(TF_t *TF_ptr) {
             pid = DeQ(&none_q);                                      //get 1st PID un-used (dequeue none queue)
            //  printf("after pressing n pid is %d \n",pid);
             CreateISR(pid);                                          //call CreateISR() with it to create new process
-           
-            for(i =1; i<Q_SIZE;i++){
-//               printf("%d is in runque %d\n",run_q.q[i],i);
-               
-            }
-               
             }
             break;
          case 't': TerminateISR(); break;   
