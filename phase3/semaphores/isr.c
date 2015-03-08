@@ -117,7 +117,8 @@ void SleepISR(int seconds){
   
 }
 
-void SemWaitISR(int semaphoreID){
+void SemWaitISR(){
+  semaphoreID = pcb[CRP].TF_ptr->ebx;
   
   if(semaphore[semaphoreID].count > 0){
     semaphore[semaphoreID].count --;
@@ -129,8 +130,8 @@ void SemWaitISR(int semaphoreID){
   }
 }
 
-void SemPostISR(int semaphoreID){
-
+void SemPostISR(){
+  pcb[CRP].TF_ptr->ebx
   if(semaphore[semaphoreID].wait_q.size ==0){
     semaphore[semaphoreID].count ++;
   }else {
