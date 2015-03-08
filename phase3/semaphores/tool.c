@@ -7,7 +7,6 @@
 
 
 void MyBZero(char *p, int size) {
-	p.size =0;
 	while(size--){
 		*p++=(char)0;
 	}

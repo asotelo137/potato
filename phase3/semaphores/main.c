@@ -44,10 +44,10 @@ void InitData() {
    int i;
    sys_time = 0;
    
-   MyBZero((char*)&run_q,0);
-   MyBZero((char*)&none_q,0);
-   MyBZero((char*)&sleep_q,0);
-   MyBZero((char*)&semaphore_q,0);
+   MyBZero((char*)&run_q,sizeof(q_t));
+   MyBZero((char*)&none_q,sizeof(q_t));
+   MyBZero((char*)&sleep_q,sizeof(q_t));
+   MyBZero((char*)&semaphore_q,sizeof(q_t));
    
    for(i = 1 ; i<Q_SIZE;i++){
       pcb[i].state = NONE;
