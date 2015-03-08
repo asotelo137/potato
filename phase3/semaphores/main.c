@@ -69,15 +69,15 @@ void SelectCRP() {       // select which PID to be new CRP
    }
 
    if(run_q.size == 0)
-<<<<<<< HEAD
+
      CRP = 0;
    else 
      CRP = DeQ(&run_q);
-=======
+
       CRP = 0;
    else 
       CRP = DeQ(&run_q);
->>>>>>> 6d15a6b0fa464db96d3a2834f485b6ea3feb0687
+
 
    pcb[CRP].mode = UMODE;
    pcb[CRP].state = RUNNING;
