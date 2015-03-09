@@ -18,7 +18,27 @@ q_t run_q, none_q,sleep_q;      // processes ready to run and not used
 pcb_t pcb[MAX_PROC];    // process table
 char stack[MAX_PROC][STACK_SIZE]; // run-time stacks for processes
 //(include stuff from timer lab and new PCB described in 1.html)
+
+//******************************************************************
+//phase 3
+/*
+main.c/extern.h
+   apply the semaphore type to declare an array of semaphores,
+   "semaphore," which has the same size as a PID queue
+
+   a semaphore queue "semaphore_q" to be primed with available
+   semaphores (numbers 1 ~ 19),
+    
+   need for testing (Phase 3 only, after Phase, delete):
+      integers "product_semaphore" and "product"
+*/
+semaphore_t semaphore[MAX_PROC];
+q_t semaphore_q;
+int product_semaphore,product;
+
+/******************************************************************/
 struct i386_gate *IDT_ptr;
+
 
 void SetEntry(int entry_num, func_ptr_t func_ptr){
    struct i386_gate *gateptr = &IDT_ptr[entry_num];
@@ -55,9 +75,14 @@ void InitData() {
    MyBZero(&none_q,0);
    MyBZero(&sleep_q,0);
    
+   //phase 3
+    MyBZero(&semaphore_q,0);
+   
    for(i = 1 ; i<Q_SIZE;i++){
       pcb[i].state = NONE;
       EnQ(i,&none_q);
+      //phase 3
+      Enq(i,&semaphore_q);
       
    }
    CRP = 0;
@@ -73,7 +98,13 @@ void InitData() {
    3. set the count of the product semaphore to 1
    4. set the product to 0
    */
-   MyBZero()
+   product_semaphore=DeQ(&semaphore_q);
+   
+   MyBZero(&semaphore_q,0);
+   
+   product_semaphore = 1;
+   
+   product=0;
    
    
 }
