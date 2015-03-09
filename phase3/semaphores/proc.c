@@ -40,11 +40,11 @@ void Producer(){
    int i;
    cons_printf("yes");//print 0 on PC
    while(1){
-      SemWait(pcb[CRP].TF_ptr->ebx);// Wait for product semaphore
+      SemWait(poduct_semaphore);// Wait for product semaphore
       cons_printf("Proc %d is producing... ",CRP);
       product += 100;
       cons_printf("+++ product is now %d \n",product);
-      SemPost(pcb[CRP].TF_ptr->ebx);// post product semaphore
+      SemPost(poduct_semaphore);// post product semaphore
       for(i=0; i<1666000; i++) IO_DELAY();
    }
 }
@@ -55,11 +55,11 @@ void Consumer(){
    int i;
    cons_printf("yes 2 ");//print 0 on PC
    while(1){
-      SemWait(pcb[CRP].TF_ptr->ebx);// Wait for product semaphore
+      SemWait(poduct_semaphore);// Wait for product semaphore
       cons_printf("Proc %d is consuming... ",CRP);
       product -= 100;
       cons_printf("--- product is now %d \n",product);
-      SemPost(pcb[CRP].TF_ptr->ebx);// post product semaphore
+      SemPost(poduct_semaphore);// post product semaphore
       for(i=0; i<1666000; i++) IO_DELAY();
    }
 }
