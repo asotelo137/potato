@@ -135,9 +135,9 @@ void SemPostISR(){
   if(semaphore[semaphoreID].wait_q.size ==0){
     semaphore[semaphoreID].count ++;
   }else {
-    semaphoreID = DeQ(&semaphore_q);
-    pcb[semaphoreID].state = RUN;
-    EnQ(semaphoreID,&run_q);
+    int temp = DeQ(&semaphore_q);
+    pcb[temp].state = RUN;
+    EnQ(temp,&run_q);
   }
   
 }
