@@ -101,7 +101,6 @@ void Kernel(TF_t *TF_ptr) {
    switch(TF_ptr->intr_num){
       
       case TIMER_INTR:
-       printf("%d \n",pcb[CRP].TF_ptr->intr_num);
          //printf("made it into kernel\n");
          TimerISR();
          break;
