@@ -36,7 +36,7 @@ void Producer() {
    
    int i,spid,seconds;
    spid=GetPid();
-   cons_printf("yes");//print 0 on PC
+   printf("yes");//print 0 on PC
    while(1){
       seconds= 4 - (i%4);
       SemWait(product_semaphore);// Wait for product semaphore
@@ -53,7 +53,7 @@ void Consumer() {
    
    int i,spid,seconds;
    spid=GetPid();
-   cons_printf("yes 2 ");//print 0 on PC
+   printf("yes 2 ");//print 0 on PC
    while(1){
       seconds= 4 - (i%4);
       SemWait(product_semaphore);// Wait for product semaphore
