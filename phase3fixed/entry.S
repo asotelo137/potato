@@ -36,6 +36,14 @@ ENTRY(GetPidEntry)
 ENTRY(TimerEntry)
    pushl $TIMER_INTR
    jmp IntoKernel
+   
+// push intr type number thn jump
+   pushl $SEMWAIT_INTR
+   jmp IntoKernel
+   
+//push 
+   pushl $SEMPOST_INTR
+   jmp IntoKernel
 
 // Common IRQ entry, save context and call Kmain()
 IntoKernel:
