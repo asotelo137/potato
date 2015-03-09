@@ -9,10 +9,10 @@
 void Idle() {
    int i;//seconds;
    for(;;){
-   cons_printf("0");//print 0 on PC
-   //seconds= 4 - (CRP%4);
-   //Sleep(seconds);
-   for(i=0; i<1666000; i++) IO_DELAY();//busy-loop delay for about 1 sec
+      cons_printf("0");//print 0 on PC
+      //seconds= 4 - (CRP%4);
+      //Sleep(seconds);
+      for(i=0; i<1666000; i++) IO_DELAY();//busy-loop delay for about 1 sec
    } 
 }
 
@@ -21,18 +21,19 @@ void UserProc() {
    int seconds;
    cons_printf("shit");//print 0 on PC
    for(;;){
-   i=GetPid();
-   cons_printf("%d",i);//print its pid (CRP) on PC
-   seconds= 4 - (i%4);
-   Sleep(seconds);
-   //printf("seconds %d", seconds);
-   // Sleep(seconds);
-   //for(i=0; i<1666000; i++) IO_DELAY();//busy-loop delay for about 1 sec
+      i=GetPid();
+      cons_printf("%d",i);//print its pid (CRP) on PC
+      seconds= 4 - (i%4);
+      Sleep(seconds);
+      //printf("seconds %d", seconds);
+      // Sleep(seconds);
+      //for(i=0; i<1666000; i++) IO_DELAY();//busy-loop delay for about 1 sec
    }
    
 }
  
-void Producer(){
+void Producer() {
+   
    int i,spid,seconds;
    spid=GetPid();
    cons_printf("yes");//print 0 on PC
@@ -48,7 +49,8 @@ void Producer(){
    }
 }
 
-void Consumer(){
+void Consumer() {
+   
    int i,spid,seconds;
    spid=GetPid();
    cons_printf("yes 2 ");//print 0 on PC
