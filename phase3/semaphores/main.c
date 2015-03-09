@@ -112,7 +112,7 @@ void Kernel(TF_t *TF_ptr) {
       case SLEEP_INTR:
         printf("%d \n",pcb[CRP].TF_ptr->intr_num);
         breakpoint();   
-         SleepISR(TF_ptr->ebx);
+         SleepISR();
          break;
       case SEMWAIT_INTR:
           printf("%d \n",pcb[CRP].TF_ptr->intr_num);
