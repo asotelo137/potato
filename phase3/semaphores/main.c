@@ -115,27 +115,27 @@ void Kernel(TF_t *TF_ptr) {
          TimerISR();
          break;
       case GETPID_INTR:
-          printf("%d \n",pcb[CRP].TF_ptr->intr_num);
+         // printf("%d \n",pcb[CRP].TF_ptr->intr_num);
           breakpoint();
          GetPidISR();
          break;
       case SLEEP_INTR:
-        printf("%d \n",pcb[CRP].TF_ptr->intr_num);
+       // printf("%d \n",pcb[CRP].TF_ptr->intr_num);
         breakpoint();   
          SleepISR();
          break;
       case SEMWAIT_INTR:
-          printf("%d \n",pcb[CRP].TF_ptr->intr_num);
+         // printf("%d \n",pcb[CRP].TF_ptr->intr_num);
           breakpoint();   
          SemWaitISR(CRP);
          break;
       case SEMPOST_INTR:
-         printf("%d \n",pcb[CRP].TF_ptr->intr_num);
+       //  printf("%d \n",pcb[CRP].TF_ptr->intr_num);
          breakpoint();   
          SemPostISR(CRP);
          break;
       default:
-          printf("%d \n",pcb[CRP].TF_ptr->intr_num);
+       //   printf("%d \n",pcb[CRP].TF_ptr->intr_num);
          cons_printf("Panic!\n");
          breakpoint();
          break;
