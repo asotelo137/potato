@@ -45,7 +45,7 @@ void Producer(){
       cons_printf("Proc %d is producing... ",CRP);
       product += 100;
       cons_printf("+++ product is now %d \n",product);
-      SemPost(poduct_semaphore);// post product semaphore
+      SemPost(product_semaphore);// post product semaphore
       for(i=0; i<1666000; i++) IO_DELAY();
    }
 }
@@ -60,7 +60,7 @@ void Consumer(){
       cons_printf("Proc %d is consuming... ",CRP);
       product -= 100;
       cons_printf("--- product is now %d \n",product);
-      SemPost(poduct_semaphore);// post product semaphore
+      SemPost(product_semaphore);// post product semaphore
       for(i=0; i<1666000; i++) IO_DELAY();
    }
 }
