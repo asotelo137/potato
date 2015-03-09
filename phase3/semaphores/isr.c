@@ -26,13 +26,17 @@ void CreateISR(int pid) {
       // point to just above stack, then drop by sizeof(TF_t)
       pcb[pid].TF_ptr = (TF_t *)&stack[pid][STACK_SIZE];
       pcb[pid].TF_ptr--;
-      if(pid == 0)
+      /*if(pid == 0)
         pcb[pid].TF_ptr->eip = (unsigned int)Idle; // Idle process
       else if(pid%2 == 0)
         pcb[pid].TF_ptr->eip = (unsigned int)Consumer; // other new process
       else
         pcb[pid].TF_ptr->eip = (unsigned int)Producer;
-        
+      */
+      if(pid == 0)
+pcb[pid].TF_ptr->eip = (unsigned int)Idle; // Idle process
+else
+pcb[pid].TF_ptr->eip = (unsigned int)UserProc;
         
       pcb[pid].TF_ptr->eflags = EF_DEFAULT_VALUE | EF_INTR;
       pcb[pid].TF_ptr->cs = get_cs();
