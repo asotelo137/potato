@@ -147,6 +147,7 @@ void Kernel(TF_t *TF_ptr) {
    }                                                                 // end if some key pressed
 //   printf("after case statement \n");
    SelectCRP();    //call SelectCRP() to settle/determine for next CRP
+   printf("pcb[CRP].TF_ptr->intr_num")
    Dispatch(pcb[CRP].TF_ptr);
 }
 
