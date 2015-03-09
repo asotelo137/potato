@@ -104,10 +104,11 @@ void Kernel(TF_t *TF_ptr) {
    int pid,i;
    char key;
    
-   pcb[CRP].TF_ptr=TF_ptr;
    //change state in PCB of CRP to kernel mode
-   pcb[CRP].mode = KMODE;
+   pcb[CRP].mode = KMODE; 
+   pcb[CRP].TF_ptr=TF_ptr;
    //call TimerISR() to service timer interrupt as it just occurred
+   printf("%d\n",TF_ptr->intr_num)
    switch(TF_ptr->intr_num){
       
       case TIMER_INTR:
