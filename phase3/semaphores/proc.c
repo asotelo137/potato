@@ -18,9 +18,10 @@ void Idle() {
 
 void UserProc() {
    
-   cons_printf("shit");//print 0 on PC
+ 
    int i;
    int seconds;
+   cons_printf("shit");//print 0 on PC
    for(;;){
    i=GetPid();
    cons_printf("%d",i);//print its pid (CRP) on PC
@@ -35,8 +36,9 @@ void UserProc() {
  
 void Producer(){
    
-   cons_printf("yes");//print 0 on PC
+   
    int i;
+   cons_printf("yes");//print 0 on PC
    while(1){
       SemWait(pcb[CRP].TF_ptr->ebx);// Wait for product semaphore
       cons_printf("Proc %d is producing... ",CRP);
@@ -49,8 +51,9 @@ void Producer(){
 
 void Consumer(){
    
-   cons_printf("yes 2 ");//print 0 on PC
+   
    int i;
+   cons_printf("yes 2 ");//print 0 on PC
    while(1){
       SemWait(pcb[CRP].TF_ptr->ebx);// Wait for product semaphore
       cons_printf("Proc %d is consuming... ",CRP);
