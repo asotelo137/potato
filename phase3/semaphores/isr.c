@@ -30,8 +30,10 @@ void CreateISR(int pid) {
       if(pid == 0){
          pcb[pid].TF_ptr->eip = (unsigned int)Idle; // Idle process
       }else if(pid%2 == 0 ){
+        printf("consumer");
          pcb[pid].TF_ptr->eip = (unsigned int)Consumer; 
       }else{ 
+         printf("producer");
          pcb[pid].TF_ptr->eip = (unsigned int)Producer; // other new process
       }
       pcb[pid].TF_ptr->eflags = EF_DEFAULT_VALUE | EF_INTR;
