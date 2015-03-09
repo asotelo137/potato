@@ -153,6 +153,7 @@ void Kernel(TF_t *TF_ptr) {
             pid = DeQ(&none_q);                                      //get 1st PID un-used (dequeue none queue)
            //  printf("after pressing n pid is %d \n",pid);
             CreateISR(pid);                                          //call CreateISR() with it to create new process
+            printf("%d\n",TF_ptr->intr_num);
             }
             break;
          case 't': 
