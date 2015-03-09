@@ -34,7 +34,7 @@ typedef struct {             // proc queue type
       an integer used to control access, "count"
       a PID queue for waiting processes "q_t wait_q"
 */
-typedef stuct {
+typedef struct {
    int count;
    q_t wait_q;
 } semaphore_t;
