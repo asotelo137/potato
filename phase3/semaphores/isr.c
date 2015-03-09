@@ -38,7 +38,6 @@ void CreateISR(int pid) {
       pcb[pid].TF_ptr->es = get_es();
       pcb[pid].TF_ptr->fs = get_fs();
       pcb[pid].TF_ptr->gs = get_gs();
-      }
    
 //  return 0;
 }
