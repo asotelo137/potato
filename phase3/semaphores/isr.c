@@ -15,13 +15,12 @@ void CreateISR(int pid) {
    if(pid !=0 ){//if pid given is not 0 (Idle), enqueue it into run queue
     //   printf("Create recieved a pid : %d \n",pid);
       EnQ(pid,&run_q);
-   }
       // PCB of new proc:
       pcb[pid].mode = UMODE;//mode is set to UMODE
       pcb[pid].state= RUN;//state is set to RUN
       pcb[pid].runtime = 0;// both runtime counts are reset to 0
       pcb[pid].total_runtime = 0;// both runtime counts are reset to 0
-      
+   }
       
       MyBZero(stack[pid], STACK_SIZE); // erase stack
       // point to just above stack, then drop by sizeof(TF_t)
