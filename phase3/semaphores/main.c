@@ -127,12 +127,12 @@ void Kernel(TF_t *TF_ptr) {
       case SEMWAIT_INTR:
           printf("%d \n",pcb[CRP].TF_ptr->intr_num);
           breakpoint();   
-         SemWaitISR();
+         SemWaitISR(CRP);
          break;
       case SEMPOST_INTR:
          printf("%d \n",pcb[CRP].TF_ptr->intr_num);
          breakpoint();   
-         SemPostISR(pcb[CRP].TF_ptr->ebx);
+         SemPostISR(CRP);
          break;
       default:
           printf("%d \n",pcb[CRP].TF_ptr->intr_num);
