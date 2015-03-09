@@ -44,6 +44,7 @@ void CreateISR(int pid) {
 
 void TerminateISR() {
   //printf("terminate\n");
+  breakpoint();
    //just return if CRP is 0 or -1 (Idle or not given)
     
     if (CRP <=0 ){
@@ -65,7 +66,6 @@ void GetPidISR(){
 void TimerISR() {
   
   outportb(0x20,0x60);
-
      // printf("TimerISR Beggineing CRP %d \n",CRP);
   
    //upcount the runtime of CRP and system time
@@ -115,6 +115,7 @@ void SleepISR(int seconds){
 
 void SemWaitISR(){
   
+  breakpoint();
  int semaphoreID = pcb[CRP].TF_ptr->ebx;
   printf("wait ISR");
   if(semaphore[semaphoreID].count > 0){
@@ -129,6 +130,7 @@ void SemWaitISR(){
 
 void SemPostISR(){
 
+breakpoint();
  int semaphoreID = pcb[CRP].TF_ptr->ebx;
    printf("post ISR");
   if(semaphore[semaphoreID].wait_q.size ==0){
