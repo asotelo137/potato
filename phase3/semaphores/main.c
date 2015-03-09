@@ -72,6 +72,7 @@ void SelectCRP() {       // select which PID to be new CRP
    if(CRP == 0){
       pcb[0].state = RUN;
    }
+<<<<<<< HEAD
 
 
    if(run_q.size == 0)
@@ -90,6 +91,15 @@ void SelectCRP() {       // select which PID to be new CRP
 
    pcb[CRP].mode = UMODE;
    pcb[CRP].state = RUNNING;
+=======
+if(run_q.size == 0)
+  CRP = 0;
+else 
+  CRP = DeQ(&run_q);
+pcb[CRP].mode = UMODE;
+pcb[CRP].state = RUNNING;
+   
+>>>>>>> b0b3b4e5b5d5a0ec00cb676f900aba218cdc42e3
 }
 int main() {
    InitData(); 		//call Init Data to initialize kernel data
