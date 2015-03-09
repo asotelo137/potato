@@ -154,6 +154,7 @@ void Kernel(TF_t *TF_ptr) {
             break;
          case 'w':
                printf("%d\n",TF_ptr->intr_num);
+               break;
          case 'q':                                                   //if 'q'
             //printf("q pressed\n");
             exit(0);                                                 //just do exit(0);
