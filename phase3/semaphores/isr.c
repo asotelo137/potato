@@ -28,12 +28,12 @@ void CreateISR(int pid) {
       pcb[pid].TF_ptr--;
       // fill out trapframe of this new proc:
       if(pid == 0){
-      pcb[pid].TF_ptr->eip = (unsigned int)Idle; // Idle process
+         pcb[pid].TF_ptr->eip = (unsigned int)Idle; // Idle process
       }else if(pid%2 == 0 ){
-        pcb[pid].TF_ptr->eip = (unsigned int)Consumer; 
-      }else if(pid%2 == 1){
-      pcb[pid].TF_ptr->eip = (unsigned int)Producer; // other new process
-      }
+         pcb[pid].TF_ptr->eip = (unsigned int)Consumer; 
+      }else 
+         pcb[pid].TF_ptr->eip = (unsigned int)Producer; // other new process
+  
       pcb[pid].TF_ptr->eflags = EF_DEFAULT_VALUE | EF_INTR;
       pcb[pid].TF_ptr->cs = get_cs();
       pcb[pid].TF_ptr->ds = get_ds();
