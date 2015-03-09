@@ -32,11 +32,12 @@ void InitIDT(){
    IDT_ptr = get_idt_base();//locate IDT
    cons_printf("IDT is at %u. \n",IDT_ptr);
    SetEntry(32,TimerEntry);//prime IDT Entry
+    outportb(0x21,~1);
    SetEntry(48,GetPidEntry);
    SetEntry(49,SleepEntry);
    SetEntry(50,SemWaitEntry);
    SetEntry(51,SemPostEntry);
-   outportb(0x21,~1);
+  
 }
 
 
