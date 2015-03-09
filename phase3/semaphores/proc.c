@@ -8,6 +8,7 @@
 
 void Idle() {
    int i;//seconds;
+   cons_printf("shit");//print 0 on PC
    for(;;){
    cons_printf("0");//print 0 on PC
    //seconds= 4 - (CRP%4);
