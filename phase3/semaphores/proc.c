@@ -8,7 +8,6 @@
 
 void Idle() {
    int i;//seconds;
-   cons_printf("shit");//print 0 on PC
    for(;;){
    cons_printf("0");//print 0 on PC
    //seconds= 4 - (CRP%4);
@@ -18,8 +17,6 @@ void Idle() {
 }
 
 void UserProc() {
-   
- 
    int i;
    int seconds;
    cons_printf("shit");//print 0 on PC
@@ -36,31 +33,33 @@ void UserProc() {
 }
  
 void Producer(){
-   
-   
-   int i;
+   int i,spid,seconds;
+   spid=GetPid();
    cons_printf("yes");//print 0 on PC
    while(1){
+      seconds= 4 - (i%4);
       SemWait(product_semaphore);// Wait for product semaphore
       cons_printf("Proc %d is producing... ",CRP);
       product += 100;
       cons_printf("+++ product is now %d \n",product);
       SemPost(product_semaphore);// post product semaphore
-      for(i=0; i<1666000; i++) IO_DELAY();
+      for(i=0; i<1666000; i++) IO_DELAY(); 
+      Sleep(seconds);
    }
 }
 
 void Consumer(){
-   
-   
-   int i;
+   int i,spid,seconds;
+   spid=GetPid();
    cons_printf("yes 2 ");//print 0 on PC
    while(1){
+      seconds= 4 - (i%4);
       SemWait(product_semaphore);// Wait for product semaphore
       cons_printf("Proc %d is consuming... ",CRP);
       product -= 100;
       cons_printf("--- product is now %d \n",product);
       SemPost(product_semaphore);// post product semaphore
       for(i=0; i<1666000; i++) IO_DELAY();
+      Sleep(seconds);
    }
 }
