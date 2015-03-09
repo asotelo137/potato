@@ -32,6 +32,17 @@ void InitIDT(){
    SetEntry(48,GetPidEntry);
    SetEntry(49,SleepEntry);
    outportb(0x21,~1);
+   
+   //phase 3 
+   /*
+   InitIDT()
+   fill out IDT for the new entries:
+      SemWaitEntry
+      SemPostEntry
+   */
+   SetEntry(50,SemWaitEntry);
+   SetEntry(51,SemPostEntry);
+   
 }
 
 
@@ -50,6 +61,21 @@ void InitData() {
       
    }
    CRP = 0;
+   
+   //phase 3 
+   /*
+   InitData()
+   empty semaphore queue and fill numbers 1~19 into it
+
+   These are for Phase 3 as testing needs, delete after Phase:
+   1. dequeue semaphore queue to give to product_semaphore
+   2. MyBzero the semaphore allocated
+   3. set the count of the product semaphore to 1
+   4. set the product to 0
+   */
+   MyBZero()
+   
+   
 }
 
 void SelectCRP() {       // select which PID to be new CRP
