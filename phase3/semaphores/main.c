@@ -101,22 +101,32 @@ void Kernel(TF_t *TF_ptr) {
    switch(TF_ptr->intr_num){
       
       case TIMER_INTR:
+       printf("%d \n",pcb[CRP].TF_ptr->intr_num);
          //printf("made it into kernel\n");
          TimerISR();
          break;
       case GETPID_INTR:
+          printf("%d \n",pcb[CRP].TF_ptr->intr_num);
+          breakpoint();
          GetPidISR();
          break;
       case SLEEP_INTR:
+        printf("%d \n",pcb[CRP].TF_ptr->intr_num);
+        breakpoint();   
          SleepISR(TF_ptr->ebx);
          break;
       case SEMWAIT_INTR:
+          printf("%d \n",pcb[CRP].TF_ptr->intr_num);
+          breakpoint();   
          SemWaitISR();
          break;
       case SEMPOST_INTR:
+         printf("%d \n",pcb[CRP].TF_ptr->intr_num);
+         breakpoint();   
          SemPostISR(pcb[CRP].TF_ptr->ebx);
          break;
       default:
+          printf("%d \n",pcb[CRP].TF_ptr->intr_num);
          cons_printf("Panic!\n");
          breakpoint();
          break;
