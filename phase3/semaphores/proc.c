@@ -17,6 +17,7 @@ void Idle() {
 }
 
 void UserProc() {
+   
    cons_printf("shit");//print 0 on PC
    int i;
    int seconds;
@@ -33,6 +34,7 @@ void UserProc() {
 }
  
 void Producer(){
+   
    cons_printf("yes");//print 0 on PC
    int i;
    while(1){
@@ -46,6 +48,7 @@ void Producer(){
 }
 
 void Consumer(){
+   
    cons_printf("yes 2 ");//print 0 on PC
    int i;
    while(1){
