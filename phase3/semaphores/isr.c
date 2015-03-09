@@ -93,7 +93,7 @@ void TimerISR() {
 
    if(pcb[CRP].runtime == TIME_LIMIT){
     
-      pcb[CRP].total_runtime=pcb[CRP].runtime + pcb[CRP].total_runtime;
+      pcb[CRP].total_runtime += pcb[CRP].runtime;
       pcb[CRP].runtime=0;
       pcb[CRP].state = RUN;
       EnQ(CRP,&run_q);
