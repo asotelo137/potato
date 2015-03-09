@@ -34,10 +34,9 @@ void CreateISR(int pid) {
         pcb[pid].TF_ptr->eip = (unsigned int)Producer;
       */
       if(pid == 0)
-pcb[pid].TF_ptr->eip = (unsigned int)Idle; // Idle process
-else
-pcb[pid].TF_ptr->eip = (unsigned int)UserProc;
-        
+        pcb[pid].TF_ptr->eip = (unsigned int)Idle; // Idle process
+      else
+        pcb[pid].TF_ptr->eip = (unsigned int)UserProc;
       pcb[pid].TF_ptr->eflags = EF_DEFAULT_VALUE | EF_INTR;
       pcb[pid].TF_ptr->cs = get_cs();
       pcb[pid].TF_ptr->ds = get_ds();
