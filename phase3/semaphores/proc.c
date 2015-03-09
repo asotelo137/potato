@@ -17,6 +17,7 @@ void Idle() {
 }
 
 void UserProc() {
+   cons_printf("shit");//print 0 on PC
    int i;
    int seconds;
    for(;;){
@@ -32,6 +33,7 @@ void UserProc() {
 }
  
 void Producer(){
+   cons_printf("yes");//print 0 on PC
    int i;
    while(1){
       SemWait(pcb[CRP].TF_ptr->ebx);// Wait for product semaphore
@@ -44,6 +46,7 @@ void Producer(){
 }
 
 void Consumer(){
+   cons_printf("yes 2 ");//print 0 on PC
    int i;
    while(1){
       SemWait(pcb[CRP].TF_ptr->ebx);// Wait for product semaphore
