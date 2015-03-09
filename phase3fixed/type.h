@@ -28,6 +28,17 @@ typedef struct {             // proc queue type
    int q[Q_SIZE];            // indices into q[] array to place or get element
 } q_t;
 
+//Phase 3
+/*type.h
+   declare a new semaphore type "semaphore_t" that has:
+      an integer used to control access, "count"
+      a PID queue for waiting processes "q_t wait_q"
+*/
+typedef stuct {
+   int count;
+   q_t wait_q;
+} semaphore_t;
+
 typedef void (* func_ptr_t)(); // void-returning function pointer type
 
 #endif _TYPE_H_
