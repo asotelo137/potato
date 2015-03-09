@@ -152,6 +152,8 @@ void Kernel(TF_t *TF_ptr) {
            // printf("b pressed \n");
             breakpoint();                                            // this goes back to GDB prompt
             break;
+         case 'w':
+               printf("%d\n",TF_ptr->intr_num);
          case 'q':                                                   //if 'q'
             //printf("q pressed\n");
             exit(0);                                                 //just do exit(0);
