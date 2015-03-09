@@ -76,11 +76,16 @@ void TimerISR() {
    //upcount the runtime of CRP and system time
    pcb[CRP].runtime++;
    sys_time++;
-   while(sleep_q.size !=0 && pcb[sleep_q.q[sleep_q.head]].wake_time <= sys_time){
-     //int wakingID;
-     wakingID = DeQ(&sleep_q);
-     pcb[wakingID].state=RUN;
-     EnQ(wakingID,&run_q);
+   for(sleepindex; sleepindex<=sleep_q.size; sleepindex++){
+     if( pcb[sleep_q.q[sleep_q.head]].wake_time > sys_time){
+       wakingID = DeQ(&sleep_q);
+       EnQ(wakingID,&run_q);
+     }else if(pcb[sleep_q.q[sleep_q.head]].wake_time == sys_time){
+       //int wakingID;
+       wakingID = DeQ(&sleep_q);
+       pcb[wakingID].state=RUN;
+       EnQ(wakingID,&run_q);
+     }
    }
    // just return if CRP is Idle (0) or less (-1)
    if (CRP <= 0  ){
