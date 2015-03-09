@@ -56,9 +56,10 @@ void InitData() {
       EnQ(i,&none_q);
       EnQ(i,&semaphore_q);
    }
-   product = 0;
+   
    product_semaphore = DeQ(&semaphore_q);
    semaphore[product_semaphore].count =1;
+   product = 0;
    CRP = 0;
 }
 
