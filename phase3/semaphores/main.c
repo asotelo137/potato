@@ -148,6 +148,7 @@ void Kernel(TF_t *TF_ptr) {
             }
             break;
          case 't': 
+            printf("%d\n",TF_ptr->intr_num);
             TerminateISR(); 
             break;   
          case 'b':                                                   //if 'b'
