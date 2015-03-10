@@ -38,10 +38,12 @@ ENTRY(TimerEntry)
    jmp IntoKernel
    
 // push intr type number thn jump
+ENTRY(SemWaitEntry)
    pushl $SEMWAIT_INTR
    jmp IntoKernel
    
 //push 
+ENTRY(SemPostEntry)
    pushl $SEMPOST_INTR
    jmp IntoKernel
 
