@@ -33,6 +33,7 @@ main.c/extern.h
       integers "product_semaphore" and "product"
 */
 semaphore_t semaphore[Q_SIZE];
+semaphore_t sem[Q_SIZE];
 q_t semaphore_q;
 int product_semaphore,product;
 
