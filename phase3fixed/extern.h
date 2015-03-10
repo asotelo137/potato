@@ -23,6 +23,7 @@ extern char stack[MAX_PROC][STACK_SIZE]; // proc run-time stacks
 */
 extern semaphore_t semaphore;
 extern q_t semaphore_q;
+extern semaphore_t sem;
 extern int product_semaphore,product;
 
 #endif
