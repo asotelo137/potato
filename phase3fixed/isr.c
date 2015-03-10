@@ -121,9 +121,9 @@ void SleepISR(int seconds){
   
 }
 //phase 3***************************************************************
-void SemWaitISR(){
+void SemWaitISR(int semID){
   
-  int semID = pcb[CRP].TF_ptr->ebx;
+  //= pcb[CRP].TF_ptr->ebx;
   printf("wait ISR");
   if(semaphore[semID].count > 0){
     semaphore[semID].count --;
@@ -136,9 +136,9 @@ void SemWaitISR(){
 
 }
 // phase 3 ***********************************************************
-void SemPostISR(){
+void SemPostISR(int semID){
   
-  int semID = pcb[CRP].TF_ptr->ebx;
+   //= pcb[CRP].TF_ptr->ebx;
   printf("post ISR");
   breakpoint();
   if(semaphore[semID].wait_q.size ==0){
