@@ -5,7 +5,6 @@
 #include "extern.h"  // for current_run_pid needed here below
 #include "proc.h"    // for Idle, SimpleProc, DispatchProc
 #include "syscall.h"
-#include "tool.h"
 
 void Idle() {
    int i;//seconds;
@@ -145,7 +144,7 @@ void IRQ7(){
    
    outportb(0x20,0x67);
    if(semaphore[print_semaphore].wait_q.size>0){
-      pid = DeQ(semaphore[print_semaphore].wait_q);
+      pid = DeQ(&semaphore[print_semaphore].wait_q);
       EnQ(pid,&run_q);
       pcb[pid].state=RUN;
    }
