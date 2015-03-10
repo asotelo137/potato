@@ -189,12 +189,12 @@ void IRQ7ISR(){
 // Sem get ISR
 void SemGetISR(){
   
-  int count;
+  int countnumber;
   /*to allocate a semaphore by dequeuing the available semaphore-ID queue,
   "bzero" it, set the count to what's requested accordingly,
   and the semphore ID is returned to the calling process via its trapframe.
   */
-  count = pcb[CRP].TF_ptr->ecx;
+  countnumber = pcb[CRP].TF_ptr->ecx;
   print_semaphore=DeQ(&semaphore_q);
   MyBZero((char *) &semaphore[print_semaphore],sizeof(semaphore_t));
   semaphore[product_semaphore].count = count;
