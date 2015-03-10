@@ -52,7 +52,6 @@ void Consumer() {
       
       seconds= 4 - (i%4);
       SemWait(product_semaphore);// Wait for product semaphore
-      printf("%d\n",product_semaphore);
       cons_printf("Proc %d is consuming... ",spid);
       product -= 100;
       cons_printf("--- product is now %d \n",product);
