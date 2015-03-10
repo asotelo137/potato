@@ -122,7 +122,7 @@ void SemWaitISR(){
   semID = pcb[CRP].TF_ptr->ebx;
   printf("wait ISR");
   if( semaphore[semID].count > 0){
-    sem[semaphoreID].count --;
+    semaphore[semID].count --;
   }else if( semaphore[semID].count == 0){
     EnQ(CRP,&(semaphore[semID].wait_q));
     pcb[CRP].state = WAIT;
