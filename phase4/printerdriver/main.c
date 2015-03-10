@@ -72,8 +72,8 @@ void InitIDT(){
    SetEntry(SEMPOST_INTR,SemPostEntry);
    
    //phase 4 
-   setEntry(SEMGET_INTR,SemGetEntry);
-   setEntry(IRQ7_INTR,IRQ7Entry)
+   SetEntry(SEMGET_INTR,SemGetEntry);
+   SetEntry(IRQ7_INTR,IRQ7Entry);
    outportb(0x21,~129);
    //***************
     outportb(0x21,~1);
