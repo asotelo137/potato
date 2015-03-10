@@ -144,7 +144,7 @@ void IRQ7(){
    
    outportb(0x20,0x67);
    if(semaphore[print_semaphore].wait_q.size>0){
-      pid = DeQ(semaphore[print_semaphore].wait);
+      pid = DeQ(semaphore[print_semaphore].wait_q);
       EnQ(pid,&run_q);
       pcb[pid].state=RUN;
    }
