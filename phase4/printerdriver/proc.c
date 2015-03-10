@@ -76,12 +76,6 @@ void Print_Driver(){
    print_semaphore = SemGet(0); // should it be -1? depends on IRQISR();
    TIME_OUT_COUNT =0;
    
-   outportb(LPT1_BASE+LPT_DATA, ch);      // send char to data reg
-   code = inportb(LPT1_BASE+LPT_CONTROL); // read control reg
-   outportb(LPT1_BASE+LPT_CONTROL, code|PC_STROBE); // send with added strobe
-   for(i=0; i<20; i++) IO_DELAY();        // delay for EPSON LP-571 printer
-   outportb(LPT1_BASE+LPT_CONTROL, code); // send original control code
-   
    // make sure printer's powered up, cable connected, the following
    // statements (until the Sleep call) will reset the printer and the
    // first IRQ 7 will occur
@@ -98,11 +92,19 @@ void Print_Driver(){
          p = str;//p copy from str
          while (p != 0 ){  //what p points to is not 0 {
             // code sending the character to the port (see above)
+                     
+            outportb(LPT1_BASE+LPT_DATA, ch);      // send char to data reg
+            code = inportb(LPT1_BASE+LPT_CONTROL); // read control reg
+            outportb(LPT1_BASE+LPT_CONTROL, code|PC_STROBE); // send with added strobe
+            for(i=0; i<20; i++) IO_DELAY();        // delay for EPSON LP-571 printer
+            outportb(LPT1_BASE+LPT_CONTROL, code); // send original control code
+            
             
             // code busy-poll for printer readiness (see above)
             // ----------------- BUSY-POLL PSEUDO CODE BELOW ------------------
             // if interrupt-driven mode below is replaced by a semaphore wait
             // loop 3*1666000 (3 seconds) {
+            /*
             while(TIME_OUT_COUNT != TIME_OUT){
                //    code = PS_ACK & inportb(LPT1_BASE+LPT_STATUS); // read status
                code = PS_ACK & inportb(LPT1_BASE+LPT_STATUS); // read status
@@ -113,15 +115,16 @@ void Print_Driver(){
                // }
                TIME_COUNT_OUT++;   
             }
-            // if the loop count did get to that many (timed out) {
+            // if the loop count did get to that many (timed out) 
             if ( TIME_OUT_COUNT == TIME_OUT ){
                //    show msg: printer timed out. Check printer!
                cons_printf("printer timed out. Check printer!\n");
                // }
             }
             // or, do a semaphore wait (for interrupt-driven mode)
-            
+            */
             //increment pointer p (to point to the next character)
+            SemWait(print_semaphore);
             p++;
          } // while what p...
          
