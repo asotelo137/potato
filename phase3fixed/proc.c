@@ -39,6 +39,7 @@ void Producer() {
      // printf("yes in while\n");
       seconds= 4 - (i%4);
       SemWait(product_semaphore);// Wait for product semaphore
+      printf("%d\n",product_semaphore);
       cons_printf("Proc %d is producing... ",spid);
       product += 100;
       cons_printf("+++ product is now %d \n",product);
@@ -56,6 +57,7 @@ void Consumer() {
       seconds= 4 - (i%4);
     //  printf("yes 2 while 1\n");
       SemWait(product_semaphore);// Wait for product semaphore
+      printf("%d\n",product_semaphore);
      // printf("yes 2 while 2\n");
       cons_printf("Proc %d is consuming... ",spid);
      // printf("yes 2 while 3\n");
