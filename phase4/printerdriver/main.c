@@ -38,6 +38,13 @@ q_t semaphore_q;
 int product_semaphore,product;
 
 /******************************************************************/
+//******************************************************************
+//phase 4
+
+int print_semaphore;
+
+
+//******************************************************************
 struct i386_gate *IDT_ptr;
 
 
@@ -71,7 +78,7 @@ void InitIDT(){
 
 void InitData() {
    int i;
-   sys_time = 0;
+   sys_time = print_it = 0;
    
    MyBZero((char *) &run_q,sizeof(q_t));
    MyBZero((char *) &none_q,sizeof(q_t));
