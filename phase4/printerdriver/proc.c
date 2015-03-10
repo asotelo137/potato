@@ -64,7 +64,7 @@ void Consumer() {
  
 //Phase 4 ******************************************************************8
 
-void Print_Driver(){
+void PrintDriver(){
    // send ch to data reg and control code to control reg
    // then repeatedly poll for printer ACK unless timed out
    // #include <spede/machine/parallel.h> // flag constants used below
