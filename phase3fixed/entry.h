@@ -51,8 +51,8 @@ entry.h
       SemPostEntry
 */
 
-extern void SemWaitEnty;
-extern void SemPostEntry;
+extern void SemWaitEnty();
+extern void SemPostEntry();
 
 __END_DECLS
 
