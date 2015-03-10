@@ -181,6 +181,17 @@ void IRQ7ISR(){
   outportb(0x20, 0x67)
 }
 
-
+// phase 4 **********************************************************
+// Sem get ISR
+void SemGetISR(){
+  /*to allocate a semaphore by dequeuing the available semaphore-ID queue,
+  "bzero" it, set the count to what's requested accordingly,
+  and the semphore ID is returned to the calling process via its trapframe.
+  */
+  product_semaphore=DeQ(&semaphore_q);
+  MyBZero((char *) &semaphore[product_semaphore],sizeof(semaphore_t));
+  semaphore[product_semaphore].count = 1;
+  
+}
 
 
