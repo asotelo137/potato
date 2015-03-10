@@ -21,6 +21,7 @@ pcb_t pcb[MAX_PROC];    // process table
 char stack[MAX_PROC][STACK_SIZE]; // run-time stacks for processes
 //(include stuff from timer lab and new PCB described in 1.html)
 semaphore_t semaphore[Q_SIZE];
+semaphore_t sem[Q_SIZE];
 struct i386_gate *IDT_ptr;
 
 void SetEntry(int entry_num, func_ptr_t func_ptr){
@@ -46,10 +47,10 @@ void InitData() {
    int i;
    sys_time = 0;
    
-   MyBZero((char*)&run_q,sizeof(q_t));
-   MyBZero((char*)&none_q,sizeof(q_t));
-   MyBZero((char*)&sleep_q,sizeof(q_t));
-   MyBZero((char*)&semaphore_q,sizeof(q_t));
+   MyBZero((char*)run_q,sizeof(q_t));
+   MyBZero((char*)none_q,sizeof(q_t));
+   MyBZero((char*)sleep_q,sizeof(q_t));
+   MyBZero((char*)semaphore_q,sizeof(q_t));
    MyBZero((char*)semaphore,Q_SIZE);
    
    for(i = 1 ; i<Q_SIZE;i++){
