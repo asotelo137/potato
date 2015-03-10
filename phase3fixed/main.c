@@ -77,7 +77,6 @@ void InitData() {
    MyBZero((char *) &none_q,sizeof(q_t));
    MyBZero((char *) &sleep_q,sizeof(q_t));
    MyBZero((char *) &semaphore_q,sizeof(q_t));
-   MyBZero((char *) &semaphore,Q_SIZE);
    
    for(i = 1 ; i<Q_SIZE;i++){
       pcb[i].state = NONE;
@@ -101,7 +100,7 @@ void InitData() {
    */
    product_semaphore=DeQ(&semaphore_q);
    
-   MyBZero((char *) &semaphore[product_semaphore],sizeof(q_t));
+   MyBZero((char *) &semaphore[product_semaphore],sizeof(semaphore_t));
    
    semaphore[product_semaphore].count = 1;
    //MyBZero((char *)semaphore[product_semaphore].wait_q,Q_SIZE);
