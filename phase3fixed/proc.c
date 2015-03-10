@@ -37,14 +37,14 @@ void Producer() {
    printf("yes\n");//print 0 on PC
    while(1){
       printf("yes in while\n");
-      //seconds= 4 - (i%4);
+      seconds= 4 - (i%4);
       SemWait(product_semaphore);// Wait for product semaphore
-      cons_printf("Proc %d is producing... ",CRP);
+      cons_printf("Proc %d is producing... ",spid);
       product += 100;
       cons_printf("+++ product is now %d \n",product);
       SemPost(product_semaphore);// post product semaphore
       for(i=0; i<1666000; i++) IO_DELAY();
-      //Sleep(seconds);
+      Sleep(seconds);
    }
 }
 void Consumer() {
@@ -53,18 +53,18 @@ void Consumer() {
    printf("yes 2 \n");//print 0 on PC
    while(1){
       
-      //seconds= 4 - (i%4);
+      seconds= 4 - (i%4);
       printf("yes 2 while 1\n");
       SemWait(product_semaphore);// Wait for product semaphore
       printf("yes 2 while 2\n");
-      cons_printf("Proc %d is consuming... ",CRP);
+      cons_printf("Proc %d is consuming... ",spid);
       printf("yes 2 while 3\n");
       product -= 100;
       printf("yes 2 while 4\n");
       cons_printf("--- product is now %d \n",product);
       SemPost(product_semaphore);// post product semaphore
       for(i=0; i<1666000; i++) IO_DELAY();
-      //Sleep(seconds);
+      Sleep(seconds);
    }
 }
  
