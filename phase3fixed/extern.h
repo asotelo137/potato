@@ -22,11 +22,11 @@ extern char stack[MAX_PROC][STACK_SIZE]; // proc run-time stacks
       integers "product_semaphore" and "product"
 */
 extern q_t semaphore_q;
-<<<<<<< HEAD
+
 extern semaphore_t sem[Q_SIZE];
-=======
+
 extern semaphore_t semaphore[Q_SIZE];
->>>>>>> ac3aa2030fa87872fa1ac703cf11c2afb9e9eb71
+
 extern int product_semaphore,product;
 
 #endif
