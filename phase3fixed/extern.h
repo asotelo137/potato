@@ -21,9 +21,8 @@ extern char stack[MAX_PROC][STACK_SIZE]; // proc run-time stacks
    need for testing (Phase 3 only, after Phase, delete):
       integers "product_semaphore" and "product"
 */
-extern semaphore_t semaphore;
 extern q_t semaphore_q;
-extern semaphore_t sem;
+extern semaphore_t semaphore[Q_SIZE];
 extern int product_semaphore,product;
 
 #endif
