@@ -74,13 +74,16 @@ void GetPidISR(){
 }
 
 void TimerISR() {
-   outportb(0x20,0x60);
+  //dismiss timer intr (IRQ 0), otherwise, new intr signal from timer
+  //won't be recognized by CPU since circuit uses edge-trigger flipflop
+  //0x20 is PIC control reg, 0x60 dismisses IRQ 0
+  outportb(0x20,0x60);
    
   // printf("TimerISR Beggineing CRP %d \n",CRP);
   
-   //upcount the runtime of CRP and system time
-   pcb[CRP].runtime++;
-   sys_time++;
+  //upcount the runtime of CRP and system time
+  pcb[CRP].runtime++;
+  sys_time++;
   sleepsize=sleep_q.size;
   while(sleepsize--){
     sleeppid=DeQ(&sleep_q);
@@ -153,4 +156,31 @@ void SemPostISR(){
     EnQ(temp,&run_q);
   }
 }
+
+// phase 4 **********************************************************
+//This function will first dismiss IRQ7 and does the same function of a semaphore-post
+//(on the print_semaphore) to release the waited process which PrinterDriver() so it can resume printing
+
+void IRQ7ISR(){
+  
+  int temp;
+  int semID; 
+  
+  semID = pcb[CRP].TF_ptr->ebx;
+ //breakpoint();
+  if( print_semaphore[semID].wait_q.size ==0){
+    print_semaphore[semID].count ++;
+  }else {
+    
+    temp = DeQ(&print_semaphore[semID].wait_q);
+    pcb[temp].state = RUN;
+    EnQ(temp,&run_q);
+  }
+  
+  //dismiss IRQ7
+  outportb(0x20, 0x67)
+}
+
+
+
 
