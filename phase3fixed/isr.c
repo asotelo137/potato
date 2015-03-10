@@ -84,7 +84,7 @@ void TimerISR() {
   sleepsize=sleep_q.size;
   while(sleepsize--){
     sleeppid=DeQ(&sleep_q);
-    if(pcb[sleep_q.q[sleep_q.head]].wake_time == sys_time){
+    if(pcb[sleeppid].wake_time == sys_time){
       //int wakingID;
       EnQ(sleeppid,&run_q);
       pcb[wakingID].state=RUN;
