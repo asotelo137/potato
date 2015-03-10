@@ -67,7 +67,7 @@ void Consumer() {
 void Print_Driver(){
    int TIME_OUT=3*1666000;
    int i, code;
-   char str []= "Hello, my team is called PotatoOS!\n Its time to bake potato!\n\0";
+   char str []= "Hello, my team is called PotatoOS!\n It's time to bake potato!\n\0";
    char *p;
    
    print_semaphore = SemGet(0); // should it be -1? depends on IRQISR();
