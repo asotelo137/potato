@@ -57,7 +57,7 @@ extern void SemWaitEntry();
 extern void SemPostEntry();
 
 // phase 4**********************************************************
-extern void SemGet();
+extern void SemGetEntry();
 extern void IRQ7Entry();
 
 __END_DECLS
