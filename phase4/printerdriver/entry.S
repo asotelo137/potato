@@ -48,7 +48,7 @@ ENTRY(SemPostEntry)
    jmp IntoKernel
    
 //Phase 4-
-ENTRY(IRQ7ENTRY)
+ENTRY(IRQ7Entry)
    pushl $IRQ7_INTR
    jmp IntoKernel
    
