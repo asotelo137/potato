@@ -92,7 +92,7 @@ void PrintDriver(){
       Sleep(1);  //Sleep for 1 second
       if(print_it == 1){// print_it is 1 (set by Kernel() when key polled is 'p') {
          p = str;//p copy from str
-         while (p != 0 ){  //what p points to is not 0 {
+         while (*p ){  //what p points to is not 0 {
             // code sending the character to the port (see above)
                      
             outportb(LPT1_BASE+LPT_DATA, *p);      // send char to data reg
