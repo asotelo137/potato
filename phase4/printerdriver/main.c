@@ -164,6 +164,12 @@ void Kernel(TF_t *TF_ptr) {
       case SEMPOST_INTR://phase 3 *********************************
          SemPostISR();
          break;
+      case SEMGET_INTR:
+         SemGetISR();
+         break;
+      case IRQ7_ENTRY:
+         IRQ7ISR();
+         break;
       default:
          cons_printf("Panic!\n");
          breakpoint();
