@@ -39,3 +39,7 @@ void SemPost(int semaphoreID){
       :"g" (semaphoreID)
       :"%ebx");
 }
+//phase 4 printing SemGet()
+void SemGet(){
+   
+}
