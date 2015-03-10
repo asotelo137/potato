@@ -101,7 +101,7 @@ void InitData() {
    */
    product_semaphore=DeQ(&semaphore_q);
    
-  // MyBZero(&semaphore_q,0);
+   MyBZero((char *) &semaphore[product_semaphore],Q_SIZE);
    
    product_semaphore = 1;
    //MyBZero((char *)semaphore[product_semaphore].wait_q,Q_SIZE);
