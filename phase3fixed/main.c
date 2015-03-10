@@ -11,6 +11,7 @@
 #include "proc.h"       // processes such as Init()
 #include "type.h"       // processes such as Init()
 #include "entry.h"
+#include "TF.h"
 
 // kernel data structure:
 int CRP, sys_time;                // current running PID, -1 means no process
