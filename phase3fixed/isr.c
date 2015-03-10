@@ -146,11 +146,11 @@ void SemPostISR(){
  //breakpoint();
   if( semaphore[semID].wait_q.size ==0){
     semaphore[semID].count ++;
-  }else 
+  }else {
     
     temp = DeQ(&semaphore[semID].wait_q);
     pcb[temp].state = RUN;
     EnQ(temp,&run_q);
-  
+  }
 }
 
