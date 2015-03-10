@@ -73,13 +73,13 @@ void InitData() {
    int i;
    sys_time = 0;
    
-   MyBZero((char*)run_q,MAX_PROC);
-   MyBZero((char*)none_q,MAX_PROC);
-   MyBZero((char*)sleep_q,MAX_PROC);
+   MyBZero((char*)run_q,sizeof(q_t));
+   MyBZero((char*)none_q,sizeof(q_t));
+   MyBZero((char*)sleep_q,sizeof(q_t));
    
    //phase 3
-    MyBZero((char*)semaphore_q,MAX_PROC);
-    MyBZero((char*)semaphore,Q_SIZE);
+   MyBZero((char*)semaphore_q,sizeof(q_t));
+   MyBZero((char*)semaphore,Q_SIZE);
    
    for(i = 1 ; i<Q_SIZE;i++){
       pcb[i].state = NONE;
