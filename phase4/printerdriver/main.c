@@ -98,13 +98,15 @@ void InitData() {
    3. set the count of the product semaphore to 1
    4. set the product to 0
    */
-   product_semaphore=DeQ(&semaphore_q);
+   // phase 3 testing
+   /*product_semaphore=DeQ(&semaphore_q);
    
    MyBZero((char *) &semaphore[product_semaphore],sizeof(semaphore_t));
    
    semaphore[product_semaphore].count = 1;
    //MyBZero((char *)semaphore[product_semaphore].wait_q,Q_SIZE);
    product=0;
+   */ 
    
    
 }
