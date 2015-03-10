@@ -69,7 +69,7 @@ void PrintDriver(){
    // then repeatedly poll for printer ACK unless timed out
    // #include <spede/machine/parallel.h> // flag constants used below
    int TIME_OUT=3*1666000; // time out 3 secs
-   int i, code,TIME_OUT_COUNT;
+   int i, code,TIME_OUT_COUNT,pid;
    char str []= "Hello, my team is called PotatoOS!\n It's time to bake potato!\n\0";
    char *p;
    
@@ -86,6 +86,7 @@ void PrintDriver(){
    Sleep(1);                                   // printer needs time to reset
 
    while(1) {
+      pid = GetPid();
       cons_printf("PID is %d.",pid);// my PID
       Sleep(1);  //Sleep for 1 second
       if(print_it == 1){// print_it is 1 (set by Kernel() when key polled is 'p') {
