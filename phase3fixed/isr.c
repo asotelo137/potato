@@ -81,7 +81,8 @@ void TimerISR() {
    //upcount the runtime of CRP and system time
    pcb[CRP].runtime++;
    sys_time++;
- while(sleepsize--){
+  sleepsize=sleep_q.size;
+  while(sleepsize--){
     sleeppid=DeQ(&sleep_q);
     if(pcb[sleep_q.q[sleep_q.head]].wake_time == sys_time){
       //int wakingID;
