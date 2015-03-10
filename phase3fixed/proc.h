@@ -5,5 +5,7 @@
 
 void Idle();
 void UserProc();
+void Consumer();
+void Producer();
 
 #endif
