@@ -18,18 +18,16 @@ void EnQ(int pid, q_t *p) {
 // show error msg and return if queue's already full
 // needs coding
 // ????????????????????????????????????????????????	
-	if (p->size == Q_SIZE){
-		printf("\nQueue is full\n");
+	if(p->size == Q_SIZE){
+		cons_printf(“Queue full!\n”);
 		return;
-	}else
-	// printf("EnQ pid %d \n",pid);
-	p->q[p->tail]= pid;
-	p->tail ++;
-	
-	if (p->tail >= Q_SIZE) {
+	}
+	p->q[p->tail]=pid;
+	p->size++;
+	p->tail++;
+	if(p->tail == Q_SIZE){
 		p->tail = 0;
 	}
-	p->size ++;
 }
 
 int DeQ(q_t *p) { // return -1 if q is empty
@@ -37,20 +35,16 @@ int DeQ(q_t *p) { // return -1 if q is empty
 // needs coding
 // ?????????????????????????????????????????????????
 	int pid;
-	
-	if (p->size == 0){
-		printf("Queue is empty\n");
+	if(p->size ==0){
+		cons_printf(“Queue Empty!\n”);
 		return -1;
-	}else
-	
-	pid=p->q[p->head];
-	p->head++;
-	
-	if(p->head==Q_SIZE){
-		p->head=0;
 	}
+	pid = p->q[p->head];
 	p->size--;
-//	printf("DeQ pid %d \n",pid);
+	p->head++;
+	if(p->head == Q_SIZE){
+		p->head = 0;
+	}
 	return pid;
 }
 
