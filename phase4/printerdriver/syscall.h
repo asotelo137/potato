@@ -7,5 +7,7 @@ int GetPid();      // no input, 1 return
 void Sleep(int);   // 1 input, no return
 void SemWait(int);
 void SemPost(int);
+// phase 4 printing
+void SemGet(int);
 
 #endif
