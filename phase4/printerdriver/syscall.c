@@ -44,8 +44,8 @@ int SemGet(int count){
    int semaphoreID;
    asm(" movl %%ebx,%1;int $52;movl %%ecx, %0" // CPU inst
       : "=g" (semaphoreID) // 1 output from asm()
-      : "g"(count)// 1 input into asm()
-      : ); // push/pop before/after asm()
+      : "g"(count);)// 1 input into asm()
+      //:  // push/pop before/after asm()
    return semaphoreID;
    
 }
