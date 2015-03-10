@@ -196,9 +196,9 @@ void Kernel(TF_t *TF_ptr) {
             if (none_q.size == 0){                                   //no processes left in none queue
                cons_printf("No more process!\n");                    //"No more process!\n" (msg on target PC)
             }else{
-            pid = DeQ(&none_q);                                      //get 1st PID un-used (dequeue none queue)
-           //  printf("after pressing n pid is %d \n",pid);
-            CreateISR(pid);                                          //call CreateISR() with it to create new process
+               pid = DeQ(&none_q);                                      //get 1st PID un-used (dequeue none queue)
+              //  printf("after pressing n pid is %d \n",pid);
+               CreateISR(pid);                                          //call CreateISR() with it to create new process
             }
             break;
          case 't': TerminateISR(); break;   
