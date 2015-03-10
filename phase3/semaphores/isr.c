@@ -120,7 +120,7 @@ void SleepISR(int seconds){
 
 void SemWaitISR(){
   
-  int semID = pcb[CRP].TF_ptr->ebx;
+  int semID = GetPid();
   printf("wait ISR");
   if(semaphore[semID].count > 0){
     semaphore[semID].count --;
@@ -137,7 +137,7 @@ void SemPostISR(){
 
 
 
- int semID = pcb[CRP].TF_ptr->ebx;
+ int semID = GetPid();
    printf("post ISR");
    breakpoint();
   if(semaphore[semID].wait_q.size ==0){
