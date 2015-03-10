@@ -29,4 +29,36 @@ void UserProc() {
    }
    
 }
+
+//Phase 3 ******************************************************************8
+void Producer() {
+   int i,spid,seconds;
+   spid=GetPid();
+   printf("yes\n");//print 0 on PC
+   while(1){
+      seconds= 4 - (i%4);
+      SemWait(product_semaphore);// Wait for product semaphore
+      cons_printf("Proc %d is producing... ",CRP);
+      product += 100;
+      cons_printf("+++ product is now %d \n",product);
+      SemPost(product_semaphore);// post product semaphore
+      for(i=0; i<1666000; i++) IO_DELAY();
+      Sleep(seconds);
+   }
+}
+void Consumer() {
+   int i,spid,seconds;
+   spid=GetPid();
+   printf("yes 2 \n");//print 0 on PC
+   while(1){
+      seconds= 4 - (i%4);
+      SemWait(product_semaphore);// Wait for product semaphore
+      cons_printf("Proc %d is consuming... ",CRP);
+      product -= 100;
+      cons_printf("--- product is now %d \n",product);
+      SemPost(product_semaphore);// post product semaphore
+      for(i=0; i<1666000; i++) IO_DELAY();
+      Sleep(seconds);
+   }
+}
  
