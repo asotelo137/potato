@@ -76,8 +76,6 @@ void InitData() {
    MyBZero((char*)run_q,sizeof(q_t));
    MyBZero((char*)none_q,sizeof(q_t));
    MyBZero((char*)sleep_q,sizeof(q_t));
-   
-   //phase 3
    MyBZero((char*)semaphore_q,sizeof(q_t));
    MyBZero((char*)semaphore,Q_SIZE);
    
@@ -106,7 +104,7 @@ void InitData() {
   // MyBZero(&semaphore_q,0);
    
    product_semaphore = 1;
-   MyBZero((char *)semaphore[product_semaphore].wait_q,Q_SIZE);
+   //MyBZero((char *)semaphore[product_semaphore].wait_q,Q_SIZE);
    product=0;
    
    
