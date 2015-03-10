@@ -76,7 +76,7 @@ void InitIDT(){
    SetEntry(IRQ7_INTR,IRQ7Entry);
    outportb(0x21,~129);
    //***************
-    outportb(0x21,~1);
+    //outportb(0x21,~1);
 }
 
 
