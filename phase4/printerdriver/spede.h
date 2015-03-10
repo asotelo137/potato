@@ -19,6 +19,9 @@
 // #include <spede/string.h> // memset(), strcpy(), strtok(), etc.
 // #include <spede/time.h> // CLK_TCK, time_t, clock(), time(), etc.
 
+//Phase 4 add-on
+#include <spede/machine/parallel.h>
+
 #endif
 
 /*  I/O port 0x80 is reserved and will never be used.  If you
