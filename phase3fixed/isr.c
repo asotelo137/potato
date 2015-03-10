@@ -87,7 +87,7 @@ void TimerISR() {
     if(pcb[sleeppid].wake_time == sys_time){
       //int wakingID;
       EnQ(sleeppid,&run_q);
-      pcb[wakingID].state=RUN;
+      pcb[sleeppid].state=RUN;
     }else {
       EnQ(sleeppid,&sleep_q);
     }
