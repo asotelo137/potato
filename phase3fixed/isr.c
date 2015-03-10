@@ -119,8 +119,7 @@ void SemWaitISR(){
   printf("wait ISR");
   if(semaphore[semID].count > 0){
     semaphore[semID].count --;
-  }
-  if(semaphore[semID].count == 0){
+  }else if(semaphore[semID].count == 0){
     EnQ(CRP,&(semaphore[semID].wait_q));
     pcb[CRP].state = WAIT;
     CRP=-1;
@@ -136,10 +135,9 @@ void SemPostISR(){
   breakpoint();
   if(semaphore[semID].wait_q.size ==0){
     semaphore[semID].count ++;
-  }else {
+  }else 
     int temp = DeQ(&semaphore_q);
-    pcb[temp].state = RUN;
-    EnQ(temp,&run_q);
-  }
+  pcb[temp].state = RUN;
+  EnQ(temp,&run_q);
 }
 
