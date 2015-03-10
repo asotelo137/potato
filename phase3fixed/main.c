@@ -32,7 +32,7 @@ main.c/extern.h
    need for testing (Phase 3 only, after Phase, delete):
       integers "product_semaphore" and "product"
 */
-semaphore_t semaphore[Q_SIZE];;
+semaphore_t semaphore[Q_SIZE];
 q_t semaphore_q;
 int product_semaphore,product;
 
