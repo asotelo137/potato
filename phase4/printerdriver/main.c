@@ -41,7 +41,7 @@ int product_semaphore,product;
 //******************************************************************
 //phase 4
 
-int print_semaphore;
+int print_semaphore,print_it;
 
 
 //******************************************************************
