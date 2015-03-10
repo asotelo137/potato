@@ -10,6 +10,7 @@
 
 int wakingID;
 int wake_period;
+int sleepindex,sleepsize;
 void CreateISR(int pid) {
   // printf("create\n");
    if(pid !=0 ){//if pid given is not 0 (Idle), enqueue it into run queue
@@ -76,7 +77,8 @@ void TimerISR() {
    //upcount the runtime of CRP and system time
    pcb[CRP].runtime++;
    sys_time++;
-   for(sleepindex; sleepindex<=sleep_q.size; sleepindex++){
+   sleepsize = sleep_q.size;
+   for(sleepindex=1; sleepindex<=sleepsize; sleepindex++){
      if( pcb[sleep_q.q[sleep_q.head]].wake_time > sys_time){
        wakingID = DeQ(&sleep_q);
        EnQ(wakingID,&run_q);
