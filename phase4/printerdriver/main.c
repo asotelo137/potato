@@ -207,6 +207,7 @@ void Kernel(TF_t *TF_ptr) {
             breakpoint();                                            // this goes back to GDB prompt
             break;
          case 'p'://phase 4 printing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            printf("WTF");
             print_it = 1; // set global print_it to 1
             break;
          case 'q':                                                   //if 'q'
