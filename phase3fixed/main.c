@@ -77,6 +77,7 @@ void InitData() {
    
    //phase 3
     MyBZero((char *)semaphore_q,MAX_PROC);
+    MyBZero((char *)semaphore,Q_SIZE);
    
    for(i = 1 ; i<Q_SIZE;i++){
       pcb[i].state = NONE;
