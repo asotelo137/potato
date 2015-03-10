@@ -179,7 +179,7 @@ void Kernel(TF_t *TF_ptr) {
       case SEMGET_INTR:
          SemGetISR();
          break;
-      case IRQ7_ENTRY:
+      case IRQ7_INTR:
          IRQ7ISR();
          break;
       default:
