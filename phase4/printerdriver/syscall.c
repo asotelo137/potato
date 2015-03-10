@@ -40,12 +40,12 @@ void SemPost(int semaphoreID){
       :"%ebx");
 }
 //phase 4 printing SemGet()
-int SemGet(int print_sem){
-   int pid;
-   asm("int $52; movl %%ebx, %0" // CPU inst
-      : "=g" (print_sem) // 1 output from asm()
-      : // no input into asm()
-      : "%ebx"); // push/pop before/after asm()
-   return pid;
+int SemGet(int count){
+   int semaphoreID;
+   asm("int $52; movl %%ebx, %1;movl %%ecx, %0" // CPU inst
+      : "=g" (semaphoreID) // 1 output from asm()
+      : "g"(count)// 1 input into asm()
+      //: "%ebx"); // push/pop before/after asm()
+   return semaphoreID;
    
 }
