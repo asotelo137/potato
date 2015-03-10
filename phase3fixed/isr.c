@@ -128,7 +128,7 @@ void SemWaitISR(){
     EnQ(CRP,&(semaphore[semID].wait_q));
     pcb[CRP].state = WAIT;
     CRP=-1;
-  
+}
 
 }
 // phase 3 ***********************************************************
