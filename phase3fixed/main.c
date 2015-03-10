@@ -71,12 +71,12 @@ void InitData() {
    int i;
    sys_time = 0;
    
-   MyBZero(&run_q,0);
-   MyBZero(&none_q,0);
-   MyBZero(&sleep_q,0);
+   MyBZero((char *)run_q,MAX_PROC);
+   MyBZero((char *)none_q,MAX_PROC);
+   MyBZero((char *)sleep_q,MAX_PROC);
    
    //phase 3
-    MyBZero(&semaphore_q,0);
+    MyBZero((char *)semaphore_q,MAX_PROC);
    
    for(i = 1 ; i<Q_SIZE;i++){
       pcb[i].state = NONE;
@@ -100,7 +100,7 @@ void InitData() {
    */
    product_semaphore=DeQ(&semaphore_q);
    
-   MyBZero(&semaphore_q,0);
+  // MyBZero(&semaphore_q,0);
    
    product_semaphore = 1;
    
