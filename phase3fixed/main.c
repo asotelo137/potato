@@ -83,7 +83,7 @@ void InitData() {
       pcb[i].state = NONE;
       EnQ(i,&none_q);
       //phase 3
-      Enq(i,&semaphore_q);
+      EnQ(i,&semaphore_q);
       
    }
    CRP = 0;
