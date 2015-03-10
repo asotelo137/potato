@@ -123,7 +123,7 @@ void SleepISR(int seconds){
 //phase 3***************************************************************
 void SemWaitISR(){
   
-   int semID = pcb[CRP].TF_ptr->ebx;
+  int semID = pcb[CRP].TF_ptr->ebx;
   printf("wait ISR");
   if(semaphore[semID].count > 0){
     semaphore[semID].count --;
@@ -144,7 +144,7 @@ void SemPostISR(){
   if(semaphore[semID].wait_q.size ==0){
     semaphore[semID].count ++;
   }else 
-    int temp = DeQ(&semaphore_q);
+  int temp = DeQ(&semaphore_q);
   pcb[temp].state = RUN;
   EnQ(temp,&run_q);
 }
