@@ -56,9 +56,9 @@ void SetEntry(int entry_num, func_ptr_t func_ptr){
 void InitIDT(){
    IDT_ptr = get_idt_base();//locate IDT
    cons_printf("IDT is at %u. \n",IDT_ptr);
-   SetEntry(32,TimerEntry);//prime IDT Entry
-   SetEntry(48,GetPidEntry);
-   SetEntry(49,SleepEntry);
+   SetEntry(TIMER_INTR,TimerEntry);//prime IDT Entry
+   SetEntry(GETPID_INTR,GetPidEntry);
+   SetEntry(SLEEP_INTR,SleepEntry);
   
    
    //phase 3 
@@ -68,9 +68,14 @@ void InitIDT(){
       SemWaitEntry
       SemPostEntry
    */
-   SetEntry(50,SemWaitEntry);
-   SetEntry(51,SemPostEntry);
+   SetEntry(SEMWAIT_INTR,SemWaitEntry);
+   SetEntry(SEMPOST_INTR,SemPostEntry);
    
+   //phase 4 
+   setEntry(SEMGET_INTR,SemGetEntry);
+   setEntry(IRQ7_INTR,IRQ7Entry)
+   outportb(0x21,~129);
+   //***************
     outportb(0x21,~1);
 }
 
