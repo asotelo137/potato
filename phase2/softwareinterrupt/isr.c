@@ -10,7 +10,7 @@
 
 int wakingID;
 int wake_period;
-int sleepindex,sleepsize;
+int sleepindex,sleepsize,sleeppid;
 void CreateISR(int pid) {
   // printf("create\n");
    if(pid !=0 ){//if pid given is not 0 (Idle), enqueue it into run queue
@@ -78,17 +78,16 @@ void TimerISR() {
    pcb[CRP].runtime++;
    sys_time++;
    sleepsize = sleep_q.size;
-   for(sleepindex=1; sleepindex<=sleepsize; sleepindex++){
-     if( pcb[sleep_q.q[sleep_q.head]].wake_time > sys_time){
-       wakingID = DeQ(&sleep_q);
-       EnQ(wakingID,&run_q);
-     }else if(pcb[sleep_q.q[sleep_q.head]].wake_time == sys_time){
+   while(sleepsize--){
+      sleeppid=DeQ(&sleep_q);
+    if(pcb[sleep_q.q[sleep_q.head]].wake_time == sys_time){
        //int wakingID;
-       wakingID = DeQ(&sleep_q);
+       EnQ(sleeppid,&run_q);
        pcb[wakingID].state=RUN;
-       EnQ(wakingID,&run_q);
-     }
-   }
+    }else {  
+      EnQ(sleeppid,&sleep_q);
+    }
+  }
    // just return if CRP is Idle (0) or less (-1)
    if (CRP <= 0  ){
       //printf("TIMER ISR CRP is %d\n", CRP);
