@@ -153,8 +153,14 @@ void Kernel(TF_t *TF_ptr) {
       case GETPID_INTR:
          GetPidISR();
          break;
-      case SLEEP_INTR:
+      case SLEEP_INTR://
          SleepISR(TF_ptr->ebx);
+         break;
+      case SEMWAIT_INTR://phase 3 *********************************
+         SemWaitISR();
+         break;
+      case SEMPOST_INTR://phase 3 *********************************
+         SemPostISR();
          break;
       default:
          cons_printf("Panic!\n");
