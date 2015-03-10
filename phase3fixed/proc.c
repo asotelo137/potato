@@ -32,25 +32,25 @@ void UserProc() {
 
 //Phase 3 ******************************************************************8
 void Producer() {
-   int i,spid,seconds;
+   int i,spid;//,seconds;
    spid=GetPid();
    while(1){
-      seconds= 4 - (i%4);
+      //seconds= 4 - (i%4);
       SemWait(product_semaphore);// Wait for product semaphore
       cons_printf("Proc %d is producing... ",spid);
       product += 100;
       cons_printf("+++ product is now %d \n",product);
       SemPost(product_semaphore);// post product semaphore
       for(i=0; i<1666000; i++) IO_DELAY();
-      Sleep(seconds);
+      //Sleep(seconds);
    }
 }
 void Consumer() {
-   int i,spid,seconds;
+   int i,spid;//,seconds;
    spid=GetPid();
    while(1){
       
-      seconds= 4 - (i%4);
+     // seconds= 4 - (i%4);
       SemWait(product_semaphore);// Wait for product semaphore
       cons_printf("Proc %d is consuming... ",spid);
       product -= 100;
@@ -58,7 +58,7 @@ void Consumer() {
       SemPost(product_semaphore);// post product semaphore
       
       for(i=0; i<1666000; i++) IO_DELAY();
-      Sleep(seconds);
+     // Sleep(seconds);
    }
 }
  
