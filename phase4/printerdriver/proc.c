@@ -95,7 +95,7 @@ void PrintDriver(){
          while (p != 0 ){  //what p points to is not 0 {
             // code sending the character to the port (see above)
                      
-            outportb(LPT1_BASE+LPT_DATA, ch);      // send char to data reg
+            outportb(LPT1_BASE+LPT_DATA, p);      // send char to data reg
             code = inportb(LPT1_BASE+LPT_CONTROL); // read control reg
             outportb(LPT1_BASE+LPT_CONTROL, code|PC_STROBE); // send with added strobe
             for(i=0; i<20; i++) IO_DELAY();        // delay for EPSON LP-571 printer
