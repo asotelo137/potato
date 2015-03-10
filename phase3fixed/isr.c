@@ -125,6 +125,7 @@ void SemWaitISR(){
   if( semaphore[semID].count > 0){
     semaphore[semID].count --;
   }else if( semaphore[semID].count == 0){
+    breakpoint();
     EnQ(CRP,&(semaphore[semID].wait_q));
     pcb[CRP].state = WAIT;
     CRP=-1;
