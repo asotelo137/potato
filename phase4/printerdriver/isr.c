@@ -173,11 +173,11 @@ void IRQ7ISR(){
   
   semID = pcb[CRP].TF_ptr->ebx;
  //breakpoint();
-  if( print_semaphore[semID].wait_q.size ==0){
-    print_semaphore[semID].count ++;
+  if( semaphore[semID].wait_q.size ==0){
+    semaphore[semID].count ++;
   }else {
     
-    temp = DeQ(&print_semaphore[semID].wait_q);
+    temp = DeQ(&semaphore[semID].wait_q);
     pcb[temp].state = RUN;
     EnQ(temp,&run_q);
   }
