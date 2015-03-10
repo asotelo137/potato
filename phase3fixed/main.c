@@ -52,7 +52,7 @@ void InitIDT(){
    SetEntry(32,TimerEntry);//prime IDT Entry
    SetEntry(48,GetPidEntry);
    SetEntry(49,SleepEntry);
-   outportb(0x21,~1);
+  
    
    //phase 3 
    /*
@@ -64,6 +64,7 @@ void InitIDT(){
    SetEntry(50,SemWaitEntry);
    SetEntry(51,SemPostEntry);
    
+    outportb(0x21,~1);
 }
 
 
