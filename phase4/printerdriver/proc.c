@@ -65,12 +65,22 @@ void Consumer() {
 //Phase 4 ******************************************************************8
 
 void Print_Driver(){
-   int TIME_OUT=3*1666000;
-   int i, code;
+   // send ch to data reg and control code to control reg
+   // then repeatedly poll for printer ACK unless timed out
+   // #include <spede/machine/parallel.h> // flag constants used below
+   int TIME_OUT=3*1666000; // time out 3 secs
+   int i, code,TIME_OUT_COUNT;
    char str []= "Hello, my team is called PotatoOS!\n It's time to bake potato!\n\0";
    char *p;
    
    print_semaphore = SemGet(0); // should it be -1? depends on IRQISR();
+   TIME_OUT_COUNT =0;
+   
+   outportb(LPT1_BASE+LPT_DATA, ch);      // send char to data reg
+   code = inportb(LPT1_BASE+LPT_CONTROL); // read control reg
+   outportb(LPT1_BASE+LPT_CONTROL, code|PC_STROBE); // send with added strobe
+   for(i=0; i<20; i++) IO_DELAY();        // delay for EPSON LP-571 printer
+   outportb(LPT1_BASE+LPT_CONTROL, code); // send original control code
    
    // make sure printer's powered up, cable connected, the following
    // statements (until the Sleep call) will reset the printer and the
@@ -87,20 +97,42 @@ void Print_Driver(){
       if(print_it == 1){// print_it is 1 (set by Kernel() when key polled is 'p') {
          p = str;//p copy from str
          while (p != 0 ){  //what p points to is not 0 {
-            
             // code sending the character to the port (see above)
-
+            
             // code busy-poll for printer readiness (see above)
+            // ----------------- BUSY-POLL PSEUDO CODE BELOW ------------------
+            // if interrupt-driven mode below is replaced by a semaphore wait
+            // loop 3*1666000 (3 seconds) {
+            while(TIME_OUT_COUNT != TIME_OUT){
+               //    code = PS_ACK & inportb(LPT1_BASE+LPT_STATUS); // read status
+               code = PS_ACK & inportb(LPT1_BASE+LPT_STATUS); // read status
+               //    if(code == 0) break;    // printer ACK'ed
+               if(code == 0) break;    // printer ACK'ed
+               //    IO_DELAY();             // or, wait 0.65us, try again
+               IO_DELAY();             // or, wait 0.65us, try again
+               // }
+               TIME_COUNT_OUT++;   
+            }
+            // if the loop count did get to that many (timed out) {
+            if ( TIME_OUT_COUNT == TIME_OUT ){
+               //    show msg: printer timed out. Check printer!
+               cons_printf("printer timed out. Check printer!\n");
+               // }
+            }
             // or, do a semaphore wait (for interrupt-driven mode)
-
-            increment pointer p (to point to the next character)
+            
+            //increment pointer p (to point to the next character)
+            p++;
          } // while what p...
+         
       } // if print_it...
-      set print_it back to 0
+     if (print_it ==1)
+            print_it = 0; //set print_it back to 0
    } // while(1)
+   
 } // PrintDriver()
    
-}
+
 
 //phase 4 *********************************************************
 void IRQ7(){
