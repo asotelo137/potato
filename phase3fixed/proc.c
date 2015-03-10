@@ -44,6 +44,7 @@ void Producer() {
       product += 100;
       cons_printf("+++ product is now %d \n",product);
       SemPost(product_semaphore);// post product semaphore
+      printf("%d\n",product_semaphore);
       for(i=0; i<1666000; i++) IO_DELAY();
       Sleep(seconds);
    }
@@ -65,6 +66,7 @@ void Consumer() {
       //printf("yes 2 while 4\n");
       cons_printf("--- product is now %d \n",product);
       SemPost(product_semaphore);// post product semaphore
+      printf("%d\n",product_semaphore);
       for(i=0; i<1666000; i++) IO_DELAY();
       Sleep(seconds);
    }
