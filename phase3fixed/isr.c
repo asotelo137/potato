@@ -146,6 +146,7 @@ void SemPostISR(){
   }else 
     
     temp = DeQ(&semaphore[semID].wait_q);
+    printf("%d\n",temp);
     pcb[temp].state = RUN;
     EnQ(temp,&run_q);
   
