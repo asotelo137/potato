@@ -68,7 +68,7 @@ void PrintDriver(){
    // send ch to data reg and control code to control reg
    // then repeatedly poll for printer ACK unless timed out
    // #include <spede/machine/parallel.h> // flag constants used below
-   int TIME_OUT=3*1666000; // time out 3 secs
+   //int TIME_OUT=3*1666000; // time out 3 secs
    int i, code,TIME_OUT_COUNT,pid;
    char str []= "Hello, my team is called PotatoOS!\n It's time to bake potato!\n\0";
    char *p;
@@ -144,7 +144,7 @@ void IRQ7(){
    
    outportb(0x20,0x67);
    if(semaphore[print_semaphore].wait_q.size>0){
-      pid = DeQ(sem[print].wait);
+      pid = DeQ(semaphore[print_semaphore].wait);
       EnQ(pid,&run_q);
       pcb[pid].state=RUN;
    }
