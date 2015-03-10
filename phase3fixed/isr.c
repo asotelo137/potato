@@ -10,7 +10,7 @@
 
 int wakingID;
 int wake_period;
-int sleepindex;
+int sleepindex,sleeppid;
 void CreateISR(int pid) {
   // printf("create\n");
    if(pid !=0 ){//if pid given is not 0 (Idle), enqueue it into run queue
