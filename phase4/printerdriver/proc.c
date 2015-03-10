@@ -142,7 +142,7 @@ void PrintDriver(){
 void IRQ7(){
    int pid;
    
-   outportb(20,67);
+   outportb(0x20,0x67);
    if(semaphore[print_semaphore].wait_q.size>0){
       pid = DeQ(sem[print].wait);
       EnQ(pid,&run_q);
