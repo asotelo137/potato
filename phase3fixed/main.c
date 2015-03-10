@@ -138,7 +138,7 @@ int main() {
 }
 void Kernel(TF_t *TF_ptr) {
 
-   int pid,i;
+   int pid;
    char key;
    
    pcb[CRP].TF_ptr=TF_ptr;
