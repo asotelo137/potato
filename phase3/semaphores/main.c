@@ -21,7 +21,6 @@ pcb_t pcb[MAX_PROC];    // process table
 char stack[MAX_PROC][STACK_SIZE]; // run-time stacks for processes
 //(include stuff from timer lab and new PCB described in 1.html)
 semaphore_t semaphore[Q_SIZE];
-semaphore_t sem[Q_SIZE];
 struct i386_gate *IDT_ptr;
 
 void SetEntry(int entry_num, func_ptr_t func_ptr){
