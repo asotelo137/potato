@@ -20,3 +20,22 @@ void Sleep(int sec) {
         :"g" (sec)
         :"%ebx");
 }
+/* PHASE 3 **********************************************
+syscall.c/.h
+   code:
+      SemWait()
+      SemPost()
+*/
+void SemWait(int semaphoreID){
+   asm("movl %0, %%ebx ;int $50"
+      :
+      :"g" (semaphoreID)
+      :"%ebx");
+}
+
+void SemPost(int semaphoreID){
+   asm("movl %0, %%ebx ;int $51"
+      :
+      :"g" (semaphoreID)
+      :"%ebx");
+}
