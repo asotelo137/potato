@@ -167,24 +167,16 @@ void SemPostISR(){
 //(on the print_semaphore) to release the waited process which PrinterDriver() so it can resume printing
 
 void IRQ7ISR(){
-  
-  int temp;
-  int semID; 
-  
-  semID = pcb[CRP].TF_ptr->ebx;
- //breakpoint();
-  if( semaphore[semID].wait_q.size ==0){
-    semaphore[semID].count ++;
-  }else {
-    
-    temp = DeQ(&semaphore[semID].wait_q);
-    pcb[temp].state = RUN;
-    EnQ(temp,&run_q);
-  }
-  
-  //dismiss IRQ7
-  outportb(0x20, 0x67);
+   int pid;
+   
+   outportb(0x20,0x67);
+   if(semaphore[print_semaphore].wait_q.size>0){
+      pid = DeQ(&semaphore[print_semaphore].wait_q);
+      EnQ(pid,&run_q);
+      pcb[pid].state=RUN;
+   }
 }
+
 
 // phase 4 **********************************************************
 // Sem get ISR
