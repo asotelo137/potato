@@ -11,6 +11,7 @@
 int wakingID;
 int wake_period;
 int sleepindex,sleeppid,sleepsize;
+int count;
 void CreateISR(int pid) {
   // printf("create\n");
    if(pid !=0 ){//if pid given is not 0 (Idle), enqueue it into run queue
@@ -189,12 +190,11 @@ void IRQ7ISR(){
 // Sem get ISR
 void SemGetISR(){
   
-  int countnumber;
   /*to allocate a semaphore by dequeuing the available semaphore-ID queue,
   "bzero" it, set the count to what's requested accordingly,
   and the semphore ID is returned to the calling process via its trapframe.
   */
-  countnumber = pcb[CRP].TF_ptr->ecx;
+  count = pcb[CRP].TF_ptr->ecx;
   print_semaphore=DeQ(&semaphore_q);
   MyBZero((char *) &semaphore[print_semaphore],sizeof(semaphore_t));
   semaphore[product_semaphore].count = count;
