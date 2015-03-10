@@ -22,6 +22,8 @@ entry.h
 #define SEMWAIT_INTR 50
 #define SEMPOST_INTR 51
 
+#define SEMGET_INTR 52
+#define IRQ7_INTR 39
 
 #define KCODE 0x08    // kernel's code segment
 #define KDATA 0x10    // kernel's data segment
