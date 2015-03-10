@@ -34,9 +34,9 @@ void UserProc() {
 void Producer() {
    int i,spid,seconds;
    spid=GetPid();
-   printf("yes\n");//print 0 on PC
+   //printf("yes\n");//print 0 on PC
    while(1){
-      printf("yes in while\n");
+     // printf("yes in while\n");
       seconds= 4 - (i%4);
       SemWait(product_semaphore);// Wait for product semaphore
       cons_printf("Proc %d is producing... ",spid);
@@ -50,17 +50,17 @@ void Producer() {
 void Consumer() {
    int i,spid,seconds;
    spid=GetPid();
-   printf("yes 2 \n");//print 0 on PC
+  // printf("yes 2 \n");//print 0 on PC
    while(1){
       
       seconds= 4 - (i%4);
-      printf("yes 2 while 1\n");
+    //  printf("yes 2 while 1\n");
       SemWait(product_semaphore);// Wait for product semaphore
-      printf("yes 2 while 2\n");
+     // printf("yes 2 while 2\n");
       cons_printf("Proc %d is consuming... ",spid);
-      printf("yes 2 while 3\n");
+     // printf("yes 2 while 3\n");
       product -= 100;
-      printf("yes 2 while 4\n");
+      //printf("yes 2 while 4\n");
       cons_printf("--- product is now %d \n",product);
       SemPost(product_semaphore);// post product semaphore
       for(i=0; i<1666000; i++) IO_DELAY();
