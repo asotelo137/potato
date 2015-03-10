@@ -46,6 +46,11 @@ ENTRY(SemWaitEntry)
 ENTRY(SemPostEntry)
    pushl $SEMPOST_INTR
    jmp IntoKernel
+   
+//Phase 4-
+ENTRY(IRQ7ENTRY)
+   pushl $IRQ7_INTR
+   jmp IntoKernel
 
 // Common IRQ entry, save context and call Kmain()
 IntoKernel:
