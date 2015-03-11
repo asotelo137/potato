@@ -21,12 +21,12 @@ void UserProc() {
   // int i;
    int seconds;
    for(;;){
-   cons_printf("%d",CRP);//print its pid (CRP) on PC
-   seconds= 4 - (CRP%4);
-   Sleep(seconds);
-   //printf("seconds %d", seconds);
-   // Sleep(seconds);
-   //for(i=0; i<1666000; i++) IO_DELAY();//busy-loop delay for about 1 sec
+      cons_printf("%d",CRP);//print its pid (CRP) on PC
+      seconds= 4 - (CRP%4);
+      Sleep(seconds);
+      //printf("seconds %d", seconds);
+      // Sleep(seconds);
+      //for(i=0; i<1666000; i++) IO_DELAY();//busy-loop delay for about 1 sec
    }
    
 }
