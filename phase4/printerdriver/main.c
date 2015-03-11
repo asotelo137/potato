@@ -98,7 +98,7 @@ void InitData() {
       
    }
    CRP = 0;
-   &none_q.head = 5;
+   
    //phase 3 
    /*
    InitData()
