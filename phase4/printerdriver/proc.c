@@ -136,16 +136,3 @@ void PrintDriver(){
    
 } // PrintDriver()
    
-
-
-//phase 4 *********************************************************
-void IRQ7(){
-   int pid;
-   
-   outportb(0x20,0x67);
-   if(semaphore[print_semaphore].wait_q.size>0){
-      pid = DeQ(&semaphore[print_semaphore].wait_q);
-      EnQ(pid,&run_q);
-      pcb[pid].state=RUN;
-   }
-}
