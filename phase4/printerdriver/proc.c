@@ -84,7 +84,7 @@ void PrintDriver() {
    while(1) {
       cons_printf("My pid is : %d", GetPid());
       Sleep(1);
-      if (print_it == 1 )//(set by Kernel() when key polled is 'p') {
+      if (print_it == 1 ){//(set by Kernel() when key polled is 'p') {
          p =str;
          while (*p){//what p points to is not 0 {
 
