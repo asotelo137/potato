@@ -27,7 +27,7 @@ extern semaphore_t sem[Q_SIZE];
 
 extern semaphore_t semaphore[Q_SIZE];
 
-extern int product_semaphore,product;
+extern int product_semaphore,product,semaphoreID;
 //phase 4 printing globals
 extern int print_it,print_semaphore;
 
