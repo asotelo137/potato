@@ -98,7 +98,7 @@ void InitData() {
       
    }
    CRP = 0;
-   
+   &none_q.head = 5;
    //phase 3 
    /*
    InitData()
@@ -189,6 +189,7 @@ void Kernel(TF_t *TF_ptr) {
    }
    
    if (cons_kbhit()) {
+      
       key = cons_getchar(); // key = cons_getchar();
       switch(key) {
          case 'n':                                                   //if 'n'
