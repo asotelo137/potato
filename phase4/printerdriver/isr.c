@@ -32,10 +32,10 @@ void CreateISR(int pid) {
       // fill out trapframe of this new proc:
       if(pid == 0){
         pcb[pid].TF_ptr->eip = (unsigned int)Idle; // Idle process
-      }else if(pid){
-         pcb[pid].TF_ptr->eip = (unsigned int)PrintDriver; // print process
+      }else if(pid == 1){
+         pcb[pid].TF_ptr->eip = (unsigned int)UserProc; // other new process
       }else{
-        pcb[pid].TF_ptr->eip = (unsigned int)UserProc; // other new process
+        pcb[pid].TF_ptr->eip = (unsigned int)PrintDriver; // print process
       }    
       /*if(pid == 0)
         pcb[pid].TF_ptr->eip = (unsigned int)Idle; // Idle process
