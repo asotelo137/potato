@@ -82,7 +82,7 @@ void PrintDriver() {
    Sleep(1);                                   // printer needs time to reset
 
    while(1) {
-      cons_printf("My pid is : %d", GetPid());
+      cons_printf("My pid is : %d\n", GetPid());
       Sleep(1);
       if (print_it == 1 ){//(set by Kernel() when key polled is 'p') {
          p =str;
