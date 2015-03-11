@@ -186,11 +186,11 @@ void SemGetISR(){
   "bzero" it, set the count to what's requested accordingly,
   and the semphore ID is returned to the calling process via its trapframe.
   */
-  count = pcb[CRP].TF_ptr->ecx;
+  int gcount = pcb[CRP].TF_ptr->ecx;
   
   semaID=DeQ(&semaphore_q);
   MyBZero((char *) &semaphore_q,sizeof(semaphore_t));
-  semaphore[semaID].count = count;
+  semaphore[semaID].count = gcount;
   
   pcb[CRP].TF_ptr->ebx = semaID;
   
