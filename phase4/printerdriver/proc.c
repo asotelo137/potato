@@ -85,7 +85,7 @@ void PrintDriver() {
       cons_printf("My pid is : %d\n", GetPid());
       Sleep(1);
       if (print_it == 1 ){//(set by Kernel() when key polled is 'p') {
-         p =str;
+         p = str;
          while (*p){//what p points to is not 0 {
 
             // code sending the character to the port (see above)
