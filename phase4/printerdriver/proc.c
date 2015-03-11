@@ -67,7 +67,7 @@ void Consumer() {
 
 void PrintDriver() {
    int i, code;
-   char str[] = "Hello, my Team is called PotatoOS!\n \0";
+   char str[] = "Hello, my team is called PotatoOS!\n It's time to bake potato!\n\0";
    char *p;
 
    print_semaphore = SemGet(0); // should it be -1? depends on IRQISR()
