@@ -17,14 +17,14 @@ void CreateISR(int pid) {
    if(pid !=0 ){//if pid given is not 0 (Idle), enqueue it into run queue
     //   printf("Create recieved a pid : %d \n",pid);
       EnQ(pid,&run_q);
-   }
+  
       // PCB of new proc:
       pcb[pid].mode = UMODE;//mode is set to UMODE
       pcb[pid].state= RUN;//state is set to RUN
       pcb[pid].runtime = 0;// both runtime counts are reset to 0
       pcb[pid].total_runtime = 0;// both runtime counts are reset to 0
       
-      
+       }
       MyBZero(stack[pid], STACK_SIZE); // erase stack
       // point to just above stack, then drop by sizeof(TF_t)
       pcb[pid].TF_ptr = (TF_t *)&stack[pid][STACK_SIZE];
@@ -167,14 +167,19 @@ void SemPostISR(){
 //(on the print_semaphore) to release the waited process which PrinterDriver() so it can resume printing
 
 void IRQ7ISR(){
-   int pid;
-   
-   outportb(0x20,0x67);
-   if(semaphore[print_semaphore].wait_q.size>0){
-      pid = DeQ(&semaphore[print_semaphore].wait_q);
-      EnQ(pid,&run_q);
-      pcb[pid].state=RUN;
-   }
+   int temp;
+  int semID; 
+  outportb(0x20, 0x67);
+  semID = pcb[CRP].TF_ptr->ebx;
+ //breakpoint();
+  if( semaphore[semID].wait_q.size ==0){
+    semaphore[semID].count ++;
+  }else {
+    
+    temp = DeQ(&semaphore[semID].wait_q);
+    pcb[temp].state = RUN;
+    EnQ(temp,&run_q);
+  }
 }
 
 
@@ -189,7 +194,7 @@ void SemGetISR(){
   int gcount = pcb[CRP].TF_ptr->ecx;
   
   semaID=DeQ(&semaphore_q);
-  MyBZero((char *) &semaphore_q,sizeof(semaphore_t));
+  MyBZero((char *) &semaphore_q,sizeof(q_t));
   semaphore[semaID].count = gcount;
   
   pcb[CRP].TF_ptr->ebx = semaID;
