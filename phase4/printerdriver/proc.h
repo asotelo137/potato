@@ -8,6 +8,6 @@ void UserProc();
 void Consumer();
 void Producer();
 void PrintDriver();
-void IRQ7();
+
 
 #endif
