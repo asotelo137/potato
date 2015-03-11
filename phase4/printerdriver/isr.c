@@ -135,13 +135,13 @@ void SemWaitISR(){
   int semID;
   semID = pcb[CRP].TF_ptr->ebx;
  // breakpoint();
-  if( semaphore[semID].count > 0){
-    semaphore[semID].count --;
-  }else {
+  //if( semaphore[semID].count > 0){
+   // semaphore[semID].count --;
+  //}else {
     EnQ(CRP,&(semaphore[semID].wait_q));
     pcb[CRP].state = WAIT;
     CRP=-1;
-  }
+  //}
 
 }
 // phase 3 ***********************************************************
