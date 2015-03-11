@@ -92,7 +92,7 @@ void PrintDriver() {
             outportb(LPT1_BASE+LPT_DATA, *p);      // send char to data reg
             code = inportb(LPT1_BASE+LPT_CONTROL); // read control reg
             outportb(LPT1_BASE+LPT_CONTROL, code|PC_STROBE); // send with added strobe
-            for(i=0; i<20; i++) IO_DELAY();        // delay for EPSON LP-571 printer
+            for(i=0; i<50; i++) IO_DELAY();        // delay for EPSON LP-571 printer
             outportb(LPT1_BASE+LPT_CONTROL, code); // send original control code
             // code busy-poll for printer readiness (see above)
             // or, do a semaphore wait (for interrupt-driven mode)
