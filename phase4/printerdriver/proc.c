@@ -70,7 +70,7 @@ void PrintDriver() {
    char str[] = "Hello, my team is called PotatoOS!\n It's time to bake potato!\n\0";
    char *p;
 
-   print_semaphore = SemGet(0); // should it be -1? depends on IRQISR()
+   print_semaphore = SemGet(-1); // should it be -1? depends on IRQISR()
 
 // make sure printer's powered up, cable connected, the following
 // statements (until the Sleep call) will reset the printer and the
