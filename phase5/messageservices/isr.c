@@ -194,7 +194,11 @@ void SemGetISR(){
   and the semphore ID is returned to the calling process via its trapframe.
   */
   int gcount = pcb[CRP].TF_ptr->ebx;
+  /*
+  changed the if conditioncheckiing for zero to negative 1 on changs advice, remeber to include the pcb line
+  inside the o condition check
   
+  */
   semaID=DeQ(&semaphore_q);
   if ( semaID == -1) return;
   MyBZero((char*)&semaphore[semaID], sizeof(semaphore_t));
