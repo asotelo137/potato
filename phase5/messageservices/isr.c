@@ -195,7 +195,7 @@ void SemGetISR(){
   
   semaID=DeQ(&semaphore_q);
   if ( semaID >= 0){
-    MyBzero((char*)&semaphore[semaID], sizeof(semaphore_t));
+    MyBZero((char*)&semaphore[semaID], sizeof(semaphore_t));
     semaphore[semaID].count = gcount;
     
     pcb[CRP].TF_ptr->ecx = semaID;
