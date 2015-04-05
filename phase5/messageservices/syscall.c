@@ -48,3 +48,16 @@ int SemGet(int count) {
 		: "%ebx", "%ecx" ); // push/pop before/after asm()
   return semaid;
 }
+
+//Phase 5: code MsgSnd() and MsgRcv(), they 
+//both pass the argument as interger (typecast) to the kernel
+void MsgSnd(msg_t * msg){
+	
+	
+}
+
+void MsgRcv(msg_t * msg){
+
+	
+}
+
