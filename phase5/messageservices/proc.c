@@ -103,4 +103,30 @@ void PrintDriver() {
       print_it = 0;
    } // while(1)
 } // PrintDriver()
+
+//phase 5 ******************************************************************************************
+void init(){
    
+   char str[] = "Hello, my team is called PotatoOS!\nIt's time to bake potato!\n\0";
+   msg_t msg;
+   StrCpy(msg,str);
+   while(1){ 
+      cons_printf("1");
+      for(i=0; i<1666000; i++) IO_DELAY();//busy-loop delay for about 1 sec
+      if (cons_kbhit()) {
+         key = cons_getchar(); // key = cons_getchar();
+         switch(key) {
+            case 'b':                                                   //if 'b'
+              // printf("b pressed \n");
+               breakpoint();                                            // this goes back to GDB prompt
+               break;
+            case 'p'://phase 4 printing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+               MsgSnd(&msg); // set global print_it to 1
+               break;
+            case 'q':                                                   //if 'q'
+               //printf("q pressed\n");
+               exit(0);                                                 //just do exit(0);
+         }                                                              // end switch
+      }
+   }
+}
