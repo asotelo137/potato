@@ -39,6 +39,23 @@ typedef struct {
    q_t wait_q;
 } semaphore_t;
 
+typedef struct{
+   msg_q_t msg_q;
+   q_t wait_q;
+}mbox_t;
+
+typedef struct{
+   msg_t msg[Q_SIZE];
+   int head, tail, size;
+}msg_q_t;
+
+typedef{
+   int sender;
+   int recipient;
+   int time_stamp;
+   int char data[101];
+}msg_t;
+
 typedef void (* func_ptr_t)(); // void-returning function pointer type
 
 #endif _TYPE_H_
