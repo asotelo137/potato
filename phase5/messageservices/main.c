@@ -59,6 +59,9 @@ void InitIDT(){
    SetEntry(TIMER_INTR,TimerEntry);//prime IDT Entry
    SetEntry(GETPID_INTR,GetPidEntry);
    SetEntry(SLEEP_INTR,SleepEntry);
+   SetEntry(MSGSEND_INTR,MsgSendEntry);
+   SetEntry(MSGRCV_INTR,MsgRcvEntry);
+
   
    
    //phase 3 
@@ -141,6 +144,7 @@ void SelectCRP() {       // select which PID to be new CRP
    pcb[CRP].state = RUNNING;
    
 }
+
 int main() {
    InitData(); 		//call Init Data to initialize kernel data
    CreateISR(0);	//call CreateISR(0) to create Idle process (PID 0)
@@ -150,6 +154,27 @@ int main() {
    
    return 0;
 }
+
+void init(){
+   
+   for(i=0; i<1666000; i++) IO_DELAY();//busy-loop delay for about 1 sec
+   if (cons_kbhit()) {
+      key = cons_getchar(); // key = cons_getchar();
+      switch(key) {
+         case 'b':                                                   //if 'b'
+           // printf("b pressed \n");
+            breakpoint();                                            // this goes back to GDB prompt
+            break;
+         case 'p'://phase 4 printing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            print_it = 1; // set global print_it to 1
+            break;
+         case 'q':                                                   //if 'q'
+            //printf("q pressed\n");
+            exit(0);                                                 //just do exit(0);
+      }                                                              // end switch
+   }   
+}
+
 void Kernel(TF_t *TF_ptr) {
 
    int pid;
