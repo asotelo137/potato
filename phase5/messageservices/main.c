@@ -18,6 +18,7 @@ int CRP, sys_time;                // current running PID, -1 means no process
 q_t run_q, none_q,sleep_q;      // processes ready to run and not used
 pcb_t pcb[MAX_PROC];    // process table
 char stack[MAX_PROC][STACK_SIZE]; // run-time stacks for processes
+mbox_t mbox[NUM_PROC];
 //(include stuff from timer lab and new PCB described in 1.html)
 
 //******************************************************************
@@ -62,8 +63,6 @@ void InitIDT(){
    SetEntry(MSGSEND_INTR,MsgSendEntry);
    SetEntry(MSGRCV_INTR,MsgRcvEntry);
 
-  
-   
    //phase 3 
    /*
    InitIDT()
@@ -81,8 +80,6 @@ void InitIDT(){
    //***************
     //outportb(0x21,~1);
 }
-
-
 
 void InitData() {
    int i;
@@ -155,26 +152,6 @@ int main() {
    return 0;
 }
 
-void init(){
-   
-   for(i=0; i<1666000; i++) IO_DELAY();//busy-loop delay for about 1 sec
-   if (cons_kbhit()) {
-      key = cons_getchar(); // key = cons_getchar();
-      switch(key) {
-         case 'b':                                                   //if 'b'
-           // printf("b pressed \n");
-            breakpoint();                                            // this goes back to GDB prompt
-            break;
-         case 'p'://phase 4 printing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-            print_it = 1; // set global print_it to 1
-            break;
-         case 'q':                                                   //if 'q'
-            //printf("q pressed\n");
-            exit(0);                                                 //just do exit(0);
-      }                                                              // end switch
-   }   
-}
-
 void Kernel(TF_t *TF_ptr) {
 
    int pid;
@@ -208,6 +185,7 @@ void Kernel(TF_t *TF_ptr) {
       case IRQ7_INTR:
          IRQ7ISR();
          break;
+      case 
       default:
          cons_printf("Panic!\n");
          breakpoint();
@@ -229,16 +207,6 @@ void Kernel(TF_t *TF_ptr) {
             }
             break;
          case 't': TerminateISR(); break;   
-         case 'b':                                                   //if 'b'
-           // printf("b pressed \n");
-            breakpoint();                                            // this goes back to GDB prompt
-            break;
-         case 'p'://phase 4 printing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-            print_it = 1; // set global print_it to 1
-            break;
-         case 'q':                                                   //if 'q'
-            //printf("q pressed\n");
-            exit(0);                                                 //just do exit(0);
       }                                                              // end switch
    }                                                                 // end if some key pressed
 //   printf("after case statement \n");
