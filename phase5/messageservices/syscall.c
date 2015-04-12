@@ -61,6 +61,6 @@ void MsgRcv(msg_t *msg){
 	asm("movl %0,%%ebx ; int $54;" 
 		: 
 		: "g" (msg)
-		: "%ebx", "%ecx" ); 
+		: "%ebx"); 
 }
 
