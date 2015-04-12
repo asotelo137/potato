@@ -110,7 +110,7 @@ void PrintDriver() {
 //phase 5 ******************************************************************************************
 void init(){
    int key;
-   msg_t msg;.
+   msg_t msg;
    char str[]= "Hello, my team is called PotatoOS!\nIt's time to bake potato!\n\0";
    msg.recipient = 2;
    MyStrCpy(msg,str);
