@@ -109,12 +109,13 @@ void PrintDriver() {
 
 //phase 5 ******************************************************************************************
 void init(){
-   
-   char str[] = "Hello, my team is called PotatoOS!\nIt's time to bake potato!\n\0";
-   msg_t msg;
-   StrCpy(msg,str);
+   int key;
+   msg_t msg;.
+   char str[]= "Hello, my team is called PotatoOS!\nIt's time to bake potato!\n\0";
+   msg.recipient = 2;
+   MyStrCpy(msg,str);
    while(1){ 
-      cons_printf("1");
+      cons_printf("My pid is : %d\n", GetPid());
       for(i=0; i<1666000; i++) IO_DELAY();//busy-loop delay for about 1 sec
       if (cons_kbhit()) {
          key = cons_getchar(); // key = cons_getchar();
