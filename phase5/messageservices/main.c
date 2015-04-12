@@ -18,7 +18,7 @@ int CRP, sys_time;                // current running PID, -1 means no process
 q_t run_q, none_q,sleep_q;      // processes ready to run and not used
 pcb_t pcb[MAX_PROC];    // process table
 char stack[MAX_PROC][STACK_SIZE]; // run-time stacks for processes
-mbox_t mbox[NUM_PROC];
+mbox_t mbox[MAX_PROC];
 //(include stuff from timer lab and new PCB described in 1.html)
 
 //******************************************************************
@@ -77,7 +77,7 @@ void InitIDT(){
    SetEntry(IRQ7_INTR,IRQ7Entry);
    
    //phase 5
-   SetEntry(MSGSEND_INTR,MsgSendEntry);
+   SetEntry(MSGSEND_INTR,MsgSndEntry);
    SetEntry(MSGRCV_INTR,MsgRcvEntry);
    
    outportb(0x21,~129);
@@ -137,7 +137,7 @@ void SelectCRP() {       // select which PID to be new CRP
       pcb[0].state = RUN;
    }
 
-   if(run_q.size == 0 ){
+   if(run_q.size == 0 )
       CRP = 0;
    else 
       CRP = DeQ(&run_q); 
