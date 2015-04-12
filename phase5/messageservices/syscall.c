@@ -51,14 +51,14 @@ int SemGet(int count) {
 
 //Phase 5: code MsgSnd() and MsgRcv(), they 
 void MsgSnd( msg_t *message){
-	asm("movl %0,%%ebx  int $53;" 
+	asm("movl %0,%%ebx  int $53" 
 		: 
 		: "g" (message)
 		: "%ebx" ); 
 }
 
 void MsgRcv(msg_t *msg){
-	asm("movl %0,%%ebx ; int $54;" 
+	asm("movl %0,%%ebx ; int $54" 
 		: 
 		: "g" (msg)
 		: "%ebx"); 
