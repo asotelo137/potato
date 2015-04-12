@@ -115,7 +115,7 @@ void Init(){
    msg.recipient = 2;
    MyStrCpy(msg.data, str);
    while(1){ 
-      cons_printf("My pid is : %d\n", GetPid());
+      cons_printf("%d", GetPid());
       Sleep(1);
       //int i;
       //for(i=0; i<1666000; i++) IO_DELAY();//busy-loop delay for about 1 sec
