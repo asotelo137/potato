@@ -60,8 +60,7 @@ void InitIDT(){
    SetEntry(TIMER_INTR,TimerEntry);//prime IDT Entry
    SetEntry(GETPID_INTR,GetPidEntry);
    SetEntry(SLEEP_INTR,SleepEntry);
-   SetEntry(MSGSEND_INTR,MsgSendEntry);
-   SetEntry(MSGRCV_INTR,MsgRcvEntry);
+   
 
    //phase 3 
    /*
@@ -76,9 +75,15 @@ void InitIDT(){
    //phase 4 
    SetEntry(SEMGET_INTR,SemGetEntry);
    SetEntry(IRQ7_INTR,IRQ7Entry);
+   
+   //phase 5
+   SetEntry(MSGSEND_INTR,MsgSendEntry);
+   SetEntry(MSGRCV_INTR,MsgRcvEntry);
+   
    outportb(0x21,~129);
    //***************
     //outportb(0x21,~1);
+    
 }
 
 void InitData() {
@@ -145,6 +150,8 @@ void SelectCRP() {       // select which PID to be new CRP
 int main() {
    InitData(); 		//call Init Data to initialize kernel data
    CreateISR(0);	//call CreateISR(0) to create Idle process (PID 0)
+   CreateISR(1);
+   CreateISR(2);
    InitIDT();
    cons_printf("{pcb[0] is at %u. \n",pcb[0].TF_ptr);
    Dispatch(pcb[0].TF_ptr);    // to dispatch/run CRP
@@ -185,14 +192,20 @@ void Kernel(TF_t *TF_ptr) {
       case IRQ7_INTR:
          IRQ7ISR();
          break;
-      case 
+      //phase 5
+      case MSGSEND_INTR:
+         MsgSndISR();
+         break;
+      case MSGRCV_INTR:
+         MsgRcvISR();
+         break;
       default:
          cons_printf("Panic!\n");
          breakpoint();
          break;
    }
    
-   if (cons_kbhit()) {
+  /* if (cons_kbhit()) {
       
       key = cons_getchar(); // key = cons_getchar();
       switch(key) {
@@ -208,7 +221,7 @@ void Kernel(TF_t *TF_ptr) {
             break;
          case 't': TerminateISR(); break;   
       }                                                              // end switch
-   }                                                                 // end if some key pressed
+   }*/                                                                 // end if some key pressed
 //   printf("after case statement \n");
    SelectCRP();    //call SelectCRP() to settle/determine for next CRP
    Dispatch(pcb[CRP].TF_ptr);
