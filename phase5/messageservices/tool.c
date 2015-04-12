@@ -78,6 +78,6 @@ msg_t *MsgDeQ(msg_q_t *p){
 	if(p->head == Q_SIZE){
 		p->head = 0;
 	}
-	return *msg;
+	return msg;
 	
 }
