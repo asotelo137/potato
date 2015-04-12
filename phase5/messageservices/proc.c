@@ -116,7 +116,9 @@ void init(){
    MyStrCpy(msg,str);
    while(1){ 
       cons_printf("My pid is : %d\n", GetPid());
-      for(i=0; i<1666000; i++) IO_DELAY();//busy-loop delay for about 1 sec
+      Sleep(1);
+      //int i;
+      //for(i=0; i<1666000; i++) IO_DELAY();//busy-loop delay for about 1 sec
       if (cons_kbhit()) {
          key = cons_getchar(); // key = cons_getchar();
          switch(key) {
