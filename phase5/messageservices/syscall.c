@@ -50,7 +50,7 @@ int SemGet(int count) {
 }
 
 //Phase 5: code MsgSnd() and MsgRcv(), they 
-int MsgSnd( msg_t *message){
+int MsgSnd( msg_t *msg){
 	asm("movl %0,%%ebx ; int $53;" 
 		: 
 		: "g" (message)
