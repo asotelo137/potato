@@ -3,8 +3,8 @@
 #ifndef _SYSCALL_H_
 #define _SYSCALL_H_
 ///Phase 5///
-#define MSGSND 53
-#define MSGRCV 54
+//#define MSGSND 53
+//#define MSGRCV 54
 /////////////
 
 int GetPid();      // no input, 1 return
