@@ -215,7 +215,7 @@ void MsgSndISR(){
   source = (msg_t *)pcb[CRP].TF_ptr->ebx;
   msg = source -> recipient;
   
-  if ((&mbox[msg].wait_q).size == 0){
+  if ((&mbox[msg].wait_q).p->size == 0){
   	
   	source->sender = CRP;
   	source->time_stamp = sys_time;
