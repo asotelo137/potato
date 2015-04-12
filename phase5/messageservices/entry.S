@@ -57,9 +57,10 @@ ENTRY(SemGetEntry)
    jmp IntoKernel
    
 //Phase 5
-Entry(MsgSendEntry)
-   pushl $MSGSEND_INTR
+Entry(MsgSndEntry)
+   pushl $MSGSND_INTR
    jmp IntoKernel
+   
    //line 63   
    
 Entry(MsgRcvEntry)
