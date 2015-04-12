@@ -31,4 +31,7 @@ extern int product_semaphore,product,semaphoreID;
 //phase 4 printing globals
 extern int print_it,print_semaphore;
 
+//phase 5 ****************************************88
+extern mbox_t mbox[MAX_PROC];
+
 #endif
