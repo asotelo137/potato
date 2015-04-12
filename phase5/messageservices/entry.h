@@ -63,7 +63,12 @@ extern void SemPostEntry();
 extern void SemGetEntry();
 extern void IRQ7Entry();
 
+//Phase 5************************************************************
+extern void MsgSendEntry();
+extern void MsgRcvEntry();
+
 __END_DECLS
+
 
 #endif
 
