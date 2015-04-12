@@ -39,15 +39,17 @@ typedef struct {
    q_t wait_q;
 } semaphore_t;
 
-typedef struct{
-   msg_q_t msg_q;
-   q_t wait_q;
-}mbox_t;
+
 
 typedef struct{
    msg_t msg[Q_SIZE];
    int head, tail, size;
 }msg_q_t;
+
+typedef struct{
+   msg_q_t msg_q;
+   q_t wait_q;
+}mbox_t;
 
 typedef{
    int sender;
