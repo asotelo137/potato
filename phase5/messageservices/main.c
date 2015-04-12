@@ -77,7 +77,7 @@ void InitIDT(){
    SetEntry(IRQ7_INTR,IRQ7Entry);
    
    //phase 5
-   SetEntry(MSGSEND_INTR,MsgSndEntry);
+   SetEntry(MSGSND_INTR,MsgSndEntry);
    SetEntry(MSGRCV_INTR,MsgRcvEntry);
    
    outportb(0x21,~129);
