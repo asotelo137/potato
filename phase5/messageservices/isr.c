@@ -206,7 +206,15 @@ void SemGetISR(){
   
   pcb[CRP].TF_ptr->ecx = semaID;
 
+}
+
+//Phase 5***********
+void MsgSndISR(){
+  
   
 }
 
-
+void MsgRcvISR(){
+ 
+  
+}
