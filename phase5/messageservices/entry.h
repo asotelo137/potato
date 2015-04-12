@@ -25,7 +25,7 @@ entry.h
 #define SEMGET_INTR 52
 #define IRQ7_INTR 39
 
-#define MSGSEND_INTR 53
+#define MSGSND_INTR 53
 #define MSGRCV_INTR 54
 
 #define KCODE 0x08    // kernel's code segment
