@@ -113,7 +113,7 @@ void init(){
    msg_t msg;
    char str[]= "Hello, my team is called PotatoOS!\nIt's time to bake potato!\n\0";
    msg.recipient = 2;
-   MyStrCpy(msg,str);
+   MyStrCpy(msg,*str);
    while(1){ 
       cons_printf("My pid is : %d\n", GetPid());
       Sleep(1);
