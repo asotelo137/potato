@@ -193,7 +193,7 @@ void Kernel(TF_t *TF_ptr) {
          IRQ7ISR();
          break;
       //phase 5
-      case MSGSEND_INTR:
+      case MSGSND_INTR:
          MsgSndISR();
          break;
       case MSGRCV_INTR:
