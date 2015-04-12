@@ -4,7 +4,7 @@
 #include <spede/machine/asmacros.h>
 #include "entry.h"
 
-// set DS and ES to Kernel's data segment
+// set DS and ES to Kernels data segment
 #define SET_KSEGS movw $(KDATA), %ax; mov %ax, %ds; mov %ax, %es
 
 .comm kstack, KSTACK_SIZE, 1 // define kernel stack space
