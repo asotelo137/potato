@@ -70,7 +70,7 @@ msg_t *MsgDeQ(msg_q_t *p){
 	msg_t *msg;
 	if(p->size ==0){
 		cons_printf("Message queue is Empty!\n");
-		return;
+		return '\0';
 	}
 	msg = p->msg[p->head];
 	p->size--;
