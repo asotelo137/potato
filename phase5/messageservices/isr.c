@@ -235,7 +235,8 @@ void MsgRcvISR(){
   int pid;
   pid = GetPid();
   
-  msg_t msg = pcb[CRP].TF_ptr->ebx;
+  msg_t msg;
+  msg = pcb[CRP].TF_ptr->ebx;
   if(mbox[msg].msg_q_t.size == 0){
     //code to block CRP
     //move the calling process to the wait queue of the mailbox, set its state, and reset cur_pid
