@@ -39,7 +39,7 @@ typedef struct {
    q_t wait_q;
 } semaphore_t;
 
-typedef{
+typedef struct{
    int sender;
    int recipient;
    int time_stamp;
