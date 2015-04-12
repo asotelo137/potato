@@ -221,7 +221,7 @@ void MsgSndISR(){
   	source->time_stamp = sys_time;
   	MsgEnQ(source, &mbox[msg].msg_q);
   }else{
-  	int tmp_pid = DeQ(mbox[msg]->wait_q);
+  	int tmp_pid = DeQ(&(mbox[msg].wait_q));
   	EnQ(tmp_pid, &run_q);
   	
   	destination = (msg_t *)pcb[tmp_pid].TF_ptr->ebx;
