@@ -60,7 +60,12 @@ ENTRY(SemGetEntry)
 Entry(MsgSendEntry)
    pushl $MSGSEND_INTR
    jmp IntoKernel
+<<<<<<< HEAD
 
+=======
+   //line 63   
+   
+>>>>>>> 4b93654340ce455a6678d7a4d5eaff280b25d8c8
 Entry(MsgRcvEntry)
    pushl $MSGRCV_INTR
    jmp IntoKernel
