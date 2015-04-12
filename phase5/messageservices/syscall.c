@@ -50,7 +50,7 @@ int SemGet(int count) {
 }
 
 //Phase 5: code MsgSnd() and MsgRcv(), they 
-void MsgSnd(msg_t *msg)
+void MsgSnd(msg_t msg)
 {
 	asm("movl %0, %%eax; int $53" // CPU inst
 	:
@@ -58,7 +58,7 @@ void MsgSnd(msg_t *msg)
 	: "ebx"); // push/pop before/after asm()
 }
 
-void MsgRcv(msg_t *msg){
+void MsgRcv(msg_t msg){
 	asm("movl %0,%%ebx ; int $54" 
 		: 
 		: "g" ((int) msg)
