@@ -243,7 +243,7 @@ void MsgRcvISR(){
   }else{
     // dequeue a message (get a msg_t pointer) and use it to copy to CRP's local msg space!
     // copy the 1st message to the msg locally declared in the calling process
-    tmp = DeMsgQ(&mbox[msg].msg_q_t);
+    tmp = DeMsgQ(&mbox[msg].msg_q);
     memcpy(msg, &tmp, sizeof(msg_t));
   }
 }
