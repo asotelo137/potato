@@ -64,6 +64,7 @@ Entry(MsgSendEntry)
 Entry(MsgRcvEntry)
    pushl $MSGRCV_INTR
    jmp IntoKernel
+// line 67
 
 // Common IRQ entry, save context and call Kmain()
 IntoKernel:
