@@ -2,6 +2,7 @@
 
 #ifndef _SYSCALL_H_
 #define _SYSCALL_H_
+#include "type.h"
 ///Phase 5///
 //#define MSGSND 53
 //#define MSGRCV 54
