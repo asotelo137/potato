@@ -74,7 +74,7 @@ IntoKernel:
    pushl %gs
    movl %esp, %edx
    cld
-   SET_KSEGS      // set DS and ES to kernel's data segments
+   SET_KSEGS      // set DS and ES to kernels data segments
    leal kstack + KSTACK_SIZE, %esp
    pushl %edx
    call CNAME(Kernel)
