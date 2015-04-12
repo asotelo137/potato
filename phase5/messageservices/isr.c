@@ -234,7 +234,7 @@ void MsgRcvISR(){
   msg_t tmp;
   int pid;
   pid = GetPid();
-  int msg;
+  msg_t *msg;
   msg = pcb[CRP].TF_ptr->ebx;
   if(mbox[msg].msg_q_t.size == 0){
     //code to block CRP
