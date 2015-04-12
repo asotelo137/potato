@@ -49,4 +49,35 @@ int DeQ(q_t *p) { // return -1 if q is empty
 	}
 	return pid;
 }
+//phase 5 *******************************************************************************888
 
+void MsgEnQ(msg_t *p, msg_q_t *q){
+	if(q->size == Q_SIZE){
+		//breakpoint();
+		cons_printf(" Queue full!\n");
+		return;
+	}
+	q->msg[q->tail]=*p;
+	q->size++;
+	q->tail++;
+	if(q->tail == Q_SIZE){
+		q->tail = 0;
+	}
+}
+
+msg_t *MsgDeQ(msg_q_t *p){
+	
+	msg_t *msg;
+	if(p->size ==0){
+		cons_printf("Queue Empty!\n");
+		return -1;
+	}
+	msg = p->msg[p->head];
+	p->size--;
+	p->head++;
+	if(p->head == Q_SIZE){
+		p->head = 0;
+	}
+	return *msg;
+	
+}
