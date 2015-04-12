@@ -67,7 +67,8 @@ void Consumer() {
 
 void PrintDriver() {
    int i, code;
-   char str[] = "Hello, my team is called PotatoOS!\nIt's time to bake potato!\n\0";
+   //char str[] = "Hello, my team is called PotatoOS!\nIt's time to bake potato!\n\0";
+   msg_t my_msg;
    char *p;
 
    print_semaphore = SemGet(-1); // should it be -1? depends on IRQISR()
@@ -83,24 +84,26 @@ void PrintDriver() {
 
    while(1) {
       cons_printf("My pid is : %d\n", GetPid());
-      Sleep(1);
-      if (print_it == 1 ){//(set by Kernel() when key polled is 'p') {
-         p = str;
-         while (*p){//what p points to is not 0 {
+      //Sleep(1);
+      //phase 5
+      MsgRcv(&my_msg);
+      // if (print_it == 1 ){//(set by Kernel() when key polled is 'p') {
+      p = my_msg.data;
+      while (*p){//what p points to is not 0 {
 
-            // code sending the character to the port (see above)
-            outportb(LPT1_BASE+LPT_DATA, *p);      // send char to data reg
-            code = inportb(LPT1_BASE+LPT_CONTROL); // read control reg
-            outportb(LPT1_BASE+LPT_CONTROL, code|PC_STROBE); // send with added strobe
-            for(i=0; i<50; i++) IO_DELAY();        // delay for EPSON LP-571 printer
-            outportb(LPT1_BASE+LPT_CONTROL, code); // send original control code
-            // code busy-poll for printer readiness (see above)
-            // or, do a semaphore wait (for interrupt-driven mode)
-            SemWait(print_semaphore);
-            p++;//increment pointer p (to point to the next character)
-         } // while what p...
-      } // if print_it...
-      print_it = 0;
+         // code sending the character to the port (see above)
+         outportb(LPT1_BASE+LPT_DATA, *p);      // send char to data reg
+         code = inportb(LPT1_BASE+LPT_CONTROL); // read control reg
+         outportb(LPT1_BASE+LPT_CONTROL, code|PC_STROBE); // send with added strobe
+         for(i=0; i<50; i++) IO_DELAY();        // delay for EPSON LP-571 printer
+         outportb(LPT1_BASE+LPT_CONTROL, code); // send original control code
+         // code busy-poll for printer readiness (see above)
+         // or, do a semaphore wait (for interrupt-driven mode)
+         SemWait(print_semaphore);
+         p++;//increment pointer p (to point to the next character)
+      } // while what p...
+      //} // if print_it...
+      //print_it = 0;
    } // while(1)
 } // PrintDriver()
 
