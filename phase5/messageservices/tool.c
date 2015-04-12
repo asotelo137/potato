@@ -82,7 +82,7 @@ msg_t *MsgDeQ(msg_q_t *p){
 	
 }
 
-void MyStrcpy( char *dest, char *src){
+void MyStrCpy( char *dest, char *src){
 	
 	while(*src){
 		*dest = *src;
