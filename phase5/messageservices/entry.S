@@ -60,7 +60,11 @@ ENTRY(SemGetEntry)
 Entry(MsgSendEntry)
    push $MSGSEND_INTR
    jmp IntoKernel
+<<<<<<< HEAD
 
+=======
+   
+>>>>>>> 9dab2bac34e84ed9d33cba26d2fe5f35d0e1725d
 Entry(MsgRcvEntry)
    push $MSGRCV_INTR
    jmp IntoKernel
@@ -74,7 +78,7 @@ IntoKernel:
    pushl %gs
    movl %esp, %edx
    cld
-   SET_KSEGS      // set DS and ES to kernel's data segments
+   SET_KSEGS      // set DS and ES to kernels data segments
    leal kstack + KSTACK_SIZE, %esp
    pushl %edx
    call CNAME(Kernel)
