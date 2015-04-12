@@ -233,7 +233,7 @@ void MsgRcvISR(){
   
   msg_t *tmp;
   int pid;
-  if(mbox[CRP].msg_q_t.size == 0){
+  if(mbox[CRP].msg_q.size == 0){
     //code to block CRP
     //move the calling process to the wait queue of the mailbox, set its state, and reset cur_pid
     EnQ(CRP, mbox[CRP].wait_q);
