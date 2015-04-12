@@ -43,7 +43,7 @@ typedef struct{
    int sender;
    int recipient;
    int time_stamp;
-   int char data[101];
+   char data[101];
 }msg_t;
 
 typedef struct{
