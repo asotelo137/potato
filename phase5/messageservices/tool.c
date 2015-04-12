@@ -81,3 +81,15 @@ msg_t *MsgDeQ(msg_q_t *p){
 	return msg;
 	
 }
+
+void MyStrcpy( char *dest, char *src){
+	
+	while(*src){
+		*dest = *src;
+		src++;
+		dest++
+	}
+	*dest='/0';
+	
+}
+
