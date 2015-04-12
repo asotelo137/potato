@@ -14,7 +14,7 @@ void SemPost(int);
 // phase 4 printing
 int SemGet(int);
 //phase 5
-void MsgSnd(msg_t* msg);
-int MsgRcv(msg_t* msg);
+void MsgSnd(*);
+int MsgRcv(*);
 
 #endif
