@@ -58,11 +58,11 @@ ENTRY(SemGetEntry)
    
 //Phase 5
 Entry(MsgSendEntry)
-   push $MSGSEND_INTR
+   pushl $MSGSEND_INTR
    jmp IntoKernel
 
 Entry(MsgRcvEntry)
-   push $MSGRCV_INTR
+   pushl $MSGRCV_INTR
    jmp IntoKernel
 
 // Common IRQ entry, save context and call Kmain()
