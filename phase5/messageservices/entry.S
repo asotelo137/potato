@@ -47,7 +47,7 @@ ENTRY(SemPostEntry)
    pushl $SEMPOST_INTR
    jmp IntoKernel
    
-//Phase 4-
+//Phase 4
 ENTRY(IRQ7Entry)
    pushl $IRQ7_INTR
    jmp IntoKernel
@@ -56,7 +56,7 @@ ENTRY(SemGetEntry)
    pushl $SEMGET_INTR
    jmp IntoKernel
    
-//Phase 5-
+//Phase 5
 Entry(MsgSendEntry)
    push $MSGSEND_INTR
    jmp IntoKernel
