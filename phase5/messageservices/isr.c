@@ -210,8 +210,23 @@ void SemGetISR(){
 
 //Phase 5***********
 void MsgSndISR(){
+  msg_t *source, *destination;
+  int msg;
+  source = (msg_t *)pcb[CRP].TF_ptr->ebx;
+  msg = source -> recipient;
   
-  
+  if ((mbox[msg].wait_q).size == 0){
+  	
+  	source->sender = CRP;
+  	source->time_stamp = sys_time;
+  	MsgEnQ(source, &mbox[msg].msg_q);
+  }else{
+  	int tmp_pid = DeQ(&(mbox[msg].wait_q));
+  	EnQ(tmp_pid, &run_q);
+  	
+  	destination = (msg_t *)pcb[tmp_pid].TF_ptr->ebx;
+  	memcpy((char*)destination,(char*)source, sizeof(msg_t));
+  }
 }
 
 void MsgRcvISR(){
@@ -229,6 +244,6 @@ void MsgRcvISR(){
     // dequeue a message (get a msg_t pointer) and use it to copy to CRP's local msg space!
     // copy the 1st message to the msg locally declared in the calling process
     tmp = DeMsgQ(&mbox[msg].msg_q_t);
-		memcpy(msg, &tmp, sizeof(msg_t));
+    memcpy(msg, &tmp, sizeof(msg_t));
   }
 }
