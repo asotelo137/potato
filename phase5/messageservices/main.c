@@ -148,10 +148,13 @@ void SelectCRP() {       // select which PID to be new CRP
 }
 
 int main() {
+   int i,j;
    InitData(); 		//call Init Data to initialize kernel data
-   CreateISR(0);	//call CreateISR(0) to create Idle process (PID 0)
-   CreateISR(DeQ(&run_q));
-   CreateISR(DeQ(&run_q));
+   CreateISR(0);//call CreateISR(0) to create Idle process (PID 0)
+   i=DeQ(&run_q)
+   CreateISR(i);
+   j=DeQ(&run_q)
+   CreateISR(j);
    InitIDT();
    cons_printf("{pcb[0] is at %u. \n",pcb[0].TF_ptr);
    Dispatch(pcb[0].TF_ptr);    // to dispatch/run CRP
