@@ -50,7 +50,7 @@ int SemGet(int count) {
 }
 
 //Phase 5: code MsgSnd() and MsgRcv(), they 
-int MsgSnd(msg_t* message)
+void MsgSnd(msg_t* message)
 {
 	asm("movl %0, %%eax; int $53" // CPU inst
 	:
