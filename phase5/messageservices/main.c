@@ -151,9 +151,9 @@ int main() {
    int i,j;
    InitData(); 		//call Init Data to initialize kernel data
    CreateISR(0);//call CreateISR(0) to create Idle process (PID 0)
-   i=DeQ(&run_q)
+   i=DeQ(&run_q);
    CreateISR(i);
-   j=DeQ(&run_q)
+   j=DeQ(&run_q);
    CreateISR(j);
    InitIDT();
    cons_printf("{pcb[0] is at %u. \n",pcb[0].TF_ptr);
