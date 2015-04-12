@@ -231,10 +231,8 @@ void MsgSndISR(){
 
 void MsgRcvISR(){
   
-  msg_t tmp;
+  msg_t *tmp;
   int pid;
-  msg_t *msg;
-  msg = pcb[CRP].TF_ptr->ebx;
   if(mbox[CRP].msg_q_t.size == 0){
     //code to block CRP
     //move the calling process to the wait queue of the mailbox, set its state, and reset cur_pid
