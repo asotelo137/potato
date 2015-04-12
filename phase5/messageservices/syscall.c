@@ -50,16 +50,15 @@ int SemGet(int count) {
 }
 
 //Phase 5: code MsgSnd() and MsgRcv(), they 
-//both pass the argument as interger (typecast) to the kernel
-void MsgSnd(msg_t * (int)msg){
-	asm("movl %1,%%ebx ; int $53; movl %%ecx, %0;" 
+void MsgSnd(int m , msg_t *message){
+	asm("movl %0,%%eax ; movl %1, %%ebx; int $53;" 
 		: 
-		: "g" (msg)
-		: "%ebx", "%ecx" ); 
+		: "g" (m),"g" (message)
+		: "%ebx", "%ebx" ); 
 }
 
-void MsgRcv(msg_t * (int)msg){
-	asm("movl %1,%%ebx ; int $54; movl %%ecx, %0;" 
+void MsgRcv(msg_t *msg){
+	asm("movl %0,%%ebx ; int $54;" 
 		: 
 		: "g" (msg)
 		: "%ebx", "%ecx" ); 
