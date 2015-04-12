@@ -161,8 +161,8 @@ int main() {
 
 void Kernel(TF_t *TF_ptr) {
 
-   int pid;
-   char key;
+   //int pid;
+   //char key;
    
    pcb[CRP].TF_ptr=TF_ptr;
    //change state in PCB of CRP to kernel mode
