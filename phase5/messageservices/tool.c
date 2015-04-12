@@ -54,7 +54,7 @@ int DeQ(q_t *p) { // return -1 if q is empty
 void MsgEnQ(msg_t *p, msg_q_t *q){
 	if(q->size == Q_SIZE){
 		//breakpoint();
-		cons_printf(" Queue full!\n");
+		cons_printf("Mesage queue is full!\n");
 		return;
 	}
 	q->msg[q->tail]=*p;
