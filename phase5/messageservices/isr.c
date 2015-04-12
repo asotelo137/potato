@@ -215,6 +215,6 @@ void MsgSndISR(){
 }
 
 void MsgRcvISR(){
- 
+  int msg = pcb[CRP].TF_ptr->ebx;
   
 }
