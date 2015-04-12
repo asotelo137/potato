@@ -60,7 +60,7 @@ ENTRY(SemGetEntry)
 Entry(MsgSendEntry)
    pushl $MSGSEND_INTR
    jmp IntoKernel
-   //line 63 
+   //line 63   
    
 Entry(MsgRcvEntry)
    pushl $MSGRCV_INTR
