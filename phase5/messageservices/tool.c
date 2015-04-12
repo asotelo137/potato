@@ -87,9 +87,9 @@ void MyStrCpy( char *dest, char *src){
 	while(*src){
 		*dest = *src;
 		src++;
-		dest++
+		dest++;
 	}
-	*dest='/0';
+	*dest='\0';
 	
 }
 
