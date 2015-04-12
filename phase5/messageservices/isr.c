@@ -215,13 +215,13 @@ void MsgSndISR(){
   source = (msg_t *)pcb[CRP].TF_ptr->ebx;
   msg = source -> recipient;
   
-  if ((mbox[msg].wait_q).size == 0){
+  if ((&mbox[msg].wait_q).size == 0){
   	
   	source->sender = CRP;
   	source->time_stamp = sys_time;
   	MsgEnQ(source, &mbox[msg].msg_q);
   }else{
-  	int tmp_pid = DeQ(&(mbox[msg].wait_q));
+  	int tmp_pid = DeQ(&(&mbox[msg].wait_q));
   	EnQ(tmp_pid, &run_q);
   	
   	destination = (msg_t *)pcb[tmp_pid].TF_ptr->ebx;
@@ -234,7 +234,7 @@ void MsgRcvISR(){
   msg_t tmp;
   
   int msg = pcb[CRP].TF_ptr->ebx;
-  if(mbox[msg].msg_q_t.p->size == 0){
+  if(&mbox[msg].msg_q_t.p->size == 0){
     //code to block CRP
     //move the calling process to the wait queue of the mailbox, set its state, and reset cur_pid
     EnQ(pid, &mbox[msg].wait_q);
