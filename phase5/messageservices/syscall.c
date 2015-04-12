@@ -2,7 +2,7 @@
 // collection of syscalls, i.e., API
 
 #include "syscall.h" // prototype these below
-
+#include "type.h"
 int GetPid() {
    int pid;
 
