@@ -53,7 +53,7 @@ int SemGet(int count) {
 void MsgSnd(msg_t* msg){
 	asm("movl %0,%%ebx ; int $53;" 
 		: 
-		: "g" (message)
+		: "g" (msg)
 		: "%ebx" ); 
 }
 
