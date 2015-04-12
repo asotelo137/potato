@@ -236,13 +236,13 @@ void MsgRcvISR(){
   if(mbox[CRP].msg_q.size == 0){
     //code to block CRP
     //move the calling process to the wait queue of the mailbox, set its state, and reset cur_pid
-    EnQ(CRP, mbox[CRP].wait_q);
+    EnQ(CRP, &mbox[CRP].wait_q);
 		//pcb[pid].state = WAIT;
 		//pid=-1;
   }else{
     // dequeue a message (get a msg_t pointer) and use it to copy to CRP's local msg space!
     // copy the 1st message to the msg locally declared in the calling process
-    tmp = MsgDeQ(mbox[CRP].msg_q);
+    tmp = MsgDeQ(&mbox[CRP].msg_q);
     (msg_t *)pcb[pid].TF_ptr->ebx = tmp;
   }
 }
