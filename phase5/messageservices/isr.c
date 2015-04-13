@@ -244,6 +244,6 @@ void MsgRcvISR(){
     // dequeue a message (get a msg_t pointer) and use it to copy to CRP's local msg space!
     // copy the 1st message to the msg locally declared in the calling process
     tmp = MsgDeQ(&mbox[CRP].msg_q);
-    (msg_t *)pcb[pid].TF_ptr->ebx = tmp;
+    (msg_t *)pcb[CRP].TF_ptr->ebx = tmp;
   }
 }
