@@ -223,6 +223,7 @@ void MsgSndISR(){
   	MsgEnQ(source, &mbox[msg].msg_q);
   }else{
   	int tmp_pid = DeQ(&(mbox[msg].wait_q));
+  	pcb[tmp_pid].state = RUN;
   	EnQ(tmp_pid, &run_q);
   	
   	destination = (msg_t *)pcb[tmp_pid].TF_ptr->ebx;
@@ -243,7 +244,10 @@ void MsgRcvISR(){
   }else{
     // dequeue a message (get a msg_t pointer) and use it to copy to CRP's local msg space!
     // copy the 1st message to the msg locally declared in the calling process
+    //tmp = MsgDeQ(&mbox[CRP].msg_q);
+    //(msg_t *)pcb[CRP].TF_ptr->ebx = tmp;
     tmp = MsgDeQ(&mbox[CRP].msg_q);
-    (msg_t *)pcb[CRP].TF_ptr->ebx = tmp;
+    msg_ptr = (msg_t *)pcb[pid].TF_ptr->ebx;
+   *msg_ptr = *tmp;
   }
 }
