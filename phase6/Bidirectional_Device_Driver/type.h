@@ -56,6 +56,15 @@ typedef struct{
    q_t wait_q;
 }mbox_t;
 
+typedef struct{
+   q_t TX_q  // to transmit to terminal
+       RX_q, // to receive from terminal
+       echo_q; // to echo back to terminal
+   int TX_sem, // transmit space available count
+       RX_sem, // receive data (arrived) count
+       echo, // to echo back to terminal (the typing) or not
+       TX_extra; // if 1, TXRDY event occurred but echo_q and TX_q were empty
+}terminal_t;
 
 
 typedef void (* func_ptr_t)(); // void-returning function pointer type
