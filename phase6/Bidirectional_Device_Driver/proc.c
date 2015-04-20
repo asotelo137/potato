@@ -136,3 +136,87 @@ void Init(){
       }
    }
 }
+
+//phase 6 **************************************************************************************
+void shell(){
+   int BAUD_RATE, divisor; //for serial oal port 
+   msg_t msg;              //local message space
+   char login[101], password[101]; //login and password strings
+   int STDIN = 4, STDOUT = 5;
+   
+   /*1st initialize terminal interface data structure (below)
+   then initialize serial port (below)
+
+   infinite loop:
+      loop A:
+         prompt valid commands (send msg to STDOUT, receive reply)
+         prompt for login (send msg to STDOUT, receive reply)
+         get login entered (send msg to STDIN, receive reply)
+         prompt for password (same as above)
+         get password entered (same as above)
+         string-compare login and password; if same, break loop A
+         (else) prompt "Invalid login!\n\0"
+      repeat loop A
+      loop B:
+         prompt for entering command string
+         get command string entered
+         if command string is empty {
+            continue (loop B)
+         }
+         if command string is "bye" {
+            break (loop B)
+         }
+         if command string is "whoami" {
+            show login string,
+            and an additional "\n\0" (for aesthetics)
+            continue (loop B)
+         }
+         other strings {
+            show "Command not found!\n\0"
+         }
+      repeat loop B
+   repeat infinite loop*/
+}
+
+void STDIN(){
+   /*infinite loop:
+      receive msg
+      char ptr p points to msg.data
+
+      loop A:
+         semaphore wait on RX_sem
+         ch = dequeue from RX_q
+         if ch is '\r', break loop A  // CR (Carriage Return) ends string
+         *p++ = ch;
+      repeat loop A
+
+      *p = '\0';   // add NUL to terminate msg.data
+
+      set msg recipient with sender
+      send msg, as reply to sender (MsgSndISR() must authenticate sender)
+   repeat infinite loop*/
+
+}
+
+void STDOUT(){
+   /*STDOUT() does:
+   infinite loop:
+      receive msg
+      char ptr p points to msg data
+
+      loop A (until p points to null):
+         semaphore-wait on TX_sem of terminal interface
+         enqueue what p points to to TX_q of terminal interface
+         issue syscall "TipIRQ3();" to manually start IRQ 3
+         if what p points to is '\n' {
+            semaphore-wait on TX_sem of terminal interface
+            enqueue '\r' to TX_q  of terminal interface
+         }
+         advance p
+      repeat loop A
+
+      prep msg: set recipient with sender
+      send msg (back to sender)
+   repeat infinite loop
+   */
+}
