@@ -22,6 +22,9 @@
 //Phase 4 add-on
 #include <spede/machine/parallel.h>
 
+//phase 6 add-on
+#include <spede/machine/rs232.h> //serial ports constants
+
 #endif
 
 /*  I/O port 0x80 is reserved and will never be used.  If you
