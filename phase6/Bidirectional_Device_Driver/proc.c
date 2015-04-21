@@ -141,7 +141,7 @@ void Init(){
 void shell(){
    int BAUD_RATE, divisor; //for serial oal port 
    msg_t msg;              //local message space
-   char login[101], password[101],slogin[101],spassword[101]; //login and password strings
+   char login[101], password[101],command[101]; //login and password strings
    int STDIN = 4, STDOUT = 5;
    
    MyBzero((char *) &terminal.TX_q,sizeof(q_t));
@@ -151,8 +151,7 @@ void shell(){
    terminal.RX_sem = SemGet(0);   //get a semaphore to set RX_sem, count 0 (no char from terminal KB)
    terminalecho = 1;   //set echo to 1 (default is to echo back whatever typed from terminal)
    terminal.TX_extra = 1;   //set TX_extra to 1 (an IRQ3 TXRDY event missed)
-   slogin = "Aaron";
-   spassword = "rules";
+   
    /*
    // COM1-8_IOBASE: 0x3f8 0x2f8 0x3e8 0x2e8 0x2f0 0x3e0 0x2e0 0x260
    // transmit speed 9600 bauds, clear IER, start TXRDY and RXRDY
@@ -205,7 +204,7 @@ void shell(){
          MyStrCpy(password,msg.data);
          //string-compare login and password; if same, break loop A
          //(else) prompt "Invalid login!\n\0"
-        if(MyStrcmp(login,slogin)==1 and MyStrcmp(password,spassword) == 1)){
+        if(MyStrcmp(login,password) == 1)){
            break;
         }else
          if(result == 0 )}
@@ -215,43 +214,65 @@ void shell(){
          }
       }//repeat loop A
       while(1){//loop B:
-         prompt for entering command string
-         get command string entered
-         if command string is empty {
-            continue (loop B)
+         //prompt for entering command string
+         MyStrCpy(msg.data,"enter command: ");
+         MsgSnd(STDOUT,&msg);
+         MsgRcv(&msg);  
+         //get command string entered
+         MsgSnd(STDIN, &msg);
+         MsgRcv(&msg);
+         //MyStrCpy(command,msg.data);
+         if (MyStrlen(msg.data) == 0 ) {
+            continue;//continue (loop B)
+         }else
+         if(MyStrcmp(msg.data,"Bye\0")){//if command string is "bye" {
+            break;//break (loop B)
          }
-         if command string is "bye" {
-            break (loop B)
+         if(MyStrcmp(msg.data,"whoami\0"))//if command string is "whoami" {
+            //show login string,
+            MyStrCpy(msg.data,login);
+            MsgSnd(STDOUT,&msg);
+            MsgRcv(&msg);
+            //and an additional "\n\0" (for aesthetics)
+            MyStrCpy(msg.data,"\n\0")
+            MsgSnd(STDOUT,&msg);
+            MsgRcv(&msg);
+            //continue (loop B)
          }
-         if command string is "whoami" {
-            show login string,
-            and an additional "\n\0" (for aesthetics)
-            continue (loop B)
-         }
-         other strings {
-            show "Command not found!\n\0"
-         }
+         else{//other strings {
+            MyStrCpy(msg.data,"Command not found!\n\0")
+            MsgSnd(STDOUT,&msg);
+            MsgRcv(&msg);        //show "Command not found!\n\0"
+         }//}
+     
+         
       }//repeat loop B
-   repeat infinite loop*/
+   //repeat infinite loop*/
 }
 
 void STDIN(){
-   /*infinite loop:
-      receive msg
-      char ptr p points to msg.data
+   char *p , ch;
+   msg_t msg;
+   while(1){//infinite loop:
+   //receive msg
+      //MsgSnd(STDIN, &msg);
+      MsgRcv(&msg);
+   //char ptr p points to msg.data
+      *p = msg.data;
 
-      loop A:
-         semaphore wait on RX_sem
-         ch = dequeue from RX_q
-         if ch is '\r', break loop A  // CR (Carriage Return) ends string
+      while(1) {//loop A:
+         SemWait(RX_sem);//semaphore wait on RX_sem
+         ch = DeQ(terminal.RX_q);//ch = dequeue from RX_q
+         if(ch == '\r'){//if ch is '\r', break loop A  // CR (Carriage Return) ends string
+         break;
+         }
          *p++ = ch;
-      repeat loop A
-
+      }//repeat loop A
       *p = '\0';   // add NUL to terminate msg.data
-
-      set msg recipient with sender
-      send msg, as reply to sender (MsgSndISR() must authenticate sender)
-   repeat infinite loop*/
+      
+      message.recipient = msg.sender; //set msg recipient with sender
+      MsgSnd(&msg);// send msg, as reply to sender (MsgSndISR() must authenticate sender)
+   }//repeat infinite loop*/
 
 }
 
