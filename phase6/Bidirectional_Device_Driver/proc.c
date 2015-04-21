@@ -184,7 +184,7 @@ void shell(){
    
   while(1){// infinite loop:
       while(1){//loop A:
-         prompt valid commands (send msg to STDOUT, receive reply)
+         //prompt valid commands (send msg to STDOUT, receive reply)
          
          //prompt for login (send msg to STDOUT, receive reply)
          MyStrCpy(msg.data,"login: ");
