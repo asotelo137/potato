@@ -259,11 +259,11 @@ void STDIN(){
       //MsgSnd(STDIN, &msg);
       MsgRcv(&msg);
    //char ptr p points to msg.data
-      *p = &msg.data;
+      *p = msg.data;
 
       while(1) {//loop A:
          SemWait(terminal.RX_sem);//semaphore wait on RX_sem
-         ch = (char)DeQ((char * )terminal.RX_q);//ch = dequeue from RX_q
+         ch = (char)DeQ(&terminal.RX_q);//ch = dequeue from RX_q
          if(ch == '\r'){//if ch is '\r', break loop A  // CR (Carriage Return) ends string
          break;
          }
@@ -287,11 +287,11 @@ void STDOUT(){
 
       while(1){//loop A (until p points to null):
          SemWait(terminal.TX_sem);//semaphore-wait on TX_sem of terminal interface
-         EnQ((int) p,&terminal.TX_q)//enqueue what p points to to TX_q of terminal interface
+         EnQ((int) p,&terminal.TX_q);//enqueue what p points to to TX_q of terminal interface
          TipIRQ3();//issue syscall "TipIRQ3();" to manually start IRQ 3
          if(*p == '\n'){//if what p points to is '\n' {
             SemWait(terminal.TX_sem);//semaphore-wait on TX_sem of terminal interface
-            EnQ((int) '\r',&terminal.TX_q)//enqueue '\r' to TX_q  of terminal interface
+            EnQ((int) '\r',&terminal.TX_q);//enqueue '\r' to TX_q  of terminal interface
          }
          p++;//advance p
       }//repeat loop A
