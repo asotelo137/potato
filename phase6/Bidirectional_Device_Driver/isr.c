@@ -301,13 +301,13 @@ void IRQ3RX() { // queue char read from port to RX and echo queues
       // use 127 to mask out msb (rest 7 bits in ASCII range)
       ch = inportb(COM2_IOBASE+DATA) & 0x7F;  // mask 0111 1111
       EnQ((int) ch , terminal.RX_q);//enqueue ch to RX queue
-      SemPostISR(terminal.RX_sem);//SemPostISR( RX semaphore of terminal interface )
+      SemPostISR(&terminal.RX_sem);//SemPostISR( RX semaphore of terminal interface )
 
       if(ch == '\r'){//if ch is '\r' {
          EnQ((int) '\r', &terminal.echo_q);//enqueue '\r' then '\n' to echo queue of terminal interface
       } else {
          if(terminal.echo == 1){//if echo of terminal interface is 1 {
-             EnQ((int) ch , terminal->echo_q);//enqueue ch to echo queue of terminal interface
+             EnQ((int) ch , &terminal.echo_q);//enqueue ch to echo queue of terminal interface
          }
       }
 	
