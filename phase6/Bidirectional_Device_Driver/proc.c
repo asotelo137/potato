@@ -261,7 +261,7 @@ void STDIN(){
       *p = msg.data;
 
       while(1) {//loop A:
-         SemWait(RX_sem);//semaphore wait on RX_sem
+         SemWait(terminal.RX_sem);//semaphore wait on RX_sem
          ch = (char)DeQ(terminal.RX_q);//ch = dequeue from RX_q
          if(ch == '\r'){//if ch is '\r', break loop A  // CR (Carriage Return) ends string
          break;
