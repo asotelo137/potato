@@ -263,10 +263,10 @@ void IRQ3ISR(){
       	switch(event) {
          case IIR_TXRDY://case IIR_TXRDY, call IRQ3TX(), break, (send char to terminal video)
          		IRQ3TX();
-         		break();
+         		break;
          case IIR_RXRDY://case IIR_RXRDY, call IRQ3RX(), break, (get char from terminal KB)
 	 		IRQ3RX();
-	 		break();
+	 		break;
       	}
 
       	if(terminal.TX_extra == 1){//if TX_extra of terminal interface is 1
