@@ -83,7 +83,7 @@ void PrintDriver() {
    Sleep(1);                                   // printer needs time to reset
 
    while(1) {
-      cons_printf("My pid is : %d\n", GetPid());
+      cons_printf(" %d ", GetPid());
       //Sleep(1);
       //phase 5
       MsgRcv(&my_msg);
