@@ -275,7 +275,7 @@ void IRQ3ISR(){
 }
 
 void IRQ3TX() { // dequeue TX_q to write to port
-      char ch = 0; // NUL, '\0'
+      char ch = '\0'; // NUL, '\0'
 
       if(terminal.echo_q.size != 0){//if echo queue of terminal interface is not empty {
          ch = DeQ(&terminal.echo_q);//ch = dequeue from echo queue of terminal interface
