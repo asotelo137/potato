@@ -83,7 +83,7 @@ void InitIDT(){
    
     //phase 6 ***********************************************************
    SetEntry(IRQ3_INTR,IRQ3Entry);
-   outportb(0x21,~128+8+1);
+   outportb(0x21,~(128+8+1));
    //***************
     //outportb(0x21,~1);
   
