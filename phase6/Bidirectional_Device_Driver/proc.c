@@ -149,7 +149,7 @@ void shell(){
    MyBzero((char *) &terminal.echo_q,sizeof(q_t));//clear 3 queues: TX_q, RX_q, echo_q
    terminal.TX_sem = SemGet(Q_SIZE);   //get a semaphore to set TX_sem, count Q_SIZE (char space to terminal video)
    terminal.RX_sem = SemGet(0);   //get a semaphore to set RX_sem, count 0 (no char from terminal KB)
-   terminalecho = 1;   //set echo to 1 (default is to echo back whatever typed from terminal)
+   terminal.echo = 1;   //set echo to 1 (default is to echo back whatever typed from terminal)
    terminal.TX_extra = 1;   //set TX_extra to 1 (an IRQ3 TXRDY event missed)
    
    /*
@@ -186,22 +186,22 @@ void shell(){
       while(1){//loop A:
          //prompt valid commands (send msg to STDOUT, receive reply)
          MyStrCpy(msg.data,"available commands: whoami, bye \n");
-         MsgSnd(STDOUT,&msg);
+         MsgSnd(&msg);
          MsgRcv(&msg);
          //prompt for login (send msg to STDOUT, receive reply)
          MyStrCpy(msg.data,"login: ");
-         MsgSnd(STDOUT,&msg);
+         MsgSnd(&msg);
          MsgRcv(&msg);
          //get login entered (send msg to STDIN, receive reply)
-         MsgSnd(STDIN, &msg);
+         MsgSnd( &msg);
          MsgRcv(&msg);
          MyStrCpy(login,msg.data);
          //prompt for password (same as above)
          MyStrCpy(msg.data,"password: ");
-         MsgSnd(STDOUT,&msg);
+         MsgSnd(&msg);
          MsgRcv(&msg);
          //get password entered (same as above)
-         MsgSnd(STDIN, &msg);
+         MsgSnd( &msg);
          MsgRcv(&msg);
          MyStrCpy(password,msg.data);
          //string-compare login and password; if same, break loop A
@@ -211,17 +211,17 @@ void shell(){
         }else
          if(result == 0 )}
             MyStrCpy(msg.data," Invalid login! ");
-            MsgSnd(STDOUT,&msg);
+            MsgSnd(&msg);
             MsgRcv(&msg);
          }
       }//repeat loop A
       while(1){//loop B:
          //prompt for entering command string
          MyStrCpy(msg.data,"enter command: ");
-         MsgSnd(STDOUT,&msg);
+         MsgSnd(&msg);
          MsgRcv(&msg);  
          //get command string entered
-         MsgSnd(STDIN, &msg);
+         MsgSnd(&msg);
          MsgRcv(&msg);
          //MyStrCpy(command,msg.data);
          if (MyStrlen(msg.data) == 0 ) {
@@ -231,7 +231,7 @@ void shell(){
          }else if(MyStrcmp(msg.data,"whoami\0"))//if command string is "whoami" {
             //show login string,
             MyStrCpy(msg.data,login);
-            MsgSnd(STDOUT,&msg);
+            MsgSnd(&msg);
             MsgRcv(&msg);
             //and an additional "\n\0" (for aesthetics)
             MyStrCpy(msg.data,"\n\0");
@@ -241,7 +241,7 @@ void shell(){
          }
          else{//other strings {
             MyStrCpy(msg.data,"Command not found!\n\0");
-            MsgSnd(STDOUT,&msg);
+            MsgSnd(&msg);
             MsgRcv(&msg);        //show "Command not found!\n\0"
          }//}
      
