@@ -144,13 +144,15 @@ void shell(){
    char login[101], password[101]; //login and password strings
    int STDIN = 4, STDOUT = 5;
    
-   MyBzero((char *) &TX_q,sizeof(q_t));
-   MyBzero((char *) &RX_q,sizeof(q_t));
-   MyBzero((char *) &echo_q,sizeof(q_t));//clear 3 queues: TX_q, RX_q, echo_q
-   TX_sem = SemGet(Q_SIZE);   //get a semaphore to set TX_sem, count Q_SIZE (char space to terminal video)
-   RX_sem = SemGet(0);   //get a semaphore to set RX_sem, count 0 (no char from terminal KB)
-   echo = 1;   //set echo to 1 (default is to echo back whatever typed from terminal)
-   TX_extra = 1;   //set TX_extra to 1 (an IRQ3 TXRDY event missed)
+   MyBzero((char *) &terminal.TX_q,sizeof(q_t));
+   MyBzero((char *) &terminal.RX_q,sizeof(q_t));
+   MyBzero((char *) &terminal.echo_q,sizeof(q_t));//clear 3 queues: TX_q, RX_q, echo_q
+   terminal.TX_sem = SemGet(Q_SIZE);   //get a semaphore to set TX_sem, count Q_SIZE (char space to terminal video)
+   terminal.RX_sem = SemGet(0);   //get a semaphore to set RX_sem, count 0 (no char from terminal KB)
+   terminalecho = 1;   //set echo to 1 (default is to echo back whatever typed from terminal)
+   terminal.TX_extra = 1;   //set TX_extra to 1 (an IRQ3 TXRDY event missed)
+   login = "Aaron";
+   password = "rules";
    /*
    // COM1-8_IOBASE: 0x3f8 0x2f8 0x3e8 0x2e8 0x2f0 0x3e0 0x2e0 0x260
    // transmit speed 9600 bauds, clear IER, start TXRDY and RXRDY
@@ -164,7 +166,7 @@ void shell(){
    //    LSR Line Status Reg
    //    CFCR Char Format Control Reg
    //    LSR_TSRE Line Status Reg, Xmit+Shift Regs Empty
-
+   */
    // set baud rate 9600
    BAUD_RATE = 9600;              // Mr. Baud invented this
    divisor = 115200 / BAUD_RATE;  // time period of each baud
@@ -180,18 +182,40 @@ void shell(){
    outportb(COM2_IOBASE+IER, IER_ERXRDY|IER_ETXRDY); // enable TX, RX events
    IO_DELAY();
 
-
-   infinite loop:
-      loop A:
+   
+  while(1){// infinite loop:
+      while(1){//loop A:
          prompt valid commands (send msg to STDOUT, receive reply)
-         prompt for login (send msg to STDOUT, receive reply)
-         get login entered (send msg to STDIN, receive reply)
-         prompt for password (same as above)
-         get password entered (same as above)
-         string-compare login and password; if same, break loop A
-         (else) prompt "Invalid login!\n\0"
-      repeat loop A
-      loop B:
+         
+         //prompt for login (send msg to STDOUT, receive reply)
+         MyStrCpy(msg.data,"login: ");
+         MsgSnd(STDOUT,&msg);
+         MsgRcv(&msg);
+         //get login entered (send msg to STDIN, receive reply)
+         MsgSnd(STDIN, &msg);
+         MsgRcv(&msg);
+         MyStrCpy(login,msg.data);
+         //prompt for password (same as above)
+         MyStrCpy(msg.data,"password: ");
+         MsgSnd(STDOUT,&msg);
+         MsgRcv(&msg);
+         //get password entered (same as above)
+         MsgSnd(STDIN, &msg);
+         MsgRcv(&msg);
+         MyStrCpy(password,msg.data);
+         //string-compare login and password; if same, break loop A
+         //(else) prompt "Invalid login!\n\0"
+         while(login !='\0' || password != '\0'){
+            break;******************************************************************************************************************************
+            *******************************************************************************************************
+         }
+         if(login == '\0' || password == '\0')}
+            MyStrCpy(msg.data," Invalid login! ");
+            MsgSnd(STDOUT,&msg);
+            MsgRcv(&msg);
+         }
+      }//repeat loop A
+      while(1){//loop B:
          prompt for entering command string
          get command string entered
          if command string is empty {
@@ -208,7 +232,7 @@ void shell(){
          other strings {
             show "Command not found!\n\0"
          }
-      repeat loop B
+      }//repeat loop B
    repeat infinite loop*/
 }
 
