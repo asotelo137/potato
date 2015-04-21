@@ -128,6 +128,10 @@ void InitData() {
    //MyBZero((char *)semaphore[product_semaphore].wait_q,Q_SIZE);
    product=0;
    */ 
+   //phase 6
+   CreateISR(3);
+   CreateISR(4);
+   CreateISR(5);
    
 }
 
