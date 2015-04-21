@@ -188,6 +188,7 @@ void Shell(){
          //prompt valid commands (send msg to STDOUT, receive reply)
          cons_printf("hey cam, fuck you");
          MyStrCpy(msg.data,"available commands: whoami, bye \n");
+         msg.recipient=5;
          MsgSnd(&msg);
          MsgRcv(&msg);
          //prompt for login (send msg to STDOUT, receive reply)
