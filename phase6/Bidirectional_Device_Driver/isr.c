@@ -154,7 +154,7 @@ void SemWaitISR(){
 
 }
 // phase 3 ***********************************************************
-void SemPostISR(int semid){
+void SemPostISR(int semID){
   
   int temp;
   //int semID; 
