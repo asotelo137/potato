@@ -205,14 +205,15 @@ void shell(){
          MyStrCpy(password,msg.data);
          //string-compare login and password; if same, break loop A
          //(else) prompt "Invalid login!\n\0"
-         while(login !='\0' || password != '\0'){
-            break;******************************************************************************************************************************
-            *******************************************************************************************************
+        if(strcmp(login,password)==0)
          }
-         if(login == '\0' || password == '\0')}
+         if(result == 0 )}
             MyStrCpy(msg.data," Invalid login! ");
             MsgSnd(STDOUT,&msg);
             MsgRcv(&msg);
+         }
+         if(result == 1){
+            break;
          }
       }//repeat loop A
       while(1){//loop B:
