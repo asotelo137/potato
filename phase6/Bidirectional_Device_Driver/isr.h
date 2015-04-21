@@ -9,9 +9,12 @@ void TimerISR();
 void GetPidISR();
 void SleepISR(int);
 void SemWaitISR();
-void SemPostISR();
+void SemPostISR(int);
 void IRQ7ISR();
 void SemGetISR();
 void MsgSndISR();
 void MsgRcvISR();
+void IRQ3ISR();
+void IRQ3RX();
+void IRQ3TX();
 #endif
