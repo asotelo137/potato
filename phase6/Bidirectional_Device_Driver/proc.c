@@ -259,11 +259,11 @@ void STDIN(){
       //MsgSnd(STDIN, &msg);
       MsgRcv(&msg);
    //char ptr p points to msg.data
-      *p = msg.data;
+      *p = &msg.data;
 
       while(1) {//loop A:
          SemWait(terminal.RX_sem);//semaphore wait on RX_sem
-         ch = (char)DeQ(terminal.RX_q);//ch = dequeue from RX_q
+         ch = (char)DeQ((char * )terminal.RX_q);//ch = dequeue from RX_q
          if(ch == '\r'){//if ch is '\r', break loop A  // CR (Carriage Return) ends string
          break;
          }
@@ -279,6 +279,7 @@ void STDIN(){
 
 void STDOUT(){
    msg_t msg;
+   char *p ;
    //STDOUT() does:
    while(1){//infinite loop:
       MsgRcv(&msg);//receive msg
