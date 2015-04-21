@@ -79,7 +79,7 @@ void InitIDT(){
    SetEntry(MSGSND_INTR,MsgSndEntry);
    SetEntry(MSGRCV_INTR,MsgRcvEntry);
    
-   outportb(0x21,~129);
+   outportb(0x21,~128+8+1);
    //***************
     //outportb(0x21,~1);
    //phase 6 ***********************************************************
