@@ -108,7 +108,7 @@ int MyStrcmp(char *s1, char *s2){
 }
 
 int MyStrlen(char *s){
-	int length
+	int length;
 	while(*s){
 		length++;
 	}
