@@ -240,7 +240,7 @@ void shell(){
             continue;//continue (loop B)
          }
          else{//other strings {
-            MyStrCpy(msg.data,"Command not found!\n\0")
+            MyStrCpy(msg.data,"Command not found!\n\0");
             MsgSnd(STDOUT,&msg);
             MsgRcv(&msg);        //show "Command not found!\n\0"
          }//}
