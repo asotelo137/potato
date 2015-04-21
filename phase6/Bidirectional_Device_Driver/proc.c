@@ -262,7 +262,7 @@ void STDIN(){
 
       while(1) {//loop A:
          SemWait(RX_sem);//semaphore wait on RX_sem
-         ch = DeQ(terminal.RX_q);//ch = dequeue from RX_q
+         ch = (char)DeQ(terminal.RX_q);//ch = dequeue from RX_q
          if(ch == '\r'){//if ch is '\r', break loop A  // CR (Carriage Return) ends string
          break;
          }
@@ -270,31 +270,31 @@ void STDIN(){
       }//repeat loop A
       *p = '\0';   // add NUL to terminate msg.data
       
-      message.recipient = msg.sender; //set msg recipient with sender
+      msg.recipient = msg.sender; //set msg recipient with sender
       MsgSnd(&msg);// send msg, as reply to sender (MsgSndISR() must authenticate sender)
    }//repeat infinite loop*/
 
 }
 
 void STDOUT(){
-   /*STDOUT() does:
-   infinite loop:
-      receive msg
-      char ptr p points to msg data
+   msg_t msg;
+   //STDOUT() does:
+   while(1){//infinite loop:
+      MsgRcv(&msg);//receive msg
+      *p = msg.data;//char ptr p points to msg data
 
-      loop A (until p points to null):
-         semaphore-wait on TX_sem of terminal interface
-         enqueue what p points to to TX_q of terminal interface
-         issue syscall "TipIRQ3();" to manually start IRQ 3
-         if what p points to is '\n' {
-            semaphore-wait on TX_sem of terminal interface
-            enqueue '\r' to TX_q  of terminal interface
+      while(1){//loop A (until p points to null):
+         SemWait(terminal.TX_q);//semaphore-wait on TX_sem of terminal interface
+         EnQ((int) p,terminal.TX_q)//enqueue what p points to to TX_q of terminal interface
+         TipIRQ3();//issue syscall "TipIRQ3();" to manually start IRQ 3
+         if(*p == '\n'){//if what p points to is '\n' {
+            SemWait(terminal.TX_q);//semaphore-wait on TX_sem of terminal interface
+            EnQ((int) '\r',terminal.TX_q)//enqueue '\r' to TX_q  of terminal interface
          }
-         advance p
-      repeat loop A
+         p++;//advance p
+      }//repeat loop A
 
-      prep msg: set recipient with sender
-      send msg (back to sender)
-   repeat infinite loop
-   */
+      msg.recipient = msg.sender;//prep msg: set recipient with sender
+      MsgSnd(&msg);//send msg (back to sender)
+   }//repeat infinite loop
 }
