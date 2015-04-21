@@ -287,6 +287,7 @@ void IRQ3TX() { // dequeue TX_q to write to port
          if(terminal.TX_q.size != 0){//if TX queue of terminal interface is not empty
             ch = DeQ(&terminal.TX_q);//ch = dequeue from TX queue of terminal interface
             SemPostISR(terminal.TX_sem);//SemPostISR( TX semaphore of terminal interface )
+         }
       }
 
       if(ch == 0){//if ch is 0 {
@@ -295,5 +296,25 @@ void IRQ3TX() { // dequeue TX_q to write to port
          outportb(COM2_IOBASE+DATA,0);//use outportb() to send ch to COM2_IOBASE+DATA
          terminal.TX_extra = 0;//TX_extra is cleared (to 0)
       }
-   }
+	
+}
+
+void IRQ3RX() { // queue char read from port to RX and echo queues
+      char ch;
+
+      // use 127 to mask out msb (rest 7 bits in ASCII range)
+      ch = inportb(COM2_IOBASE+DATA) & 0x7F;  // mask 0111 1111
+      EnQ((int) ch , RX_q);//enqueue ch to RX queue
+      SemPostISR(RX_sem);//SemPostISR( RX semaphore of terminal interface )
+
+      if(ch == '\r'){//if ch is '\r' {
+         EnQ((int) '\r', &terminal.echo_q);//enqueue '\r' then '\n' to echo queue of terminal interface
+      } else {
+         if(termina.echo == 1){//if echo of terminal interface is 1 {
+             EnQ((int) ch , echo_q);//enqueue ch to echo queue of terminal interface
+         }
+      }
+	
+}
+   
    
