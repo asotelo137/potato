@@ -185,12 +185,12 @@ void Shell(){
   while(1){// infinite loop:
       while(1){//loop A:
          //prompt valid commands (send msg to STDOUT, receive reply)
-         MyStrCpy(msg.data,"available commands: whoami, bye \n");
+         MyStrCpy(msg.data,"available commands: whoami, bye \n\0");
          msg.recipient = STDOUT;
          MsgSnd(&msg);
          MsgRcv(&msg);
          //prompt for login (send msg to STDOUT, receive reply)
-         MyStrCpy(msg.data,"login: ");
+         MyStrCpy(msg.data,"login: \0");
          msg.recipient=STDOUT;
          MsgSnd(&msg);
          MsgRcv(&msg);
@@ -200,7 +200,7 @@ void Shell(){
          MsgRcv(&msg);
          MyStrCpy(login,msg.data);
          //prompt for password (same as above)
-         MyStrCpy(msg.data,"password: ");
+         MyStrCpy(msg.data,"password: \0");
          msg.recipient=STDOUT;
          MsgSnd(&msg);
          MsgRcv(&msg);
@@ -216,7 +216,7 @@ void Shell(){
            break;
         }else
          if(result == 0 ){
-            MyStrCpy(msg.data," Invalid login! ");
+            MyStrCpy(msg.data," Invalid login! \n\0");
             msg.recipient=STDOUT;
             MsgSnd(&msg);
             MsgRcv(&msg);
@@ -224,7 +224,7 @@ void Shell(){
       }//repeat loop A
       while(1){//loop B:
          //prompt for entering command string
-         MyStrCpy(msg.data,"enter command: ");
+         MyStrCpy(msg.data,"enter command: \0");
          msg.recipient=STDOUT;
          MsgSnd(&msg);
          MsgRcv(&msg);  
