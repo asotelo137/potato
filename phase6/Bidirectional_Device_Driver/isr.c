@@ -154,12 +154,12 @@ void SemWaitISR(){
 
 }
 // phase 3 ***********************************************************
-void SemPostISR(){
+void SemPostISR(int semid){
   
   int temp;
-  int semID; 
+  //int semID; 
   
-  semID = pcb[CRP].TF_ptr->ebx;
+  //semID = pcb[CRP].TF_ptr->ebx;
  //breakpoint();
   if( semaphore[semID].wait_q.size ==0){
     semaphore[semID].count ++;
