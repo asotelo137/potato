@@ -257,3 +257,23 @@ void MsgRcvISR(){
    *msg_ptr = *tmp;
   }
 }
+
+//phase 6 ************************************
+void IRQ3ISR(){
+	int event;
+	outportb(0x20,0x63);//dismiss IRQ 3: use outportb() to send 0x63 to 0x20
+	//read event from COM2_IOBASE+IIR (Interrupt Indicator Register)
+	event = inportb(COM2_IOBASE+IIR);
+      	switch(event) {
+         case IIR_TXRDY://case IIR_TXRDY, call IRQ3TX(), break, (send char to terminal video)
+         		IRQ3TX();
+         		break();
+         case IIR_RXRDY://case IIR_RXRDY, call IRQ3RX(), break, (get char from terminal KB)
+	 		IRQ3RX();
+	 		break();
+      	}
+
+      	if(terminal.TX_extra == 1){//if TX_extra of terminal interface is 1
+        	IRQ3TX();//call IRQ3TX() to use it to TX char
+      	}
+}
