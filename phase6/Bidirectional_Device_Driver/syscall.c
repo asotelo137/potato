@@ -64,6 +64,6 @@ void MsgRcv(msg_t *msg){
 		: "g" ((int) msg)
 		: "%ebx"); 
 }
-TipIRQ3(){
+void TipIRQ3(){
 	asm("int $35");
 }
