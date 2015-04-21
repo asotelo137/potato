@@ -144,8 +144,42 @@ void shell(){
    char login[101], password[101]; //login and password strings
    int STDIN = 4, STDOUT = 5;
    
-   /*1st initialize terminal interface data structure (below)
-   then initialize serial port (below)
+   MyBzero((char *) &TX_q,sizeof(q_t));
+   MyBzero((char *) &RX_q,sizeof(q_t));
+   MyBzero((char *) &echo_q,sizeof(q_t));//clear 3 queues: TX_q, RX_q, echo_q
+   TX_sem = SemGet(Q_SIZE);   //get a semaphore to set TX_sem, count Q_SIZE (char space to terminal video)
+   RX_sem = SemGet(0);   //get a semaphore to set RX_sem, count 0 (no char from terminal KB)
+   echo = 1;   //set echo to 1 (default is to echo back whatever typed from terminal)
+   TX_extra = 1;   //set TX_extra to 1 (an IRQ3 TXRDY event missed)
+   /*
+   // COM1-8_IOBASE: 0x3f8 0x2f8 0x3e8 0x2e8 0x2f0 0x3e0 0x2e0 0x260
+   // transmit speed 9600 bauds, clear IER, start TXRDY and RXRDY
+   // Data communication acronyms:
+   //    IIR Intr Indicator Reg
+   //    IER Intr Enable Reg
+   //    ETXRDY Enable Xmit Ready
+   //    ERXRDY Enable Recv Ready
+   //    MSR Modem Status Reg
+   //    MCR Modem Control Reg
+   //    LSR Line Status Reg
+   //    CFCR Char Format Control Reg
+   //    LSR_TSRE Line Status Reg, Xmit+Shift Regs Empty
+
+   // set baud rate 9600
+   BAUD_RATE = 9600;              // Mr. Baud invented this
+   divisor = 115200 / BAUD_RATE;  // time period of each baud
+   outportb(COM2_IOBASE+CFCR, CFCR_DLAB);          // CFCR_DLAB 0x80
+   outportb(COM2_IOBASE+BAUDLO, LOBYTE(divisor));
+   outportb(COM2_IOBASE+BAUDHI, HIBYTE(divisor));
+   // set CFCR: 7-E-1 (7 data bits, even parity, 1 stop bit)
+   outportb(COM2_IOBASE+CFCR, CFCR_PEVEN|CFCR_PENAB|CFCR_7BITS);
+   outportb(COM2_IOBASE+IER, 0);
+   // raise DTR, RTS of the serial port to start read/write
+   outportb(COM2_IOBASE+MCR, MCR_DTR|MCR_RTS|MCR_IENABLE);
+   IO_DELAY();
+   outportb(COM2_IOBASE+IER, IER_ERXRDY|IER_ETXRDY); // enable TX, RX events
+   IO_DELAY();
+
 
    infinite loop:
       loop A:
