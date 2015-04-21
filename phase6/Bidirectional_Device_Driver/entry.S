@@ -68,6 +68,11 @@ ENTRY(MsgRcvEntry)
    jmp IntoKernel
 // line 67
 
+ENTRY(IRQ3Entry)
+pushl $IRQ3_INTR
+jmp IntoKernel
+// line 67
+
 // Common IRQ entry, save context and call Kmain()
 IntoKernel:
    pusha
