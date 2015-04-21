@@ -183,6 +183,7 @@ void Shell(){
 
    
   while(1){// infinite loop:
+      cons_printf("fuck you cam ");
       while(1){//loop A:
          //prompt valid commands (send msg to STDOUT, receive reply)
          MyStrCpy(msg.data,"available commands: whoami, bye \n");
