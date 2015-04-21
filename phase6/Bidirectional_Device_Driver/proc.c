@@ -188,11 +188,12 @@ void Shell(){
          //prompt valid commands (send msg to STDOUT, receive reply)
          cons_printf("hey cam, fuck you");
          MyStrCpy(msg.data,"available commands: whoami, bye \n");
-         msg.recipient=5;
+         msg.recipient=STDOUT;
          MsgSnd(&msg);
          MsgRcv(&msg);
          //prompt for login (send msg to STDOUT, receive reply)
          MyStrCpy(msg.data,"login: ");
+         msg.recipient=STDOUT;
          MsgSnd(&msg);
          MsgRcv(&msg);
          //get login entered (send msg to STDIN, receive reply)
@@ -201,6 +202,7 @@ void Shell(){
          MyStrCpy(login,msg.data);
          //prompt for password (same as above)
          MyStrCpy(msg.data,"password: ");
+         msg.recipient=STDOUT;
          MsgSnd(&msg);
          MsgRcv(&msg);
          //get password entered (same as above)
@@ -215,6 +217,7 @@ void Shell(){
         }else
          if(result == 0 ){
             MyStrCpy(msg.data," Invalid login! ");
+            msg.recipient=STDOUT;
             MsgSnd(&msg);
             MsgRcv(&msg);
          }
@@ -222,6 +225,7 @@ void Shell(){
       while(1){//loop B:
          //prompt for entering command string
          MyStrCpy(msg.data,"enter command: ");
+         msg.recipient=STDOUT;
          MsgSnd(&msg);
          MsgRcv(&msg);  
          //get command string entered
@@ -239,12 +243,14 @@ void Shell(){
             MsgRcv(&msg);
             //and an additional "\n\0" (for aesthetics)
             MyStrCpy(msg.data,"\n\0");
+            msg.recipient=STDOUT;
             MsgSnd(&msg);
             MsgRcv(&msg);
             continue;//continue (loop B)
          }
          else{//other strings {
             MyStrCpy(msg.data,"Command not found!\n\0");
+            msg.recipient=STDOUT;
             MsgSnd(&msg);
             MsgRcv(&msg);        //show "Command not found!\n\0"
          }//}
