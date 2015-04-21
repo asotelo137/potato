@@ -144,9 +144,9 @@ void Shell(){
    char login[101], password[101],command[101]; //login and password strings
    int STDIN = 4, STDOUT = 5;
    int result;
-   MyBzero((char *) &terminal.TX_q,sizeof(q_t));
-   MyBzero((char *) &terminal.RX_q,sizeof(q_t));
-   MyBzero((char *) &terminal.echo_q,sizeof(q_t));//clear 3 queues: TX_q, RX_q, echo_q
+   MyBZero((char *) &terminal.TX_q,sizeof(q_t));
+   MyBZero((char *) &terminal.RX_q,sizeof(q_t));
+   MyBZero((char *) &terminal.echo_q,sizeof(q_t));//clear 3 queues: TX_q, RX_q, echo_q
    terminal.TX_sem = SemGet(Q_SIZE);   //get a semaphore to set TX_sem, count Q_SIZE (char space to terminal video)
    terminal.RX_sem = SemGet(0);   //get a semaphore to set RX_sem, count 0 (no char from terminal KB)
    terminal.echo = 1;   //set echo to 1 (default is to echo back whatever typed from terminal)
