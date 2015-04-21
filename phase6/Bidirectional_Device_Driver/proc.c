@@ -197,6 +197,7 @@ void Shell(){
          MsgSnd(&msg);
          MsgRcv(&msg);
          //get login entered (send msg to STDIN, receive reply)
+         msg.recipient=STDIN;
          MsgSnd( &msg);
          MsgRcv(&msg);
          MyStrCpy(login,msg.data);
@@ -206,6 +207,7 @@ void Shell(){
          MsgSnd(&msg);
          MsgRcv(&msg);
          //get password entered (same as above)
+         msg.recipient=STDIN;
          MsgSnd( &msg);
          MsgRcv(&msg);
          MyStrCpy(password,msg.data);
@@ -229,6 +231,7 @@ void Shell(){
          MsgSnd(&msg);
          MsgRcv(&msg);  
          //get command string entered
+         msg.recipient=STDIN;
          MsgSnd(&msg);
          MsgRcv(&msg);
          //MyStrCpy(command,msg.data);
