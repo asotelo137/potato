@@ -284,7 +284,7 @@ void STDOUT(){
       *p = msg.data;//char ptr p points to msg data
 
       while(1){//loop A (until p points to null):
-         SemWait(terminal.TX_q);//semaphore-wait on TX_sem of terminal interface
+         SemWait(terminal.TX_sem);//semaphore-wait on TX_sem of terminal interface
          EnQ((int) p,terminal.TX_q)//enqueue what p points to to TX_q of terminal interface
          TipIRQ3();//issue syscall "TipIRQ3();" to manually start IRQ 3
          if(*p == '\n'){//if what p points to is '\n' {
