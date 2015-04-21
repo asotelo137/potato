@@ -189,13 +189,11 @@ void Shell(){
          msg.recipient = STDOUT;
          MsgSnd(&msg);
          MsgRcv(&msg);
-         breakpoint(); 
          //prompt for login (send msg to STDOUT, receive reply)
          MyStrCpy(msg.data,"login: ");
          msg.recipient=STDOUT;
          MsgSnd(&msg);
          MsgRcv(&msg);
-         breakpoint(); 
          //get login entered (send msg to STDIN, receive reply)
          msg.recipient=STDIN;
          MsgSnd( &msg);
