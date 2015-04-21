@@ -17,5 +17,7 @@ int SemGet(int);
 //phase 5
 void MsgSnd(msg_t *);
 void MsgRcv(msg_t *);
+//phase6
+void TipIRQ3();
 
 #endif
