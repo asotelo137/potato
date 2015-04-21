@@ -141,7 +141,7 @@ void Init(){
 void shell(){
    int BAUD_RATE, divisor; //for serial oal port 
    msg_t msg;              //local message space
-   char login[101], password[101]; //login and password strings
+   char login[101], password[101],slogin[101],spassword[101]; //login and password strings
    int STDIN = 4, STDOUT = 5;
    
    MyBzero((char *) &terminal.TX_q,sizeof(q_t));
@@ -151,8 +151,8 @@ void shell(){
    terminal.RX_sem = SemGet(0);   //get a semaphore to set RX_sem, count 0 (no char from terminal KB)
    terminalecho = 1;   //set echo to 1 (default is to echo back whatever typed from terminal)
    terminal.TX_extra = 1;   //set TX_extra to 1 (an IRQ3 TXRDY event missed)
-   login = "Aaron";
-   password = "rules";
+   slogin = "Aaron";
+   spassword = "rules";
    /*
    // COM1-8_IOBASE: 0x3f8 0x2f8 0x3e8 0x2e8 0x2f0 0x3e0 0x2e0 0x260
    // transmit speed 9600 bauds, clear IER, start TXRDY and RXRDY
@@ -205,15 +205,13 @@ void shell(){
          MyStrCpy(password,msg.data);
          //string-compare login and password; if same, break loop A
          //(else) prompt "Invalid login!\n\0"
-        if(strcmp(login,password)==0)
-         }
+        if(MyStrcmp(login,slogin)==1 and MyStrcmp(password,spassword) == 1)){
+           break;
+        }else
          if(result == 0 )}
             MyStrCpy(msg.data," Invalid login! ");
             MsgSnd(STDOUT,&msg);
             MsgRcv(&msg);
-         }
-         if(result == 1){
-            break;
          }
       }//repeat loop A
       while(1){//loop B:
