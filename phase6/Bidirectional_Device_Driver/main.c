@@ -46,6 +46,8 @@ int print_semaphore,print_it;
 
 
 //******************************************************************
+//phase 6
+terminal_t terminal;
 struct i386_gate *IDT_ptr;
 
 
@@ -126,8 +128,6 @@ void InitData() {
    //MyBZero((char *)semaphore[product_semaphore].wait_q,Q_SIZE);
    product=0;
    */ 
-   //phase6
-   terminal_t terminal;
    
 }
 
