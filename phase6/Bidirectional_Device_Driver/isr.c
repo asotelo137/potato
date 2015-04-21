@@ -307,7 +307,7 @@ void IRQ3RX() { // queue char read from port to RX and echo queues
          EnQ((int) '\r', &terminal.echo_q);//enqueue '\r' then '\n' to echo queue of terminal interface
       } else {
          if(terminal.echo == 1){//if echo of terminal interface is 1 {
-             EnQ((int) ch , terminal.echo_q);//enqueue ch to echo queue of terminal interface
+             EnQ((int) ch , terminal->echo_q);//enqueue ch to echo queue of terminal interface
          }
       }
 	
