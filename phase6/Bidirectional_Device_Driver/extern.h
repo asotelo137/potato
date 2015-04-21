@@ -34,5 +34,5 @@ extern int print_it,print_semaphore;
 //phase 5 ****************************************88
 extern mbox_t mbox[MAX_PROC];
 //phase 6
-extern terminal_t terminal
+extern terminal_t terminal;
 #endif
