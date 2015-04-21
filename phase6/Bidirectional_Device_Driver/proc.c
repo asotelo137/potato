@@ -143,7 +143,7 @@ void shell(){
    msg_t msg;              //local message space
    char login[101], password[101],command[101]; //login and password strings
    int STDIN = 4, STDOUT = 5;
-   
+   int result;
    MyBzero((char *) &terminal.TX_q,sizeof(q_t));
    MyBzero((char *) &terminal.RX_q,sizeof(q_t));
    MyBzero((char *) &terminal.echo_q,sizeof(q_t));//clear 3 queues: TX_q, RX_q, echo_q
@@ -206,7 +206,8 @@ void shell(){
          MyStrCpy(password,msg.data);
          //string-compare login and password; if same, break loop A
          //(else) prompt "Invalid login!\n\0"
-        if(MyStrcmp(login,password) == 1)){
+          result = MyStrcmp(login,password); 
+        if( result){
            break;
         }else
          if(result == 0 ){
