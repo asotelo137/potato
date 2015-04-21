@@ -190,7 +190,7 @@ void Kernel(TF_t *TF_ptr) {
          SemWaitISR();
          break;
       case SEMPOST_INTR://phase 3 *********************************
-         SemPostISR();
+         SemPostISR(CRP);
          break;
       case SEMGET_INTR:
          SemGetISR();
