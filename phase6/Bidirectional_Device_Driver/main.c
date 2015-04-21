@@ -129,6 +129,9 @@ void InitData() {
    product=0;
    */ 
    //phase 6
+   CreateISR(3);
+   CreateISR(4);
+   CreateISR(5);
    
    
 }
@@ -160,12 +163,12 @@ int main() {
    CreateISR(i);
    j=DeQ(&none_q);
    CreateISR(j);
-   i=DeQ(&none_q);
-   CreateISR(i);
-   j=DeQ(&none_q);
-   CreateISR(j);
-   i=DeQ(&none_q);
-   CreateISR(i);
+   //i=DeQ(&none_q);
+   //CreateISR(i);
+   //j=DeQ(&none_q);
+   //CreateISR(j);
+   //i=DeQ(&none_q);
+   //CreateISR(i);
    InitIDT();
    cons_printf("{pcb[0] is at %u. \n",pcb[0].TF_ptr);
    Dispatch(pcb[0].TF_ptr);    // to dispatch/run CRP
