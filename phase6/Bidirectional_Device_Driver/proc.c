@@ -186,9 +186,8 @@ void Shell(){
       cons_printf("fuck you cam ");
       while(1){//loop A:
          //prompt valid commands (send msg to STDOUT, receive reply)
-         cons_printf("hey cam, fuck you");
          MyStrCpy(msg.data,"available commands: whoami, bye \n");
-         msg.recipient=STDOUT;
+         msg.recipient = STDOUT;
          MsgSnd(&msg);
          MsgRcv(&msg);
          //prompt for login (send msg to STDOUT, receive reply)
