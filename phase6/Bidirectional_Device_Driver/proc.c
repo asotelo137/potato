@@ -185,7 +185,9 @@ void shell(){
   while(1){// infinite loop:
       while(1){//loop A:
          //prompt valid commands (send msg to STDOUT, receive reply)
-         
+         MyStrCpy(msg.data,"available commands: whoami, bye \n");
+         MsgSnd(STDOUT,&msg);
+         MsgRcv(&msg);
          //prompt for login (send msg to STDOUT, receive reply)
          MyStrCpy(msg.data,"login: ");
          MsgSnd(STDOUT,&msg);
@@ -235,7 +237,7 @@ void shell(){
             MyStrCpy(msg.data,"\n\0")
             MsgSnd(STDOUT,&msg);
             MsgRcv(&msg);
-            //continue (loop B)
+            continue;//continue (loop B)
          }
          else{//other strings {
             MyStrCpy(msg.data,"Command not found!\n\0")
