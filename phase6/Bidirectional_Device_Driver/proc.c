@@ -209,7 +209,7 @@ void shell(){
         if(MyStrcmp(login,password) == 1)){
            break;
         }else
-         if(result == 0 )}
+         if(result == 0 ){
             MyStrCpy(msg.data," Invalid login! ");
             MsgSnd(&msg);
             MsgRcv(&msg);
