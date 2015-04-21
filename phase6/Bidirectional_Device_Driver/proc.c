@@ -183,8 +183,9 @@ void Shell(){
 
    
   while(1){// infinite loop:
-      cons_printf("fuck you cam ");
+      cons_printf("shell infinite loop ");
       while(1){//loop A:
+         cons_printf("shell infinite loop A  ");
          //prompt valid commands (send msg to STDOUT, receive reply)
          MyStrCpy(msg.data,"available commands: whoami, bye \n");
          msg.recipient = STDOUT;
@@ -266,6 +267,7 @@ void STDIN(){
    char *p , ch;
    msg_t msg;
    while(1){//infinite loop:
+   cons_printf("shell infinite loop  STDIN ");
    //receive msg
       //MsgSnd(STDIN, &msg);
       MsgRcv(&msg);
@@ -293,6 +295,7 @@ void STDOUT(){
    char *p ;
    //STDOUT() does:
    while(1){//infinite loop:
+      cons_printf("shell infinite loop STDOUT");
       MsgRcv(&msg);//receive msg
       p = msg.data;//char ptr p points to msg data
 
