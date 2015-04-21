@@ -277,3 +277,23 @@ void IRQ3ISR(){
         	IRQ3TX();//call IRQ3TX() to use it to TX char
       	}
 }
+
+void IRQ3TX() { // dequeue TX_q to write to port
+      char ch = 0; // NUL, '\0'
+
+      if(terminal.echo_q.size == 0){//if echo queue of terminal interface is not empty {
+         ch = DeQ(&terminal.echo_q);//ch = dequeue from echo queue of terminal interface
+      } else {
+         if(terminal.TX_q.size != 0){//if TX queue of terminal interface is not empty
+            ch = DeQ(&terminal.TX_q);//ch = dequeue from TX queue of terminal interface
+            SemPostISR(terminal.TX_sem);//SemPostISR( TX semaphore of terminal interface )
+      }
+
+      if(ch == 0){//if ch is 0 {
+         terminal.TX_extra = 1;//TX_extra is set to 1
+      } else {
+         outportb(COM2_IOBASE+DATA,0);//use outportb() to send ch to COM2_IOBASE+DATA
+         terminal.TX_extra = 0;//TX_extra is cleared (to 0)
+      }
+   }
+   
