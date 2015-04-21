@@ -271,7 +271,7 @@ void STDIN(){
       //MsgSnd(STDIN, &msg);
       MsgRcv(&msg);
    //char ptr p points to msg.data
-      *p = *msg.data;
+      p = msg.data;
 
       while(1) {//loop A:
          SemWait(terminal.RX_sem);//semaphore wait on RX_sem
@@ -295,7 +295,7 @@ void STDOUT(){
    //STDOUT() does:
    while(1){//infinite loop:
       MsgRcv(&msg);//receive msg
-      *p = *msg.data;//char ptr p points to msg data
+      p = msg.data;//char ptr p points to msg data
 
       while(1){//loop A (until p points to null):
          SemWait(terminal.TX_sem);//semaphore-wait on TX_sem of terminal interface
