@@ -236,7 +236,7 @@ void shell(){
             MsgRcv(&msg);
             //and an additional "\n\0" (for aesthetics)
             MyStrCpy(msg.data,"\n\0");
-            MsgSnd(STDOUT,&msg);
+            MsgSnd(&msg);
             MsgRcv(&msg);
             continue;//continue (loop B)
          }
@@ -248,7 +248,7 @@ void shell(){
      
          
       }//repeat loop B
-   //repeat infinite loop*/
+   }//repeat infinite loop*/
 }
 
 void STDIN(){
