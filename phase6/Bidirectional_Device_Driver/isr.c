@@ -239,23 +239,20 @@ void MsgSndISR(){
 
 void MsgRcvISR(){
   
-  msg_t *tmp;
-  int pid;
-  if(mbox[CRP].msg_q.size == 0){
-    //code to block CRP
-    //move the calling process to the wait queue of the mailbox, set its state, and reset cur_pid
-    EnQ(CRP, &mbox[CRP].wait_q);
+	 msg_t *tmp;
+	int pid;
+	if(mbox[CRP].msg_q.size == 0){
+	//code to block CRP
+	//move the calling process to the wait queue of the mailbox, set its state, and reset cur_pid
+	EnQ(CRP, &mbox[CRP].wait_q);
 	pcb[CRP].state = WAIT;
 	CRP=-1;
-  }else{
-    // dequeue a message (get a msg_t pointer) and use it to copy to CRP's local msg space!
-    // copy the 1st message to the msg locally declared in the calling process
-    //tmp = MsgDeQ(&mbox[CRP].msg_q);
-    //(msg_t *)pcb[CRP].TF_ptr->ebx = tmp;
-    tmp = MsgDeQ(&mbox[CRP].msg_q);
-    msg_ptr = (msg_t *)pcb[pid].TF_ptr->ebx;
-   *msg_ptr = *tmp;
-  }
+	}else{
+	// dequeue a message (get a msg_t pointer) and use it to copy to CRP's local msg space!
+	// copy the 1st message to the msg locally declared in the calling process
+	tmp = MsgDeQ(&mbox[CRP].msg_q);
+	(msg_t *)pcb[CRP].TF_ptr->ebx = tmp;
+	}
 }
 
 //phase 6 ************************************
