@@ -234,7 +234,7 @@ void shell(){
             MsgSnd(STDOUT,&msg);
             MsgRcv(&msg);
             //and an additional "\n\0" (for aesthetics)
-            MyStrCpy(msg.data,"\n\0")
+            MyStrCpy(msg.data,"\n\0");
             MsgSnd(STDOUT,&msg);
             MsgRcv(&msg);
             continue;//continue (loop B)
