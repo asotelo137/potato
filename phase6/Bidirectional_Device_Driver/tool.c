@@ -93,3 +93,14 @@ void MyStrCpy( char *dest, char *src){
 	
 }
 
+int MyStrcmp(char *s1, char *s2){
+	while( *s1 and *s2){
+		if(*s1 == *s2){
+			s1++;
+			s2++;
+		}else 
+			return 0;
+	}
+	return 1;
+}
+
