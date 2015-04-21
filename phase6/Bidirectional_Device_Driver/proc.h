@@ -12,5 +12,9 @@ void Producer();
 void PrintDriver();
 //phase 5
 void Init();
+//phase6
+void Shell();
+void STDIN();
+void STDOUT();
 
 #endif
