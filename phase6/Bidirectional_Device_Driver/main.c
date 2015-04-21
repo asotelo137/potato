@@ -61,7 +61,6 @@ void InitIDT(){
    SetEntry(GETPID_INTR,GetPidEntry);
    SetEntry(SLEEP_INTR,SleepEntry);
    
-
    //phase 3 
    /*
    InitIDT()
@@ -83,7 +82,9 @@ void InitIDT(){
    outportb(0x21,~129);
    //***************
     //outportb(0x21,~1);
-    
+   //phase 6 ***********************************************************
+   SetEntry(IRQ3_INTR,IRQ3Entry());
+   
 }
 
 void InitData() {
@@ -202,6 +203,9 @@ void Kernel(TF_t *TF_ptr) {
          break;
       case MSGRCV_INTR:
          MsgRcvISR();
+         break;
+      case IRQ3_INTR:
+         IRQ3ISR();
          break;
       default:
          cons_printf("Panic!\n");
