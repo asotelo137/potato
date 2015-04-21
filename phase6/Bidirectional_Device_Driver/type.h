@@ -57,7 +57,7 @@ typedef struct{
 }mbox_t;
 
 typedef struct{
-   q_t TX_q  // to transmit to terminal
+   q_t TX_q,  // to transmit to terminal
        RX_q, // to receive from terminal
        echo_q; // to echo back to terminal
    int TX_sem, // transmit space available count
