@@ -224,12 +224,9 @@ void shell(){
          //MyStrCpy(command,msg.data);
          if (MyStrlen(msg.data) == 0 ) {
             continue;//continue (loop B)
-         }else{
-            if(MyStrcmp(msg.data,"Bye\0")){//if command string is "bye" {
-               break;//break (loop B)
-            }
-         }
-         if(MyStrcmp(msg.data,"whoami\0"))//if command string is "whoami" {
+         }else if(MyStrcmp(msg.data,"bye\0")){//if command string is "bye" {
+            break;//break (loop B)
+         }else if(MyStrcmp(msg.data,"whoami\0"))//if command string is "whoami" {
             //show login string,
             MyStrCpy(msg.data,login);
             MsgSnd(STDOUT,&msg);
