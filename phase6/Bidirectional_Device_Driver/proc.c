@@ -285,7 +285,7 @@ void STDIN(){
          p++;
         // ch=p;
       }//repeat loop A
-      p = '\0';   // add NUL to terminate msg.data
+      *p = '\0';   // add NUL to terminate msg.data
       
       msg.recipient = msg.sender; //set msg recipient with sender
       MsgSnd(&msg);// send msg, as reply to sender (MsgSndISR() must authenticate sender)
