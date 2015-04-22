@@ -286,7 +286,7 @@ void IRQ3TX() { // dequeue TX_q to write to port
          }
       }
 
-      if(ch == 0){//if ch is 0 {
+      if(ch == '\0'){//if ch is 0 {
          terminal.TX_extra = 1;//TX_extra is set to 1
       } else {
          outportb(COM2_IOBASE+DATA,ch);//use outportb() to send ch to COM2_IOBASE+DATA
