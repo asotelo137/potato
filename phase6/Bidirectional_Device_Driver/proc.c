@@ -281,7 +281,7 @@ void STDIN(){
          break;
          }
          p++ ;
-         p= ch;
+         ch=p;
       }//repeat loop A
       p = '\0';   // add NUL to terminate msg.data
       
