@@ -282,7 +282,7 @@ void IRQ3TX() { // dequeue TX_q to write to port
          ch =DeQ(&terminal.echo_q);//ch = dequeue from echo queue of terminal interface
       } else {
          if(terminal.TX_q.size != 0){//if TX queue of terminal interface is not empty
-            ch = (char) DeQ(&terminal.TX_q);//ch = dequeue from TX queue of terminal interface
+            ch = DeQ(&terminal.TX_q);//ch = dequeue from TX queue of terminal interface
             SemPostISR(terminal.TX_sem);//SemPostISR( TX semaphore of terminal interface )
          }
       }
