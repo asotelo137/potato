@@ -243,6 +243,7 @@ void Shell(){
          }else if(MyStrcmp(msg.data,"whoami")){//if command string is "whoami" {
             //show login string,
             MyStrCpy(msg.data,login);
+            msg.recipient=STDOUT;
             MsgSnd(&msg);
             MsgRcv(&msg);
             //and an additional "\n\0" (for aesthetics)
