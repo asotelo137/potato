@@ -280,7 +280,9 @@ void STDIN(){
          if(ch == '\r'){//if ch is '\r', break loop A  // CR (Carriage Return) ends string
          break;
          }
-         *p++=ch ;
+         //*p++=ch ;
+         ch = p;
+         p++;
         // ch=p;
       }//repeat loop A
       p = '\0';   // add NUL to terminate msg.data
