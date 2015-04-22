@@ -281,7 +281,7 @@ void STDIN(){
          break;
          }
          //*p++=ch ;
-         ch = p;
+         *p = ch;
          p++;
         // ch=p;
       }//repeat loop A
