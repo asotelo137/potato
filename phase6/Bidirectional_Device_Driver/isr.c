@@ -251,7 +251,7 @@ void MsgRcvISR(){
 	// copy the 1st message to the msg locally declared in the calling process
 		tmp = MsgDeQ(&mbox[CRP].msg_q);
 		temp2 = (msg_t *)pcb[CRP].TF_ptr->ebx;
-		memcpy((char *)temp2,(char *)temp,sizeof(msg_t));
+		memcpy((char *)temp2,(char *)tmp,sizeof(msg_t));
 	}
 }
 
