@@ -286,7 +286,6 @@ void STDIN(){
       p = '\0';   // add NUL to terminate msg.data
       
       msg.recipient = msg.sender; //set msg recipient with sender
-      msg.sender=CRP;
       MsgSnd(&msg);// send msg, as reply to sender (MsgSndISR() must authenticate sender)
    }//repeat infinite loop*/
 
