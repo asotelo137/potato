@@ -274,7 +274,7 @@ void STDIN(){
    //char ptr p points to msg.data
       p = msg.data;
 
-      while(*p != '\0') {//loop A:
+      while(1) {//loop A:
          SemWait(terminal.RX_sem);//semaphore wait on RX_sem
          ch = DeQ(&terminal.RX_q);//ch = dequeue from RX_q
          if(ch == '\r'){//if ch is '\r', break loop A  // CR (Carriage Return) ends string
