@@ -261,7 +261,6 @@ void IRQ3ISR(){
 	outportb(0x20,0x63);//dismiss IRQ 3: use outportb() to send 0x63 to 0x20
 	//read event from COM2_IOBASE+IIR (Interrupt Indicator Register)
 	event = inportb(COM2_IOBASE+IIR);
-	cons_printf(" %d \n",event);
       	switch(event) {
          case IIR_TXRDY://case IIR_TXRDY, call IRQ3TX(), break, (send char to terminal video)
          		IRQ3TX();
