@@ -302,11 +302,12 @@ void STDOUT(){
 
       while(*p != '\0'){//loop A (until p points to null):
          SemWait(terminal.TX_sem);//semaphore-wait on TX_sem of terminal interface
-         EnQ((int) p,&terminal.TX_q);//enqueue what p points to to TX_q of terminal interface
+         EnQ(*p,&terminal.TX_q);//enqueue what p points to to TX_q of terminal interface
          TipIRQ3();//issue syscall "TipIRQ3();" to manually start IRQ 3
          if(*p == '\n'){//if what p points to is '\n' {
             SemWait(terminal.TX_sem);//semaphore-wait on TX_sem of terminal interface
-            EnQ((int) '\r',&terminal.TX_q);//enqueue '\r' to TX_q  of terminal interface
+            *p='\r';
+            EnQ(*p,&terminal.TX_q);//enqueue '\r' to TX_q  of terminal interface
          }
          p++;//advance p
       }//repeat loop A
