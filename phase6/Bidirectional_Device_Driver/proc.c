@@ -183,7 +183,9 @@ void Shell(){
 
    
   while(1){// infinite loop:
+   
       while(1){//loop A:
+         cons_printf("proc.loopA");
          //prompt valid commands (send msg to STDOUT, receive reply)
          MyStrCpy(msg.data,"available commands: whoami, bye \n\0");
          msg.recipient = STDOUT;
@@ -224,6 +226,7 @@ void Shell(){
       }//repeat loop A
       while(1){//loop B:
          //prompt for entering command string
+         cons_printf("proc.loopB");
          MyStrCpy(msg.data,"enter command: \0");
          msg.recipient=STDOUT;
          MsgSnd(&msg);
