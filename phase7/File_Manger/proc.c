@@ -320,4 +320,78 @@ void STDOUT(){
    }//repeat infinite loop
 }
 
-void ShellDirStr(attr_t *p, char *str);
+void ShellDirStr(attr_t *p, char *str) {
+   // p points to attr_t and then obj name (p+1)
+      char *obj = (char *)(p + 1);
+
+   // make str from the attr_t that p points to
+      sprintf(str, " - - - -  size =%6d     %s\n", p->size, obj);
+      if ( A_ISDIR(p->mode) ) str[1] = 'd';         // mode is directory
+      if ( QBIT_ON(p->mode, A_ROTH) ) str[3] = 'r'; // mode is readable
+      if ( QBIT_ON(p->mode, A_WOTH) ) str[5] = 'w'; // mode is writable
+      if ( QBIT_ON(p->mode, A_XOTH) ) str[7] = 'x'; // mode is executable
+   }
+void ShellDir(char *cmd, int STDOUT, int FileMgr) {
+      char obj[101], str[101];
+      msg_t msg;
+
+   // if cmd is "dir\0" (or "333\0") assume root: "dir /\0"
+   // else, there should be an obj after 1st 4 letters "dir "
+      if(MyStrcmp(cmd, "dir\0") == 1 || MyStrcmp(cmd, "333\0") == 1) {
+         obj[0] = '/';
+         obj[1] = '\0';                           // null-terminate the obj[]
+      } else {
+         cmd += 4;         // skip 1st 4 letters "dir " and get the rest (obj)
+         MyStrcpy(obj, cmd); // make sure cmd is null-terminated from Shell()
+      }
+
+   //*************************************************************************
+   // write code:
+   // apply standard "check object" protocol
+   //    prep msg: put correct code and obj into msg
+   //    send msg to FileMgr, receive reply, chk result code
+   // if code is not GOOD
+   //    prompt error msg via STDOUT
+   //    receive reply
+   //    return;        // cannot continue
+   //*************************************************************************
+
+   //*************************************************************************
+   // otherwise, code is good, returned msg has an "attr_t" type,
+   // check if user directed us to a file, then "dir" for that file;
+   // write code:
+   // p = (attr_t *)msg.data;
+   //
+   // if( ! A_ISDIR(p->mode) ) {
+   //    ShellDirStr(p, str);        // str will be built and returned
+   //    prep msg and send to STDOUT
+   //    receive reply
+   //    return;
+   // }
+   //*************************************************************************
+
+   //*************************************************************************
+   // if continued here, it's a directory
+   // request to open it, then issue read in loop
+   // write code:
+   // apply standard "open object" protocol
+   // prep msg: put code and obj in msg
+   // send msg to FileMgr, receive msg back (should be OK)
+   //
+   // loop
+   //    apply standard "read object" protocol
+   //    prep msg: put code in msg and send to FileMgr
+   //    receive reply
+   //    if code came back is not GOOD, break loop
+   //    (if continued, code was good)
+   //    do the same thing with ShellDirStr() like above
+   //    then show str via STDOUT
+   // }
+   //*************************************************************************
+   //*************************************************************************
+   // write code:
+   // (abbreviated below since same as what done above)
+   // apply standard "close object" protocol with FileMgr
+   // if response is not GOOD, display error msg via STDOUT...
+   //*************************************************************************
+   }
