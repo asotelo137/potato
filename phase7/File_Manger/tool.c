@@ -117,7 +117,7 @@ int MyStrlen(char *s){
 }	
 
 void MyMemcpy(char *dest, char *src, int size){
-	int i'
+	int i;
 	for(i = 0; i <= size ; i++){
 		*dest = *src;
 		src++;
@@ -134,8 +134,5 @@ int MyStrcmpSize(char *p, char *q, int size){
 		}else 
 			return 0;
 	}
-	if(*s1 != *s2){
-		return 0;
-	}
-		return 1;
+	return 1;
 }
