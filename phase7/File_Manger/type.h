@@ -44,6 +44,8 @@ typedef struct{
    int recipient;
    int time_stamp;
    char data[101];
+   int code;
+   int number[3];
 }msg_t;
 
 typedef struct{
