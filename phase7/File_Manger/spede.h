@@ -16,7 +16,7 @@
 
 // #include <spede/machine/pic.h> // IRQ_VECTOR(), IRQ_TIMER, IRQ_COM1, ICU0_IOBASE, SPECIFIC_EOI(), etc.
 // #include <spede/stdlib.h> // TRUE, FALSE, NULL, etc.
-// #include <spede/string.h> // memset(), strcpy(), strtok(), etc.
+#include <spede/string.h> // memset(), strcpy(), strtok(), etc.
 // #include <spede/time.h> // CLK_TCK, time_t, clock(), time(), etc.
 
 //Phase 4 add-on
