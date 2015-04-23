@@ -143,6 +143,9 @@ void Shell(){
    msg_t msg;              //local message space
    char login[101], password[101],command[101]; //login and password strings
    int STDIN = 4, STDOUT = 5;
+   //phase 7 
+   int FILEMGR = 6;
+   
    int result;
    MyBZero((char *) &terminal.TX_q,sizeof(q_t));
    MyBZero((char *) &terminal.RX_q,sizeof(q_t));
