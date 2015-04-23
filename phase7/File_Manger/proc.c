@@ -319,3 +319,5 @@ void STDOUT(){
       MsgSnd(&msg);//send msg (back to sender)
    }//repeat infinite loop
 }
+
+void ShellDirStr(attr_t *p, char *str);
