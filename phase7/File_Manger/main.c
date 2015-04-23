@@ -132,7 +132,7 @@ void InitData() {
    CreateISR(3);
    CreateISR(4);
    CreateISR(5);
-   
+   CreateISR(6);
    
 }
 
