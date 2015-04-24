@@ -45,6 +45,7 @@
 #define MODE_READFILE (0444 | A_REG)
 #define MODE_DIR (0777 | A_DIR)
 
+
 #define END_DIR_INODE ((unsigned int)(~0)) // end marker of directory content
 
 typedef struct {
