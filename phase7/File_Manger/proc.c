@@ -342,19 +342,26 @@ void ShellDir(char *cmd, int STDOUT, int FileMgr) {
          obj[1] = '\0';                           // null-terminate the obj[]
       } else {
          cmd += 4;         // skip 1st 4 letters "dir " and get the rest (obj)
-         MyStrcpy(obj, cmd); // make sure cmd is null-terminated from Shell()
+         MyStrCpy(obj, cmd); // make sure cmd is null-terminated from Shell()
       }
 
    //*************************************************************************
    // write code:
-   // apply standard "check object" protocol
-   //    prep msg: put correct code and obj into msg
+   MyStrCpy(msg,obj);// apply standard "check object" protocol
+   msg.code=80;//    prep msg: put correct code and obj into msg
+   
    //    send msg to FileMgr, receive reply, chk result code
+   msg.recipient=FileMgr;
+   MsgSnd(&msg);
+   MsgRcv(&msg);
    // if code is not GOOD
-   //    prompt error msg via STDOUT
-   //    receive reply
-   //    return;        // cannot continue
-   //*************************************************************************
+   if(msg.code != 1){
+      MyStrCpy(msg.data,"Error Obj not good \n\0");//    prompt error msg via STDOUT
+      msg.recipient=STDOUT;
+      MsgSnd(&msg);
+      MsgRcv(&msg);   //    receive reply
+      return;//    return;        // cannot continue
+   }//*************************************************************************
 
    //*************************************************************************
    // otherwise, code is good, returned msg has an "attr_t" type,
