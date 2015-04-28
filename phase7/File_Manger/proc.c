@@ -471,6 +471,7 @@ void ShellTyp(char *cmd, int STDOUT, int FileMgr) {
    // request to close FD
    //*************************************************************************
    int FILEMGR;
+   FILEMGR = 6;
 
    *cmd++;
    MyStrCpy(msg.data, cmd);
