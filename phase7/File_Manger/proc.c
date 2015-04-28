@@ -387,7 +387,7 @@ void ShellDir(char *cmd, int STDOUT, int FileMgr) {
       return;
    }
    //*************************************************************************
-   cons_printf("Good Shit\n")
+   cons_printf("Good Shit\n");
    //*************************************************************************
    // if continued here, it's a directory
    // request to open it, then issue read in loop
