@@ -432,7 +432,7 @@ void ShellDir(char *cmd, int STDOUT, int FileMgr) {
    // (abbreviated below since same as what done above)
    // apply standard "close object" protocol with FileMgr
    MyStrCpy(msg.data,obj);
-   msg.code=84;
+   msg.code=84;//close obj
    // send msg to FileMgr, receive msg back (should be OK)
    msg.recipient=FileMgr;
    MsgSnd(&msg);
@@ -476,13 +476,13 @@ void ShellTyp(char *cmd, int STDOUT, int FileMgr) {
    cmd += 4;
    MyStrCpy(msg.data, cmd);
    //result = ChkObj(msg.data, (attr_t *) msg.data)
-   msg.code=80;// prep msg: put correct code and obj into msg
+   msg.code=80;//chek obj// prep msg: put correct code and obj into msg
    // send msg to FileMgr, receive reply, chk result code
    msg.recipient=FileMgr;
    MsgSnd(&msg);
    MsgRcv(&msg);
    
-   if(msg.code != 1 || A_ISDIR(p->mode)){
+   if(msg.code != 1 || A_ISREG(p->mode)){
    	MyStrCpy(msg.data,"Usage: typ [path]<filename>\n\0");
    	msg.recipient = STDOUT;
    	MsgSnd(&msg);
