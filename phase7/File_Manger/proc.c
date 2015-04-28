@@ -498,6 +498,7 @@ void ShellTyp(char *cmd, int STDOUT, int FileMgr) {
    	MsgRcv(&msg);
    	return;
    }else{
+      MyStrCpy(msg.data, cmd);
    	msg.code = OPEN_OBJ;
    	msg.recipient = FileMgr;
    	MsgSnd(&msg);
