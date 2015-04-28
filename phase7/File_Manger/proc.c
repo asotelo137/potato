@@ -255,7 +255,7 @@ void Shell(){
             continue;//continue (loop B)
          }else if(MyStrcmp(msg.data,"dir\0")){
             ShellDir(msg.data, STDOUT,FileMgr);
-         }else if (MyStrcmp(msg.data,"typ")){
+         }else if (MyStrcmpSize(msg.data,"typ",3)){
             ShellTyp(msg.data, STDOUT,FileMgr);
          }
          else{//other strings {
