@@ -6,6 +6,7 @@
 #include "proc.h"    // for Idle, SimpleProc, DispatchProc
 #include "syscall.h"
 #include "tool.h"
+#include "FileMgr.h"
 
 void Idle() {
    int i;//seconds;
