@@ -128,7 +128,7 @@ void MyMemcpy(char *dest, char *src, int size){
 
 int MyStrcmpSize(char *p, char *q, int size){
 	int i;
-	for(i = 0; i <= size ; i++){
+	for(i = 0; i < size ; i++){
 		if(*p == *q){
 			p++;
 			q++;
