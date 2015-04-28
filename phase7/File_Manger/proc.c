@@ -515,13 +515,13 @@ void ShellTyp(char *cmd, int STDOUT, int FileMgr) {
    		if(msg.code != 1){
    			break;
    		}
-   	   ShellDirStr(p, str);
-   		MyStrCpy(msg.data,obj);
+   	   //ShellDirStr(p, str);
+   		//MyStrCpy(msg.data,obj);
    		msg.recipient=STDOUT;
    		MsgSnd(&msg);
    		MsgRcv(&msg);	
    	}
-   	MyStrCpy(msg.data,obj);
+   	//MyStrCpy(msg.data,obj);
    	msg.code = CLOSE_OBJ;
    	msg.recipient = FileMgr;
    	MsgSnd(&msg);
