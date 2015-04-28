@@ -394,17 +394,39 @@ void ShellDir(char *cmd, int STDOUT, int FileMgr) {
    // write code:
    // apply standard "open object" protocol
    // prep msg: put code and obj in msg
+   MyStrCpy(msg.data,obj);
+   msg.code=81;
    // send msg to FileMgr, receive msg back (should be OK)
+   msg.recipient=FILEMGR;
+   MsgSnd(&msg);
+   MsgRcv(&msg);
    //
    // loop
-   //    apply standard "read object" protocol
-   //    prep msg: put code in msg and send to FileMgr
-   //    receive reply
-   //    if code came back is not GOOD, break loop
-   //    (if continued, code was good)
-   //    do the same thing with ShellDirStr() like above
-   //    then show str via STDOUT
-   // }
+   while(1){
+      //    apply standard "read object" protocol
+      //    prep msg: put code in msg and send to FileMgr
+      MyStrCpy(msg.data,obj);
+      msg.code=82;
+      msg.recipient=FILEMGR;
+      MsgSnd(&msg);
+       //    receive reply
+      MsgRcv(&msg);
+      
+      //    if code came back is not GOOD, break loop
+      if(msg.code != 1){
+         break;
+      }
+      //    (if continued, code was good)
+      //    do the same thing with ShellDirStr() like above
+      ShellDirStr(p, str);       
+      //prep msg and send to STDOUT
+      MyStrCpy(msg.data,str);
+      //    then show str via STDOUT
+      msg.recipient=STDOUT;
+      MsgSnd(&msg);
+      //receive reply
+      MsgRcv(&msg);
+   }
    //*************************************************************************
    //*************************************************************************
    // write code:
