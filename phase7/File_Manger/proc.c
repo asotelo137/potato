@@ -142,7 +142,7 @@ void Init(){
 void Shell(){
    int BAUD_RATE, divisor; //for serial oal port 
    msg_t msg;              //local message space
-   char login[101], password[101],command[101]; //login and password strings
+   char login[101], password[101]; //login and password strings
    int STDIN = 4, STDOUT = 5, FileMgr =6;
    
    
@@ -337,6 +337,7 @@ void ShellDirStr(attr_t *p, char *str) {
 void ShellDir(char *cmd, int STDOUT, int FileMgr) {
       //phase 7 
       attr_t *p;
+      char * string;
    int FILEMGR = 6;
       char obj[101], str[101];
       msg_t msg;
@@ -376,9 +377,9 @@ void ShellDir(char *cmd, int STDOUT, int FileMgr) {
    p = (attr_t *) msg.data;
    
    if( ! A_ISDIR(p->mode) ) {
-      ShellDirStr(p, str);        // str will be built and returned
+      string= ShellDirStr(p, str);        // str will be built and returned
       //prep msg and send to STDOUT
-      MyStrCpy(msg.data,p);
+      MyStrCpy(msg.data,string);
       msg.recipient=STDOUT;
       MsgSnd(&msg);
       //receive reply
