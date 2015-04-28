@@ -373,7 +373,7 @@ void ShellDir(char *cmd, int STDOUT, int FileMgr) {
    // otherwise, code is good, returned msg has an "attr_t" type,
    // check if user directed us to a file, then "dir" for that file;
    // write code:
-   p = (attr_t *) msg;
+   p = (attr_t *) msg.data;
    
    if( ! A_ISDIR(p->mode) ) {
       ShellDirStr(p, str);        // str will be built and returned
@@ -489,7 +489,7 @@ void ShellTyp(char *cmd, int STDOUT, int FileMgr) {
       return;//    return;        // cannot continue
    }//
    
-   p = (attr_t * ) msg; 
+   p = (attr_t * ) msg.data; 
 
    if(msg.code != 1 || !A_ISREG(p->mode)){
    	MyStrCpy(msg.data,"Usage: typ [path]<filename>\n\0");
