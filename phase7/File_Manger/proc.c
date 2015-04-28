@@ -335,6 +335,7 @@ void ShellDirStr(attr_t *p, char *str) {
    }
 void ShellDir(char *cmd, int STDOUT, int FileMgr) {
       //phase 7 
+      char *p;
    int FILEMGR = 6;
       char obj[101], str[101];
       msg_t msg;
@@ -371,7 +372,7 @@ void ShellDir(char *cmd, int STDOUT, int FileMgr) {
    // otherwise, code is good, returned msg has an "attr_t" type,
    // check if user directed us to a file, then "dir" for that file;
    // write code:
-   char * p = (attr_t *)msg.data;
+   p = (attr_t *)msg.data;
    
    if( ! A_ISDIR(p->mode) ) {
       ShellDirStr(p, str);        // str will be built and returned
