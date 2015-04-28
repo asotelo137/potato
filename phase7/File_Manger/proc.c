@@ -489,7 +489,7 @@ void ShellTyp(char *cmd, int STDOUT, int FileMgr) {
       return;//    return;        // cannot continue
    }//
    
-   p = (attr_t * ) msg.data; 
+   //p = (attr_t * ) msg.data; 
 
    if(msg.code != GOOD || A_ISDIR(p->mode)){
    	MyStrCpy(msg.data,"Usage: typ [path]<filename>\n\0");
