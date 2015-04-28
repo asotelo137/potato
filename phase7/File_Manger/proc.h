@@ -18,6 +18,7 @@ void STDIN();
 void STDOUT();
 //phase7 
 void ShellDir(char *, int , int );
+void ShellTyp(char *,int ,int);
 
 
 #endif
