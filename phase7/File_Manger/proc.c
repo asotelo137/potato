@@ -189,7 +189,7 @@ void Shell(){
    
       while(1){//loop A:
          //prompt valid commands (send msg to STDOUT, receive reply)
-         MyStrCpy(msg.data,"available commands: whoami, bye \n\0");
+         MyStrCpy(msg.data,"available commands: whoami, bye, dir,and typ \n\0");
          msg.recipient = STDOUT;
          MsgSnd(&msg);
          MsgRcv(&msg);
