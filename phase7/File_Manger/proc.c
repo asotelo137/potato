@@ -377,9 +377,9 @@ void ShellDir(char *cmd, int STDOUT, int FileMgr) {
    p = (attr_t *) msg.data;
    
    if( ! A_ISDIR(p->mode) ) {
-      string= ShellDirStr(p, str);        // str will be built and returned
+      ShellDirStr(p, str);        // str will be built and returned
       //prep msg and send to STDOUT
-      MyStrCpy(msg.data,string);
+      MyStrCpy(msg.data,str);
       msg.recipient=STDOUT;
       MsgSnd(&msg);
       //receive reply
