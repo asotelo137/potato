@@ -194,7 +194,7 @@ void Shell(){
          MsgSnd(&msg);
          MsgRcv(&msg);
          //prompt for login (send msg to STDOUT, receive reply)
-         MyStrCpy(msg.data,"login: \0");
+         MyStrCpy(msg.data,"PotatoOS login: \0");
          msg.recipient=STDOUT;
          MsgSnd(&msg);
          MsgRcv(&msg);
@@ -204,7 +204,7 @@ void Shell(){
          MsgRcv(&msg);
          MyStrCpy(login,msg.data);
          //prompt for password (same as above)
-         MyStrCpy(msg.data,"password: \0");
+         MyStrCpy(msg.data,"PotatoOS password: \0");
          msg.recipient=STDOUT;
          MsgSnd(&msg);
          MsgRcv(&msg);
@@ -228,7 +228,7 @@ void Shell(){
       }//repeat loop A
       while(1){//loop B:
          //prompt for entering command string
-         MyStrCpy(msg.data,"enter command: \0");
+         MyStrCpy(msg.data,"PotatoOS Shell>: \0");
          msg.recipient=STDOUT;
          MsgSnd(&msg);
          MsgRcv(&msg);  
@@ -362,7 +362,7 @@ void ShellDir(char *cmd, int STDOUT, int FileMgr) {
    MsgRcv(&msg);
    // if code is not GOOD
    if(msg.code != 1){
-      MyStrCpy(msg.data,"Error Obj not good \n\0");//    prompt error msg via STDOUT
+      MyStrCpy(msg.data,"Error Object not good \n\0");//    prompt error msg via STDOUT
       msg.recipient=STDOUT;
       MsgSnd(&msg);
       MsgRcv(&msg);   //    receive reply
@@ -523,6 +523,7 @@ void ShellTyp(char *cmd, int STDOUT, int FileMgr) {
    		MsgRcv(&msg);	
    	}
    	//MyStrCpy(msg.data,obj);
+   	MyStrCpy(msg.data, cmd);
    	msg.code = CLOSE_OBJ;
    	msg.recipient = FileMgr;
    	MsgSnd(&msg);
