@@ -472,7 +472,8 @@ void ShellTyp(char *cmd, int STDOUT, int FileMgr) {
    //*************************************************************************
   
 
-   cmd++;
+   //cmd++;
+   cm += 4;
    MyStrCpy(msg.data, cmd);
    //result = ChkObj(msg.data, (attr_t *) msg.data);
    
