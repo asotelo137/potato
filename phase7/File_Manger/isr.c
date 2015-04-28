@@ -44,7 +44,7 @@ void CreateISR(int pid) {
       }else if(pid == 5){
         pcb[pid].TF_ptr->eip = (unsigned int)STDOUT;
       }else if(pid == 6){
-        pcb[pid].TF_ptr->eip = (unsigned int)FileMgr;
+        pcb[pid].TF_ptr->eip = (unsigned int)FILEMGR;
       }else{
         pcb[pid].TF_ptr->eip = (unsigned int)UserProc; // other new process
       }          
