@@ -501,8 +501,7 @@ void ShellTyp(char *cmd, int STDOUT, int FileMgr) {
    			break;
    		}
    	
-   		ShellDirStr(p, str);
-   		MyStrCpy(msg.data,str);
+   		
    		msg.recipient=STDOUT;
    		MsgSnd(&msg);
    		MsgRcv(&msg);	
