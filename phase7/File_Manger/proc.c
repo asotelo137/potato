@@ -253,7 +253,7 @@ void Shell(){
             MsgSnd(&msg);
             MsgRcv(&msg);
             continue;//continue (loop B)
-         }else if(MyStrcmp(msg.data,"dir\r")){
+         }else if(MyStrcmp(msg.data,"dir\0")){
             ShellDir(msg.data, STDOUT,FileMgr);
          }else if (MyStrcmp(msg.data,"typ")){
             ShellTyp(msg.data, STDOUT,FileMgr);
