@@ -144,8 +144,7 @@ void Shell(){
    msg_t msg;              //local message space
    char login[101], password[101],command[101]; //login and password strings
    int STDIN = 4, STDOUT = 5;
-   //phase 7 
-   int FILEMGR = 6;
+   
    
    int result;
    MyBZero((char *) &terminal.TX_q,sizeof(q_t));
@@ -333,6 +332,8 @@ void ShellDirStr(attr_t *p, char *str) {
       if ( QBIT_ON(p->mode, A_XOTH) ) str[7] = 'x'; // mode is executable
    }
 void ShellDir(char *cmd, int STDOUT, int FileMgr) {
+      //phase 7 
+   int FILEMGR = 6;
       char obj[101], str[101];
       msg_t msg;
 
