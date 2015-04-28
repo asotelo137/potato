@@ -338,8 +338,6 @@ void ShellDirStr(attr_t *p, char *str) {
 void ShellDir(char *cmd, int STDOUT, int FileMgr) {
       //phase 7 
       attr_t *p;
-      
-   int FILEMGR = 6;
       char obj[101], str[101];
       msg_t msg;
 
@@ -359,7 +357,7 @@ void ShellDir(char *cmd, int STDOUT, int FileMgr) {
    msg.code=80;//    prep msg: put correct code and obj into msg
    
    //    send msg to FileMgr, receive reply, chk result code
-   msg.recipient=FILEMGR;
+   msg.recipient=FileMgr;
    MsgSnd(&msg);
    MsgRcv(&msg);
    // if code is not GOOD
@@ -398,7 +396,7 @@ void ShellDir(char *cmd, int STDOUT, int FileMgr) {
    MyStrCpy(msg.data,obj);
    msg.code=81;
    // send msg to FileMgr, receive msg back (should be OK)
-   msg.recipient=FILEMGR;
+   msg.recipient=FileMgr;
    MsgSnd(&msg);
    MsgRcv(&msg);
    //
@@ -408,7 +406,7 @@ void ShellDir(char *cmd, int STDOUT, int FileMgr) {
       //    prep msg: put code in msg and send to FileMgr
       MyStrCpy(msg.data,obj);
       msg.code=82;
-      msg.recipient=FILEMGR;
+      msg.recipient=FileMgr;
       MsgSnd(&msg);
        //    receive reply
       MsgRcv(&msg);
@@ -433,7 +431,20 @@ void ShellDir(char *cmd, int STDOUT, int FileMgr) {
    // write code:
    // (abbreviated below since same as what done above)
    // apply standard "close object" protocol with FileMgr
+   MyStrCpy(msg.data,obj);
+   msg.code=84;
+   // send msg to FileMgr, receive msg back (should be OK)
+   msg.recipient=FileMgr;
+   MsgSnd(&msg);
+   MsgRcv(&msg);
+   
    // if response is not GOOD, display error msg via STDOUT...
+   if(msg.code != 1){
+      MyStrCpy(msg.data,"Error Closing Object! \0");
+      msg.recipient=STDOUT;
+      MsgSnd(&msg);
+      MsgRcv(&msg);
+   }
    //*************************************************************************
 }
    
