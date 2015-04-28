@@ -256,7 +256,7 @@ int ReadObj( int fd, char *buff, int owner, int *lp_actual ) {
 
 // MyBzero() fills buff with 0's, necessary to clean buff
 // since Dir2Attr may not completely overwrite whole buff...
-      MyBzero( buff, 101 );
+      MyBZero( buff, 101 );
       Dir2Attr( dir_p, attr_p );
 
 // copy obj name after attr_t, add 1 to length for null
@@ -271,7 +271,7 @@ int ReadObj( int fd, char *buff, int owner, int *lp_actual ) {
 
       if( remaining == 0 ) return FM_EOF;
 
-      MyBzero( buff, 101 );  // null termination for any part of file read
+      MyBZero( buff, 101 );  // null termination for any part of file read
 
       result = remaining<100?remaining:100; // -1 saving is for last NULL
 
