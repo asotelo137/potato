@@ -143,7 +143,7 @@ void Shell(){
    int BAUD_RATE, divisor; //for serial oal port 
    msg_t msg;              //local message space
    char login[101], password[101],command[101]; //login and password strings
-   int STDIN = 4, STDOUT = 5;
+   int STDIN = 4, STDOUT = 5, FileMgr =6;
    
    
    int result;
@@ -255,6 +255,7 @@ void Shell(){
             continue;//continue (loop B)
          }else if(MyStrcmp(msg.data,"dir")){
             
+            ShellDir(msg.data, STDOUT,FileMgr)
          }
          else{//other strings {
             MyStrCpy(msg.data,"Command not found!\n\0");
