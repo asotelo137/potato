@@ -482,7 +482,7 @@ void ShellTyp(char *cmd, int STDOUT, int FileMgr) {
    MsgSnd(&msg);
    MsgRcv(&msg);
    if(msg.code != 1){
-      MyStrCpy(msg.data,"Error Obj not good \n\0");//    prompt error msg via STDOUT
+      MyStrCpy(msg.data,"Error Object is not good \n\0");//    prompt error msg via STDOUT
       msg.recipient=STDOUT;
       MsgSnd(&msg);
       MsgRcv(&msg);   //    receive reply
