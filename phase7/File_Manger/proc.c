@@ -506,7 +506,7 @@ void ShellTyp(char *cmd, int STDOUT, int FileMgr) {
    	
    	 while(1){
    	 
-   		MyStrCpy(msg.data,obj);
+   		//MyStrCpy(msg.data,obj);
    		msg.code=READ_OBJ;
    		msg.recipient=FileMgr;
    		MsgSnd(&msg);
