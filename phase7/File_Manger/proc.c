@@ -241,7 +241,7 @@ void Shell(){
             continue;//continue (loop B)
          }else if(MyStrcmp(msg.data,"bye")){//if command string is "bye" {
             break;//break (loop B)
-         }else if(MyStrcmp(msg.data,"whoami")){//if command string is "whoami" {
+         }else if(MyStrcmp(msg.data,"who")){//if command string is "whoami" {
             //show login string,
             MyStrCpy(msg.data,login);
             msg.recipient=STDOUT;
