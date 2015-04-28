@@ -491,11 +491,12 @@ void ShellTyp(char *cmd, int STDOUT, int FileMgr) {
    
    
    p = (attr_t *) msg.data;
-   if(msg.code != 1 || A_ISDIR(p->mode)){
+   if(msg.code != 1 || !A_ISREG(p->mode)){
    	MyStrCpy(msg.data,"Usage: typ [path]<filename>\n\0");
    	msg.recipient = STDOUT;
    	MsgSnd(&msg);
    	MsgRcv(&msg);
+   	return;
    }else{
    	msg.code = OPEN_OBJ;
    	msg.recipient = FileMgr;
