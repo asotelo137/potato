@@ -233,6 +233,7 @@ void MsgSndISR(){
   	int tmp_pid = DeQ(&(mbox[msg].wait_q));
   	pcb[tmp_pid].state = RUN;
   	EnQ(tmp_pid, &run_q);
+  	source->sender = CRP;
   	
   	destination = (msg_t *)pcb[tmp_pid].TF_ptr->ebx;
   	memcpy((char*)destination,(char*)source, sizeof(msg_t));
