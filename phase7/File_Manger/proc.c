@@ -481,7 +481,16 @@ void ShellTyp(char *cmd, int STDOUT, int FileMgr) {
    msg.recipient=FileMgr;
    MsgSnd(&msg);
    MsgRcv(&msg);
+   if(msg.code != 1){
+      MyStrCpy(msg.data,"Error Obj not good \n\0");//    prompt error msg via STDOUT
+      msg.recipient=STDOUT;
+      MsgSnd(&msg);
+      MsgRcv(&msg);   //    receive reply
+      return;//    return;        // cannot continue
+   }//
    
+   
+   p = (attr_t *) msg.data;
    if(msg.code != 1 || A_ISREG(p->mode)){
    	MyStrCpy(msg.data,"Usage: typ [path]<filename>\n\0");
    	msg.recipient = STDOUT;
