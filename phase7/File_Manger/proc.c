@@ -472,11 +472,11 @@ void ShellTyp(char *cmd, int STDOUT, int FileMgr) {
    //*************************************************************************
   
 
-   *cmd++;
+   cmd++;
    MyStrCpy(msg.data, cmd);
-   result = ChkObj(msg.data, (attr_t *) msg.data);
+   //result = ChkObj(msg.data, (attr_t *) msg.data);
    
-   if(result == !GOOD || A_ISDIR(p->mode)){
+   if(msg.code != 1 || A_ISDIR(p->mode)){
    	MyStrCpy(msg.data,"Usage: typ [path]<filename>\n\0");
    	msg.recipient = STDOUT;
    	MsgSnd(&msg);
