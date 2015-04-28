@@ -470,4 +470,48 @@ void ShellTyp(char *cmd, int STDOUT, int FileMgr) {
    //    display what's read via STDOUT
    // request to close FD
    //*************************************************************************
+   int FILEMGR;
+
+   *cmd++;
+   MyStrCpy(msg.data, cmd);
+   result = ChkObj(msg.data, (attr_t *) msg.data);
+   
+   if(result == !GOOD || A_ISDIR(p->mode)){
+   	MyStrCpy(msg.data,"Usage: typ [path]<filename>\n\0");
+   	msg.recipient = STDOUT;
+   	MsgSnd(&msg);
+   	MsgRcv(&msg);
+   }else{
+   	msg.code = OPEN_OBJ;
+   	msg.recipient = FILEMGR;
+   	MsgSnd(&msg);
+   	MsgRcv(&msg);
+   	
+   	
+   	 while(1){
+   	 
+   		MyStrCpy(msg.data,obj);
+   		msg.code=READ_OBJ;
+   		msg.recipient=FILEMGR;
+   		MsgSnd(&msg);
+   		MsgRcv(&msg);
+   	
+   		if(msg.code != 1){
+   			break;
+   		}
+   	
+   		ShellDirStr(p, str);
+   		MyStrCpy(msg.data,str);
+   		msg.recipient=STDOUT;
+   		MsgSnd(&msg);
+   		MsgRcv(&msg);	
+   	}
+   	MyStrCpy(msg.data,obj);
+   	msg.code = CLOSE_OBJ;
+   	msg.recipient = FILEMGR;
+   	MsgSnd(&msg);
+   	MsgRcv(&msg);
    }
+   
+}
+   
