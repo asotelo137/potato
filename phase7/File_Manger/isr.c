@@ -7,6 +7,7 @@
 #include "extern.h"
 #include "proc.h"
 #include "syscall.h"
+#include "FileMgr.h"
 
 int wakingID;
 int wake_period;
