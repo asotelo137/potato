@@ -129,11 +129,14 @@ void InitData() {
    product=0;
    */ 
    //phase 6
-   CreateISR(3);
-   CreateISR(4);
-   CreateISR(5);
-   CreateISR(6);
-   
+   i = DeQ(&none_q);
+   CreateISR(i);     // create Shell 
+   i = DeQ(&none_q);
+   CreateISR(i);     // create STDIN
+   i = DeQ(&none_q);
+   CreateISR(i);     // create STDOUT
+   i = DeQ(&none_q);
+   CreateISR(i);
 }
 
 void SelectCRP() {       // select which PID to be new CRP
