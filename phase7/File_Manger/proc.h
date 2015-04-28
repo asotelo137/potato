@@ -18,6 +18,6 @@ void STDIN();
 void STDOUT();
 //phase7 
 void ShellDir(char *, int , int );
-void ShellDirStr(attr_t *, char *);
+
 
 #endif
