@@ -255,7 +255,7 @@ void Shell(){
             continue;//continue (loop B)
          }else if(MyStrcmp(msg.data,"dir")){
             
-            ShellDir(msg.data, STDOUT,FileMgr)
+            ShellDir(msg.data, STDOUT,FileMgr);
          }
          else{//other strings {
             MyStrCpy(msg.data,"Command not found!\n\0");
