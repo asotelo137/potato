@@ -253,6 +253,8 @@ void Shell(){
             MsgSnd(&msg);
             MsgRcv(&msg);
             continue;//continue (loop B)
+         }else if(MyStrcmp(msg.data,"dir")){
+            
          }
          else{//other strings {
             MyStrCpy(msg.data,"Command not found!\n\0");
@@ -369,14 +371,18 @@ void ShellDir(char *cmd, int STDOUT, int FileMgr) {
    // otherwise, code is good, returned msg has an "attr_t" type,
    // check if user directed us to a file, then "dir" for that file;
    // write code:
-   // p = (attr_t *)msg.data;
-   //
-   // if( ! A_ISDIR(p->mode) ) {
-   //    ShellDirStr(p, str);        // str will be built and returned
-   //    prep msg and send to STDOUT
-   //    receive reply
-   //    return;
-   // }
+   p = (attr_t *)msg.data;
+   
+   if( ! A_ISDIR(p->mode) ) {
+      ShellDirStr(p, str);        // str will be built and returned
+      //prep msg and send to STDOUT
+      MyStrCpy(msg.data,p);
+      msg.recipient=STDOUT;
+      MsgSnd(&msg);
+      //receive reply
+      MsgRcv(&msg);
+      return;
+   }
    //*************************************************************************
 
    //*************************************************************************
