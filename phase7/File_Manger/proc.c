@@ -337,7 +337,7 @@ void ShellDirStr(attr_t *p, char *str) {
 void ShellDir(char *cmd, int STDOUT, int FileMgr) {
       //phase 7 
       attr_t *p;
-      char * string;
+      
    int FILEMGR = 6;
       char obj[101], str[101];
       msg_t msg;
