@@ -449,7 +449,7 @@ void ShellDir(char *cmd, int STDOUT, int FileMgr) {
 }
    
 void ShellTyp(char *cmd, int STDOUT, int FileMgr) {
-      char obj[101]; // get away without obj
+      char obj[101],str[101]; // get away without obj
       attr_t *p;
       msg_t msg;
 
@@ -515,7 +515,7 @@ void ShellTyp(char *cmd, int STDOUT, int FileMgr) {
    		if(msg.code != 1){
    			break;
    		}
-   	
+   	   ShellDirStr(p, str);
    		MyStrCpy(msg.data,obj);
    		msg.recipient=STDOUT;
    		MsgSnd(&msg);
