@@ -348,11 +348,11 @@ void ShellDir(char *cmd, int STDOUT, int FileMgr) {
 
    //*************************************************************************
    // write code:
-   MyStrCpy(msg,obj);// apply standard "check object" protocol
+   MyStrCpy(msg.data,obj);// apply standard "check object" protocol
    msg.code=80;//    prep msg: put correct code and obj into msg
    
    //    send msg to FileMgr, receive reply, chk result code
-   msg.recipient=FileMgr;
+   msg.recipient=FILEMGR;
    MsgSnd(&msg);
    MsgRcv(&msg);
    // if code is not GOOD
