@@ -470,8 +470,7 @@ void ShellTyp(char *cmd, int STDOUT, int FileMgr) {
    //    display what's read via STDOUT
    // request to close FD
    //*************************************************************************
-   int FILEMGR;
-   FILEMGR = 6;
+  
 
    *cmd++;
    MyStrCpy(msg.data, cmd);
@@ -484,7 +483,7 @@ void ShellTyp(char *cmd, int STDOUT, int FileMgr) {
    	MsgRcv(&msg);
    }else{
    	msg.code = OPEN_OBJ;
-   	msg.recipient = FILEMGR;
+   	msg.recipient = FileMgr;
    	MsgSnd(&msg);
    	MsgRcv(&msg);
    	
@@ -493,7 +492,7 @@ void ShellTyp(char *cmd, int STDOUT, int FileMgr) {
    	 
    		MyStrCpy(msg.data,obj);
    		msg.code=READ_OBJ;
-   		msg.recipient=FILEMGR;
+   		msg.recipient=FileMgr;
    		MsgSnd(&msg);
    		MsgRcv(&msg);
    	
@@ -509,7 +508,7 @@ void ShellTyp(char *cmd, int STDOUT, int FileMgr) {
    	}
    	MyStrCpy(msg.data,obj);
    	msg.code = CLOSE_OBJ;
-   	msg.recipient = FILEMGR;
+   	msg.recipient = FileMgr;
    	MsgSnd(&msg);
    	MsgRcv(&msg);
    }
