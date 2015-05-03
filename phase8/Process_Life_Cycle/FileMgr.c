@@ -72,9 +72,19 @@ char hello_html_data[] = {
 // We'll define "root_dir[]" later. Here is a forward declare.
 extern dir_t root_dir[];                         // prototype it in advance
 
+char MySleep_data[]= {
+   #include "bin/MySleep.x"   // this must be a separate line
+};
+#define MYSLEEP_SIZE (sizeof(MySleep_data))
+
+
 dir_t bin_dir[] = {
    { 16, MODE_DIR, ~0, ".", (char *)bin_dir },   // current dir
    { 17, MODE_DIR, ~0, "..", (char *)root_dir }, // parent dir, forward declared
+   { 18, MODE_EXEC, MYSLEEP_SIZE, "8",    (char *)MySleep_data },// also called  "8"
+   { 19, MODE_EXEC, MYSLEEP_SIZE, "MySleep", (char *)MySleep_data }, // MySleep here
+   { 20, MODE_EXEC, MYHELLO_SIZE, "8",    (char *)MyHello_data },// also called  "8"
+   { 21, MODE_EXEC, MYHELLO_SIZE, "MyHello", (char *)MyHello_data }, // MySleep here
    {  0, 0, 0, NULL, NULL },                      // no entries in dir
    { END_DIR_INODE, 0, 0, NULL, NULL }           // end of bin_dir[]
 };
