@@ -421,9 +421,10 @@ void ExitISR(){
 		return;// (end of ISR)
 	}
 	//B. parent is waiting, release it, give it the 2 things
-	pcb[pcb[CRP].ppid].state=RUN;//parent's state becomes RUN
-	EnQ(pcb[CRP].ppid,&run_q);//enqueue it to run queue
-	pcb[pcb[CRP].ppid].TF_ptr->ecx=CRP;//give child PID (CRP) for parent's Wait() call to continue and return
+	ppid = pcb[CRP].ppid;
+	pcb[ppid].state=RUN;//parent's state becomes RUN
+	EnQ(ppid,&run_q);//enqueue it to run queue
+	pcb[ppid].TF_ptr->ecx=CRP;//give child PID (CRP) for parent's Wait() call to continue and return
 	*parent_exit_num_ptr = child_exit_num;//pass the child (CRP) exit number to fill out parent's local exit number
 	
 	//C. recycle exiting CRP's resources
