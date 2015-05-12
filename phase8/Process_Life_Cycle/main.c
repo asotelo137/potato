@@ -149,7 +149,7 @@ void InitData() {
    //phase 8 ////////////////////////////
    for ( i = 0; i<MAX_PROC; i++){
       page[i].owner = -1;
-      page[i].addr = 0xE00000 + 0x1000*i;
+      page[i].addr = 0xE00000 + (0x1000*i);
    }
 }
 
