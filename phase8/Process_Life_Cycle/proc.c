@@ -145,7 +145,7 @@ void Shell(){
    char login[101], password[101]; //login and password strings
    int STDIN = 4, STDOUT = 5, FileMgr =6;
    attr_t *p;
-   
+	int child_pid, exit_num;
    int result;
    MyBZero((char *) &terminal.TX_q,sizeof(q_t));
    MyBZero((char *) &terminal.RX_q,sizeof(q_t));
@@ -346,7 +346,7 @@ void Shell(){
             //continue;//continue 
          }
          Fork(p->data);
-         Wait(&exit_num);
+         child_pidWait(&exit_num);
          msg.recipient = STDOUT;
          
          }//}
@@ -535,7 +535,7 @@ void ShellDir(char *cmd, int STDOUT, int FileMgr) {
 }
    
 void ShellTyp(char *cmd, int STDOUT, int FileMgr) {
-      char obj[101],str[101]; // get away without obj
+      //char obj[101],str[101]; // get away without obj
       attr_t *p;
       msg_t msg;
 
