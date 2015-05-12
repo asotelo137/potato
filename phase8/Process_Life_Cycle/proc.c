@@ -263,8 +263,7 @@ void Shell(){
             ShellDir(msg.data, STDOUT,FileMgr);
          }else if (MyStrcmpSize(msg.data,"typ",3)){
             ShellTyp(msg.data, STDOUT,FileMgr);
-         }
-         else{//other strings {
+         }else{//other strings {
            // MyStrCpy(msg.data,"Command not found!\n\0");
             //msg.recipient=STDOUT;
             //MsgSnd(&msg);
@@ -275,7 +274,7 @@ void Shell(){
          msg.code=CHK_OBJ;
          MsgSnd(&msg);
          MsgRcv(&msg);
-         p = (attr_t *)msg.data;
+         p = (attr_t *) msg.data;
          if(msg.code!= GOOD || p->mode!= MODE_EXEC ){
             MyStrCpy(msg.data,"Command Not Found.\n\0");
             msg.recipient=STDOUT;
