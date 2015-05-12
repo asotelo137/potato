@@ -70,5 +70,10 @@ typedef struct{
 
 
 typedef void (* func_ptr_t)(); // void-returning function pointer type
+//phase 8 page type//////////////////////////////////////////////////////
+typedef struct{
+   int owner,
+       addr;
+}page_t;
 
 #endif _TYPE_H_
