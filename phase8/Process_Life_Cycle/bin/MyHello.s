@@ -22,7 +22,7 @@ _start:                     # instructions begin
 
    add ecx,ebx              #add  x (offset) to ebx (base of page) -- where msg really is
    pushl %ebx               #save a copy (push it to stack)
-   pushl %ebx               save another copy (push it again)
+   pushl %ebx               #save another copy (push it again)
 
    int $53                   #call interrupt number 53  # MsgSnd(&msg)
 
