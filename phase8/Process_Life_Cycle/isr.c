@@ -325,7 +325,7 @@ void ForkISR(){
 	int i;
 	int avail_page=-1;
 	for (i = 0; i <MAX_PROC; i++){
-		if(page[i].owner = -1){
+		if(page[i].owner == -1){
 		  avail_page= i;
 		}
 	}
@@ -417,7 +417,7 @@ void WaitISR(){
 	//loop through pages to match the owner to child PID (i)
 	int j;
 	for (j = 0; j <MAX_PROC; j++){
-		if(page[j].owner = i){
+		if(page[j].owner == i){
 			//once found, clear page (for security/privacy)
 			MyBZero((char*) page[j].addr,4096);
 			page[j].owner=-1;//set owner to -1 (not used)
@@ -430,7 +430,7 @@ void WaitISR(){
 }
    
 void ExitISR(){
-	int ppid, child_exit_num, *parent_exit_num_ptr, page_num;
+	int i,ppid, child_exit_num, *parent_exit_num_ptr, page_num;
 	
 	if(pcb[pcb[CRP].ppid].state!=WAIT_CHILD){//A. if parent of CRP NOT in state WAIT_CHILD (has yet called Wait())
 		pcb[CRP].state==ZOMBIE;//state of CRP becomes ZOMBIE
@@ -443,15 +443,19 @@ void ExitISR(){
 	pcb[pcb[CRP].ppid].TF_ptr->=CRP;//give child PID (CRP) for parent's Wait() call to continue and return
 	*parent_exit_num_ptr = child_exit_num;//pass the child (CRP) exit number to fill out parent's local exit number
 	
-	C. recycle exiting CRP's resources
-	reclaim CRP's 4KB page:
-	loop through pages to match the owner to CRP
-	once found, clear page (for security/privacy)
-	set owner to -1 (not used)
-	CRP's state becomes NONE
-	enqueue CRP back to none queue
-	CRP becomes -1
-	
+	//C. recycle exiting CRP's resources
+	//reclaim CRP's 4KB page:
+	//loop through pages to match the owner to CRP
+	for (i = 0; i <MAX_PROC; i++){
+		if(page[i].owner == CRP){
+			MyBZero((char*) page[i].addr,4096);//once found, clear page (for security/privacy)
+			page[j].owner=-1;//set owner to -1 (not used)
+			pcb[CRP].state=NONE;//CRP's state becomes NONE
+			EnQ(CRP,&none_q);//enqueue CRP back to none queue
+			CRP=-1;//CRP becomes -1
+		}
+	}
+
 
 }
    
