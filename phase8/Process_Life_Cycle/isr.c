@@ -337,7 +337,7 @@ void ForkISR(){
 	//    B. set "owner" of this page to the new PID
 	//dequeue to get new pid
 	child_pid = DeQ(&none_q);
-	page[eavail_page].owner= child_pid;
+	page[avail_page].owner= child_pid;
 	//C. copy the executable into the page, use your new MyMemcpy() coded in tool.c
 	MyMemcpy((char *) page[avail_page].addr,(char *)pcb.[CRP].TF_ptr->ebx,4096);
 
@@ -356,7 +356,7 @@ void ForkISR(){
 	pcb[child_pid].TF_ptr = (TF_t *)((page[avail_page].addr + 4096) - sizeof(TF_t) + 1);
 	//add those statements in CreateISR() to set trapframe except
 	//EIP = the page addr + 128 (skip header)
-	pcb[new_pid].TF_ptr->eip = (unsigned int)(page[avail_page].addr + 128);;
+	pcb[child_pid].TF_ptr->eip = (unsigned int)(page[avail_page].addr + 128);;
 	pcb[child_pid].TF_ptr->eflags = EF_DEFAULT_VALUE | EF_INTR;
 	pcb[child_pid].TF_ptr->cs = get_cs();
 	pcb[child_pid].TF_ptr->ds = get_ds();
