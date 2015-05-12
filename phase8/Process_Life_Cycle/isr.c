@@ -322,11 +322,13 @@ void IRQ3RX() { // queue char read from port to RX and echo queues
 void ForkISR(){
 //ForkISR():
   //     A. if no more PID or no RAM page available
-  if(none_q.size==0 || page[20].owener!= -1)
-          cons_printf(): "no more PID/RAM available!\n"
-          set CRP's TF_ptr->ecx = -1 (syscall returns -1)
-          return; (end of ISR)
-       B. set "owner" of this page to the new PID
+  if(none_q.size==0 || page[20].owener!= -1){
+  	cons_printf(" no more PID/RAM available!\n ");//cons_printf(): "no more PID/RAM available!\n"
+        CRP.TF_PTR->ecx = -1;//set CRP's TF_ptr->ecx = -1 (syscall returns -1)
+        return; //(end of ISR)
+  }
+   //    B. set "owner" of this page to the new PID
+   page[].owner  
        C. copy the executable into the page, use your new MyMemcpy() coded in tool.c
        D  set PCB:
           clear runtime and total_runtime
