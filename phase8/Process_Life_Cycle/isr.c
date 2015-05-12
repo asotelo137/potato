@@ -329,8 +329,9 @@ void ForkISR(){
 		  avail_page= i;
 		}
 	}
-	if(none_q.size==0 || avail_page == -1){
-		cons_printf(" no more PID/RAM available!\n ");//cons_printf(): "no more PID/RAM available!\n"
+	child_pid = DeQ(&none_q);
+	if(child_pid==-1|| avail_page == -1){
+		cons_printf(" no more PID/RAM available!\n ");//cons_printf(): "no more PID or RAM available!\n"
 		pcb[CRP].TF_ptr->ecx = -1;//set CRP's TF_ptr->ecx = -1 (syscall returns -1)
 	return; //(end of ISR)
 	}
