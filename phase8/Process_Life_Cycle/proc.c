@@ -188,6 +188,74 @@ void Shell(){
   while(1){// infinite loop:
    
       while(1){//loop A:
+         
+                                        
+                                              
+                                              
+                                              
+       MyStrCpy(msg.data,"                   ~:~~==~~~= \n\0"); 
+       msg.recipient = STDOUT;
+         MsgSnd(&msg);
+         MsgRcv(&msg);
+       MyStrCpy(msg.data,"          ,~~~:=~:~~+~~~~======+. \n\0"); 
+       msg.recipient = STDOUT;
+         MsgSnd(&msg);
+         MsgRcv(&msg);
+       MyStrCpy(msg.data,"     .=~~~~~~~~~~~~~==~~~~~==~==+=.\n\0");    
+       msg.recipient = STDOUT;
+         MsgSnd(&msg);
+         MsgRcv(&msg);
+       MyStrCpy(msg.data,"   ~~~+=~~~~~:~~::~~==~~~=~~=====+?+   \n\0");  
+       msg.recipient = STDOUT;
+         MsgSnd(&msg);
+         MsgRcv(&msg);
+       MyStrCpy(msg.data,"  ==?+~~~:::::::~:=~:::~======+++++?I  \n\0");  msg.recipient = STDOUT;
+         MsgSnd(&msg);
+         MsgRcv(&msg);
+       MyStrCpy(msg.data," .=~+~~~:::~~:~:~~~~~~~~===+==?+++???? \n\0");  
+       msg.recipient = STDOUT;
+         MsgSnd(&msg);
+         MsgRcv(&msg);
+       MyStrCpy(msg.data," .==~=~:~:~~~~~~~~=~=~=====?=+++++??II  \n\0"); 
+       msg.recipient = STDOUT;
+         MsgSnd(&msg);
+         MsgRcv(&msg);
+       MyStrCpy(msg.data,"  ?==+=====?===+=+++==++=++?+++???IIII  \n\0"); 
+       msg.recipient = STDOUT;
+         MsgSnd(&msg);
+         MsgRcv(&msg);
+       MyStrCpy(msg.data,"  ++++=?++I?++?++++=+=++++??++??IIII77  \n\0");
+       msg.recipient = STDOUT;
+         MsgSnd(&msg);
+         MsgRcv(&msg);
+       MyStrCpy(msg.data,"  .?+++++????+++++++?+++????IIII7777Z7  \n\0"); 
+       msg.recipient = STDOUT;
+         MsgSnd(&msg);
+         MsgRcv(&msg);
+       MyStrCpy(msg.data,"   ??7?++?II?+7++=++++7+?IIII7$$Z$$$Z   \n\0"); 
+       msg.recipient = STDOUT;
+         MsgSnd(&msg);
+         MsgRcv(&msg);
+       MyStrCpy(msg.data,"    IIIIII7II??++?I?????I7I7$$$$Z$ZZ    \n\0"); 
+       msg.recipient = STDOUT;
+         MsgSnd(&msg);
+         MsgRcv(&msg);
+       MyStrCpy(msg.data,"     ~7$7I7I77III7IIIII77$$$ZO$ZZZZ     \n\0"); 
+       msg.recipient = STDOUT;
+         MsgSnd(&msg);
+         MsgRcv(&msg);
+       MyStrCpy(msg.data,"       .7$$$$$Z$$777$$$ZZZZ$ZOOZZ.      \n\0"); 
+       msg.recipient = STDOUT;
+         MsgSnd(&msg);
+         MsgRcv(&msg);
+       MyStrCpy(msg.data,"           ..$ZZZZZZOZZZZOOOOZ..      \n\0");   
+       msg.recipient = STDOUT;
+         MsgSnd(&msg);
+         MsgRcv(&msg);
+       MyStrCpy(msg.data,"                  .... ....           \n\0");  
+       msg.recipient = STDOUT;
+         MsgSnd(&msg);
+         MsgRcv(&msg);
          //prompt valid commands (send msg to STDOUT, receive reply)
          MyStrCpy(msg.data,"available commands: whoami, bye, dir,and typ \n\0");
          msg.recipient = STDOUT;
