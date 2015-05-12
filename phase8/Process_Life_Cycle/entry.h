@@ -76,6 +76,11 @@ extern void MsgRcvEntry();
 //phase 6 **************************************************************
 extern void IRQ3Entry();
 
+//phase 8 
+extern void ForkEntry();
+extern void WaitEntry();
+extern void ExitEntry();
+
 __END_DECLS
 
 
