@@ -347,8 +347,11 @@ void Shell(){
          }
          Fork(p->data);
          child_pid=Wait(&exit_num);
-         msg.recipient = STDOUT;
          
+         msg.recipient = STDOUT;
+         sprintf(msg.data, "\nChild = %d    ExitNum = %d\n", child_pid, exit_num);
+	MsgSnd(&msg);
+	MsgRcv(&msg);
          }//}
      
          
