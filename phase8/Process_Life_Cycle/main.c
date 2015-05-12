@@ -239,9 +239,9 @@ void Kernel(TF_t *TF_ptr) {
       case FORK_INTR:
          ForkISR();
       case WAIT_INTR:
-         WaitISR;
+         WaitISR();
       case EXIT_INTR:
-         ExitISR;
+         ExitISR();
       default:
          cons_printf("Panic!\n");
          breakpoint();
