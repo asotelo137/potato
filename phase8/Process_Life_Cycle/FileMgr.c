@@ -86,10 +86,8 @@ char MyHello_data[]= {
 dir_t bin_dir[] = {
    { 16, MODE_DIR, ~0, ".", (char *)bin_dir },   // current dir
    { 17, MODE_DIR, ~0, "..", (char *)root_dir }, // parent dir, forward declared
-   { 18, MODE_EXEC, MYSLEEP_SIZE, "8",    (char *)MySleep_data },// also called  "8"
-   { 19, MODE_EXEC, MYSLEEP_SIZE, "MySleep", (char *)MySleep_data }, // MySleep here
-   { 20, MODE_EXEC, MYHELLO_SIZE, "8",    (char *)MyHello_data },// also called  "8"
-   { 21, MODE_EXEC, MYHELLO_SIZE, "MyHello", (char *)MyHello_data }, // MySleep here
+   { 18, MODE_EXEC, MYSLEEP_SIZE, "MySleep", (char *)MySleep_data }, // MySleep here
+   { 19, MODE_EXEC, MYHELLO_SIZE, "MyHello", (char *)MyHello_data }, // MySleep here
    {  0, 0, 0, NULL, NULL },                      // no entries in dir
    { END_DIR_INODE, 0, 0, NULL, NULL }           // end of bin_dir[]
 };
