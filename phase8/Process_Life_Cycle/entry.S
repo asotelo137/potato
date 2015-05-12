@@ -81,7 +81,7 @@ ENTRY(WaitEntry)
 pushl $WAIT_INTR
 jmp IntoKernel
 
-ENTRY(WaitEntry)
+ENTRY(ExitEntry)
 pushl $WAIT_INTR
 jmp IntoKernel
 
