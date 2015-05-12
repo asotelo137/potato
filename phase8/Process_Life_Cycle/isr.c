@@ -357,12 +357,12 @@ void ForkISR(){
 	//add those statements in CreateISR() to set trapframe except
 	//EIP = the page addr + 128 (skip header)
 	EIP = page[avail_page].addr+128;
-	pcb[pid].TF_ptr->eflags = EF_DEFAULT_VALUE | EF_INTR;
-	pcb[pid].TF_ptr->cs = get_cs();
-	pcb[pid].TF_ptr->ds = get_ds();
-	pcb[pid].TF_ptr->es = get_es();
-	pcb[pid].TF_ptr->fs = get_fs();
-	pcb[pid].TF_ptr->gs = get_gs();
+	pcb[child_pid].TF_ptr->eflags = EF_DEFAULT_VALUE | EF_INTR;
+	pcb[child_pid].TF_ptr->cs = get_cs();
+	pcb[child_pid].TF_ptr->ds = get_ds();
+	pcb[child_pid].TF_ptr->es = get_es();
+	pcb[child_pid].TF_ptr->fs = get_fs();
+	pcb[child_pid].TF_ptr->gs = get_gs();
       
 	//F. clear mailbox
 	MyBZero((char*)&mbox[child_pid],sizeof(mbox_t));
@@ -372,24 +372,7 @@ void ForkISR(){
 }
 
 void WaitISR(){
-	/*int i, child_exit_num, *parent_exit_num_ptr;
-	
-	//look for a zombie child
-	for(i=0; i<NUM_PROC; i++){
-		//if there's a ppid matches CRP and its state is ZOMBIE
-		if(pcbs[i].ppid == cur_pid && pcbs[i].state == ZOMBIE){
-			//FOUND! (its PID is i)
-			//put i into ecx of CRP's TF
-			//pass the exit number from the ZOMBIE to CRP
-			pcbs[cur_pid].tf_p->ecx = pcbs[i].exit_code;
-			EnQ(i,&avail_q);
-			pcbs[i].ppid = -1;
-			return;
-		}else{
-			pcbs[cur_pid].state = WAIT_CHILD;
-			cur_pid=-1;
-		}
-	}*/
+
 	int i, child_exit_num, *parent_exit_num_ptr;
 	
 	//A. look for a ZOMBIE child
