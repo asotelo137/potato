@@ -356,7 +356,7 @@ void ForkISR(){
 	pcb[child_pid].TF_ptr = (TF_t *)((page[avail_page].addr + 4096) - sizeof(TF_t) + 1);
 	//add those statements in CreateISR() to set trapframe except
 	//EIP = the page addr + 128 (skip header)
-	eip = page[avail_page].addr+128;
+	pcb[new_pid].TF_ptr->eip = (unsigned int)(page[avail_page].addr + 128);;
 	pcb[child_pid].TF_ptr->eflags = EF_DEFAULT_VALUE | EF_INTR;
 	pcb[child_pid].TF_ptr->cs = get_cs();
 	pcb[child_pid].TF_ptr->ds = get_ds();
