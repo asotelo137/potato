@@ -322,24 +322,24 @@ void IRQ3RX() { // queue char read from port to RX and echo queues
 void ForkISR(){
 	//ForkISR():
 	//     A. if no more PID or no RAM page available
-	int i;
-	int avail_page=-1;
+	int i,child_pid;
+	int avail_page = -1;
 	for (i = 0; i <MAX_PROC; i++){
 		if(page[i].owner == -1){
 		  avail_page= i;
 		}
 	}
-	if(none_q.size==0 || avail_page = -1){
+	if(none_q.size==0 || avail_page == -1){
 		cons_printf(" no more PID/RAM available!\n ");//cons_printf(): "no more PID/RAM available!\n"
-		CRP.TF_PTR->ecx = -1;//set CRP's TF_ptr->ecx = -1 (syscall returns -1)
+		CRP.TF_ptr->ecx = -1;//set CRP's TF_ptr->ecx = -1 (syscall returns -1)
 	return; //(end of ISR)
 	}
 	//    B. set "owner" of this page to the new PID
 	//dequeue to get new pid
-	child_pid = DeQ(none_q);
+	child_pid = DeQ(&none_q);
 	page[avail_page].owner= child_pid;
 	//C. copy the executable into the page, use your new MyMemcpy() coded in tool.c
-	MyMemCpy((char *)page[avial_page].addr,(char *)pcb.[CRP].TF_ptr->ebx,4096);
+	MyMemcpy((char *)page[avail_page].addr,(char *)pcb.[CRP].TF_ptr->ebx,4096);
 
 	//D  set PCB:
 	//clear runtime and total_runtime
@@ -394,7 +394,7 @@ void WaitISR(){
 	
 	//A. look for a ZOMBIE child
 	//loop i through all PCB
-	for(i = 0; i < NUM_PROC;i++){
+	for(i = 0; i < MAX_PROC;i++){
 		if(pcb[i].ppid== CRP && pcb[i].state == ZOMBIE ){//if there's a ppid matches CRP and its state is ZOMBIE
 			break;//found! (its PID is i)
 		}
@@ -433,14 +433,14 @@ void ExitISR(){
 	int i,ppid, child_exit_num, *parent_exit_num_ptr, page_num;
 	
 	if(pcb[pcb[CRP].ppid].state!=WAIT_CHILD){//A. if parent of CRP NOT in state WAIT_CHILD (has yet called Wait())
-		pcb[CRP].state==ZOMBIE;//state of CRP becomes ZOMBIE
-		CRP=-1//CRP becomes -1;
+		pcb[CRP].state = ZOMBIE;//state of CRP becomes ZOMBIE
+		CRP=-1;//CRP becomes -1;
 		return;// (end of ISR)
 	}
 	//B. parent is waiting, release it, give it the 2 things
 	pcb[pcb[CRP].ppid].state=RUN;//parent's state becomes RUN
 	EnQ(pcb[CRP].ppid,&run_q);//enqueue it to run queue
-	pcb[pcb[CRP].ppid].TF_ptr->=CRP;//give child PID (CRP) for parent's Wait() call to continue and return
+	pcb[pcb[CRP].ppid].TF_ptr->ecx=CRP;//give child PID (CRP) for parent's Wait() call to continue and return
 	*parent_exit_num_ptr = child_exit_num;//pass the child (CRP) exit number to fill out parent's local exit number
 	
 	//C. recycle exiting CRP's resources
@@ -449,7 +449,7 @@ void ExitISR(){
 	for (i = 0; i <MAX_PROC; i++){
 		if(page[i].owner == CRP){
 			MyBZero((char*) page[i].addr,4096);//once found, clear page (for security/privacy)
-			page[j].owner=-1;//set owner to -1 (not used)
+			page[i].owner=-1;//set owner to -1 (not used)
 			pcb[CRP].state=NONE;//CRP's state becomes NONE
 			EnQ(CRP,&none_q);//enqueue CRP back to none queue
 			CRP=-1;//CRP becomes -1
