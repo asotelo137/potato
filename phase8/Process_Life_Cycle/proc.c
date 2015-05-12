@@ -190,12 +190,6 @@ void Shell(){
   while(1){// infinite loop:
    
       while(1){//loop A:
-         
-                                        
-                                              
-                                              
-                                              
-       
          //prompt valid commands (send msg to STDOUT, receive reply)
          MyStrCpy(msg.data,"available commands: whoami, bye, dir,and typ \n\0");
          msg.recipient = STDOUT;
@@ -282,9 +276,11 @@ void Shell(){
             msg.recipient=STDOUT;
             MsgSnd(&msg);
             MsgRcv(&msg);
-            //continue;//continue 
+            continue;//continue 
          }
+         
          Fork(p->data);
+         
          child_pid = Wait(&exit_num);
          
          msg.recipient = STDOUT;
