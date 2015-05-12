@@ -338,7 +338,7 @@ void Shell(){
          MsgSnd(&msg);
          MsgRcv(&msg);
          p = (attr_t *)msg.data;
-         if(!GOOD || MODE_EXEC != 0777 ){
+         if(msg.code!= GOOD || p->mode!= MODE_EXEC ){
             MyStrCpy(msg.data,"Command Not Found.\n\0");
             msg.recipient=STDOUT;
             MsgSnd(&msg);
