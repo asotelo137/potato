@@ -14,13 +14,13 @@ _start:                     # instructions begin
                             # 1st, get real addr of local msg
    //(copy the stack pointer:)
    pushl %esp               #push the stack pointer
-   pop ebx                  #pop into register ebx
+   pop %ebx                  #pop into register ebx
    sub 0x1000,%ebx          #subtract 4096 from it (this is the base, real addr of the page)
 
    movl $msg,%ebx           #copy $msg to register ecx
    sub 0x80000001, %ecx     #subtract 2G from it, get x (offset)
 
-   add ecx,ebx              #add  x (offset) to ebx (base of page) -- where msg really is
+   add %ecx,%ebx              #add  x (offset) to ebx (base of page) -- where msg really is
    pushl %ebx               #save a copy (push it to stack)
    pushl %ebx               #save another copy (push it again)
 
@@ -31,7 +31,7 @@ _start:                     # instructions begin
 
    pop %ecx                  #pop to ecx (get a copy, real msg addr)
    mov 8(%ecx),%ebx          #copy time stamp (base ecx + offset of time stamp) to ebx
-   int 57                    #call interrupt number 57  # Exit(time stamp)
+   int $57                    #call interrupt number 57  # Exit(time stamp)
 
 .data                       # data segment follows code segment in RAM
 msg:                        # my msg
