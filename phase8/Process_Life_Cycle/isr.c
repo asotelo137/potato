@@ -373,7 +373,7 @@ void ForkISR(){
 
 void WaitISR(){
 
-	int i, child_exit_num, *parent_exit_num_ptr;
+	int i,j, child_exit_num, *parent_exit_num_ptr;
 	
 	//A. look for a ZOMBIE child
 	//loop i through all PCB
@@ -398,7 +398,7 @@ void WaitISR(){
 	//D. recycle resources (bring ZOMBIE to R.I.P)
 	//reclaim child's 4KB page:
 	//loop through pages to match the owner to child PID (i)
-	int j;
+
 	for (j = 0; j <MAX_PROC; j++){
 		if(page[j].owner == i){
 			//once found, clear page (for security/privacy)
@@ -429,10 +429,10 @@ void ExitISR(){
 	//C. recycle exiting CRP's resources
 	//reclaim CRP's 4KB page:
 	//loop through pages to match the owner to CRP
-	for (i = 0; i <MAX_PROC; i++){
-		if(page[i].owner == CRP){
-			MyBZero((char*) page[i].addr,4096);//once found, clear page (for security/privacy)
-			page[i].owner=-1;//set owner to -1 (not used)
+	for (page_num = 0; page_num <MAX_PROC; page_num++){
+		if(page[page_num].owner == CRP){
+			MyBZero((char*) page[page_num].addr,4096);//once found, clear page (for security/privacy)
+			page[page_num].owner=-1;//set owner to -1 (not used)
 			pcb[CRP].state=NONE;//CRP's state becomes NONE
 			EnQ(CRP,&none_q);//enqueue CRP back to none queue
 			CRP=-1;//CRP becomes -1
