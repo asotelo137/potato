@@ -57,7 +57,7 @@ void CreateISR(int pid) {
         pcb[pid].TF_ptr->eip = (unsigned int)Consumer;
       else if(pid%2 == 1)
         pcb[pid].TF_ptr->eip = (unsigned int);*/
-        
+      //statements set Trapframe 
       pcb[pid].TF_ptr->eflags = EF_DEFAULT_VALUE | EF_INTR;
       pcb[pid].TF_ptr->cs = get_cs();
       pcb[pid].TF_ptr->ds = get_ds();
@@ -356,6 +356,14 @@ void ForkISR(){
 	pcb[child_pid].TF_ptr= (TF_t*)((page[avail_page].addr+4096)- sizeof(TF_t) + 1);)
 	//add those statements in CreateISR() to set trapframe except
 	//EIP = the page addr + 128 (skip header)
+	EIP = page[avail_page].addr+128;
+	pcb[pid].TF_ptr->eflags = EF_DEFAULT_VALUE | EF_INTR;
+	pcb[pid].TF_ptr->cs = get_cs();
+	pcb[pid].TF_ptr->ds = get_ds();
+	pcb[pid].TF_ptr->es = get_es();
+	pcb[pid].TF_ptr->fs = get_fs();
+	pcb[pid].TF_ptr->gs = get_gs();
+      
 	//F. clear mailbox
 	MyBZero((char*)&mbox[child_pid],sizeof(mbox_t));
 	//G. enqueue new PID to run queue
