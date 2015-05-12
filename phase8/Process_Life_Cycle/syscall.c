@@ -67,3 +67,12 @@ void MsgRcv(msg_t *msg){
 void TipIRQ3(){
 	asm("int $35");
 }
+void Fork(char *){
+	
+}
+void Wait(int *){
+	
+}
+void Exit(int){
+	
+}
