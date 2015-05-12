@@ -87,6 +87,12 @@ void InitIDT(){
     //phase 6 ***********************************************************
    SetEntry(IRQ3_INTR,IRQ3Entry);
    outportb(0x21,~(128+8+1));
+   
+   //phase 8 ************************************************************
+   SetEntry(FORK_INTR,ForkEntry);
+   SetEntry(WAIT_INTR,WaitEntry);
+   SetEntry(EXIT_INTR,ExitEntry);
+   
    //***************
     //outportb(0x21,~1);
   
