@@ -240,7 +240,7 @@ void Kernel(TF_t *TF_ptr) {
          ForkISR();
       case WAIT_INTR:
          WaitISR;
-      case EXIT_INT:
+      case EXIT_INTR:
          ExitISR;
       default:
          cons_printf("Panic!\n");
