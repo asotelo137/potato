@@ -333,16 +333,17 @@ void Shell(){
             //MsgRcv(&msg);        //show "Command not found!\n\0"
          //phase 8 **************************************
          //MyStrCpy(msg.data,login);
-         msg.recipient=CHK_OBJ;
+         msg.recipient=FileMgr;
+         msg.code=CHK_OBJ;
          MsgSnd(&msg);
          MsgRcv(&msg);
-         p = msg.data;
+         p = (attr_t *)msg.data;
          if(!GOOD || MODE_EXEC != 0777 ){
-            MyStrCpy(msg.data,"There is an error somewhere here.\n\0");
+            MyStrCpy(msg.data,"Command Not Found.\n\0");
             msg.recipient=STDOUT;
             MsgSnd(&msg);
             MsgRcv(&msg);
-            continue;//continue 
+            //continue;//continue 
          }
          Fork(p->data);
          Wait(&exit_num);
