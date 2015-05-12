@@ -415,14 +415,14 @@ void WaitISR(){
    
 void ExitISR(){
 	int ppid, child_exit_num, *parent_exit_num_ptr, page_num;
-	
-	if(pcb[pcb[CRP].ppid].state!=WAIT_CHILD){//A. if parent of CRP NOT in state WAIT_CHILD (has yet called Wait())
+		ppid = pcb[CRP].ppid;
+	if(pcb[ppid].state!=WAIT_CHILD){//A. if parent of CRP NOT in state WAIT_CHILD (has yet called Wait())
 		pcb[CRP].state = ZOMBIE;//state of CRP becomes ZOMBIE
 		CRP=-1;//CRP becomes -1;
 		return;// (end of ISR)
 	}
 	//B. parent is waiting, release it, give it the 2 things
-	ppid = pcb[CRP].ppid;
+
 	pcb[ppid].state=RUN;//parent's state becomes RUN
 	EnQ(ppid,&run_q);//enqueue it to run queue
 	pcb[ppid].TF_ptr->ecx=CRP;//give child PID (CRP) for parent's Wait() call to continue and return
