@@ -320,7 +320,44 @@ void IRQ3RX() { // queue char read from port to RX and echo queues
 }
 //Phase 8*********************************************************
 void ForkISR(){
-	
+	//ForkISR():
+	//     A. if no more PID or no RAM page available
+	int i;
+	int avail_page=-1;
+	for (i = 0; i <MAX_PROC; i++){
+		if(page[i].owner = -1){
+		  avail_page= i;
+		}
+	}
+	if(none_q.size==0 || avail_page = -1){
+		cons_printf(" no more PID/RAM available!\n ");//cons_printf(): "no more PID/RAM available!\n"
+		CRP.TF_PTR->ecx = -1;//set CRP's TF_ptr->ecx = -1 (syscall returns -1)
+	return; //(end of ISR)
+	}
+	//    B. set "owner" of this page to the new PID
+	//dequeue to get new pid
+	child_pid = DeQ(none_q);
+	page[avail_page].owner= child_pid;
+	//C. copy the executable into the page, use your new MyMemcpy() coded in tool.c
+	MyMemCpy((char *)page[avial_page].addr,(char *)pcb.[CRP].TF_ptr->ebx,4096);
+
+	//D  set PCB:
+	//clear runtime and total_runtime
+	pcb[child_pid].runtime= 0;
+	pcb[child_pid].total_runtime = 0;
+	//set state to RUN
+	pcb[child_pid].state = RUN;
+	//set mode to UMODE
+	pcb[child_pid].mode =UMODE;
+	//set ppid to CRP (new thing from this Phase)
+	pcb[child_pid].ppid = CRP;
+	E. build trapframe:
+	point pcb[new PID].TF_ptr to end of page - sizoeof(TF_t) + 1
+	add those statements in CreateISR() to set trapframe except
+	EIP = the page addr + 128 (skip header)
+	F. clear mailbox
+	G. enqueue new PID to run queue
+
 }
 
 void WaitISR(){
