@@ -77,6 +77,11 @@ char MySleep_data[]= {
 };
 #define MYSLEEP_SIZE (sizeof(MySleep_data))
 
+char MyHello_data[]= {
+   #include "bin/MyHello.x"   // this must be a separate line
+};
+#define MYHELLO_SIZE (sizeof(MyHello_data))
+
 
 dir_t bin_dir[] = {
    { 16, MODE_DIR, ~0, ".", (char *)bin_dir },   // current dir
