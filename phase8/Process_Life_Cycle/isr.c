@@ -339,7 +339,8 @@ void ForkISR(){
 	child_pid = DeQ(&none_q);
 	page[avail_page].owner= child_pid;
 	//C. copy the executable into the page, use your new MyMemcpy() coded in tool.c
-	MyMemcpy((char *) page[avail_page].addr,(char *)pcb.[CRP].TF_ptr->ebx,4096);
+	
+	MyMemcpy((char *)page[avail_page].addr, (char *)pcb[CRP].TF_ptr->ebx, 4096 ); 
 
 	//D  set PCB:
 	//clear runtime and total_runtime
