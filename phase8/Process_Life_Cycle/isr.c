@@ -430,6 +430,28 @@ void WaitISR(){
 }
    
 void ExitISR(){
+	int ppid, child_exit_num, *parent_exit_num_ptr, page_num;
 	
+	if(pcb[pcb[CRP].ppid].state!=WAIT_CHILD){//A. if parent of CRP NOT in state WAIT_CHILD (has yet called Wait())
+		pcb[CRP].state==ZOMBIE;//state of CRP becomes ZOMBIE
+		CRP=-1//CRP becomes -1;
+		return;// (end of ISR)
+	}
+	//B. parent is waiting, release it, give it the 2 things
+	pcb[pcb[CRP].ppid].state=RUN;//parent's state becomes RUN
+	EnQ(pcb[CRP].ppid,&run_q);//enqueue it to run queue
+	pcb[pcb[CRP].ppid].TF_ptr->=CRP;//give child PID (CRP) for parent's Wait() call to continue and return
+	*parent_exit_num_ptr = child_exit_num;//pass the child (CRP) exit number to fill out parent's local exit number
+	
+	C. recycle exiting CRP's resources
+	reclaim CRP's 4KB page:
+	loop through pages to match the owner to CRP
+	once found, clear page (for security/privacy)
+	set owner to -1 (not used)
+	CRP's state becomes NONE
+	enqueue CRP back to none queue
+	CRP becomes -1
+	
+
 }
    
