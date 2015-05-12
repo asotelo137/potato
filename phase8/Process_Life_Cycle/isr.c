@@ -104,12 +104,13 @@ void TimerISR() {
   sleepsize=sleep_q.size;
   while(sleepsize--){
     sleeppid=DeQ(&sleep_q);
-    if(pcb[sleeppid].wake_time == sys_time){
+    if(pcb[sleeppid].wake_time > sys_time){
       //int wakingID;
-      EnQ(sleeppid,&run_q);
+	EnQ(sleeppid,&sleep_q);
+    }else {      
+    	EnQ(sleeppid,&run_q);
       pcb[sleeppid].state=RUN;
-    }else {
-      EnQ(sleeppid,&sleep_q);
+      
     }
   }
    // just return if CRP is Idle (0) or less (-1)
@@ -224,11 +225,9 @@ void MsgSndISR(){
   int msg;
   source = (msg_t *)pcb[CRP].TF_ptr->ebx;
   msg = source -> recipient;
-  
+  source->sender = CRP;
+  source->time_stamp = sys_time;
   if ((mbox[msg].wait_q).size == 0){
-  	
-  	source->sender = CRP;
-  	source->time_stamp = sys_time;
   	MsgEnQ(source, &mbox[msg].msg_q);
   }else{
   	int tmp_pid = DeQ(&(mbox[msg].wait_q));
