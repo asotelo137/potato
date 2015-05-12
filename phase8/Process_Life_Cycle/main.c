@@ -140,6 +140,11 @@ void InitData() {
    CreateISR(i);     // create STDOUT
    i = DeQ(&none_q);
    CreateISR(i);
+   //phase 8 ////////////////////////////
+   for ( i = 0; i<MAX_PROC; i++){
+      page[i].owner = -1;
+      page[i].addr = 0xE00000 + 0x1000*i;
+   }
 }
 
 void SelectCRP() {       // select which PID to be new CRP
