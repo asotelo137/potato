@@ -331,7 +331,7 @@ void ForkISR(){
 	}
 	if(none_q.size==0 || avail_page == -1){
 		cons_printf(" no more PID/RAM available!\n ");//cons_printf(): "no more PID/RAM available!\n"
-		CRP.TF_ptr->ecx = -1;//set CRP's TF_ptr->ecx = -1 (syscall returns -1)
+		pcb[CRP].TF_ptr->ecx = -1;//set CRP's TF_ptr->ecx = -1 (syscall returns -1)
 	return; //(end of ISR)
 	}
 	//    B. set "owner" of this page to the new PID
