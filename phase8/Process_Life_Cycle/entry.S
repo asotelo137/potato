@@ -71,7 +71,19 @@ ENTRY(MsgRcvEntry)
 ENTRY(IRQ3Entry)
 pushl $IRQ3_INTR
 jmp IntoKernel
-// line 67
+
+//phase 8 
+ENTRY(ForkEntry)
+pushl $FORK_INTR
+jmp IntoKernel
+
+ENTRY(WaitEntry)
+pushl $WAIT_INTR
+jmp IntoKernel
+
+ENTRY(WaitEntry)
+pushl $WAIT_INTR
+jmp IntoKernel
 
 // Common IRQ entry, save context and call Kmain()
 IntoKernel:
