@@ -8,6 +8,7 @@
 #include "tool.h"
 #include "isr.h"
 #include "FileMgr.h"
+#include "type.h"
 
 void Idle() {
    int i;//seconds;
