@@ -327,17 +327,17 @@ void ForkISR(){
 	for (i = 0; i <MAX_PROC; i++){
 		if(page[i].owner == -1){
 		  avail_page= i;
+		  break;
 		}
 	}
-	child_pid = DeQ(&none_q);
+	child_pid = DeQ(&none_q);//dequeue to get new pid
 	if(child_pid==-1|| avail_page == -1){
 		cons_printf(" no more PID/RAM available!\n ");//cons_printf(): "no more PID or RAM available!\n"
 		pcb[CRP].TF_ptr->ecx = -1;//set CRP's TF_ptr->ecx = -1 (syscall returns -1)
-	return; //(end of ISR)
+		return; //(end of ISR)
 	}
 	//    B. set "owner" of this page to the new PID
-	//dequeue to get new pid
-	child_pid = DeQ(&none_q);
+
 	page[avail_page].owner= child_pid;
 	//C. copy the executable into the page, use your new MyMemcpy() coded in tool.c
 	
