@@ -374,7 +374,7 @@ void ForkISR(){
 
 void WaitISR(){
 
-	int i,j, child_exit_num, *parent_exit_num_ptr;
+	int i,page_num, child_exit_num, *parent_exit_num_ptr;
 	
 	//A. look for a ZOMBIE child
 	//loop i through all PCB
@@ -400,11 +400,11 @@ void WaitISR(){
 	//reclaim child's 4KB page:
 	//loop through pages to match the owner to child PID (i)
 
-	for (j = 0; j <MAX_PROC; j++){
-		if(page[j].owner == i){
+	for (page_num = 0; page_num <MAX_PROC; page_num++){
+		if(page[page_num].owner == i){
 			//once found, clear page (for security/privacy)
-			MyBZero((char*) page[j].addr,4096);
-			page[j].owner=-1;//set owner to -1 (not used)
+			MyBZero((char*) page[page_num].addr,4096);
+			page[page_num].owner=-1;//set owner to -1 (not used)
 			pcb[i].state=NONE;//child's state becomes NONE
 			EnQ(i,&none_q);//enqueue child PID (i) back to none queue
 		}
@@ -417,9 +417,7 @@ void ExitISR(){
 	int ppid, child_exit_num, *parent_exit_num_ptr, page_num;
 
 	ppid = pcb[CRP].ppid;
-	child_exit_num = pcb[CRP].TF_ptr->ebx;
-	parent_exit_num_ptr = (int *)pcb[ppid].TF_ptr->ebx;
-	if(pcb[ppid].state!=WAIT_CHILD){//A. if parent of CRP NOT in state WAIT_CHILD (has yet called Wait())
+	if( pcb[ppid].state != WAIT_CHILD){//A. if parent of CRP NOT in state WAIT_CHILD (has yet called Wait())
 		pcb[CRP].state = ZOMBIE;//state of CRP becomes ZOMBIE
 		CRP=-1;//CRP becomes -1;
 		return;// (end of ISR)
