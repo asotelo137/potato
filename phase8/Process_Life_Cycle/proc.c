@@ -346,7 +346,7 @@ void Shell(){
             //continue;//continue 
          }
          Fork(p->data);
-         child_pidWait(&exit_num);
+         child_pid=Wait(&exit_num);
          msg.recipient = STDOUT;
          
          }//}
