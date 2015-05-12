@@ -268,6 +268,7 @@ void Shell(){
          msg.recipient=CHK_OBJ;
          MsgSnd(&msg);
          MsgRcv(&msg);
+         p = msg.data;
          if(!GOOD || MODE_EXEC != 0777 ){
             MyStrCpy(msg.data,"There is an error somewhere here.\n\0");
             msg.recipient=STDOUT;
@@ -275,7 +276,10 @@ void Shell(){
             MsgRcv(&msg);
             continue;//continue 
          }
-                     
+         Fork(p->data);
+         Wait(&exit_num);
+         msg.recipient = STDOUT;
+         
          }//}
      
          
