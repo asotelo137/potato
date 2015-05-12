@@ -372,7 +372,7 @@ void ForkISR(){
 }
 
 void WaitISR(){
-	int i, child_exit_num, *parent_exit_num_ptr;
+	/*int i, child_exit_num, *parent_exit_num_ptr;
 	
 	//look for a zombie child
 	for(i=0; i<NUM_PROC; i++){
@@ -389,7 +389,44 @@ void WaitISR(){
 			pcbs[cur_pid].state = WAIT_CHILD;
 			cur_pid=-1;
 		}
+	}*/
+	int i, child_exit_num, *parent_exit_num_ptr;
+	
+	//A. look for a ZOMBIE child
+	//loop i through all PCB
+	for(i = 0; i < NUM_PROC;i++){
+		if(pcb[i].ppid== CRP && pcb[i].state == ZOMBIE ){//if there's a ppid matches CRP and its state is ZOMBIE
+			break;//found! (its PID is i)
+		}
+	}	
+	if(i==MAX_PROC){//B. if not found (i is too big)
+		//block CRP (parent/calling process)
+		//its state becomes WAIT_CHILD (new state, add to state_t)
+		pcb[CRP].state= WAIT_CHILD;
+		CRP=-1;//CRP becomes -1
+		return; //(end of ISR)
 	}
+	//C. found exited child PID i, parent should be given 2 things:
+	//put i into ecx of CRP's TF (for syscall Wait() to return it)
+	pcb[CRP].TF_ptr->ecx=i;
+	//pass the exit number from the ZOMBIE to CRP
+	*parent_exit_num_ptr= child_exit_num;
+	
+	//D. recycle resources (bring ZOMBIE to R.I.P)
+	//reclaim child's 4KB page:
+	//loop through pages to match the owner to child PID (i)
+	int j;
+	for (j = 0; j <MAX_PROC; j++){
+		if(page[j].owner = i){
+			//once found, clear page (for security/privacy)
+			MyBZero((char*) page[j].addr,4096);
+			page[j].owner=-1;//set owner to -1 (not used)
+			pcb[i].state=NONE;//child's state becomes NONE
+			EnQ(i,&none_q);//enqueue child PID (i) back to none queue
+		}
+	}
+	
+	
 }
    
 void ExitISR(){
