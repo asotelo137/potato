@@ -276,14 +276,14 @@ void Shell(){
          MsgRcv(&msg);
          p = (attr_t *) msg.data;
          if(msg.code!= GOOD || p->mode!= MODE_EXEC ){
-            MyStrcpy(msg.data,"Command Not Found.\n\0");
+            MyStrCpy(msg.data,"Command Not Found.\n\0");
             msg.recipient=STDOUT;
             MsgSnd(&msg);
             MsgRcv(&msg);
             //continue;//continue 
          }
          Fork(p->data);
-         child_pid=Wait(&exit_num);
+         child_pid = Wait(&exit_num);
          
          msg.recipient = STDOUT;
          sprintf(msg.data, "\nChild = %d    ExitNum = %d\n", child_pid, exit_num);
