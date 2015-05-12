@@ -259,10 +259,16 @@ void Shell(){
             ShellTyp(msg.data, STDOUT,FileMgr);
          }
          else{//other strings {
-            MyStrCpy(msg.data,"Command not found!\n\0");
-            msg.recipient=STDOUT;
-            MsgSnd(&msg);
-            MsgRcv(&msg);        //show "Command not found!\n\0"
+           // MyStrCpy(msg.data,"Command not found!\n\0");
+            //msg.recipient=STDOUT;
+            //MsgSnd(&msg);
+            //MsgRcv(&msg);        //show "Command not found!\n\0"
+         //phase 8 **************************************
+         MyStrCpy(msg.data,login);
+         msg.recipient=CHK_OBJ;
+         MsgSnd(&msg);
+         MsgRcv(&msg);
+                     
          }//}
      
          
