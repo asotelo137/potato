@@ -330,10 +330,16 @@ void WaitISR(){
 	for(i=0; i<NUM_PROC; i++){
 		//if there's a ppid matches CRP and its state is ZOMBIE
 		if(pcbs[i].ppid == cur_pid && pcbs[i].state == ZOMBIE){
-			//pcbs[cur_pid].tf_p->eax = pcbs[i].exit_code;
-			//EnQ(i,&avail_q);
-			//pcbs[i].ppid = -1;
-			//return;
+			//FOUND! (its PID is i)
+			//put i into ecx of CRP's TF
+			//pass the exit number from the ZOMBIE to CRP
+			pcbs[cur_pid].tf_p->ecx = pcbs[i].exit_code;
+			EnQ(i,&avail_q);
+			pcbs[i].ppid = -1;
+			return;
+		}else{
+			pcbs[cur_pid].state = WAIT_CHILD;
+			cur_pid=-1;
 		}
 	}
 }
