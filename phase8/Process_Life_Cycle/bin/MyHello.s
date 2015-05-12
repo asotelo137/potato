@@ -12,33 +12,40 @@
 
 _start:                     # instructions begin
                             # 1st, get real addr of local msg
-   (copy the stack pointer:)
-   push the stack pointer
-   pop into register ebx
-   subtract 4096 from it (this is the base, real addr of the page)
+   //(copy the stack pointer:)
+   pushl %esp               #push the stack pointer
+   pop ebx                  #pop into register ebx
+   sub 0x1000,%ebx          #subtract 4096 from it (this is the base, real addr of the page)
 
-   copy $msg to register ecx
-   subtract 2G from it, get x (offset)
+   movl $msg,%ebx           #copy $msg to register ecx
+   sub 0x80000001, %ecx     #subtract 2G from it, get x (offset)
 
-   add  x (offset) to ebx (base of page) -- where msg really is
-   save a copy (push it to stack)
-   save another copy (push it again)
+   add ecx,ebx              #add  x (offset) to ebx (base of page) -- where msg really is
+   pushl %ebx               #save a copy (push it to stack)
+   pushl %ebx               save another copy (push it again)
 
-   call interrupt number 53  # MsgSnd(&msg)
+   int $53                   #call interrupt number 53  # MsgSnd(&msg)
 
-   pop to ebx (get a copy of real msg addr)
-   call interrupt number 54  # MsgRcv(&msg)
+   pop %ebx                  #pop to ebx (get a copy of real msg addr)
+   int $54                   #call interrupt number 54  # MsgRcv(&msg)
 
-   pop to ecx (get a copy, real msg addr)
-   copy time stamp (base ecx + offset of time stamp) to ebx
-   call interrupt number 57  # Exit(time stamp)
+   pop %ecx                  #pop to ecx (get a copy, real msg addr)
+   mov 8(%ecx),%ebx          #copy time stamp (base ecx + offset of time stamp) to ebx
+   int 57                    #call interrupt number 57  # Exit(time stamp)
 
 .data                       # data segment follows code segment in RAM
 msg:                        # my msg
-                            # msg.sender
-                            # msg.recipient
-                            # msg.time_stamp
-                            # msg.data
-                            # etc.
-          
+     .long 0                # msg.sender
+     .long 5                # msg.recipient
+     .long 5                # msg.time_stamp
+     .long 0                # msg.data
+     .endr                  # etc.
+     .ascii "Hello from Team Potato\n" #msg.data (16 char)
+     .rept 78                #101-23 = 78
+     .ascii "\0"             #null chars
+     .endr                   #end repeat
+     .long 5                 #msg.code
+     .rept 3                 #msg.number
+     .endr                   #end repeat
+         
 
