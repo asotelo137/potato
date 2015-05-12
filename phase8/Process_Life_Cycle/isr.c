@@ -320,9 +320,25 @@ void IRQ3RX() { // queue char read from port to RX and echo queues
 }
 //Phase 8*********************************************************
 void ForkISR(){
-	
-}
-
+//ForkISR():
+  //     A. if no more PID or no RAM page available
+  if(none_q.size==0 || page[20].owener!= -1)
+          cons_printf(): "no more PID/RAM available!\n"
+          set CRP's TF_ptr->ecx = -1 (syscall returns -1)
+          return; (end of ISR)
+       B. set "owner" of this page to the new PID
+       C. copy the executable into the page, use your new MyMemcpy() coded in tool.c
+       D  set PCB:
+          clear runtime and total_runtime
+          set state to RUN
+          set mode to UMODE
+          set ppid to CRP (new thing from this Phase)
+       E. build trapframe:
+          point pcb[new PID].TF_ptr to end of page - sizoeof(TF_t) + 1
+          add those statements in CreateISR() to set trapframe except
+          EIP = the page addr + 128 (skip header)
+       F. clear mailbox
+       G. enqueue new PID to run queue
 void WaitISR(){
 	
 }
