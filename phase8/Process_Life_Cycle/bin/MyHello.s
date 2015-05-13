@@ -30,7 +30,7 @@ _start:                     # instructions begin
    int $54                   #call interrupt number 54  # MsgRcv(&msg)
 
    pop %ecx                  #pop to ecx (get a copy, real msg addr)
-   mov *(%ecx),%ebx          #copy time stamp (base ecx + offset of time stamp) to ebx
+   mov 8(%ecx),%ebx          #copy time stamp (base ecx + offset of time stamp) to ebx
    int $57                    #call interrupt number 57  # Exit(time stamp)
 
 .data                       # data segment follows code segment in RAM
