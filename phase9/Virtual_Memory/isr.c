@@ -324,6 +324,13 @@ void IRQ3RX() { // queue char read from port to RX and echo queues
 void ForkISR(){
 	//ForkISR():
 	//     A. if no more PID or no RAM page available
+	
+	//variables for phase 9
+	int new_pid, page_num, exec_addr,
+        index[5],  // need 5 free page indices
+        *p,        // to fill table entries
+        main_table, code_table, stack_table, code_page, stack_page,
+	//////////////////////////
 	int i,child_pid;
 	int avail_page = -1;
 	for (i = 0; i <MAX_PROC; i++){
