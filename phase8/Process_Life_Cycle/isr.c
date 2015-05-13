@@ -221,22 +221,24 @@ void SemGetISR(){
 
 //Phase 5***********
 void MsgSndISR(){
-  msg_t *source, *destination;
-  int msg;
-  source = (msg_t *)pcb[CRP].TF_ptr->ebx;
-  msg = source -> recipient;
-  source->sender = CRP;
-  source->time_stamp = sys_time;
-  if ((mbox[msg].wait_q).size == 0){
-  	MsgEnQ(source, &mbox[msg].msg_q);
+  msg_t source, *destination;
+  int recipient;
+
+  source = *(msg_t *)pcb[CRP].TF_ptr->ebx;
+  recipient = source.recipient;
+
+  source.sender = CRP;
+  source.time_stamp = sys_time;
+
+  if ((mbox[recipient].wait_q).size == 0){
+  	MsgEnQ(&source, &mbox[recipient].msg_q);
   }else{
-  	int tmp_pid = DeQ(&(mbox[msg].wait_q));
+  	int tmp_pid = DeQ(&(mbox[recipient].wait_q));
   	pcb[tmp_pid].state = RUN;
   	EnQ(tmp_pid, &run_q);
-  	source->sender = CRP;
   	
   	destination = (msg_t *)pcb[tmp_pid].TF_ptr->ebx;
-  	memcpy((char*)destination,(char*)source, sizeof(msg_t));
+  	memcpy((char*)destination,(char*)&source, sizeof(msg_t));
   }
 }
 
@@ -353,8 +355,8 @@ void ForkISR(){
 	//set ppid to CRP (new thing from this Phase)
 	pcb[child_pid].ppid = CRP;
 	//E. build trapframe:
-	//point pcb[new PID].TF_ptr to end of page - sizoeof(TF_t) + 1
-	pcb[child_pid].TF_ptr = (TF_t *)((page[avail_page].addr + 4096) - sizeof(TF_t) + 1);
+	//point pcb[new PID].TF_ptr to end of page (4095) - sizoeof(TF_t) + 1
+	pcb[child_pid].TF_ptr = (TF_t *)(page[avail_page].addr + 4096 - sizeof(TF_t));
 	//add those statements in CreateISR() to set trapframe except
 	//EIP = the page addr + 128 (skip header)
 	pcb[child_pid].TF_ptr->eip = (unsigned int)(page[avail_page].addr + 128);;
@@ -373,7 +375,6 @@ void ForkISR(){
 }
 
 void WaitISR(){
-
 	int i,page_num, child_exit_num, *parent_exit_num_ptr;
 	
 	//A. look for a ZOMBIE child
@@ -394,26 +395,27 @@ void WaitISR(){
 	//put i into ecx of CRP's TF (for syscall Wait() to return it)
 	pcb[CRP].TF_ptr->ecx=i;
 	//pass the exit number from the ZOMBIE to CRP
-	*parent_exit_num_ptr= child_exit_num;
+	parent_exit_num_ptr = (int *)pcb[CRP].TF_ptr->ebx;
+	child_exit_num = pcb[i].TF_ptr->ebx;
+	*parent_exit_num_ptr = child_exit_num;
 	
 	//D. recycle resources (bring ZOMBIE to R.I.P)
 	//reclaim child's 4KB page:
 	//loop through pages to match the owner to child PID (i)
+
+	pcb[i].state=NONE;//child's state becomes NONE
+	EnQ(i,&none_q);//enqueue child PID (i) back to none queue
 
 	for (page_num = 0; page_num <MAX_PROC; page_num++){
 		if(page[page_num].owner == i){
 			//once found, clear page (for security/privacy)
 			MyBZero((char*) page[page_num].addr,4096);
 			page[page_num].owner=-1;//set owner to -1 (not used)
-			pcb[i].state=NONE;//child's state becomes NONE
-			EnQ(i,&none_q);//enqueue child PID (i) back to none queue
 		}
 	}
-	
-	
 }
    
-void ExitISR(){
+void ExitISR() {
 	int ppid, child_exit_num, *parent_exit_num_ptr, page_num;
 
 	ppid = pcb[CRP].ppid;
@@ -427,6 +429,9 @@ void ExitISR(){
 	pcb[ppid].state=RUN;//parent's state becomes RUN
 	EnQ(ppid,&run_q);//enqueue it to run queue
 	pcb[ppid].TF_ptr->ecx=CRP;//give child PID (CRP) for parent's Wait() call to continue and return
+
+	parent_exit_num_ptr = (int *)pcb[ppid].TF_ptr->ebx;
+	child_exit_num = pcb[CRP].TF_ptr->ebx;
 	*parent_exit_num_ptr = child_exit_num;//pass the child (CRP) exit number to fill out parent's local exit number
 	
 	//C. recycle exiting CRP's resources
@@ -437,11 +442,10 @@ void ExitISR(){
 			MyBZero((char*) page[page_num].addr,4096);//once found, clear page (for security/privacy)
 			page[page_num].owner=-1;//set owner to -1 (not used)
 			pcb[CRP].state=NONE;//CRP's state becomes NONE
-			EnQ(CRP,&none_q);//enqueue CRP back to none queue
-			CRP=-1;//CRP becomes -1
 		}
 	}
 
-
+	EnQ(CRP,&none_q);//enqueue CRP back to none queue
+	CRP=-1;//CRP becomes -1
 }
    

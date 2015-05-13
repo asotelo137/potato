@@ -82,7 +82,7 @@ pushl $WAIT_INTR
 jmp IntoKernel
 
 ENTRY(ExitEntry)
-pushl $WAIT_INTR
+pushl $EXIT_INTR
 jmp IntoKernel
 
 // Common IRQ entry, save context and call Kmain()

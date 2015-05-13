@@ -73,11 +73,11 @@ void Fork(char *exe_addr){
 	:"g" ((int)exe_addr)
 	:"%ebx");
 }
-int Wait(int *exit_num){
+int Wait(int *exit_num_ptr){
 	int pid;
 	asm("movl %1, %%ebx; int $56; movl %%ecx, %0;"
 	:"=g" (pid)
-	:"g" ((int)exit_num)
+	:"g" ((int)exit_num_ptr)
 	:"%ebx","%ecx");
    	return pid;
 }
