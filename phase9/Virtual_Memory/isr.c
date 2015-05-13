@@ -375,6 +375,8 @@ void ForkISR(){
 	pcb[child_pid].TF_ptr->fs = get_fs();
 	pcb[child_pid].TF_ptr->gs = get_gs();
       
+        pcb[pid].main_table = main_table; //set PCB[new PID].main_table to the new main table
+      
 	//F. clear mailbox
 	MyBZero((char*)&mbox[child_pid],sizeof(mbox_t));
 	//G. enqueue new PID to run queue
