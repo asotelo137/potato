@@ -15,7 +15,7 @@
 #include "syscall.h"
 
 // kernel data structure:
-int CRP, sys_time;                // current running PID, -1 means no process
+int CRP, sys_time;              // current running PID, -1 means no process
 q_t run_q, none_q,sleep_q;      // processes ready to run and not used
 pcb_t pcb[MAX_PROC];    // process table
 char stack[MAX_PROC][STACK_SIZE]; // run-time stacks for processes
@@ -24,6 +24,11 @@ mbox_t mbox[MAX_PROC];
 page_t page[MAX_PROC];
 ///end of phase 8 addendums
 //(include stuff from timer lab and new PCB described in 1.html)
+
+//phase 9
+int sys_main_table; // global variable
+//  sys_main_table for phase 9 initialized in InitData() to get the address of the 
+//  original system main translation table. Use get_cr3() call to get it.
 
 //******************************************************************
 //phase 3
@@ -103,6 +108,7 @@ void InitIDT(){
 void InitData() {
    int i;
    sys_time = print_it = 0;
+   sys_main_table = get_cr3(); //phase 9 initialize sys_main_table
    
    MyBZero((char *) &run_q,sizeof(q_t));
    MyBZero((char *) &none_q,sizeof(q_t));
