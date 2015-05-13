@@ -14,14 +14,15 @@
 typedef enum {KMODE, UMODE} mode_t;
 typedef enum {NONE, RUNNING, RUN, SLEEP, WAIT, ZOMBIE,WAIT_CHILD} state_t;
 
-typedef struct {             // PCB describes proc image
-   mode_t mode;              // process privilege mode
-   state_t state;            // state of process
-   int runtime;              // run time since dispatched
-   int total_runtime;        // total run time since created
-   TF_t *TF_ptr;             // points to TF in stack
-   int wake_time;            // amount of time to wait before wait
-   int ppid;                 // parent pid
+typedef struct {              // PCB describes proc image
+   mode_t mode;               // process privilege mode
+   state_t state;             // state of process
+   int runtime;               // run time since dispatched
+   int total_runtime;         // total run time since created
+   TF_t *TF_ptr;              // points to TF in stack
+   int wake_time;             // amount of time to wait before wait
+   int ppid;                  // parent pid
+   int main_table             // address of the main translation table of the process
 } pcb_t;
 
 typedef struct {             // proc queue type
