@@ -65,7 +65,8 @@ void CreateISR(int pid) {
       pcb[pid].TF_ptr->fs = get_fs();
       pcb[pid].TF_ptr->gs = get_gs();
       
-   
+      //phase 9
+      pcb[pid].main_table = sys_main_table;
 //  return 0;
 }
 
