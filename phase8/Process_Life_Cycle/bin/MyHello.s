@@ -37,9 +37,7 @@ _start:                     # instructions begin
 msg:                        # my msg
      .long 0                # msg.sender
      .long 5                # msg.recipient
-     .long 5                # msg.time_stamp
-     .long 0                # msg.data
-     .endr                  # etc.
+     .long 0                # msg.time_stamp
      .ascii "Hello from Team Potato\n" #msg.data (16 char)
      .rept 78                #101-23 = 78
      .ascii "\0"             #null chars
