@@ -15,7 +15,7 @@
 .global _start      # _start is gonna be main()
 
 _start:             # instructions starts
-   movl $3, %ebx    # seconds to sleep
+   ####movl $3, %ebx    # seconds to sleep
    int  $48          #get pid to sleep
    int  $49         # call sleep service
 
@@ -29,7 +29,7 @@ str1:
    .ascii "ABCDEFGH!\n\0" # a string
 str2:                     # another string, 101 chars total
    .ascii "Greetings from Team Potato!\n"    # 28 chars
-   .rept 69               # repeat 73 times
+   .rept 73               # repeat 73 times
       .ascii "\0"         # null characters
    .endr                  # end repeat
 
