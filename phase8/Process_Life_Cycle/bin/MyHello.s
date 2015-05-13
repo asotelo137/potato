@@ -39,8 +39,9 @@ msg:                        # my msg
      .long 5                # msg.recipient
      .long 0                # msg.time_stamp
      .ascii "Hello from Team Potato\n" #msg.data (16 char)
-     .rept 78                #101-23 = 78
+                             #101-23 = 78
      .ascii "\0"             #null chars
+     .rept 78  
      .endr                   #end repeat
      .long 5                 #msg.code
      .rept 3                 #msg.number
