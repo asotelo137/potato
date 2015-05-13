@@ -12,7 +12,7 @@
 
 _start:                     # instructions begin
                             # 1st, get real addr of local msg
-   //(copy the stack pointer:)
+                            # //(copy the stack pointer:)
    pushl %esp               #push the stack pointer
    pop %ebx                  #pop into register ebx
    sub 0x1000,%ebx          #subtract 4096 from it (this is the base, real addr of the page)
