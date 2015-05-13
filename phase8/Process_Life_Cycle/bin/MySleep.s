@@ -16,7 +16,7 @@
 
 _start:             # instructions starts
    movl $3, %ebx    # seconds to sleep
-   int  $48         # call sleep service
+   int  $49         # call sleep service
 
    movl $77, %ebx   # exit number
    int  $57         # call exit service
