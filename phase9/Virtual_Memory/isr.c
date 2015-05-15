@@ -387,8 +387,24 @@ void ForkISR(){
 	EnQ(child_pid,&run_q);
 */
 //////////////////phase 9 from the bottom
+
+	//build its trapframe:
+  	// set TF_ptr into stack_page (towards end of page, with space for TF)
+	pcb[new_pid].TF_ptr = (TF *)((stack_page)+4096) - sizeof(TF_t) + 1;
+	// set eip of TF to virtual addr 2G + 128
+	pcb[pid].TF_ptr->eip = (unsigned int)(2G + 128);
+	// set other things of TF the same way as before
+	pcb[new_pid].TF_ptr->eflags = EF_DEFAULT_VALUE | EF_INTR;
+	pcb[new_pid].TF_ptr->cs = get_cs();
+	pcb[new_pid].TF_ptr->ds = get_ds();
+	pcb[new_pid].TF_ptr->es = get_es();
+	pcb[new_pid].TF_ptr->fs = get_fs();
+	pcb[new_pid].TF_ptr->gs = get_gs();
+	// set TF_ptr again, to virtual addr 3G-64
+	pcb[pid].TF_ptr->eip = (unsigned int)(3G - 64);
 	
-	EnQ(pid, &run_q);
+	MyBZero((char*)&mbox[new_pid],sizeof(mbox_t));	// clear mailbox of this new process
+	EnQ(pid, &run_q);			//enqueue the pid of this new process to run queue
 
 
 }
