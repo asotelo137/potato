@@ -328,12 +328,14 @@ void ForkISR(){
 	//     A. if no more PID or no RAM page available
 	
 	//variables for phase 9
-	int new_pid, page_num, exec_addr,
-        index[5],  // need 5 free page indices
-        *p,        // to fill table entries
-        main_table, code_table, stack_table, code_page, stack_page,
+	void ForkISR() {  // ebx executable, ecx child pid to return
+   	int new_pid, page_num, exec_addr,
+       	index[5],  // need 5 free page indices
+       	*p,        // to fill table entries
+       	main_table, code_table, stack_table, code_page, stack_page,
+       	i;         // to count
 	//////////////////////////
-	int i,child_pid;
+/*	int i,child_pid;
 	int avail_page = -1;
 	for (i = 0; i <MAX_PROC; i++){
 		if(page[i].owner == -1){
@@ -383,6 +385,11 @@ void ForkISR(){
 	MyBZero((char*)&mbox[child_pid],sizeof(mbox_t));
 	//G. enqueue new PID to run queue
 	EnQ(child_pid,&run_q);
+*/
+//////////////////phase 9 from the bottom
+	
+	EnQ(pid, &run_q);
+
 
 }
 
