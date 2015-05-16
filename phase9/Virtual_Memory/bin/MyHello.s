@@ -11,23 +11,25 @@
 .global _start              # _start is main()
 
 _start:                     # instructions begin
-   pushl %esp               #push the stack pointer
-   pop %ebx                #pop into register ebx
-   sub $0x1000,%ebx        #subtract 4096 from it (this is the base, real addr of the page)
+  # pushl %esp               #push the stack pointer
+  # pop %ebx                #pop into register ebx
+  # sub $0x1000,%ebx        #subtract 4096 from it (this is the base, real addr of the page)
 
-   movl $msg , %ecx         #copy $msg to register ecx
-   subl $0x80000000, %ecx   #subtract 2G from it, get x (offset)
+   #movl $msg , %ecx         #copy $msg to register ecx
+   #subl $0x80000000, %ecx   #subtract 2G from it, get x (offset)
 
-   addl %ecx,%ebx              #add  x (offset) to ebx (base of page) -- where msg really is
-   pushl %ebx               #save a copy (push it to stack)
-   pushl %ebx               #save another copy (push it again)
-
+   #addl %ecx,%ebx              #add  x (offset) to ebx (base of page) -- where msg really is
+   #pushl %ebx               #save a copy (push it to stack)
+   #pushl %ebx               #save another copy (push it again)
+   
+   movl $msg,%ebx	
    int $53                   #call interrupt number 53  # MsgSnd(&msg)
 
-   popl %ebx                  #pop to ebx (get a copy of real msg addr)
+  # popl %ebx                  #pop to ebx (get a copy of real msg addr)
+   movl $msg, %ebx
    int $54                   #call interrupt number 54  # MsgRcv(&msg)
 
-   popl %ecx                  #pop to ecx (get a copy, real msg addr)
+   movl $msg,%ecx                  #pop to ecx (get a copy, real msg addr)
    movl 8(%ecx),%ebx          #copy time stamp (base ecx + offset of time stamp) to ebx
    int $57                    #call interrupt number 57  # Exit(time stamp)
 

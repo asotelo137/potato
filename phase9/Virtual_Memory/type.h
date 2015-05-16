@@ -22,7 +22,7 @@ typedef struct {              // PCB describes proc image
    TF_t *TF_ptr;              // points to TF in stack
    int wake_time;             // amount of time to wait before wait
    int ppid;                  // parent pid
-   int main_table             // address of the main translation table of the process
+   int main_table;             // address of the main translation table of the process
 } pcb_t;
 
 typedef struct {             // proc queue type

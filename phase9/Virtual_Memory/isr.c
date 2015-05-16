@@ -324,14 +324,14 @@ void IRQ3RX() { // queue char read from port to RX and echo queues
 }
 //Phase 8*********************************************************
 void ForkISR(){
-	//ForkISR():
+	/*//ForkISR():
 	//     A. if no more PID or no RAM page available
 	
 	//variables for phase 9
 	int new_pid, page_num, exec_addr,
         index[5],  // need 5 free page indices
         *p,        // to fill table entries
-        main_table, code_table, stack_table, code_page, stack_page,
+        main_table, code_table, stack_table, code_page, stack_page;
 	//////////////////////////
 	int i,child_pid;
 	int avail_page = -1;
@@ -382,7 +382,113 @@ void ForkISR(){
 	//F. clear mailbox
 	MyBZero((char*)&mbox[child_pid],sizeof(mbox_t));
 	//G. enqueue new PID to run queue
-	EnQ(child_pid,&run_q);
+	EnQ(child_pid,&run_q);*/
+	int new_pid,
+	index[5],  // need 5 free page indices
+	*p,        // to fill table entries
+	main_table, code_table, stack_table, code_page, stack_page,
+	i,j;         // to count
+	
+	new_pid = DeQ(&none_q);// dequeue new pid from none q
+	
+	if( new_pid == -1){// check if pid is available  return if none available
+		cons_printf("ForkISR(): No More PID available!\n");
+		pcb[CRP].TF_ptr->ecx = -1;
+		return;
+	}
+	
+j = 0;
+
+	for (i = 0; i < MAX_PROC; i++){ // loop to scan all pages
+		if(page[i].owner == -1){ //check if page is available
+			page[i].owner=new_pid;// set page owner to new pid
+			index[j] = i;// index[] = this page index
+			j++;
+			if(j == 5){ //if got enough indexes  break
+				break;
+			}
+		}					
+	}	
+	if(j != 5 ){	// if didnt get 5 indices 
+		cons_printf("ForkISR(): not enough memory available!\n");//print error
+		EnQ(new_pid, &none_q);// recycle/return pid
+		for (i = 0; i < MAX_PROC; i++){//loop through pages to return
+			if(page[i].owner == new_pid){
+				page[i].owner=-1;
+				//index[j++] =-1;
+			}					
+		}	
+	}
+	// with five pages obtained, set these addresses (integers):
+	//    main_table, code_table, stack_table, code_page, stack_page
+	//       to addresses of obtained pages       
+	main_table = page[index[0]].addr;
+	code_table = page[index[1]].addr;
+	stack_table = page[index[2]].addr;
+	code_page = page[index[3]].addr;
+	stack_page = page[index[4]].addr;
+
+	MyMemcpy((char*)main_table,(char*)sys_main_table,16);
+	
+	//set entries 512 and 767 of main_table to addresses of 
+   	//code_table and stack_table, add two flags into entries
+	p=(int *) (main_table +(512*4));
+	*p = code_table +0x003 ;
+	p = (int *)(main_table +(767*4));
+	*p = stack_table + 0x003;
+	//set entry 0 of code_table to addr of code_page (plus flags)
+	p=(int *)(code_table);
+	*p= code_page + 0x003;
+	
+	//set entry 1023 of stack_table to addr of stack_page (plus flags)
+	p=(int*) (stack_table + (1023*4));
+	*p= stack_page +0x003;
+
+	// copy executable to code_page (like previous phase)	
+	MyMemcpy((char *)code_page, (char *)pcb[CRP].TF_ptr->ebx, 4096 ); 
+
+	//set things in its PCB
+	//set the main_table in PCB of this new process to main_table
+	pcb[new_pid].main_table = main_table;
+	//clear the runtime, total_runtime
+	pcb[new_pid].runtime  = 0;
+	pcb[new_pid].total_runtime = 0;
+	//set its state
+        pcb[new_pid].state= RUN;	
+	//set its mode
+	pcb[new_pid].mode = UMODE;	
+	//set its ppid
+	pcb[new_pid].ppid=CRP;
+	
+	//build its trapframe:
+	//set TF_ptr into stack_page (towards end of page, with space for TF)
+	pcb[new_pid].TF_ptr =(TF_t*) (stack_page+4032);
+	
+	//set eip of TF to virtual addr 2G + 128
+	pcb[new_pid].TF_ptr->eip = (unsigned int)(0x80000080);	
+	
+	//set other things of TF the same way as before
+	pcb[new_pid].TF_ptr->eflags = EF_DEFAULT_VALUE | EF_INTR;
+	pcb[new_pid].TF_ptr->cs = get_cs();
+	pcb[new_pid].TF_ptr->ds = get_ds();
+	pcb[new_pid].TF_ptr->es = get_es();
+	pcb[new_pid].TF_ptr->fs = get_fs();
+	pcb[new_pid].TF_ptr->gs = get_gs();
+    	
+	//set TF_ptr again, to virtual addr 3G-64
+  	pcb[new_pid].TF_ptr =(TF_t*) (0xbfffffc0);
+	
+
+	// clear mailbox
+	MyBZero((char*)&mbox[new_pid],sizeof(mbox_t));
+	
+	// enqueue new PID to run queue
+	EnQ(new_pid,&run_q);
+		
+	
+	
+
+
 
 }
 

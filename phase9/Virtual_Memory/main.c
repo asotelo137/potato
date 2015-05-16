@@ -195,6 +195,7 @@ int main() {
    //CreateISR(i);
    InitIDT();
    cons_printf("pcb[0] is at %u. \n",pcb[0].TF_ptr);
+   set_cr3(pcb[CRP].main_table);
    Dispatch(pcb[0].TF_ptr);    // to dispatch/run CRP
    
    return 0;
@@ -276,7 +277,8 @@ void Kernel(TF_t *TF_ptr) {
       }                                                              // end switch
    }*/                                                                 // end if some key pressed
 //   printf("after case statement \n");
-   SelectCRP();    //call SelectCRP() to settle/determine for next CRP
-   Dispatch(pcb[CRP].TF_ptr);
+	SelectCRP();    //call SelectCRP() to settle/determine for next CRP
+	set_cr3(pcb[CRP].main_table);
+ 	Dispatch(pcb[CRP].TF_ptr);
 }
 
