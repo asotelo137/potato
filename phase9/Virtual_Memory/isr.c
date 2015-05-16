@@ -257,7 +257,7 @@ void MsgRcvISR(){
 	// copy the 1st message to the msg locally declared in the calling process
 		tmp = MsgDeQ(&mbox[CRP].msg_q);
 		temp2 = (msg_t *)pcb[CRP].TF_ptr->ebx;
-	//	set_cr3(pcb[CR].main_table); 		//set the MMU to start using the designated 
+		set_cr3(pcb[CR].main_table); 		//set the MMU to start using the designated 
 							//main table for runtime memory address translation.
 		memcpy((char *)temp2,(char *)tmp,sizeof(msg_t));
 	}
@@ -328,21 +328,12 @@ void ForkISR(){
 	//     A. if no more PID or no RAM page available
 	
 	//variables for phase 9
-<<<<<<< HEAD
 	int new_pid, page_num, exec_addr,
         index[5],  // need 5 free page indices
         *p,        // to fill table entries
         main_table, code_table, stack_table, code_page, stack_page;
-=======
-	void ForkISR() {  // ebx executable, ecx child pid to return
-   	int new_pid, page_num, exec_addr,
-       	index[5],  // need 5 free page indices
-       	*p,        // to fill table entries
-       	main_table, code_table, stack_table, code_page, stack_page,
-       	i;         // to count
->>>>>>> 6ba6ca5cf64eca33af2ff8c7bdc95066b11bad08
 	//////////////////////////
-/*	int i,child_pid;
+	int i,child_pid;
 	int avail_page = -1;
 	for (i = 0; i <MAX_PROC; i++){
 		if(page[i].owner == -1){
@@ -391,7 +382,6 @@ void ForkISR(){
 	//F. clear mailbox
 	MyBZero((char*)&mbox[child_pid],sizeof(mbox_t));
 	//G. enqueue new PID to run queue
-<<<<<<< HEAD
 	EnQ(child_pid,&run_q);*/
 	int new_pid,
 	index[5],  // need 5 free page indices
@@ -478,25 +468,12 @@ j = 0;
 	pcb[new_pid].TF_ptr->eip = (unsigned int)(0x80000080);	
 	
 	//set other things of TF the same way as before
-=======
-	EnQ(child_pid,&run_q);
-*/
-//////////////////phase 9 from the bottom
-
-	//build its trapframe:
-  	// set TF_ptr into stack_page (towards end of page, with space for TF)
-	pcb[new_pid].TF_ptr = (TF *)((stack_page)+4096) - sizeof(TF_t) + 1;
-	// set eip of TF to virtual addr 2G + 128
-	pcb[pid].TF_ptr->eip = (unsigned int)(2G + 128);
-	// set other things of TF the same way as before
->>>>>>> 6ba6ca5cf64eca33af2ff8c7bdc95066b11bad08
 	pcb[new_pid].TF_ptr->eflags = EF_DEFAULT_VALUE | EF_INTR;
 	pcb[new_pid].TF_ptr->cs = get_cs();
 	pcb[new_pid].TF_ptr->ds = get_ds();
 	pcb[new_pid].TF_ptr->es = get_es();
 	pcb[new_pid].TF_ptr->fs = get_fs();
 	pcb[new_pid].TF_ptr->gs = get_gs();
-<<<<<<< HEAD
     	
 	//set TF_ptr again, to virtual addr 3G-64
   	pcb[new_pid].TF_ptr =(TF_t*) (0xbfffffc0);
@@ -511,13 +488,6 @@ j = 0;
 	
 	
 
-=======
-	// set TF_ptr again, to virtual addr 3G-64
-	pcb[pid].TF_ptr->eip = (unsigned int)(3G - 64);
-	
-	MyBZero((char*)&mbox[new_pid],sizeof(mbox_t));	// clear mailbox of this new process
-	EnQ(pid, &run_q);			//enqueue the pid of this new process to run queue
->>>>>>> 6ba6ca5cf64eca33af2ff8c7bdc95066b11bad08
 
 
 }
