@@ -257,7 +257,7 @@ void MsgRcvISR(){
 	// copy the 1st message to the msg locally declared in the calling process
 		tmp = MsgDeQ(&mbox[CRP].msg_q);
 		temp2 = (msg_t *)pcb[CRP].TF_ptr->ebx;
-		set_cr3(pcb[CR].main_table); 		//set the MMU to start using the designated 
+		set_cr3(pcb[CRP].main_table); 		//set the MMU to start using the designated 
 							//main table for runtime memory address translation.
 		memcpy((char *)temp2,(char *)tmp,sizeof(msg_t));
 	}
