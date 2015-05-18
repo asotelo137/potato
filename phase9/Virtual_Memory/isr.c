@@ -238,9 +238,13 @@ void MsgSndISR(){
   	pcb[tmp_pid].state = RUN;
   	EnQ(tmp_pid, &run_q);
   	
+	set_cr3(pcb[tmp_pid].main_table);
   	destination = (msg_t *)pcb[tmp_pid].TF_ptr->ebx;
   	memcpy((char*)destination,(char*)&source, sizeof(msg_t));
   }
+	if (pcb[recipient].ppid != 0){
+		set_cr3(pcb[CRP].main_table);
+	}
 }
 
 void MsgRcvISR(){
@@ -382,7 +386,9 @@ void ForkISR(){
 	//F. clear mailbox
 	MyBZero((char*)&mbox[child_pid],sizeof(mbox_t));
 	//G. enqueue new PID to run queue
-	EnQ(child_pid,&run_q);*/
+	EnQ(new_pid,&run_q);*/
+	
+
 	int new_pid,
 	index[5],  // need 5 free page indices
 	*p,        // to fill table entries
@@ -397,22 +403,22 @@ void ForkISR(){
 		return;
 	}
 	
-j = 0;
+	j = 0;
 
-	for (i = 0; i < MAX_PROC; i++){ // loop to scan all pages
-		if(page[i].owner == -1){ //check if page is available
-			page[i].owner=new_pid;// set page owner to new pid
-			index[j] = i;// index[] = this page index
+	for (i = 0; i < MAX_PROC; i++){ 	// loop to scan all pages
+		if(page[i].owner == -1){ 	//check if page is available
+			page[i].owner=new_pid;	// set page owner to new pid
+			index[j] = i;		// index[] = this page index
 			j++;
-			if(j == 5){ //if got enough indexes  break
+			if(j == 5){ 		//if got enough indexes  break
 				break;
 			}
 		}					
 	}	
-	if(j != 5 ){	// if didnt get 5 indices 
-		cons_printf("ForkISR(): not enough memory available!\n");//print error
-		EnQ(new_pid, &none_q);// recycle/return pid
-		for (i = 0; i < MAX_PROC; i++){//loop through pages to return
+	if(j != 5 ){								// if didnt get 5 indices 
+		cons_printf("ForkISR(): not enough memory available!\n");	//print error
+		EnQ(new_pid, &none_q);						// recycle/return pid
+		for (i = 0; i < MAX_PROC; i++){					//loop through pages to return
 			if(page[i].owner == new_pid){
 				page[i].owner=-1;
 				//index[j++] =-1;
@@ -484,12 +490,6 @@ j = 0;
 	
 	// enqueue new PID to run queue
 	EnQ(new_pid,&run_q);
-		
-	
-	
-
-
-
 }
 
 void WaitISR(){
